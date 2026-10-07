@@ -64,6 +64,7 @@ def open_review(page, text=LONG, large=False):
     page.wait_for_function('stack.at(-1)?.suiteMode === "message"')
     page.wait_for_function('!topPage().getAnimations().some(a => a.playState === "running")')
     native.ensure(page.evaluate('stack.at(-1).payload.text') == text, 'Review changed exact draft')
+    native.ensure(control(page, 'accept').inner_text().strip() == '确认本机预览', 'Message acceptance label must describe its local-only preview effect')
     native.ensure(review(page).locator('p').inner_text().endswith(DISCLAIMER), 'Local-only disclaimer missing')
     native.ensure(control(page, 'back').evaluate('el => document.activeElement === el'), 'Initial focus must stay on cancel')
     native.ensure(page.evaluate('Suite.state().localOutbox.length') == 0, 'Opening review executed a preview')
