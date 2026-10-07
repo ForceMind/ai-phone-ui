@@ -1,5 +1,11 @@
 # v0.1.0 验证记录
 
+## 合并后发现的测试就绪竞争（2026-10-07）
+
+PR #7 合并提交 `713e44be072462c41fded92fa76ad370f76ff17a` 的 [首次 main CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37600514374) 为 25/25 静态、56/56 单元、127/127 DOM，native 12/14。两项迁移测试已完成恢复与 reload 的数据断言，随后切往 DOC-02 时等待 `#noteEditor` 超时。不能把此前 PR 的成功当作这次 main 成功。
+
+原因是新 harness 只等 core 的 `ready`，未等 Workbench 以 50ms 调度完成 URL 初始路由恢复；快速 runner 上，旧 SET-10 路由可能晚于测试的 DOC-02 导航而生效。修正仅在测试中显式使用 SET-10 deep link，并在每次真正 reload 后同时等待核心就绪、预期 Suite 路由和可见 URL hash。没有增加睡眠/重试、删除断言或模拟 Storage/reload，也没有修改产品运行时 JS。后续修正提交及合并后的 main 必须各自取得新的完整 CI。
+
 ## UI-011 真实 HTTP-origin 候选（2026-10-07）
 
 [Draft PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 的 `e82370e342fabc83eacd1ca322b40a5b576a10f4`：[Actions](https://github.com/ForceMind/ai-phone-ui/actions/runs/37598633407) 25/25 静态、56/56 单元、127/127 原 DOM fixture、14/14 新 native-origin 全部通过。Chromium 143.0.7499.4，Ubuntu 24.04.5，Python 3.13.15，Node 22.23.3。artifact 下载 SHA256 和 source-head 均已核对，详情见 [机器可读证据](UI011_ORIGIN_EVIDENCE.json)。
