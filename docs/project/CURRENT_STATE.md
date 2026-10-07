@@ -14,9 +14,9 @@
 
 这是对应上述提交的真实 Actions 结果。后续文档或代码提交仍应核对自身 SHA 的 CI；不能把旧报告直接当作最新成功。详见 [发布证据](../qa/PUBLICATION_EVIDENCE.json) 与 [测试报告](../qa/TEST_REPORT.md)。
 
-## M2 / UI-011 真实存储候选
+## M2 / UI-011 真实存储证据
 
-[Draft PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 的测试提交 `e82370e342fabc83eacd1ca322b40a5b576a10f4` 已由 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37598633407) 通过：25 静态、56 单元、原 127 DOM fixture，以及新增 14/14 真实 HTTP-origin 回归。真实文件输入、明确确认、原生 localStorage、整页 reload 和有界原生配额取消/重试均已执行；artifact 的 SHA256 和 source-head 已核对。没有修改产品运行时 JS。详见 [分层证据](../qa/UI011_ORIGIN_EVIDENCE.json)。本条对应明确提交，后续文档提交仍核对自身 SHA，PR 尚未合并。
+[PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 的测试提交 `e82370e342fabc83eacd1ca322b40a5b576a10f4` 已由 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37598633407) 通过：25 静态、56 单元、原 127 DOM fixture，以及新增 14/14 真实 HTTP-origin 回归。真实文件输入、明确确认、原生 localStorage、整页 reload 和有界原生配额取消/重试均已执行；artifact 的 SHA256 和 source-head 已核对。没有修改产品运行时 JS。详见 [分层证据](../qa/UI011_ORIGIN_EVIDENCE.json)。本条对应明确提交，后续文档提交与合并后的 main 仍核对自身 SHA；最新合并状态以 PR 记录为准。
 
 ## 尚未完成
 

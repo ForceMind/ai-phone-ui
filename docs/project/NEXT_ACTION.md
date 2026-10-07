@@ -2,7 +2,7 @@
 
 ## 本批 UI-011 真实 origin 回归
 
-[Draft PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 新增独立 HTTP-origin 原生 localStorage 测试，保留全部 127 DOM fixture。测试提交 `e82370e342fabc83eacd1ca322b40a5b576a10f4` 已通过 25 静态、56 单元、127 DOM、14 native origin；[证据](../qa/UI011_ORIGIN_EVIDENCE.json) 明确记录源 SHA、artifact、浏览器和真实 quota 探针。后续提交需要再查其 exact-head CI，不能把此报告当最新 head；PR 保持 Draft，不自动合并或部署。
+[PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 新增独立 HTTP-origin 原生 localStorage 测试，保留全部 127 DOM fixture。测试提交 `e82370e342fabc83eacd1ca322b40a5b576a10f4` 已通过 25 静态、56 单元、127 DOM、14 native origin；[证据](../qa/UI011_ORIGIN_EVIDENCE.json) 明确记录源 SHA、artifact、浏览器和真实 quota 探针。后续提交需要再查其 exact-head CI，不能把此报告当最新 head；按既定审阅与合并流程收尾，合并后核对 main 自身 CI；不部署。
 
 本批没有发现新的运行时恢复缺陷，没有为凑进展修改产品 JS。双区原子提交、确认前不写入、成功 reload、格式/大小拒绝和真实配额失败后取消/重试均有自动化证据。UI-011 整项与 Testing Epic #1 继续开放。
 

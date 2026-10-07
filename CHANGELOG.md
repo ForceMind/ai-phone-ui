@@ -2,11 +2,11 @@
 
 ## 2026-10-07 — UI-011 真实 HTTP-origin 回归候选
 
-- Draft PR #7 新增 14 项独立原生 localStorage/文件输入/确认/reload 回归，保留原 127 项 DOM fixture
+- PR #7 新增 14 项独立原生 localStorage/文件输入/确认/reload 回归，保留原 127 项 DOM fixture
 - 有界实际配额探针覆盖 legacy/snapshot 模式下的重复失败、取消和释放空间后重试
 - 测试提交 e82370e 的正常 GitHub CI 已通过 25/56/127/14，artifact digest 与 source-head 已核对
 - 正常 CI 明确 checkout PR 的 source head，存储报告独立上传；后续文档 head 仍须自身 CI
-- 没有产品运行时 JS 修复；大图、真实设备和 OS 存储压力仍开放，不自动合并/部署
+- 没有产品运行时 JS 修复；大图、真实设备和 OS 存储压力仍开放；合并遵循既定审阅/CI 流程，不部署
 
 ## 2026-10-07 — 远端发布完成
 
