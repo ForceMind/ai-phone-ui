@@ -201,6 +201,26 @@ with sync_playwright() as pw:
         page.wait_for_timeout(200);ensure(page.evaluate('stack.at(-1).suiteMode')=='restore')
         before=page.evaluate('S.notes');drag(page,(70,400),(245,400));ensure(page.evaluate('S.notes')==before)
     check('backup:valid-file-requires-confirmation-and-can-cancel',valid_backup_review)
+    def restore_quota_failure():
+        go(page,'SET-10')
+        before=page.evaluate('({notes:S.notes,nickname:Suite.state().nickname})')
+        raw=page.evaluate("(() => {const b=JSON.parse(JSON.stringify({format:'ai-phone-ui-backup',version:1,core:S,suite:Suite.state()}));b.core.notes='quota-test replacement';b.suite.nickname='quota-test nickname';return JSON.stringify(b);})()")
+        page.locator('#suiteBackupInput').set_input_files({'name':'quota-test.json','mimeType':'application/json','buffer':raw.encode()})
+        page.wait_for_function("stack.at(-1)?.suiteMode==='restore'")
+        page.evaluate("window.__savedSetItem=localStorage.setItem;localStorage.setItem=function(k,v){if(k==='ai-phone-ui-state-v1')throw new DOMException('Full','QuotaExceededError');return window.__savedSetItem.call(this,k,v);}")
+        try:
+            page.evaluate('acceptDialog();acceptDialog();')
+            ensure(page.evaluate('S.notes')==before['notes'])
+            ensure(page.evaluate('Suite.state().nickname')==before['nickname'])
+            ensure(page.evaluate("stack.at(-1)?.suiteMode")=='restore')
+            ensure(not page.evaluate('!!stack.at(-1).consumed'))
+            ensure(page.evaluate("localStorage.getItem('ai-phone-ui-state-v1')") is None)
+            ensure('恢复未完成' in page.locator('#toast').inner_text())
+            page.evaluate('backPage()')
+            ensure(page.evaluate('S.notes')==before['notes'])
+        finally:
+            page.evaluate('localStorage.setItem=window.__savedSetItem;delete window.__savedSetItem')
+    check('backup:quota-failure-preserves-data-and-retryable-confirmation',restore_quota_failure)
     def no_nav():
         ensure(not page.locator('.nav-bar,.assistant-dock,.nav-region').count());ensure(not page.locator('#suiteAssist').is_visible())
     check('design:no-default-bottom-nav-or-assistant-dock',no_nav)

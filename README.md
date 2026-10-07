@@ -4,7 +4,7 @@
 
 [![UI quality](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml/badge.svg?branch=main)](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml)
 
-> 2026-10-07 本地恢复检查点：远端 main 仍只有 LICENSE；原图集审批未解决，源码尚未形成远端提交。原历史与精确恢复/重建边界见 [恢复记录](docs/project/RECOVERY_20261007.md)。
+> 2026-10-07 本地恢复检查点：远端仍只有 LICENSE，源码尚未形成远端提交。见 [恢复记录](docs/project/RECOVERY_20261007.md)。
 
 一套以 **N9 三视图 + Sailfish 边缘手势、Peek、活动封面、Pulley** 为基础的 AI 手机界面与交互项目。
 
@@ -59,33 +59,19 @@ npm run docs
 ## 目录与事实来源
 
 | 路径 | 用途 |
-
 | --- | --- |
-
 | `reference/` | 原封不动的已认可 V3 与 SHA256 来源记录 |
-
 | `src/template.html` | 原型外壳 |
-
 | `src/js/core.js` | 已认可手势、任务会话及本机能力；仍有待拆分的旧全局代码 |
-
 | `src/js/suite.js` | 完整界面与本机动作 |
-
 | `src/js/model.cjs` | 可独立测试的状态校验与纯逻辑 |
-
 | `src/js/workbench.js` | 手机外的目录、状态检查、流程检查工具 |
-
 | `src/styles/` | 基础外观、页面组件、工作台样式 |
-
 | `src/data/screens.json` | **唯一界面目录**：编号、父级、状态与本机/预览边界 |
-
 | `src/data/tokens.json` | 设计参数参考；改动需同步实际 CSS/手势实现并测试 |
-
 | `src/contracts/` | 未来能力适配契约；不表示已有后端 |
-
 | `docs/` | 产品、设计、工程、QA 与交接 |
-
 | `planning/` | 本地里程碑与待办，不是假装已经创建的 GitHub Issues |
-
 | `dist/index.html` | 由构建生成的独立体验文件，请勿直接修改 |
 
 ## 继续工作之前

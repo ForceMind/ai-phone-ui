@@ -10,7 +10,7 @@ const routes=new Map(catalog.map(r=>[r.id,r]));
 const STORE_UI='ai-phone-ui-suite-v1';
 let D=PhoneModel.initial();
 let uiStorageWarned=false,renderingRoute='SYS-01';
-try{const raw=localStorage.getItem(STORE_UI);if(raw)D=PhoneModel.validate(JSON.parse(raw));}catch{uiStorageWarned=true;}
+try{const raw=PhoneStorage.getItem(STORE_UI);if(raw)D=PhoneModel.validate(JSON.parse(raw));}catch{uiStorageWarned=true;}
 let activeRoute='SYS-01',viewState='default',pendingRestore=null,lastDeleted=null,selectedDay=new Date().getDate(),monthOffset=0;
 let callMuted=false,callSpeaker=false,playingPreview=false;
 const rootForTask=new Map(),liveRouteForTask=new Map();
@@ -27,7 +27,7 @@ const steps=(items,current=0)=>items.map((x,i)=>`<div class="s-task-step"><span 
 const message=(who,body)=>`<div class="s-message ${who==='你'?'user':'ai'}"><small>${esc(who)}</small>${esc(body)}</div>`;
 const wave=()=>`<div class="s-wave" aria-label="音频波形示意">${[14,25,37,57,34,66,76,49,30,58,77,64,31,55,47,27,17].map(h=>`<i style="height:${h}px"></i>`).join('')}</div>`;
 const getDraft=(key,fallback='')=>D.drafts[key]??fallback;
-const persist=()=>{try{localStorage.setItem(STORE_UI,JSON.stringify(D));}catch{uiStorageWarned=true;if($('storageError'))$('storageError').hidden=false;}};
+const persist=()=>{try{PhoneStorage.setItem(STORE_UI,JSON.stringify(D));}catch{uiStorageWarned=true;if($('storageError'))$('storageError').hidden=false;}};
 function log(title,detail=''){D.audit.unshift({id:uid(),title,detail,at:Date.now()});D.audit=D.audit.slice(0,120);persist();}
 function applyPrefs(){document.body.classList.toggle('large-text',D.settings.largeText);document.body.classList.toggle('high-contrast',D.settings.contrast);$('suiteAssist')?.classList.toggle('show',D.settings.assist);}
 function current(){if(sleeping)return routes.get('SYS-06');if(locked)return routes.get('SYS-05');if(overlay)return routes.get(overlay==='top'?'SYS-04':'SYS-03');if(!appOpen)return routes.get(['SYS-02','SYS-01','SYS-03'][homeIndex]);const top=stack.at(-1);if(top?.kind==='suite')return routes.get(top.routeId);if(rootForTask.has(currentTask))return routes.get(rootForTask.get(currentTask));return routes.get(activeRoute);}
@@ -146,7 +146,25 @@ coverAction=function(id,dir){if(!rootForTask.has(id))return original.coverAction
 coverPreview=function(id,dx){if(!rootForTask.has(id))return original.coverPreview(id,dx);const face=$('face-'+id),under=$('under-'+id);face.parentElement.classList.add('dragging');under.innerHTML=icon('check')+'<span>保留草稿 / 控制状态</span>';direct(face,{transform:`translateX(${clamp(dx,-140,140)}px)`});};
 capHTML=function(){return '<div class="caps-scroll stack-scroll" style="position:relative;inset:auto">'+original.capHTML()+`<div class="suite-quick-group">更多持续能力</div>`+[['AI-01','直接交代','带着当前对象开始','talk'],['DOC-01','找回一份资料','照片、笔记与成果','note'],['CLD-01','我的个人环境','任务、授权与服务连接','cloud'],['DAY-01','安排我的一天','日程、专注与提醒草稿','clock'],['DAY-04','与人联系','消息和通话的界面预览','talk'],['DAY-09','听一会儿','音乐与封面控制预览','play'],['DAY-14','找一件事','搜索本机笔记与页面','list'],['SET-01','调整这部手机','氛围、权限和无障碍','lock']].map(([id,n,d,i])=>`<button class="cap suite-quick-cap" data-action="ui:go:${id}">${icon(i)}<span><strong>${n}</strong><small>${d}</small></span></button>`).join('')+'</div>';};
 function confirm(mode,title,description,payload){pushPage({kind:'confirm',mode:'suite',suiteMode:mode,title,description,payload:JSON.parse(JSON.stringify(payload||{}))});}
-acceptDialog=function(){const p=stack.at(-1);if(p?.mode!=='suite')return original.acceptDialog();if(p.consumed)return;p.consumed=true;stack.pop();renderStack();switch(p.suiteMode){case 'message':D.localOutbox.push({id:uid(),text:p.payload.text,recipient:p.payload.recipient,status:'local-preview-only'});D.messageDraft='';if(D.forms?.['DAY-05'])D.forms['DAY-05'].message='';log('消息确认预览','仅本机记录，未发送给任何人');go('DAY-05');toast('已记入本机预览，没有发送消息');break;case 'approval':log('交付动作获本机预览确认','固定版本：'+p.payload.versionId+'；未调用服务');go('AI-06');toast('确认已记录。外部动作没有执行。');break;case 'service':log('服务授权预览','未建立 OAuth 或外部连接');go('CLD-10');toast('仅记录授权预览，服务仍未连接');break;case 'delete':{const i=D.memories.findIndex(m=>m.id===p.payload.id);if(i>=0){lastDeleted={...D.memories[i]};D.memories.splice(i,1);D.selectedMemory=0;log('删除本机偏好',p.payload.id);}go('SET-07');toast('偏好已删除；到删除确认页可撤销');break;}case 'restore':if(pendingRestore){S=pendingRestore.core;D=pendingRestore.suite;S.job.status=S.job.status==='running'?'paused':S.job.status;S.focus.running=false;saveNow();persist();pendingRestore=null;location.reload();}break;case 'call':go('DAY-08');toast('只打开通话 UI，没有拨出电话');break;}persist();};
+acceptDialog=function(){const p=stack.at(-1);if(p?.mode!=='suite')return original.acceptDialog();if(p.consumed)return;
+if(p.suiteMode==='restore'){
+  if(!pendingRestore)return;
+  let nextCore,nextSuite;
+  try{
+    nextCore=JSON.parse(JSON.stringify(pendingRestore.core));
+    nextSuite=JSON.parse(JSON.stringify(pendingRestore.suite));
+    nextCore.job.status=nextCore.job.status==='running'?'paused':nextCore.job.status;
+    nextCore.focus.running=false;
+    PhoneStorage.replace(JSON.stringify(nextCore),JSON.stringify(nextSuite));
+  }catch{
+    uiStorageWarned=true;if($('storageError'))$('storageError').hidden=false;
+    toast('恢复未完成：本机存储不可写或空间不足。原资料仍保留，可取消、导出资料后重试。');
+    return;
+  }
+  p.consumed=true;clearTimeout(saveTimer);S=nextCore;D=nextSuite;
+  pendingRestore=null;stack.pop();renderStack();location.reload();return;
+}
+p.consumed=true;stack.pop();renderStack();switch(p.suiteMode){case 'message':D.localOutbox.push({id:uid(),text:p.payload.text,recipient:p.payload.recipient,status:'local-preview-only'});D.messageDraft='';if(D.forms?.['DAY-05'])D.forms['DAY-05'].message='';log('消息确认预览','仅本机记录，未发送给任何人');go('DAY-05');toast('已记入本机预览，没有发送消息');break;case 'approval':log('交付动作获本机预览确认','固定版本：'+p.payload.versionId+'；未调用服务');go('AI-06');toast('确认已记录。外部动作没有执行。');break;case 'service':log('服务授权预览','未建立 OAuth 或外部连接');go('CLD-10');toast('仅记录授权预览，服务仍未连接');break;case 'delete':{const i=D.memories.findIndex(m=>m.id===p.payload.id);if(i>=0){lastDeleted={...D.memories[i]};D.memories.splice(i,1);D.selectedMemory=0;log('删除本机偏好',p.payload.id);}go('SET-07');toast('偏好已删除；到删除确认页可撤销');break;}case 'call':go('DAY-08');toast('只打开通话 UI，没有拨出电话');break;}persist();};
 function fields(){const v={};document.querySelectorAll('#screen [data-field]').forEach(el=>{if(!el.closest('[inert]'))v[el.dataset.field]=el.value;});return v;}
 function prompt(){const text=(fields().prompt||getDraft('AI-01')).trim();if(!text){toast('先输入一句要求');return;}D.messages.push({role:'user',text});let reply='当前是本机规则演示，尚未接入模型。可以记下文字、修改照片色调或整理已有笔记。';if(/^记下[:：\s]/.test(text)){const n=text.replace(/^记下[:：\s]+/,'');if(n){S.notes=(S.notes+'\n\n'+n).slice(0,30000);renderNoteCover();save();reply='已追加到本机笔记。内容和来源留在原处。';}}else if(/暖/.test(text)){applyEdit('warm');reply='已在本机调整照片暖色，新增一个版本，原图保留。';}else if(/黑白/.test(text)){applyEdit('mono');reply='已生成一个本机黑白版本，不是生成式重绘。';}else if(/(开始|继续).*整理/.test(text)){startOrResumeJob();reply='当前网页开始整理原文快照。关闭网页不会转入真实云端运行。';}else if(/暂停.*整理/.test(text)){pauseJob();reply='本机整理已暂停，进度与输入快照保留。';}else if(/发送|付款|下单/.test(text)){reply='这个请求涉及外部操作。本项目未连接对应服务，不能代替你执行；需要明确的内容和授权确认。';}D.messages.push({role:'assistant',text:reply});D.messages=D.messages.slice(-80);D.drafts['AI-01']='';if(D.forms?.['AI-01'])D.forms['AI-01'].prompt='';persist();rerender();}
 function cropExport(){const c=versionCanvas(S.photo.versions[S.photo.current]),rect=PhoneModel.centerCrop(c.width,c.height,D.cropRatio),out=document.createElement('canvas');out.width=Math.round(rect.width);out.height=Math.round(rect.height);out.getContext('2d').drawImage(c,rect.x,rect.y,rect.width,rect.height,0,0,out.width,out.height);out.toBlob(b=>{if(!b)return toast('裁切导出失败');downloadBlob(b,'swipe-crop-'+D.cropRatio.replace(':','x')+'.png');log('导出中心裁切副本',D.cropRatio+'；原图未覆盖');toast('裁切 PNG 已交给浏览器下载');},'image/png');}

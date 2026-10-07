@@ -2,7 +2,7 @@
 
 ## 零运行时依赖构建
 
-`template.html + styles/* + data/* + image.js + core.js + model.cjs + suite.js + workbench.js → scripts/build.mjs → dist/index.html`。
+`template.html + styles/* + data/* + image.js + storage.cjs + core.js + model.cjs + suite.js + workbench.js → scripts/build.mjs → dist/index.html`。
 
 源文件可分开维护，但加载时按既定顺序组合一个脚本作用域；单文件因此可离线打开。不存在后端、数据库或生产构建服务器。开发Python服务器只用于静态预览。
 
@@ -31,3 +31,5 @@ Core key `ai-phone-ui-core-v1`（schema3），suite key `ai-phone-ui-suite-v1`�
 全局函数包装和跨域状态引用需要逐步替换成明确的controller/store；CSS tokens仍为记录而非自动生成；不是所有页面都有独立业务状态机；恢复时不重建全部动态封面的排列；个别原生V3动作与工作台目录的精确子页映射需进一步统一。
 
 在行为测试保护下重构，绝不能为了换框架破坏已认可手势。
+
+恢复后由 storage.cjs 的单快照提交承载 core/suite；旧格式在首次成功恢复前兼容。见 [存储恢复](STORAGE_RECOVERY.md)。

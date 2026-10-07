@@ -9,23 +9,14 @@
 ## 原始归档结果（历史，不计入本轮通过）
 
 | 层级 | 结果 | 证据 |
-
 | --- | --- | --- |
-
 | 构建与静态规范 | 24/24通过 | static-results.json |
-
 | Node纯逻辑 | 32/32通过 | unit-results.txt |
-
 | 浏览器UI回归 | 126/126通过 | browser-results.json |
-
 | 界面渲染 | 86/86登记页可挂载与定位 | route:开头的检查 |
-
 | 浏览器异常 | 未捕获JS异常0个 | page_errors |
-
 | 默认外发请求 | HTTP/HTTPS/WS/WSS记录0个 | network_requests |
-
 | 发布脚本 | bash -n语法检查通过 | scripts/publish-github.sh；未执行真实创建 |
-
 | GitHub Actions | 未运行 | 仅提交workflow文件；原始归档当时未建远端 |
 
 测试环境：v22.16.0；Chromium 144.0.7559.96 built on Debian GNU/Linux 13 (trixie)；Python Playwright按requirements-dev.txt。记录时间由运行环境生成：2026-10-04T16:46:26.132025+00:00。
@@ -57,3 +48,7 @@
 - 远端Git、PR、Actions或网站部署。
 
 这些是后续M2/M4验收任务，不应隐藏在“全绿”或“UI完成”的表述里。全部登记UI完成按项目明确范围计，不是生产系统完成声明。
+
+## 2026-10-07 重建后验证
+
+构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。没有新远端 CI。

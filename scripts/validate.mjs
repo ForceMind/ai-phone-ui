@@ -18,7 +18,7 @@ verify('all modes are explicit',()=>catalog.forEach(r=>assert(['local','prototyp
 verify('all pages have name and purpose',()=>catalog.forEach(r=>assert(r.name&&r.purpose&&r.acceptance.length,'empty specification '+r.id)));
 verify('all catalog types have renderer or native alias',()=>{const native=['home','events','capabilities','controls','lock','sleep','photo','selection','versions','export','notes','job','focus'];for(const r of catalog)assert(native.includes(r.type)||suite.includes("case '"+r.type+"':"),'missing renderer '+r.type);});
 verify('linked UI route IDs resolve',()=>{const known=new Set(catalog.map(r=>r.id));for(const text of [suite,read('src/js/workbench.js')])for(const match of text.matchAll(/(?:ui:go:|go:|go\(')([A-Z]{2,3}-\d{2})/g))assert(known.has(match[1]),'unknown target '+match[1]);});
-for(const name of ['image.js','core.js','model.cjs','suite.js','workbench.js'])verify('syntax:'+name,()=>new vm.Script(read('src/js/'+name),{filename:name}));
+for(const name of ['image.js','storage.cjs','core.js','model.cjs','suite.js','workbench.js'])verify('syntax:'+name,()=>new vm.Script(read('src/js/'+name),{filename:name}));
 verify('built HTML has no unresolved placeholders',()=>assert(!read('dist/index.html').includes('<!-- BUILD:'),'unresolved build placeholder'));
 verify('self contained: no external executable/style assets',()=>assert(!/<script[^>]+src\s*=|<link[^>]+(?:stylesheet|preload)/i.test(read('dist/index.html')),'external dependency'));
 verify('default app has no network clients',()=>assert(!/\b(fetch\s*\(|new\s+(?:WebSocket|XMLHttpRequest|EventSource)|sendBeacon\s*\()/m.test(core+suite),'network client in UI'));

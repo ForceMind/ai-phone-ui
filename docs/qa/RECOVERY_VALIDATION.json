@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-07",
+  "scope": "reconstructed local UI-011 checkpoint",
+  "static": {
+    "passed": 25,
+    "total": 25
+  },
+  "unit": {
+    "passed": 56,
+    "total": 56,
+    "existing": 32,
+    "additional": 24
+  },
+  "browser": {
+    "exit_code": 1,
+    "assertions_executed": 0,
+    "reason": "Chromium socket() Operation not permitted"
+  },
+  "remote_head": "e5c33cbadedebcc4fb8f4d09132045f907bd7af0",
+  "remote_source_published": false,
+  "remote_ci_run": false,
+  "original_bundle_sha256": "76c662253478dbcf8946d3d40e8b4818a62fc48adbc11cffe46c83246f09e2f7",
+  "reconstruction_not_old_patch_identity": true
+}

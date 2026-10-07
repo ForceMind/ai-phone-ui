@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/validate.mjs",
-    "test": "node --test tests/model.test.cjs",
+    "test": "node --test tests/*.test.cjs",
     "test:ui": "python tests/browser_test.py",
     "dev": "python scripts/serve.py",
     "verify": "npm run build && npm run check && npm test && npm run test:ui",

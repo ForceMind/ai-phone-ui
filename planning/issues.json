@@ -63,7 +63,8 @@
       "status": "blocked",
       "title": "创建私有远端并核对HEAD",
       "milestone": "M0",
-      "acceptance": "需要已授权GitHub写入；不可虚报成功"
+      "acceptance": "需要已授权GitHub写入；不可虚报成功",
+      "note": "远端只有 LICENSE；源码发布等待原图集平台审批，本地恢复提交不是远端交付。"
     },
     {
       "id": "UI-009",
@@ -84,10 +85,11 @@
     {
       "id": "UI-011",
       "priority": "P0",
-      "status": "todo",
+      "status": "in_progress",
       "title": "备份异常与大图存储压力",
       "milestone": "M2",
-      "acceptance": "损坏/过大/空间不足不覆盖旧资料；真实origin恢复"
+      "acceptance": "损坏/过大/空间不足不覆盖旧资料；真实origin恢复",
+      "note": "已重建并本地提交恢复一致性；25 静态/56 单元通过，浏览器 0 断言；真实 origin、大图、配额、实机待测。"
     },
     {
       "id": "UI-012",

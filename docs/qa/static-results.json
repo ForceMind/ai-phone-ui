@@ -1,6 +1,6 @@
 {
-  "total": 24,
-  "passed": 24,
+  "total": 25,
+  "passed": 25,
   "failed": 0,
   "checks": [
     {
@@ -37,6 +37,10 @@
     },
     {
       "name": "syntax:image.js",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:storage.cjs",
       "status": "pass"
     },
     {
