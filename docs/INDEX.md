@@ -21,3 +21,5 @@
 [2026-10-07 恢复记录](project/RECOVERY_20261007.md) · [UI-011 存储恢复](engineering/STORAGE_RECOVERY.md)
 
 [远端发布证据](qa/PUBLICATION_EVIDENCE.json)
+
+[UI-011 真实 origin 验证证据](qa/UI011_ORIGIN_EVIDENCE.json)

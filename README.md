@@ -45,6 +45,7 @@ npm test
 python -m pip install -r requirements-dev.txt
 python -m playwright install chromium
 npm run test:ui
+npm run test:storage
 npm run dev
 # 可选：重新导出可浏览的项目文档
 npm run docs
@@ -52,7 +53,7 @@ npm run docs
 
 开发服务仅监听本机 `127.0.0.1:4173`。生产发布不需要 Node 服务，`dist/` 是静态文件；没有自动发布或遥测。
 
-浏览器测试默认通过 DOM 注入运行，并显式采用内存存储成功路径与存储拒绝路径，方便在受限沙盒中复现。它**不证明**真实 file:// 持久化或实机权限行为。设置 `CHROMIUM_PATH` 可选择已有 Chromium。
+浏览器测试默认通过 DOM 注入运行，并显式采用内存存储成功路径与存储拒绝路径，方便在受限沙盒中复现。它**不证明**真实 file:// 持久化或实机权限行为。新增的 `test:storage` 则单独启动回环 HTTP 服务，以浏览器原生 localStorage、文件导入、明确确认和真实 reload 验证 UI-011；不会将两种测试的证据混用。设置 `CHROMIUM_PATH` 可选择已有 Chromium。
 
 ## 目录与事实来源
 

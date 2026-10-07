@@ -1,0 +1,126 @@
+{
+  "scope": "M2 UI-011 HTTP-origin storage regression only",
+  "source_head": "e82370e342fabc83eacd1ca322b40a5b576a10f4",
+  "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/7",
+  "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37598633407",
+  "conclusion": "success",
+  "counts": {
+    "static": 25,
+    "unit": 56,
+    "dom_fixture": 127,
+    "native_origin": 14
+  },
+  "artifact": {
+    "id": 11472006970,
+    "url": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37598633407/artifacts/11472006970",
+    "sha256": "81bc163b9a51f1a705428c61f1f8db89c805e367ca2915d3afc78f4ba2d1545b",
+    "download_digest_verified": true,
+    "source_head_file_verified": true
+  },
+  "native_storage_report": {
+    "timestamp": "2026-10-07T09:11:05.691407+00:00",
+    "source_head": "e82370e342fabc83eacd1ca322b40a5b576a10f4",
+    "browser": "143.0.7499.4",
+    "origin": "http://127.0.0.1:39767",
+    "harness": "HTTP scripts/serve.py; native localStorage; real file input, confirmation clicks and document reload",
+    "not_tested": [
+      "physical Android/iOS",
+      "HTTPS deployment",
+      "OS disk pressure",
+      "large images/device memory",
+      "concurrent-tab conflict resolution",
+      "camera/microphone permissions"
+    ],
+    "total": 14,
+    "passed": 14,
+    "failed": 0,
+    "page_errors": [],
+    "external_requests": [],
+    "quota_probes": [
+      {
+        "filledCodeUnits": 5241281,
+        "attempts": 25,
+        "quotaErrors": 11,
+        "boundCodeUnits": 16777216
+      },
+      {
+        "filledCodeUnits": 5241281,
+        "attempts": 25,
+        "quotaErrors": 11,
+        "boundCodeUnits": 16777216
+      },
+      {
+        "filledCodeUnits": 5240987,
+        "attempts": 25,
+        "quotaErrors": 10,
+        "boundCodeUnits": 16777216
+      },
+      {
+        "filledCodeUnits": 5240987,
+        "attempts": 25,
+        "quotaErrors": 10,
+        "boundCodeUnits": 16777216
+      }
+    ],
+    "checks": [
+      {
+        "name": "native:legacy-reload-without-premature-migration",
+        "status": "pass"
+      },
+      {
+        "name": "native:legacy-to-snapshot-confirm-reload-and-normal-saves",
+        "status": "pass"
+      },
+      {
+        "name": "native:snapshot-replacement-confirm-reload-and-normal-saves",
+        "status": "pass"
+      },
+      {
+        "name": "native:cancel-valid-import-retains-both-sections-after-reload",
+        "status": "pass"
+      },
+      {
+        "name": "native:malformed-json-rejected-before-writing",
+        "status": "pass"
+      },
+      {
+        "name": "native:unsupported-backup-version-rejected",
+        "status": "pass"
+      },
+      {
+        "name": "native:external-photo-backup-rejected",
+        "status": "pass"
+      },
+      {
+        "name": "native:over-12MiB-backup-rejected-before-writing",
+        "status": "pass"
+      },
+      {
+        "name": "native:bounded-quota-legacy-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "native:bounded-quota-legacy-retry",
+        "status": "pass"
+      },
+      {
+        "name": "native:bounded-quota-snapshot-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "native:bounded-quota-snapshot-retry",
+        "status": "pass"
+      },
+      {
+        "name": "native:no-page-errors",
+        "status": "pass"
+      },
+      {
+        "name": "native:no-external-requests",
+        "status": "pass"
+      }
+    ]
+  },
+  "runtime_javascript_changed": false,
+  "note": "This immutable report covers the source_head above. Documentation/acceptance metadata commits require their own exact-head CI; inspect the PR checks for its current head."
+}

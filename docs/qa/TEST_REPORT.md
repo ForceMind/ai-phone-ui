@@ -1,5 +1,15 @@
 # v0.1.0 验证记录
 
+## UI-011 真实 HTTP-origin 候选（2026-10-07）
+
+[Draft PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 的 `e82370e342fabc83eacd1ca322b40a5b576a10f4`：[Actions](https://github.com/ForceMind/ai-phone-ui/actions/runs/37598633407) 25/25 静态、56/56 单元、127/127 原 DOM fixture、14/14 新 native-origin 全部通过。Chromium 143.0.7499.4，Ubuntu 24.04.5，Python 3.13.15，Node 22.23.3。artifact 下载 SHA256 和 source-head 均已核对，详情见 [机器可读证据](UI011_ORIGIN_EVIDENCE.json)。
+
+真实 origin suite 使用现有回环 HTTP 服务和浏览器原生 localStorage，执行真实 file input、确认按钮及整页 reload；不模拟 setItem/PhoneStorage/reload。四个配额探针各 25 次有界写入，实际填入 5,241,281（legacy）/5,240,987（snapshot）个字符并收到浏览器 QuotaExceededError。失败保留旧 bytes/内存与可重试确认，取消及释放测试 filler 后重试都通过。普通 core/suite 保存互不覆盖。没有暴露新的运行时恢复缺陷。
+
+本地 Chromium 启动仍遇到 socket() EPERM，0 项 native 断言；没有改变安全策略。以上成功来自正常 GitHub runner，不能用本地历史结果替代。证据只覆盖这个明确 SHA；文档/目录验收元数据的新提交仍需新的 exact-head CI。
+
+大图/设备内存、Android/iOS、OS 磁盘压力、HTTPS 部署、相机/麦克风权限、并发标签冲突及实际辅助技术尚未验证。以下较早的“未测真实 origin”描述仅属于历史批次。
+
 ## 当前远端发布验证（2026-10-07）
 
 - M0 `dab0df965aab58636c893161c6d4a6ef205a948d`：[Actions](https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789) 成功，24/24 静态、32/32 单元、126/126 浏览器
