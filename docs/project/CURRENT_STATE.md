@@ -35,4 +35,6 @@ UI-011 原子恢复代码已实现并通过自动化；HTTP-origin Chromium 的�
 
 ## M2 / UI-014 确认焦点与取消接续
 
-[Draft PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 `3299ba0` 开始，首个测试提交在真实 HTTP-origin Chromium 记录 25 个直接焦点/返回失败和 7 个文件选择启动超时。初版修复 `8e08e6b` 的原 25 静态、82 单元、127 DOM 与 19 native 存储/图像检查通过，新增键盘检查 30/41；剩余的文件选择启动和测试重新打开 Pulley 路径继续诊断，不能宣称本卡全绿。独立审阅还要求覆盖嵌套确认退回的焦点。详见 [按 SHA 分层的证据](../qa/UI014_FOCUS_EVIDENCE.json)。
+[PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 `3299ba0` 开始，首个测试提交在真实 HTTP-origin Chromium 记录 25 个直接焦点/返回失败和 7 个文件选择启动超时。修复候选 `a3da63073cd399745117be456ef57293795a6c95` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038) 已通过 25 静态、84 单元、127 DOM、19 native 存储/图像与 41/41 native 键盘检查；artifact 摘要、source-head、构建 HTML 字节和截图均已核对。历史失败、harness 修正与通过证据分开记录，见 [按 SHA 分层的证据](../qa/UI014_FOCUS_EVIDENCE.json)。
+
+这不是所有后续 head 或 main 的绿灯证明；最终小改（包括将恢复按钮的旧「确认导出」文案纠正为「确认恢复」）与合并 main 各自仍需 exact-head CI/artifact。完整 UI-014 仍开放，读屏、大字与实际手机未验证。

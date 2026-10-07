@@ -2,7 +2,7 @@
 
 ## 本批 UI-014：现有确认页的键盘焦点与取消
 
-[Draft PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 main `3299ba0217caa9850f39677aafd25eba9e3086f7` 开始。首个提交 `a7b8fde3f1fcbbc360245c971f9d2f88e2025c20` 只加入真实 HTTP-origin 键盘回归；先保存实际 Chromium 失败证据，再修复已复现问题。
+[Draft PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 main `3299ba0217caa9850f39677aafd25eba9e3086f7` 开始。首个提交 `a7b8fde3f1fcbbc360245c971f9d2f88e2025c20` 只加入真实 HTTP-origin 键盘回归，已保存实际 Chromium 失败证据。修复候选 `a3da630` 通过 25/84/127/19/41；最终 head 与合并 main 仍单独核对，不以该历史绿灯替代。
 
 - 范围：IMG-10 / IMG-01 的本机照片导入、IMG-02 的 Pulley 导出、SET-10 / CLD-17 的备份恢复确认
 - 验收：进入确认先聚焦取消；Tab / Shift+Tab 可达且不落入底层；Escape、键盘/鼠标取消、右滑取消恢复可见的原入口；最小化后重新打开保留确认与草稿
@@ -11,6 +11,10 @@
 - 退出条件：实际失败与修复证据、独立审阅、最终 exact-head CI、正常合并后的 main CI/artifact 核对。设备、读屏与移动软键盘仍不在本卡完成声明中
 
 UI-011 合成图边界已通过 PR #9 合入上述 main；保留 [既有证据](../qa/UI011_IMAGE_EVIDENCE.json)。UI-011 整项继续开放，不把桌面合成图当实机内存或 OS 压力结果。Testing Epic #1 正文维持原样，不重试、不另写评论。
+
+## 下一张有界安全卡：确认候选是否按任务隔离
+
+独立代码审阅发现 `pendingFile` / `pendingRestore` 是全局候选，而确认页能保留在任务会话中。先用两个有区别的合成备份/照片、切换任务、取消较新候选和返回旧确认进行原生浏览器复现，核对显示内容与最终被接受的候选是否一致；不得直接认定已发生或已修复。若复现，只修复该现有确认快照的归属和一次性消费，保留本卡焦点接续及 UI-011 原子恢复，不新增服务或页面。
 
 ## M2 实际设备边界仍开放
 

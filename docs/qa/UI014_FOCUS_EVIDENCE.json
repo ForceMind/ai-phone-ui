@@ -395,7 +395,10 @@
   "interpretation": [
     "Reproduction: 25 direct focus/return failures and 7 file-chooser startup timeouts, not 32 proven product defects.",
     "Initial candidate: 30/41 keyboard checks passed. Eight chooser timeouts remained; three export-reopen failures came from a harness coordinate click selecting the now-restored Pulley history command.",
-    "Final code, independent review, exact-head CI, and merged main artifacts must be verified separately."
+    "Final code, independent review, exact-head CI, and merged main artifacts must be verified separately.",
+    "a3da630 passed all 41 native keyboard checks after stable chooser observation and keyboard-only Pulley setup; the precise internal cause of prior chooser timeouts is not proven.",
+    "Pixel review showed a pre-existing restore approval caption incorrectly said export. The final small correction labels that existing button as restore, with a native assertion; the final head must run its own CI.",
+    "Independent code review identified and verified the nested-review focus correction; no remaining focus-code blocker reported at a3da630."
   ],
   "not_tested": [
     "screen readers",
@@ -404,5 +407,198 @@
     "real-device gesture/OS conflicts",
     "production services or deployment"
   ],
-  "unrelated_observation": "Static review found global pendingFile/pendingRestore candidates may outlive their individual review sessions; separate native reproduction and a bounded follow-up card are needed, not a claim of fixed behavior here."
+  "unrelated_observation": "Static review found global pendingFile/pendingRestore candidates may outlive their individual review sessions; separate native reproduction and a bounded follow-up card are needed, not a claim of fixed behavior here.",
+  "verified_candidate": {
+    "source_head": "a3da63073cd399745117be456ef57293795a6c95",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038",
+    "conclusion": "success",
+    "counts": {
+      "static": 25,
+      "unit": 84,
+      "dom_fixture": 127,
+      "native_storage": 19,
+      "native_keyboard_total": 41,
+      "native_keyboard_passed": 41
+    },
+    "artifact": {
+      "id": 11476295913,
+      "sha256": "0d9ce4dc0e849fc56c4d4988c1b2e5417244ff23f1bcbe3dc2c08db91532ca11",
+      "download_digest_verified": true,
+      "source_head_file_verified": true,
+      "built_html_bytes_verified": true
+    },
+    "browser": "143.0.7499.4",
+    "screenshots_inspected": [
+      "keyboard-focus-backup-settings.png",
+      "keyboard-focus-photo-export.png"
+    ],
+    "checks": [
+      {
+        "name": "backup-settings:entry",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:entry",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:gesture-reversal-pointercancel-right-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:gesture-reversal-pointercancel-right-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "overlay-and-inert-guards",
+        "status": "pass"
+      },
+      {
+        "name": "other-task-resume",
+        "status": "pass"
+      },
+      {
+        "name": "keyboard-quota-failure",
+        "status": "pass"
+      },
+      {
+        "name": "abandoned-picker",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ]
+  }
 }

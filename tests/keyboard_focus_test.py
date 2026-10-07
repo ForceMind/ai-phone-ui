@@ -72,6 +72,8 @@ def open_review(page, surface, navigate=True):
                     'buffer': base64.b64decode(native.PNG.split(',')[1])}
         chooser.value.set_files(file)
     page.wait_for_function('stack.at(-1)?.kind === "confirm"')
+    if surface.startswith('backup'):
+        native.ensure(dialog(page, 'accept').inner_text().strip() == '确认恢复', 'Backup acceptance must be labeled as restore, not export')
     observe(page, surface + ':opened')
     native.assert_original(page)
 
