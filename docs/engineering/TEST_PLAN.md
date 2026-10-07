@@ -33,3 +33,5 @@
 build/check/unit/browser均通过，未测项有明确记录；小范围改动也要复核全部登记页面可达。真实服务PR需新增服务测试和隐私审查。
 
 UI-011 重建：17 项 storage 测试 + 7 项生产处理器 VM 测试，保留原 32 项。原 127 项 DOM fixture 已有远端证据；新的真实 origin 回归必须另行核对本批 exact-head CI。
+
+UI-011 图像回归使用 Python 标准库生成有真实 PNG chunk/CRC 的 4000×4000、4001×4000 纯色图及 512×512 噪声图，不读取私人图片。原生报告记录像素、编码长度、fixture SHA256 与 quota 探针。拒绝前后比较实际存储 bytes/运行状态；成功及取消均检查 reload 后原片、版本和草稿。新增 `tests/backup_image.test.cjs` 的 Image 是明确的单元 mock，仅验证 14 个入口控制分支，原 56 单元、127 DOM 与 14 native 用例不删除。

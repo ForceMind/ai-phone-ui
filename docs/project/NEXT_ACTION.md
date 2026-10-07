@@ -1,23 +1,23 @@
 # 下一步，只从这里继续
 
-## 本批 UI-011 真实 origin 回归
+## 本批 UI-011 合成图边界
 
-[PR #7](https://github.com/ForceMind/ai-phone-ui/pull/7) 新增独立 HTTP-origin 原生 localStorage 测试，保留全部 127 DOM fixture。测试提交 `e82370e342fabc83eacd1ca322b40a5b576a10f4` 已通过 25 静态、56 单元、127 DOM、14 native origin；[证据](../qa/UI011_ORIGIN_EVIDENCE.json) 明确记录源 SHA、artifact、浏览器和真实 quota 探针。后续提交需要再查其 exact-head CI，不能把此报告当最新 head；按既定审阅与合并流程收尾，合并后核对 main 自身 CI；不部署。
+[PR #9](https://github.com/ForceMind/ai-phone-ui/pull/9) 先用真实 HTTP-origin Chromium 在 `cbd799cb81183ed17d862230da75a4742b8ff623` 重现两个图像校验缺陷：超过既有 16MP 上限及无法解码的 data URL 仍进入替换确认。修复在确认前验证图片，不重编码或覆盖原片，保持双区原子提交。此前 127 DOM / 14 native 全保留，另增 5 图像 native 场景和 8 入口单元。详见 [失败及修复证据](../qa/UI011_IMAGE_EVIDENCE.json)。
 
-本批没有发现新的运行时恢复缺陷，没有为凑进展修改产品 JS。双区原子提交、确认前不写入、成功 reload、格式/大小拒绝和真实配额失败后取消/重试均有自动化证据。UI-011 整项与 Testing Epic #1 继续开放。
+本卡收尾需要独立审阅、最终 exact-head CI 和正常合并后的 main CI；旧提交的绿灯不替代当前 HEAD。UI-011 整项继续开放：本批合成图片不代表实际手机内存和 OS 磁盘压力。没有更改 Testing Epic #1 正文或另写评论。
 
-## 下一张有界工作卡：UI-011 大图持久化边界
+## 下一张有界工作卡：UI-014 现有确认页的键盘焦点与取消
 
-- 使用合成图片，不读取或上传私人照片；HTTP-origin 检查解码尺寸限制、原片/版本保存和 reload
-- 分别覆盖接近尺寸边界、超过解码像素上限、合法但无法解码的图片以及图像占用下的存储失败
-- 先取得失败证据，再仅修复影响原资料保留或恢复诚实反馈的缺陷；保留现有 25/56/127/14 回归
-- 退出条件：每个场景有实际 Chromium 结果、原资料/草稿保留断言及新的 exact-head CI；不把合成图浏览器结果当手机内存测试
+- 只检查已有照片导入/导出与备份恢复确认页的 Tab、Shift+Tab、返回/取消和再次打开
+- 在 HTTP-origin Chromium 记录真实焦点、当前页面和原资料/草稿；先复现，再仅修复阻断现有操作的焦点缺陷
+- 保留 V3 手势、现有确认方式和全部回归；不新增页面、能力或架构层
+- 退出条件：以上路径有明确结果、修复回归和 exact-head CI；读屏、移动软键盘与实际设备结果仍单列未测
 
-## M2 实际设备与无障碍仍开放
+## M2 实际设备边界仍开放
 
 - UI-010：Android 与 iOS 各至少一台，记录机型/OS/浏览器，检查系统边缘、软键盘、Peek 反转、重复与取消
 - UI-011：实际设备容量/OS 磁盘压力、大图内存边界；并发标签冲突合并尚未证明
-- UI-014：焦点恢复、读屏、替代操作、大字体和长文
-- 未测项如实记录，不能用 Node VM、DOM fixture 或桌面 HTTP Chromium 代替
+- UI-014：除本次有界键盘卡外，仍需读屏、替代操作、大字体和长文
+- 不用 Node VM、DOM fixture 或桌面 HTTP Chromium 代替真实手机结果
 
 现有 planning/issues.json 保留 24 项计划；六张 Epic 无重复映射 15 个既有未完成条目。M3/M4/M5 按原顺序后续推进，不重做 86 页、不连接真实服务或部署。
