@@ -10,7 +10,7 @@ function fixture(){
     document:{activeElement:null},$:()=>({classList:{contains:()=>help}}),backPage(){backs++;}};
   const button=action=>({dataset:{action},focus(){if(!hidden){ctx.document.activeElement=this;focusCount++;}}});
   const back=button('back'),accept=button('accept');
-  const dialog={closest:()=>inert,contains:el=>el===back||el===accept,
+  const dialog={closest:()=>inert,contains:el=>el===dialog||el===back||el===accept,
     querySelector:selector=>selector.includes('back')?back:accept};
   ctx.topPage=()=>dialog;
   vm.createContext(ctx);vm.runInContext(code,ctx);
@@ -50,4 +50,12 @@ test('confirmation focus: return descriptor is serializable and survives session
 });
 test('confirmation focus: ordinary task pages retain their existing keyboard behavior',()=>{
  const f=fixture();f.ctx.stack=[{kind:'suite'}];f.sync();assert.equal(f.count(),0);assert.deepEqual(f.key('Tab'),{handled:false,prevented:false});
+});
+
+test('confirmation focus: dialog-root focus is treated as outside the two-button cycle',()=>{
+ const f=fixture();f.ctx.document.activeElement=f.dialog;
+ assert.deepEqual(f.key('Tab',{shiftKey:true}),{handled:true,prevented:true});assert.equal(f.ctx.document.activeElement,f.accept);
+});
+test('confirmation focus: dismissing a nested review preserves safe older-review focus',()=>{
+ const f=fixture();f.sync();f.ctx.restoreConfirmationFocus({kind:'confirm'});assert.equal(f.ctx.document.activeElement,f.back);
 });

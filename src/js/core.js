@@ -34,7 +34,7 @@ function confirmationKey(e){
   if(e.key==='Escape'){e.preventDefault();backPage();return true;}
   if(e.key!=='Tab')return false;
   const first=el.querySelector('[data-action="back"]'),last=el.querySelector('[data-action="accept"]');
-  if(!el.contains(document.activeElement)||e.shiftKey&&document.activeElement===first||!e.shiftKey&&document.activeElement===last){
+  if(document.activeElement!==first&&document.activeElement!==last||e.shiftKey&&document.activeElement===first||!e.shiftKey&&document.activeElement===last){
     e.preventDefault();(e.shiftKey?last:first)?.focus({preventScroll:true});
   }
   return true;
@@ -43,6 +43,8 @@ function restoreConfirmationFocus(page,cancelled=true){
   if(page?.kind!=='confirm'||!appOpen||overlay||locked||sleeping)return;
   const origin=page.returnFocus;
   if(cancelled&&page.mode==='import'&&origin?.task!==currentTask&&NAMES[origin?.task])openTask(origin.task,{noAnimation:true});
+  const review=activeConfirmation();
+  if(review){review.querySelector('[data-action="back"]')?.focus({preventScroll:true});return;}
   if(origin?.task===currentTask){
     if(cancelled&&origin.pulley&&!stack.length)pinPulley();
     const root=cancelled&&origin.pulley&&pulleyPinned?$('pulley'):topPage()||$('taskSurface');

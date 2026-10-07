@@ -19,7 +19,7 @@ SURFACES = ('backup-settings', 'backup-cloud', 'photo-gallery', 'photo-camera-im
 
 def observe(page, stage):
     value = page.evaluate('''() => ({route: Suite.current().id, task: currentTask,
-        page: stack.at(-1)?.kind || 'root', documentFocused: document.hasFocus(), mode: stack.at(-1)?.mode || null,
+        page: stack.at(-1)?.kind || 'root', documentFocused: document.hasFocus(), inputEvents: window.__ui014Inputs || [], mode: stack.at(-1)?.mode || null,
         focus: {tag: document.activeElement?.tagName, id: document.activeElement?.id,
           action: document.activeElement?.dataset.action || null,
           menu: document.activeElement?.dataset.menu || null,
@@ -56,7 +56,7 @@ def open_review(page, surface, navigate=True):
         native.go(page, origin(surface))
     if surface == 'photo-export':
         # Existing M shortcut opens the existing Pulley; native Enter activates it.
-        page.locator('#screen').click(position={'x': 175, 'y': 100})
+        page.locator('#screen').focus()
         page.keyboard.press('m')
         opener(page, surface).focus()
         page.keyboard.press('Enter')
@@ -87,6 +87,8 @@ def assert_return(page, surface):
 def entry(page, surface):
     open_review(page, surface)
     focused(page, dialog(page, 'back'), surface + ':safe-initial-focus')
+    if surface in ('backup-settings', 'photo-export'):
+        page.screenshot(path=str(OUT / ('keyboard-focus-' + surface + '.png')), animations='disabled')
 
 
 def tab_order(page, surface):
@@ -264,6 +266,20 @@ def run_case(browser, server, name, fn):
     print('RUN', name, flush=True)
     try:
         with native.case(browser, server) as page:
+            # Keep interception enabled for the whole document. A per-use listener
+            # can race its asynchronous protocol setup against an immediate key.
+            page.on('filechooser', lambda chooser: None)
+            page.evaluate("""() => {
+              window.__ui014Inputs = [];
+              for (const type of ['keydown', 'keyup', 'click']) window.addEventListener(type, e => {
+                const item = {type, key: e.key, target: e.target.id || e.target.dataset.action || e.target.tagName,
+                  trusted: e.isTrusted, activation: navigator.userActivation.isActive,
+                  blockedUntil: clickBlock, now: performance.now()};
+                window.__ui014Inputs.push(item);
+                if (window.__ui014Inputs.length > 20) window.__ui014Inputs.shift();
+                queueMicrotask(() => item.prevented = e.defaultPrevented);
+              }, true);
+            }""")
             page.bring_to_front()
             page.wait_for_function('document.hasFocus()')
             try:

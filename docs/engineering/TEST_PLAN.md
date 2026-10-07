@@ -35,3 +35,10 @@ build/check/unit/browser均通过，未测项有明确记录；小范围改动�
 UI-011 重建：17 项 storage 测试 + 7 项生产处理器 VM 测试，保留原 32 项。原 127 项 DOM fixture 已有远端证据；新的真实 origin 回归必须另行核对本批 exact-head CI。
 
 UI-011 图像回归使用 Python 标准库生成有真实 PNG chunk/CRC 的 4000×4000、4001×4000 纯色图及 512×512 噪声图，不读取私人图片。原生报告记录像素、编码长度、fixture SHA256 与 quota 探针。拒绝前后比较实际存储 bytes/运行状态；成功及取消均检查 reload 后原片、版本和草稿。新增 `tests/backup_image.test.cjs` 的 Image 是明确的单元 mock，仅验证 14 个入口控制分支，原 56 单元、127 DOM 与 14 native 用例不删除。
+
+
+## UI-014 真实键盘验收
+
+`npm run test:keyboard` 从同一回环 HTTP 预览加载实际构建；使用前台 Chromium 文档、真实文件选择事件、Tab / Shift+Tab / Enter / Escape、鼠标及现有 pointercancel。它分别报告照片相册/拍摄页的导入、Pulley 导出和两个备份入口的进入、取消、再次打开、最小化接续、覆盖层、跨任务、明确接受和配额失败。每次取消后检查原片、版本和两侧草稿，并通过真实 reload 复核持久状态。
+
+`tests/confirmation_focus.test.cjs` 只是 14 个生产焦点 helper 的 VM 控制分支检查，不是浏览器或读屏证明。全部原 70 单元、127 DOM 和 19 native 存储/图像检查继续保留。测试先行提交中的文件选择超时要与已观测焦点错误分开统计，不能全部称为产品缺陷。

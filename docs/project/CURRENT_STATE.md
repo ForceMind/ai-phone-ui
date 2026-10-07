@@ -31,3 +31,8 @@ UI-011 原子恢复代码已实现并通过自动化；HTTP-origin Chromium 的�
 ## 计划映射
 
 已从既有 backlog 建立六张 [Epic](../../planning/README.md)，覆盖 15 个未完成条目且无重复；没有扩大功能范围，也未创建远端 Milestones。
+
+
+## M2 / UI-014 确认焦点与取消接续
+
+[Draft PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 `3299ba0` 开始，首个测试提交在真实 HTTP-origin Chromium 记录 25 个直接焦点/返回失败和 7 个文件选择启动超时。初版修复 `8e08e6b` 的原 25 静态、82 单元、127 DOM 与 19 native 存储/图像检查通过，新增键盘检查 30/41；剩余的文件选择启动和测试重新打开 Pulley 路径继续诊断，不能宣称本卡全绿。独立审阅还要求覆盖嵌套确认退回的焦点。详见 [按 SHA 分层的证据](../qa/UI014_FOCUS_EVIDENCE.json)。

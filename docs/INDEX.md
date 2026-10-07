@@ -25,3 +25,5 @@
 [UI-011 真实 origin 验证证据](qa/UI011_ORIGIN_EVIDENCE.json)
 
 [UI-011 图像边界与失败复现证据](qa/UI011_IMAGE_EVIDENCE.json)
+
+[UI-014 确认焦点/取消的失败与修复证据](qa/UI014_FOCUS_EVIDENCE.json)
