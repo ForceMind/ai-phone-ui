@@ -8,6 +8,11 @@ No device, HTTPS, cross-tab conflict, or OS storage-pressure claim is made.
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
+import base64
+import hashlib
+import random
+import struct
+import zlib
 import json
 import os
 import re
@@ -27,7 +32,7 @@ SNAPSHOT = 'ai-phone-ui-state-v1'
 FILLER = 'ui011-test-only-quota-filler'
 PNG = ('data:image/png;base64,'
        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a/aQAAAAASUVORK5CYII=')
-RESULTS, ERRORS, OUTBOUND, QUOTAS = [], [], [], []
+RESULTS, ERRORS, OUTBOUND, QUOTAS, IMAGES = [], [], [], [], []
 
 
 def ensure(value, message='Assertion failed'):
@@ -45,12 +50,28 @@ def check(name, fn):
         traceback.print_exc()
 
 
-def fixture(label):
+def synthetic_png(width, height, noisy=False):
+    """Real, bounded PNG bytes, generated without third-party image dependencies."""
+    def chunk(kind, data):
+        return struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind + data))
+    rng = random.Random(11011)
+    rows = (b'\0' + (rng.randbytes(width * 3) if noisy else bytes((48, 120, 176)) * width)
+            for _ in range(height))
+    compressor = zlib.compressobj()
+    compressed = b''.join(compressor.compress(row) for row in rows) + compressor.flush()
+    data = (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, 2, 0, 0, 0))
+            + chunk(b'IDAT', compressed) + chunk(b'IEND', b''))
+    IMAGES.append({'width': width, 'height': height, 'pixels': width * height,
+                   'encoded_bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(), 'noisy': noisy})
+    return 'data:image/png;base64,' + base64.b64encode(data).decode()
+
+
+def fixture(label, source=PNG):
     return {
         'format': 'ai-phone-ui-backup', 'version': 1,
         'core': {
             'schema': 3, 'notes': label + ' notes', 'theme': 'sea',
-            'photo': {'source': PNG, 'name': label + '.png', 'current': 1,
+            'photo': {'source': source, 'name': label + '.png', 'current': 1,
                       'selection': None, 'versions': [
                           {'id': 'original', 'label': 'Original', 'ops': []},
                           {'id': 'warm', 'label': 'Warm copy', 'ops': [{'type': 'warm', 'region': None}]}]},
@@ -123,8 +144,8 @@ def reload_page(page):
 
 
 @contextmanager
-def case(browser, origin, snapshot=False):
-    seeded = values(fixture('original'), snapshot)
+def case(browser, origin, snapshot=False, original=None):
+    seeded = values(original or fixture('original'), snapshot)
     context = browser.new_context(viewport={'width': 1440, 'height': 1000},
         storage_state={'cookies': [], 'origins': [{'origin': origin, 'localStorage': [
             {'name': key, 'value': value} for key, value in seeded.items()]}]})
@@ -156,12 +177,15 @@ def live(page):
     return page.evaluate('({core: S, suite: Suite.state()})')
 
 
-def assert_original(page):
+def assert_original(page, backup=None):
+    backup = backup or fixture('original')
     state = live(page)
-    ensure(state['core']['notes'] == 'original notes', 'Original core was replaced')
-    ensure(state['suite']['nickname'] == 'original phone', 'Original suite was replaced')
-    ensure(state['core']['photo']['source'] == PNG, 'Original photo was lost')
-    ensure(state['suite']['forms']['DAY-02']['eventTitle'] == 'original event draft', 'Original draft was lost')
+    for key in ('notes', 'photo'):
+        ensure(state['core'][key] == backup['core'][key], 'Original core ' + key + ' was changed')
+    ensure(state['core']['drafts']['photo'] == backup['core']['drafts']['photo'], 'Original photo draft was lost')
+    ensure(state['suite']['nickname'] == backup['suite']['nickname'], 'Original suite was replaced')
+    ensure(state['suite']['forms']['DAY-02'] == backup['suite']['forms']['DAY-02'], 'Original form draft was lost')
+    ensure(state['suite']['drafts']['DAY-02'] == backup['suite']['drafts']['DAY-02'], 'Original suite draft was lost')
 
 
 def import_file(page, raw, name='restore.json'):
@@ -194,7 +218,7 @@ def assert_restored(page, backup):
     state = live(page)
     ensure(state['core']['notes'] == backup['core']['notes'], 'Core did not survive reload')
     ensure(state['suite']['nickname'] == backup['suite']['nickname'], 'Suite did not survive reload')
-    ensure(state['core']['photo']['source'] == PNG, 'Photo original changed on reload')
+    ensure(state['core']['photo']['source'] == backup['core']['photo']['source'], 'Photo original changed on reload')
     ensure(state['core']['photo']['versions'] == backup['core']['photo']['versions'], 'Photo versions changed')
     ensure(state['core']['drafts']['photo'] == backup['core']['drafts']['photo'], 'Core draft lost')
     ensure(state['suite']['forms']['DAY-02']['eventTitle'] == backup['suite']['forms']['DAY-02']['eventTitle'], 'Suite draft lost')
@@ -295,14 +319,18 @@ def fill_quota(page):
     QUOTAS.append(result)
 
 
-def quota(browser, origin, snapshot=False, retry=True):
-    with case(browser, origin, snapshot) as page:
+def quota(browser, origin, snapshot=False, retry=True, image_source=None):
+    original = fixture('original', image_source or PNG)
+    with case(browser, origin, snapshot, original) as page:
         go(page, 'SET-10')
-        new = fixture('quota restored')
+        new = fixture('quota restored', image_source or PNG)
         new['core']['notes'] = 'restored under quota ' + ('x' * 29000)
         review(page, new)
         before = stored(page)
         before_live = live(page)
+        if image_source:
+            ensure(len(image_source) > 1024 * 1024, 'Image must occupy over 1 Mi native storage code units')
+            ensure(page.evaluate('([baseCanvas.width, baseCanvas.height])') == [512, 512], 'Occupancy image did not decode')
         document_token = page.evaluate('window.__ui011Document = Math.random().toString(36)')
         fill_quota(page)
         for _ in range(2):
@@ -313,6 +341,7 @@ def quota(browser, origin, snapshot=False, retry=True):
             ensure(stored(page) == before, 'Quota failure changed original durable bytes')
             ensure(live(page) == before_live, 'Quota failure changed in-memory data')
             expect(page.locator('#storageError')).to_be_visible()
+            assert_original(page, original)
         if retry:
             page.evaluate('key => localStorage.removeItem(key)', FILLER)
             commit_and_reload(page)
@@ -325,11 +354,43 @@ def quota(browser, origin, snapshot=False, retry=True):
             ensure(stored(page) == before, 'Cancel after failure changed durable data')
             page.evaluate('key => localStorage.removeItem(key)', FILLER)
             reload_page(page)
-            assert_original(page)
+            assert_original(page, original)
             # Same file can be selected after cancellation; approval is required again.
             review(page, new)
-            assert_original(page)
+            assert_original(page, original)
             click_dialog(page, 'back')
+
+
+def image_boundary(browser, origin, source):
+    with case(browser, origin) as page:
+        page.set_default_timeout(15000)
+        new = fixture('16MP boundary', source)
+        before = stored(page)
+        review(page, new)
+        ensure(stored(page) == before, 'Boundary image wrote before approval')
+        assert_original(page)
+        commit_and_reload(page)
+        assert_restored(page, new)
+        ensure(page.evaluate('([baseCanvas.width, baseCanvas.height])') == [4000, 4000],
+               'Exact 16MP boundary was replaced or resized')
+        reload_page(page)
+        assert_restored(page, new)
+
+
+def reject_image(browser, origin, source):
+    with case(browser, origin) as page:
+        page.set_default_timeout(15000)
+        before = stored(page)
+        before_live = live(page)
+        import_file(page, json.dumps(fixture('invalid image', source)).encode())
+        page.wait_for_function('stack.at(-1)?.suiteMode === "restore" || document.querySelector("#toast").textContent.includes("无法恢复")')
+        ensure(not page.evaluate('stack.some(p => p.suiteMode === "restore")'),
+               'Undecodable/over-16MP image reached replacement approval instead of rejection')
+        expect(page.locator('#toast')).to_contain_text('无法恢复')
+        ensure(stored(page) == before, 'Rejected image changed durable bytes')
+        ensure(live(page) == before_live, 'Rejected image changed live originals or drafts')
+        reload_page(page)
+        assert_original(page)
 
 
 def main():
@@ -358,7 +419,16 @@ def main():
                 for retry in (False, True):
                     mode = ('snapshot' if snapshot else 'legacy') + ('-retry' if retry else '-cancel')
                     check('native:bounded-quota-' + mode, lambda s=snapshot, r=retry: quota(browser, origin, s, r))
-            check('native:no-page-errors', lambda: ensure(not ERRORS, str(ERRORS)))
+            boundary = synthetic_png(4000, 4000)
+            oversized_image = synthetic_png(4001, 4000)
+            occupancy = synthetic_png(512, 512, noisy=True)
+            check('native:image-exact-16MP-confirm-and-reload', lambda: image_boundary(browser, origin, boundary))
+            check('native:image-over-16MP-rejected-before-replacement', lambda: reject_image(browser, origin, oversized_image))
+            encoded_invalid = 'data:image/png;base64,' + base64.b64encode(b'valid base64 but not a decodable PNG').decode()
+            check('native:image-valid-base64-undecodable-rejected', lambda: reject_image(browser, origin, encoded_invalid))
+            check('native:image-occupied-legacy-quota-cancel-and-reload', lambda: quota(browser, origin, retry=False, image_source=occupancy))
+            check('native:image-occupied-snapshot-quota-retry-and-reload', lambda: quota(browser, origin, snapshot=True, image_source=occupancy))
+            check('native:no-page-errors' , lambda: ensure(not ERRORS, str(ERRORS)))
             check('native:no-external-requests', lambda: ensure(not OUTBOUND, str(OUTBOUND)))
             browser.close()
     except Exception as exc:
@@ -369,10 +439,10 @@ def main():
               'browser': browser_version, 'origin': origin,
               'harness': 'HTTP scripts/serve.py; native localStorage; real file input, confirmation clicks and document reload',
               'not_tested': ['physical Android/iOS', 'HTTPS deployment', 'OS disk pressure',
-                             'large images/device memory', 'concurrent-tab conflict resolution', 'camera/microphone permissions'],
+                             'physical-device large-image memory pressure', 'concurrent-tab conflict resolution', 'camera/microphone permissions'],
               'total': len(RESULTS), 'passed': sum(x['status'] == 'pass' for x in RESULTS),
               'failed': sum(x['status'] == 'fail' for x in RESULTS), 'page_errors': ERRORS,
-              'external_requests': OUTBOUND, 'quota_probes': QUOTAS, 'checks': RESULTS}
+              'external_requests': OUTBOUND, 'quota_probes': QUOTAS, 'synthetic_images': IMAGES, 'checks': RESULTS}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'storage-origin-results.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({key: report[key] for key in ('source_head', 'browser', 'total', 'passed', 'failed')}, indent=2))
