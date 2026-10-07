@@ -11,7 +11,7 @@ const STORE_UI='ai-phone-ui-suite-v1';
 let D=PhoneModel.initial();
 let uiStorageWarned=false,renderingRoute='SYS-01';
 try{const raw=PhoneStorage.getItem(STORE_UI);if(raw)D=PhoneModel.validate(JSON.parse(raw));}catch{uiStorageWarned=true;}
-let activeRoute='SYS-01',viewState='default',pendingRestore=null,lastDeleted=null,selectedDay=new Date().getDate(),monthOffset=0;
+let activeRoute='SYS-01',viewState='default',pendingRestore=null,restoreSerial=0,lastDeleted=null,selectedDay=new Date().getDate(),monthOffset=0;
 let callMuted=false,callSpeaker=false,playingPreview=false;
 const rootForTask=new Map(),liveRouteForTask=new Map();
 const row=(title,sub='',target='',glyph='arrow',extra='')=>`<${target?'button':'div'} class="s-row" ${target?`data-action="ui:go:${target}"`:''}>${glyph?icon(glyph):''}<span class="grow"><b>${esc(title)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span>${extra|| (target?'<span class="chev">›</span>':'')}</${target?'button':'div'}>`;
@@ -228,7 +228,31 @@ const baselineChoose=chooseMode;chooseMode=function(g){if(g.target.closest?.('in
 $('screen').addEventListener('input',e=>{const fieldName=e.target.dataset.field;if(fieldName){const id=e.target.closest('[data-route-id]')?.dataset.routeId||current()?.id||activeRoute;D.drafts[id]=e.target.value;D.forms??={};D.forms[id]??={};D.forms[id][fieldName]=e.target.value;if(fieldName==='message')D.messageDraft=e.target.value;if(fieldName==='search'){D.readQuery=e.target.value;$('suiteSearchResults').innerHTML=searchHTML(e.target.value);}if(fieldName==='contactSearch'){const q=e.target.value.toLowerCase();$('contactResults').innerHTML=fixtures.contacts.filter(x=>x[0].toLowerCase().includes(q)).map(([n,x])=>`<button class="s-row" data-action="ui:contact:${n}"><span class="s-avatar">${n[0]}</span><span class="grow"><b>${n}</b><small>${x}</small></span></button>`).join('')||note('没有匹配的示例联系人。');}persist();}
 if(e.target.dataset.range==='compare'){D.comparison=Number(e.target.value);$('suiteComparison')?.style.setProperty('--compare',D.comparison+'%');persist();}if(e.target.dataset.range==='volume'){D.settings.volume=Number(e.target.value);$('volumeLabel').textContent=D.settings.volume+'%';persist();}});
 $('screen').addEventListener('change',e=>{if(e.target.dataset.checkId!==undefined){if(!D.checklist.length)D.checklist=PhoneModel.extractChecklist(S.notes);const item=D.checklist[Number(e.target.dataset.checkId)];if(item)item.done=e.target.checked;persist();}});
-const backupInput=document.createElement('input');backupInput.id='suiteBackupInput';backupInput.type='file';backupInput.accept='application/json,.json';backupInput.hidden=true;document.body.appendChild(backupInput);backupInput.addEventListener('change',async e=>{const f=e.target.files?.[0];e.target.value='';if(!f)return;if(f.size>12*1024*1024){toast('备份超过 12 MB，请选择有效的小型备份');return;}try{const b=JSON.parse(await f.text());if(b.format!=='ai-phone-ui-backup'||b.version!==1)throw Error('不是本项目支持的备份格式');const core=validate(b.core),suite=PhoneModel.validate(b.suite);pendingRestore={core,suite};confirm('restore','恢复本机资料','文件已通过基本结构校验。\n这会替换当前照片、笔记、偏好与草稿。请先导出当前资料。\n\n恢复后不会启动任何周期任务。',{name:f.name});}catch(err){pendingRestore=null;toast('无法恢复：'+err.message);}});
+async function validateBackupPhoto(source){
+  if(!source)return;
+  const image=new Image();
+  await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error('备份中的图片无法解码'));image.src=source;});
+  if(!image.naturalWidth||!image.naturalHeight)throw Error('备份中的图片尺寸无效');
+  if(image.naturalWidth*image.naturalHeight>16000000)throw Error('备份中的图片超过 1600 万像素');
+  try{await image.decode();}catch{throw Error('备份中的图片无法解码');}
+}
+const backupInput=document.createElement('input');backupInput.id='suiteBackupInput';backupInput.type='file';backupInput.accept='application/json,.json';backupInput.hidden=true;document.body.appendChild(backupInput);
+backupInput.addEventListener('change',async e=>{
+  const f=e.target.files?.[0];e.target.value='';if(!f)return;
+  const serial=++restoreSerial,originPage=stack.at(-1);pendingRestore=null;
+  const isCurrent=()=>serial===restoreSerial&&stack.at(-1)===originPage;
+  if(f.size>12*1024*1024){toast('备份超过 12 MB，请选择有效的小型备份');return;}
+  try{
+    const b=JSON.parse(await f.text());
+    if(!isCurrent())return;
+    if(b.format!=='ai-phone-ui-backup'||b.version!==1)throw Error('不是本项目支持的备份格式');
+    const core=validate(b.core),suite=PhoneModel.validate(b.suite);
+    await validateBackupPhoto(core.photo.source);
+    if(!isCurrent())return;
+    pendingRestore={core,suite};
+    confirm('restore','恢复本机资料','文件已通过结构和图片校验。\n这会替换当前照片、笔记、偏好与草稿。请先导出当前资料。\n\n恢复后不会启动任何周期任务。',{name:f.name});
+  }catch(err){if(isCurrent()){pendingRestore=null;toast('无法恢复：'+err.message);}}
+});
 const assist=document.createElement('div');assist.className='suite-assist';assist.id='suiteAssist';assist.innerHTML='<button data-action="back">返回</button><button data-action="ui:go:SYS-01">活动任务</button><button data-action="topmenu">系统控制</button>'; $('screen').appendChild(assist);
 // Extra line icons are built-in, not fetched assets.
 const defs=document.querySelector('svg defs');for(const [id,path] of [['list','M4 6h16M4 12h16M4 18h16'],['lock','M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5z'],['download','M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4'],['history','M4 10a8 8 0 1 1 0 6M4 4v6h6M12 7v6l4 2'],['trash','M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15']])if(!document.getElementById('i-'+id))defs.insertAdjacentHTML('beforeend',`<symbol id="i-${id}" viewBox="0 0 24 24"><path d="${path}"/></symbol>`);
