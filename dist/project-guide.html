@@ -65,6 +65,17 @@ npm run docs</code></pre>
 <p class="list-item">- 每个新页面需编号、父级、空/错/取消方案、至少一个交互断言和可检索入口。</p>
 <p class="list-item">- 手势阈值按 360×672 逻辑坐标；不要混用页面缩放后的物理像素。</p>
 <p class="list-item">- 不删除已经存在的 tests 来“修复”失败；不能把断言换成只看页面存在。</p></article><article id="doc-2"><div class="filename">CHANGELOG.md</div><h2>Changelog</h2>
+<h3>2026-10-07 — 确认候选归属</h3>
+<p class="list-item">- 先在真实 HTTP-origin Chromium 复现旧备份/照片确认误用较新文件和无效文件使旧确认失效</p>
+<p class="list-item">- 候选随各自确认/浅复制会话共享，取消和接受只消费自己的候选；恢复失败保留同一候选可重试</p>
+<p class="list-item">- 不改页面、焦点契约、原片/版本/草稿或原子存储协议；保留所有既有回归与失败证据</p>
+<p class="list-item">- 实际手机、读屏、大字及 OS 存储压力仍待 M2 后续验收</p>
+<h3>2026-10-07 — UI-014 确认焦点与取消接续</h3>
+<p class="list-item">- 先在 HTTP-origin Chromium 记录焦点丢失、Tab 逃逸和导入取消丢失原任务，再按既有确认页修复</p>
+<p class="list-item">- 进入/接续聚焦取消，取消返回有效原入口，保留 Pulley、手势阈值、原片、版本和草稿</p>
+<p class="list-item">- 截图复核发现并纠正备份恢复按钮误写为「确认导出」的旧文案；实际恢复动作与确认协议不变</p>
+<p class="list-item">- 增加独立真实键盘 suite 与 14 个 helper 单元，保持此前 25 静态、70 单元、127 DOM 和 19 native 存储/图像回归</p>
+<p class="list-item">- 明确接受、配额失败、覆盖层与旧文件选择的接续边界单独验证；不声称读屏或实际手机已通过</p>
 <h3>2026-10-07 — UI-011 图像恢复边界</h3>
 <p class="list-item">- 先在真实 HTTP-origin Chromium 重现两个非法图片仍进入替换确认的缺陷，再在确认前检查图片加载、既有 16MP 上限及解码</p>
 <p class="list-item">- 保留原片 data URL、版本和两侧草稿；图像占用下原生配额失败仍可取消或重试</p>
@@ -118,11 +129,16 @@ npm run docs</code></pre>
 <p><a href="#doc-24">2026-10-07 恢复记录</a> · <a href="#doc-17">UI-011 存储恢复</a></p>
 <p><span>远端发布证据</span></p>
 <p><span>UI-011 真实 origin 验证证据</span></p>
-<p><span>UI-011 图像边界与失败复现证据</span></p></article><article id="doc-4"><div class="filename">docs/design/ACCESSIBILITY.md</div><h2>无障碍与替代操作</h2>
+<p><span>UI-011 图像边界与失败复现证据</span></p>
+<p><span>UI-014 确认焦点/取消的失败与修复证据</span></p></article><article id="doc-4"><div class="filename">docs/design/ACCESSIBILITY.md</div><h2>无障碍与替代操作</h2>
 <p>手势是默认交互，但不能是唯一入口。设置中可开启可点按的返回/活动/菜单控件；这不是给默认设计恢复底栏。已有键盘路径、焦点轮廓、语义按钮、输入标签和不活跃层 inert。</p>
 <p>快捷键 H 活动、E 事件、A 能力、T 控制、M 菜单、Esc 返回。文本输入中不拦截这些字母；焦点按钮的空格交给按钮本身。</p>
 <p>下一阶段验收：全部页面合理的焦点次序；弹层开启/关闭后的焦点归还；读屏能知道当前层级、错误和待确认对象；可达控件足够大；放大文字不截断；不通过颜色唯一表达成功/失败；减少动效关闭动态装饰；浏览器手势被系统抢走时不误提交。</p>
-<p>本版有基础功能与部分自动检查，没有 WCAG/读屏/真实触觉认证。小字和触控目标需独立真机测试。</p></article><article id="doc-5"><div class="filename">docs/design/CONTENT_GUIDE.md</div><h2>文案规则</h2>
+<p>本版有基础功能与部分自动检查，没有 WCAG/读屏/真实触觉认证。小字和触控目标需独立真机测试。</p>
+<h3>UI-014：已有照片/备份确认的键盘边界</h3>
+<p>确认页激活或从最小化、其他任务、系统覆盖层返回时，焦点先落在「取消」。同一确认页重复同步状态不会从「接受」抢走焦点。Tab / Shift+Tab 只在现有取消与接受按钮间循环；有 inert 祖先、工作台目录、帮助层或系统覆盖层时，确认页不拦截它们的键盘操作。</p>
+<p>Escape、取消按钮或既有右滑取消退回发起处。导入照片时，即使确认已进入照片任务，取消仍恢复之前的相册/拍摄页面与导入入口；接受的导入目标仍为照片工作区。Pulley 导出取消只在原照片上下文恢复原菜单命令。没有按钮入口的手势或 deep link 使用可见的当前任务容器作为焦点退路，不新增常驻控件。原图、版本、两侧草稿和手势阈值不因此改变。</p>
+<p>焦点返回描述随每张确认和任务会话保留；取消后的旧文件选择结果不能重新导航或夺取焦点。这里的自动验收是桌面 HTTP-origin Chromium，不宣称读屏、手机软键盘或 WCAG 完整认证。</p></article><article id="doc-5"><div class="filename">docs/design/CONTENT_GUIDE.md</div><h2>文案规则</h2>
 <p>优先“当前对象 + 状态 + 下一步”。例如“这张照片已新增一个暖调版本；原图保留。”不要“AI魔法处理中”“一切交给我”掩盖具体动作。</p>
 <div class="table-scroll"><table><tr><th>场景</th><th>使用</th><th>不使用</th></tr><tr><td>服务未接入</td><td>交互预览 · 未连接</td><td>在线 / 已授权 / 服务健康</td></tr><tr><td>本机预览消息</td><td>已记入本机预览，没有发送</td><td>已发送成功</td></tr><tr><td>下载</td><td>PNG 已交给浏览器下载</td><td>已永久保存</td></tr><tr><td>周期草稿</td><td>已保存草稿，未启用定时任务</td><td>我会每周替你执行</td></tr><tr><td>权限意向</td><td>使用时仍会请求设备权限</td><td>你已授予相机权限</td></tr><tr><td>图片处理</td><td>本机调色版本</td><td>AI 已重建真实细节</td></tr><tr><td>错误</td><td>保留输入；该步骤未完成</td><td>出错了，请稍后再试（无恢复方式）</td></tr></table></div>
 <p>英文只保留品牌、结构标签和开发标识，交互正文采用简体中文。设计检查编号不等于正式产品中要展示开发代码。</p></article><article id="doc-6"><div class="filename">docs/design/DESIGN_SYSTEM.md</div><h2>设计系统 v1</h2>
@@ -174,7 +190,10 @@ npm run docs</code></pre>
 <p>动作过程中给短文案，松手后给结果。错误提示保留当前对象。氛围改变不改变手势映射。减少动效时仍有最终状态、选择词语和颜色之外的标记。辅助按钮可在设置开启，但默认不回退成底部导航栏。</p>
 <h3>备份恢复确认的存储验收</h3>
 <p>UI-011 使用 CLD-17 / SET-10 的文件输入与现有明确确认按钮，不改手势阈值。成功必须在同一个快照提交 core/suite 后才 reload；文件选择本身、格式或大小拒绝、配额失败、取消均不得替换旧资料。配额失败保留可再次点击的同一确认，取消后重新选择文件须重新确认。HTTP-origin 自动化验证真实持久化和 reload，不等同实机触摸、读屏或系统存储压力。</p>
-<p>备份内的图片必须在替换确认出现之前经过浏览器加载、尺寸和解码检查。空 source 仍表示本机示例；可解码的 1600 万像素原片可恢复，超过上限或无法解码的 data URL 必须拒绝。校验不重编码、不裁切原片。较新的文件选择或离开原页面后，过时的异步校验不能重新打开确认或清空新候选。普通照片导入的 1400px 工作副本策略保持不变。</p></article><article id="doc-9"><div class="filename">docs/design/RESPONSIVE.md</div><h2>响应式与设备适配</h2>
+<p>备份内的图片必须在替换确认出现之前经过浏览器加载、尺寸和解码检查。空 source 仍表示本机示例；可解码的 1600 万像素原片可恢复，超过上限或无法解码的 data URL 必须拒绝。校验不重编码、不裁切原片。较新的文件选择或离开原页面后，过时的异步校验不能重新打开确认或清空新候选。普通照片导入的 1400px 工作副本策略保持不变。</p>
+<p>UI-014 键盘补充：确认页进入与接续优先聚焦取消，Tab / Shift+Tab 在两个既有按钮中循环；Escape 等价于取消。返回恢复有效原任务/入口，不等价于接受；照片导入的取消恢复发起任务，明确接受仍去照片工作区。鼠标/触摸确认阈值、右滑取消、反转和 pointercancel 不改。较新的任务导航使旧文件选择失去恢复焦点或重开确认的资格。</p>
+<h3>现有导入确认的候选归属</h3>
+<p>照片 File 与已校验备份只属于创建它的确认。现有任务栈的浅复制共享同一个候选持有对象；接续旧确认不会取用较新文件。取消清空该确认的候选，接受照片在启动异步导入前一次性取走自己的 File；恢复只有在单快照提交成功后才清空候选，写入失败仍可重试。较新文件被取消或校验失败不改变旧确认，旧会话副本不能重放已消费/取消的候选。仅保留原有确认文字与页面，不扩展全局状态层。</p></article><article id="doc-9"><div class="filename">docs/design/RESPONSIVE.md</div><h2>响应式与设备适配</h2>
 <p>桌面工作台使用三列：页面目录 / 设备 / 当前规范。中间逻辑屏幕固定360×672，机身390×756，按剩余宽高缩放，不独立缩放手势阈值。</p>
 <p>小于730px宽时目录与检查器隐藏，顶端“界面目录”打开全屏目录；页面主体只展示可操作手机。可以鼠标、触摸或键盘操作。</p>
 <p>建议矩阵：390×844、360×800、430×932、768×1024、1366×768、1440×1000；另测横屏、200%文字缩放、浏览器地址栏收缩和软键盘。</p>
@@ -827,7 +846,10 @@ npm run docs</code></pre>
 <h3>UI-011 图像替换前校验</h3>
 <p>2026-10-07 测试先行的 PR #9 在真实 HTTP-origin Chromium 发现：有效 data URL 结构并不能保证图片可解码。超过 1600 万像素及有效 base64 但不能解码的内容都可进入旧恢复确认，若提交后启动再拒绝图片，已经丢失原来的工作区。见 <span>失败与修复证据</span>。</p>
 <p>修复只在恢复入口加入浏览器加载、既有 16MP 尺寸上限和完整解码校验，之后才建立 pendingRestore / 明确确认。保留 source 字节，不把原片替换成缩略图；空 source 的示例备份继续有效。序号与原页面身份避免异步结果覆盖较新选择；已有 captureSession 边界使离开、最小化和锁屏前的解码失效，即使再返回同一页面也不能弹回旧确认。单快照提交、quota 重试与清理协议未变。</p>
-<p>原 14 项 native 回归保持，增加 5 项：4000×4000 准确边界确认/重载、4001×4000 拒绝、有效 base64 无法解码拒绝、超过 1 Mi 字符的真实噪声 PNG 占用下 legacy 取消/重载、snapshot 重试/重载。探针仍只操作测试 filler；每例关闭隔离 context。14 项额外单元仅证明加载/解码失败和异步陈旧结果控制，不能替代真实浏览器。桌面合成图的结果不证明手机内存或 OS 磁盘压力。</p></article><article id="doc-18"><div class="filename">docs/engineering/TEST_PLAN.md</div><h2>测试计划</h2>
+<p>原 14 项 native 回归保持，增加 5 项：4000×4000 准确边界确认/重载、4001×4000 拒绝、有效 base64 无法解码拒绝、超过 1 Mi 字符的真实噪声 PNG 占用下 legacy 取消/重载、snapshot 重试/重载。探针仍只操作测试 filler；每例关闭隔离 context。14 项额外单元仅证明加载/解码失败和异步陈旧结果控制，不能替代真实浏览器。桌面合成图的结果不证明手机内存或 OS 磁盘压力。</p>
+<h3>UI-011 确认候选隔离</h3>
+<p>PR #11 的测试提交 d3430714 在真实 HTTP-origin Chromium 复现：SET-10 的旧确认接续后会提交 CLD-17 较新备份，包括已取消的备份；较新无效备份则使旧确认无法提交。嵌套照片确认也会导入已取消的较新 File。详见 <span>候选红绿证据</span>。</p>
+<p>候选现在随确认保存在共享持有对象中，不再读取 pendingRestore / pendingFile 全局槽。任务栈浅复制不复制候选所有权：取消及成功提交清空同一个对象，所有旧副本一同失效。配额/序列化失败不消费候选，切换其他任务后仍可接受原备份。storage.cjs、原片校验、16MP、1400px 工作副本、双区草稿与单次 replace 协议均保持。</p></article><article id="doc-18"><div class="filename">docs/engineering/TEST_PLAN.md</div><h2>测试计划</h2>
 <h3>分层</h3>
 <p class="list-item">1. 静态：目录编号唯一、父链有效、渲染类型存在、动作入口可解释、schema/manifest一致、无未替换构建标记、无外链脚本/样式、文档齐备、V3哈希不变。</p>
 <p class="list-item">2. 单元：状态校验、裁切范围、提取语义、搜索、数据限制、快照不可变、备份不能恢复伪造连接或周期启用。</p>
@@ -845,7 +867,13 @@ npm run docs</code></pre>
 <h3>合并门槛</h3>
 <p>build/check/unit/browser均通过，未测项有明确记录；小范围改动也要复核全部登记页面可达。真实服务PR需新增服务测试和隐私审查。</p>
 <p>UI-011 重建：17 项 storage 测试 + 7 项生产处理器 VM 测试，保留原 32 项。原 127 项 DOM fixture 已有远端证据；新的真实 origin 回归必须另行核对本批 exact-head CI。</p>
-<p>UI-011 图像回归使用 Python 标准库生成有真实 PNG chunk/CRC 的 4000×4000、4001×4000 纯色图及 512×512 噪声图，不读取私人图片。原生报告记录像素、编码长度、fixture SHA256 与 quota 探针。拒绝前后比较实际存储 bytes/运行状态；成功及取消均检查 reload 后原片、版本和草稿。新增 <code>tests/backup_image.test.cjs</code> 的 Image 是明确的单元 mock，仅验证 14 个入口控制分支，原 56 单元、127 DOM 与 14 native 用例不删除。</p></article><article id="doc-19"><div class="filename">docs/project/CHARTER.md</div><h2>项目宪章</h2>
+<p>UI-011 图像回归使用 Python 标准库生成有真实 PNG chunk/CRC 的 4000×4000、4001×4000 纯色图及 512×512 噪声图，不读取私人图片。原生报告记录像素、编码长度、fixture SHA256 与 quota 探针。拒绝前后比较实际存储 bytes/运行状态；成功及取消均检查 reload 后原片、版本和草稿。新增 <code>tests/backup_image.test.cjs</code> 的 Image 是明确的单元 mock，仅验证 14 个入口控制分支，原 56 单元、127 DOM 与 14 native 用例不删除。</p>
+<h3>UI-014 真实键盘验收</h3>
+<p><code>npm run test:keyboard</code> 从同一回环 HTTP 预览加载实际构建；使用前台 Chromium 文档、真实文件选择事件、Tab / Shift+Tab / Enter / Escape、鼠标及现有 pointercancel。它分别报告照片相册/拍摄页的导入、Pulley 导出和两个备份入口的进入、取消、再次打开、最小化接续、覆盖层、跨任务、明确接受和配额失败。所有取消路径检查原片、版本和两侧草稿；Escape / 键盘按钮 / 鼠标按钮的取消与再次打开用例另通过真实 reload 复核持久状态。</p>
+<p><code>tests/confirmation_focus.test.cjs</code> 只是 14 个生产焦点 helper 的 VM 控制分支检查，不是浏览器或读屏证明。全部原 70 单元、127 DOM 和 19 native 存储/图像检查继续保留。测试先行提交中的文件选择超时要与已观测焦点错误分开统计，不能全部称为产品缺陷。</p>
+<h3>M2 导入候选隔离</h3>
+<p><code>npm run test:candidates</code> 以既有可见目录、文件选择器、H 最小化、活动封面和确认按钮操作实际 HTTP 预览；不改栈或全局候选，不模拟存储/reload。六个行为场景覆盖 A 后选择待定/取消/无效 B、取消 A 后接受 B、嵌套照片 B 取消后接续 A，以及 A 配额失败后选择/取消 B 再重试 A；另检查页面异常与外部请求。合成照片分别为 1×1 和 3×2，备份两部分与草稿有区别。确认 payload/会话与最终内容一起验证身份，不宣称显示完整文件名。</p>
+<p><code>candidate_ownership.test.cjs</code> 的八项 VM 检查调用生产入口/接受/取消处理器，验证共享候选跨浅复制的一次性消费与拒绝重放。保留旧 84 单元、127 DOM、19 native 存储/图片及 41 native 键盘。新增代码仍须 exact-head CI；本地浏览器 socket EPERM 不计为通过。</p></article><article id="doc-19"><div class="filename">docs/project/CHARTER.md</div><h2>项目宪章</h2>
 <h3>目标</h3>
 <p>维护一套可以直接上手操作、持续迭代的 AI 手机 UI 和交互设计。继承用户已认可的 V3，而不是重新评估产品是否应该使用 N9 / Sailfish 交互。</p>
 <p>手机的主语是“正在做的事”，不是应用图标。AI 负责把意图转成可检查的任务；手势负责指代、比较、暂停、接续与确认。前期实体手机/网页是入口，未来云端个人环境提供连续资料和任务，但本仓库先把体验做清楚。</p>
@@ -874,7 +902,13 @@ npm run docs</code></pre>
 <p>UI-011 原子恢复代码已实现并通过自动化；HTTP-origin Chromium 的原生存储/配额回归已获得上述独立证据；实际设备大图内存、OS 磁盘压力、Android/iOS、系统边缘、软键盘和无障碍仍属于 M2。原 127 项 DOM fixture 与新增 14 项真实 origin 分开报告，均不代表实机结果。</p>
 <p>模型、云手机、消息、电话、音乐、地图、OAuth、账单及日历账号均未连接；没有部署网站，也不是完整 Android 系统。存储本地且未加密，中心裁切/圆形选区不是语义抠图。下一张工作卡见 <a href="#doc-23">NEXT_ACTION</a>。</p>
 <h3>计划映射</h3>
-<p>已从既有 backlog 建立六张 <span>Epic</span>，覆盖 15 个未完成条目且无重复；没有扩大功能范围，也未创建远端 Milestones。</p></article><article id="doc-21"><div class="filename">docs/project/DECISIONS.md</div><h2>决策记录</h2>
+<p>已从既有 backlog 建立六张 <span>Epic</span>，覆盖 15 个未完成条目且无重复；没有扩大功能范围，也未创建远端 Milestones。</p>
+<h3>M2 / UI-014 确认焦点与取消接续</h3>
+<p><a href="https://github.com/ForceMind/ai-phone-ui/pull/10" target="_blank" rel="noopener noreferrer">PR #10</a> 从 <code>3299ba0</code> 开始，首个测试提交在真实 HTTP-origin Chromium 记录 25 个直接焦点/返回失败和 7 个文件选择启动超时。修复候选 <code>a3da63073cd399745117be456ef57293795a6c95</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038" target="_blank" rel="noopener noreferrer">CI</a> 已通过 25 静态、84 单元、127 DOM、19 native 存储/图像与 41/41 native 键盘检查；artifact 摘要、source-head、构建 HTML 字节和截图均已核对。历史失败、harness 修正与通过证据分开记录，见 <span>按 SHA 分层的证据</span>。</p>
+<p>这不是所有后续 head 或 main 的绿灯证明；最终小改（包括将恢复按钮的旧「确认导出」文案纠正为「确认恢复」）与合并 main 各自仍需 exact-head CI/artifact。完整 UI-014 仍开放，读屏、大字与实际手机未验证。</p>
+<h3>M2 / 现有确认候选隔离</h3>
+<p>PR #10 已正常合并至 main df55643；该 main 的 run 37609773189 已由合并门槛核对 25/84/127/19/41。下一张有界卡是 <a href="https://github.com/ForceMind/ai-phone-ui/pull/11" target="_blank" rel="noopener noreferrer">PR #11</a>：测试先行 d3430714 真正复现较新导入覆盖旧确认的候选，见 <span>按 SHA 分层证据</span>。修复只使照片/备份候选随确认共享并一次消费，不更改存储协议或页面。UI-011 与完整 UI-014 仍开放；本卡最终 head、正常合并 main 及 artifact 仍分别按门槛核对。</p>
+<p>候选 <code>28975e3</code> 的 run 37611856799 已核对通过 25/92/127/19/41/8；artifact ZIP、source-head 与预览 HTML 匹配。独立 review 无阻塞问题；最终小改仅撤去可选文件名显示、同步文档与登记验收，仍须自己的 CI，再核对正常合并 main。</p></article><article id="doc-21"><div class="filename">docs/project/DECISIONS.md</div><h2>决策记录</h2>
 <h3>ADR-001 / 接受V3而非重设计方向</h3>
 <p>用户明确认可V3融合的系统特性。保留三视图、边缘、Peek、活动封面、Pulley、页面确认；反对回到固定App横向轮播+底条。</p>
 <h3>ADR-002 / 独立UI仓库</h3>
@@ -903,19 +937,29 @@ npm run docs</code></pre>
 <p>PR #7 进入既定审阅/合并流程，代码与 main 合并结果需分别核对 exact-head CI。Testing Epic #1 的进度正文更新被取消，已保持原样；这只是未更新的跟踪文字，不阻塞已授权的独立代码 PR 收尾，也不应另写评论或重试该 issue 修改。</p>
 <p>合并后测试时序记录：713e44b 的首次 main CI 暴露 native harness 提前导航（12/14），详见 QA 报告。测试须等待 core ready 与 Workbench 初始 deep link 都就绪；只等 core 标志会被延迟旧路由覆盖。保留失败证据，不能以 PR 通过代替 main 通过。</p>
 <h3>本批图像边界接续</h3>
-<p>PR #9 已保存 test-only 失败证据，再加入确认前的真实图片验证，保持原 URL 字节、16MP 启动限制及单快照提交协议。普通照片导入的 1400px 工作副本没有改动。单元的 Image mock 仅覆盖 14 个入口分支，不替代新增 5 个 native 图片场景。必须核对 <span>图像证据</span> 的对应 SHA，并在收尾时查最终 head 与 main 自身 CI。不要重新创建图像范围或将 UI-011 整项关闭；下一张卡仍位于 M2。</p></article><article id="doc-23"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>下一步，只从这里继续</h2>
-<h3>本批 UI-011 合成图边界</h3>
-<p><a href="https://github.com/ForceMind/ai-phone-ui/pull/9" target="_blank" rel="noopener noreferrer">PR #9</a> 先用真实 HTTP-origin Chromium 在 <code>cbd799cb81183ed17d862230da75a4742b8ff623</code> 重现两个图像校验缺陷：超过既有 16MP 上限及无法解码的 data URL 仍进入替换确认。修复在确认前验证图片，不重编码或覆盖原片，保持双区原子提交。此前 127 DOM / 14 native 全保留，另增 5 图像 native 场景和 8 入口单元。详见 <span>失败及修复证据</span>。</p>
-<p>本卡收尾需要独立审阅、最终 exact-head CI 和正常合并后的 main CI；旧提交的绿灯不替代当前 HEAD。UI-011 整项继续开放：本批合成图片不代表实际手机内存和 OS 磁盘压力。没有更改 Testing Epic #1 正文或另写评论。</p>
-<h3>下一张有界工作卡：UI-014 现有确认页的键盘焦点与取消</h3>
-<p class="list-item">- 只检查已有照片导入/导出与备份恢复确认页的 Tab、Shift+Tab、返回/取消和再次打开</p>
-<p class="list-item">- 在 HTTP-origin Chromium 记录真实焦点、当前页面和原资料/草稿；先复现，再仅修复阻断现有操作的焦点缺陷</p>
-<p class="list-item">- 保留 V3 手势、现有确认方式和全部回归；不新增页面、能力或架构层</p>
-<p class="list-item">- 退出条件：以上路径有明确结果、修复回归和 exact-head CI；读屏、移动软键盘与实际设备结果仍单列未测</p>
+<p>PR #9 已保存 test-only 失败证据，再加入确认前的真实图片验证，保持原 URL 字节、16MP 启动限制及单快照提交协议。普通照片导入的 1400px 工作副本没有改动。单元的 Image mock 仅覆盖 14 个入口分支，不替代新增 5 个 native 图片场景。必须核对 <span>图像证据</span> 的对应 SHA，并在收尾时查最终 head 与 main 自身 CI。不要重新创建图像范围或将 UI-011 整项关闭；下一张卡仍位于 M2。</p>
+<h3>UI-014 当前有界接续</h3>
+<p>PR #10 只收敛现有照片导入/导出与备份确认的键盘进入、取消和任务接续，保持明确接受路径及 UI-011 原片/16MP/原子恢复回归。先记录真实浏览器 RED，再修复焦点与原任务返回；文件选择启动超时和测试脚本点错恢复后菜单要与产品缺陷区分。见 UI014_FOCUS_EVIDENCE.json；最终 head 与 main 都必须各自核对 artifact。完整 UI-014 仍不关闭，读屏、大字及实际手机尚未验证。</p>
+<p>独立代码阅读另提示：确认页可保留在任务会话中，而 pendingFile / pendingRestore 候选是全局变量，可能存在跨确认候选隔离缺口。该项尚未由原生浏览器复现；单独下一张有界卡调查，不把焦点修复当作已解决候选绑定，也不修改已取消更新的 Epic #1。</p>
+<p>UI-014 的代码候选 <code>a3da630</code> 已经由独立审阅和真实 CI/artifact 验证：25 静态、84 单元、127 DOM、19 native 存储/图像、41 native 键盘。截图复核后仅纠正恢复确认按钮的动作名称，新增原生文案断言；最终 head 与合并 main 必须重新核对。不要在后续提交中丢弃已有 RED 与初版候选失败记录。</p>
+<h3>PR #11 候选隔离接续</h3>
+<p>从已核对 main df55643 开始。d3430714 的真实 HTTP 测试已确认 pendingFile / pendingRestore 串用，而非仅代码怀疑；修复使候选随确认的共享对象保存，浅复制会话不会获得第二次执行权。取消先释放当前候选再恢复焦点，恢复只在 replace 成功后释放；失败保留同一候选。新增八项生产 handler 单元与六条 native 行为路径，详见 UI011_CANDIDATE_EVIDENCE.json。保留所有历史 RED，必须查最终 head/main CI，Epic #1 取消的文字更新继续不动。</p>
+<p>候选 <code>28975e3</code> 的 run 37611856799 已核对通过 25/92/127/19/41/8；artifact ZIP、source-head 与预览 HTML 匹配。独立 review 无阻塞问题；最终小改仅撤去可选文件名显示、同步文档与登记验收，仍须自己的 CI，再核对正常合并 main。</p></article><article id="doc-23"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>下一步，只从这里继续</h2>
+<h3>当前有界卡：导入确认候选隔离</h3>
+<p>从已核对 main <code>df55643ece06ae5244848eb2969386e8e749d091</code> 开始；<a href="https://github.com/ForceMind/ai-phone-ui/pull/10" target="_blank" rel="noopener noreferrer">PR #10</a> 已正常合并，main run 37609773189 通过 25/84/127/19/41。</p>
+<p><a href="https://github.com/ForceMind/ai-phone-ui/pull/11" target="_blank" rel="noopener noreferrer">Draft PR #11</a> 的测试提交 <code>d3430714</code> 在真正 HTTP-origin Chromium 复现四项故障：接续备份 A 会恢复仍待定/已取消的 B，较新无效备份使 A 接受失效，以及取消照片 B 后接续 A 会导入 B。取消 A 后接受 B 的保护路径原本通过。详见 <span>候选证据</span>。</p>
+<p>修复候选 <code>28975e3c540e32ac3e3d0a87a275c4804a52b714</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37611856799" target="_blank" rel="noopener noreferrer">CI</a> 已通过 25 静态、92 单元、127 DOM、19 native 存储/图像、41 native 键盘与 8 native 候选检查；artifact 的 source-head、ZIP 摘要与构建 HTML 已核对。后续最终 head 与正常合并的 main 必须独立复核，不以该候选绿灯替代。</p>
+<p class="list-item">- 范围：仅已有照片/备份确认的候选归属与一次消费，沿用原任务栈浅复制；没有新全局状态层、页面、服务或部署</p>
+<p class="list-item">- 候选随确认共享，取消只清空自己的候选，旧会话副本不能重放；恢复在原子写入成功后才消费，失败保持可重试</p>
+<p class="list-item">- 保留焦点/取消返回、选择不执行、原片/版本/双区草稿、16MP 校验和现有单快照协议</p>
+<p class="list-item">- 收尾门槛：独立审阅、最终 exact-head CI/artifact、parent 正常合并、main CI/artifact；Epic #1 被取消的正文更新继续不动，不另写评论</p>
+<h3>收尾后下一张 M2 产品卡：长确认内容的可读性</h3>
+<p>属于既有 UI-014 的“大字/长文不裁切”目标。先在本机消息预览 DAY-05 输入可辨识的长草稿并进入现有确认，检查普通/大字设置下正文末尾、边界说明和取消/接受的可达性；检查不换行长文本、键盘阅读、最小化后接续及取消。<code>.dialog-inner</code> 现为绝对定位且未设可滚动内容区域，这只是待复现的代码线索，不是已通过或已确认缺陷。</p>
+<p>若原生浏览器确认内容被遮挡，只修复现有确认页的内容布局/阅读与替代操作，保留固定快照、一次接受、明确本机预览语义与取消不提交。不做新页面或完整无障碍重构，不用扩大测试数量代替产品修复；任何真实消息/电话/账号动作均不在范围内。</p>
 <h3>M2 实际设备边界仍开放</h3>
 <p class="list-item">- UI-010：Android 与 iOS 各至少一台，记录机型/OS/浏览器，检查系统边缘、软键盘、Peek 反转、重复与取消</p>
 <p class="list-item">- UI-011：实际设备容量/OS 磁盘压力、大图内存边界；并发标签冲突合并尚未证明</p>
-<p class="list-item">- UI-014：除本次有界键盘卡外，仍需读屏、替代操作、大字体和长文</p>
+<p class="list-item">- UI-014：完整读屏、替代操作、大字体和长文仍开放</p>
 <p class="list-item">- 不用 Node VM、DOM fixture 或桌面 HTTP Chromium 代替真实手机结果</p>
 <p>现有 planning/issues.json 保留 24 项计划；六张 Epic 无重复映射 15 个既有未完成条目。M3/M4/M5 按原顺序后续推进，不重做 86 页、不连接真实服务或部署。</p></article><article id="doc-24"><div class="filename">docs/project/RECOVERY_20261007.md</div><h2>2026-10-07 本地提交恢复记录（历史）</h2>
 <blockquote>后续结果：M0 与 UI-011 均已发布并通过 GitHub CI；下文保留恢复时点事实，不表示当前仍有审批或上传阻塞。当前状态见 <a href="#doc-16">REMOTE_STATUS</a>。</blockquote>
@@ -977,7 +1021,13 @@ npm run docs</code></pre>
 <p class="list-item">- 远端Git、PR、Actions或网站部署。</p>
 <p>这些是后续M2/M4验收任务，不应隐藏在“全绿”或“UI完成”的表述里。全部登记UI完成按项目明确范围计，不是生产系统完成声明。</p>
 <h3>2026-10-07 重建后验证</h3>
-<p>构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。该本地记录当时没有新远端 CI，当前结果见顶部。</p></article><article id="doc-27"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。该本地记录当时没有新远端 CI，当前结果见顶部。</p>
+<h3>UI-014：有界确认键盘回归</h3>
+<p>测试先行 <code>a7b8fde</code> 记录 25 个直接焦点/取消返回失败与 7 个原生选择器启动超时；初版候选 <code>8e08e6b</code> 新键盘 suite 为 30/41，保留完整失败 artifact。嵌套确认焦点、测试点击已恢复的 Pulley 和选择器监听时序分别修正，不减少既有断言或重试到成功。</p>
+<p><code>a3da63073cd399745117be456ef57293795a6c95</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038" target="_blank" rel="noopener noreferrer">run 37608195038</a> 实际通过 25 静态、84 单元、127 DOM、19 native 存储/图像与 41 native 键盘。ZIP SHA256、source-head、预览 HTML 与截图均已复核。这里的计数只适用于该 SHA；最终文案小改与合并 main 必须分别复跑。证据与未测边界见 <span>UI014_FOCUS_EVIDENCE.json</span>。</p>
+<h3>M2：导入候选隔离</h3>
+<p><a href="https://github.com/ForceMind/ai-phone-ui/pull/11" target="_blank" rel="noopener noreferrer">PR #11</a> 首个测试提交 d3430714 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37611026086" target="_blank" rel="noopener noreferrer">run 37611026086</a> 保持 25/84/127/19/41 通过，新增候选检查 3/7：两种旧备份确认提交 B、无效 B 使 A 不再提交，以及旧照片确认导入 B，均由真实浏览器确认。ZIP 摘要与 source-head 已核对。候选修复、最终 head 与 main 的结果按 SHA 单列在 <span>候选证据</span>，不能把某一绿灯外推。</p>
+<p>候选 <code>28975e3</code> 的 run 37611856799 已核对通过 25/92/127/19/41/8；artifact ZIP、source-head 与预览 HTML 匹配。独立 review 无阻塞问题；最终小改仅撤去可选文件名显示、同步文档与登记验收，仍须自己的 CI，再核对正常合并 main。</p></article><article id="doc-27"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
 <p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
 <p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
 <p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>

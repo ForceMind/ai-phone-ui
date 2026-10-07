@@ -38,3 +38,10 @@ UI-011 原子恢复代码已实现并通过自动化；HTTP-origin Chromium 的�
 [PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 `3299ba0` 开始，首个测试提交在真实 HTTP-origin Chromium 记录 25 个直接焦点/返回失败和 7 个文件选择启动超时。修复候选 `a3da63073cd399745117be456ef57293795a6c95` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038) 已通过 25 静态、84 单元、127 DOM、19 native 存储/图像与 41/41 native 键盘检查；artifact 摘要、source-head、构建 HTML 字节和截图均已核对。历史失败、harness 修正与通过证据分开记录，见 [按 SHA 分层的证据](../qa/UI014_FOCUS_EVIDENCE.json)。
 
 这不是所有后续 head 或 main 的绿灯证明；最终小改（包括将恢复按钮的旧「确认导出」文案纠正为「确认恢复」）与合并 main 各自仍需 exact-head CI/artifact。完整 UI-014 仍开放，读屏、大字与实际手机未验证。
+
+
+## M2 / 现有确认候选隔离
+
+PR #10 已正常合并至 main df55643；该 main 的 run 37609773189 已由合并门槛核对 25/84/127/19/41。下一张有界卡是 [PR #11](https://github.com/ForceMind/ai-phone-ui/pull/11)：测试先行 d3430714 真正复现较新导入覆盖旧确认的候选，见 [按 SHA 分层证据](../qa/UI011_CANDIDATE_EVIDENCE.json)。修复只使照片/备份候选随确认共享并一次消费，不更改存储协议或页面。UI-011 与完整 UI-014 仍开放；本卡最终 head、正常合并 main 及 artifact 仍分别按门槛核对。
+
+候选 `28975e3` 的 run 37611856799 已核对通过 25/92/127/19/41/8；artifact ZIP、source-head 与预览 HTML 匹配。独立 review 无阻塞问题；最终小改仅撤去可选文件名显示、同步文档与登记验收，仍须自己的 CI，再核对正常合并 main。

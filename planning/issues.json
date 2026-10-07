@@ -91,7 +91,7 @@
       "title": "备份异常与大图存储压力",
       "milestone": "M2",
       "acceptance": "损坏/过大/空间不足不覆盖旧资料；真实origin恢复",
-      "note": "PR #9 先在 cbd799c 真正 Chromium 复现两项图像拒绝缺陷（native 17/19），ab06fa9 修复提交 CI 通过 25/64/127/19 并验证 artifact。独立审阅另发现离开任务后的过时解码弹回问题，增加生产导航函数回归及请求序号失效，最终 head 与 main 必须重新核对 CI。整项仍 in_progress：实际手机大图内存、OS 压力与设备验收未完成。",
+      "note": "PR #9 先在 cbd799c 真正 Chromium 复现两项图像拒绝缺陷（native 17/19），ab06fa9 修复提交 CI 通过 25/64/127/19 并验证 artifact。独立审阅另发现离开任务后的过时解码弹回问题，增加生产导航函数回归及请求序号失效，最终 head 与 main 必须重新核对 CI。整项仍 in_progress：实际手机大图内存、OS 压力与设备验收未完成。 PR #11 另以真实 HTTP-origin 复现全局候选串用：旧确认会恢复/导入较新文件，或因较新无效文件失效。候选改为随确认共享的一次性对象，保留配额重试。红绿证据见 docs/qa/UI011_CANDIDATE_EVIDENCE.json；最终 head/main 必须独立核对。",
       "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/1"
     },
     {

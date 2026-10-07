@@ -1,0 +1,698 @@
+{
+  "scope": "M2 UI-011/UI-014: per-confirmation local import candidate ownership",
+  "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/11",
+  "starting_main": "df55643ece06ae5244848eb2969386e8e749d091",
+  "reproduction": {
+    "source_head": "d3430714cdaf12a60feb44f06dd1c9c2f85f81de",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37611026086",
+    "conclusion": "failure",
+    "counts": {
+      "static": 25,
+      "unit": 84,
+      "dom_fixture": 127,
+      "native_storage": 19,
+      "native_keyboard": 41,
+      "native_candidates_total": 7,
+      "native_candidates_passed": 3
+    },
+    "artifact": {
+      "id": 11477457990,
+      "sha256": "c9391898253f23bb23b4285c53cb1756f0f9d97c6435b32bfeb86094eeff03ea",
+      "download_digest_verified": true,
+      "source_head_file_verified": true
+    },
+    "browser": "143.0.7499.4",
+    "checks": [
+      {
+        "name": "backup-accept-A-after-B-pending",
+        "status": "fail",
+        "error": "Core did not survive reload"
+      },
+      {
+        "name": "backup-accept-A-after-B-cancelled",
+        "status": "fail",
+        "error": "Core did not survive reload"
+      },
+      {
+        "name": "backup-accept-A-after-B-invalid",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until 'load'\n============================================================"
+      },
+      {
+        "name": "backup-cancel-A-accept-B",
+        "status": "pass"
+      },
+      {
+        "name": "photo-cancel-B-resume-accept-A",
+        "status": "fail",
+        "error": "Older A review imported another file"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ],
+    "candidate_trace": [
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:before-accept-after-B-pending",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:after-production-reload",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-B.png",
+        "notes": "candidate-B notes",
+        "nickname": "candidate-B phone"
+      },
+      {
+        "stage": "backup-accept-A-after-B-pending:failure",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-B.png",
+        "notes": "candidate-B notes",
+        "nickname": "candidate-B phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:before-accept-after-B-cancelled",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:after-production-reload",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-B.png",
+        "notes": "candidate-B notes",
+        "nickname": "candidate-B phone"
+      },
+      {
+        "stage": "backup-accept-A-after-B-cancelled:failure",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-B.png",
+        "notes": "candidate-B notes",
+        "nickname": "candidate-B phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:before-accept-after-B-invalid",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "backup-accept-A-after-B-invalid:failure",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "photo:B:above-A",
+        "task": "photo",
+        "route": "IMG-02",
+        "reviews": [
+          {
+            "mode": "import",
+            "suiteMode": null,
+            "title": "用这张照片继续",
+            "name": null,
+            "consumed": false
+          },
+          {
+            "mode": "import",
+            "suiteMode": null,
+            "title": "用这张照片继续",
+            "name": null,
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "photo:A:after-accept",
+        "task": "photo",
+        "route": "IMG-02",
+        "reviews": [],
+        "photo": "candidate-B.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "photo-cancel-B-resume-accept-A:failure",
+        "task": "photo",
+        "route": "IMG-02",
+        "reviews": [],
+        "photo": "candidate-B.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      }
+    ]
+  },
+  "fix": "Each review holds a shared candidate.value across existing shallow session copies. Only that holder is consumed or cancelled; successful restore clears it after the atomic write, while quota/serialization failure leaves it retryable. No global fallback, new state engine, or storage schema change.",
+  "unit_scope": "Eight production-handler VM checks add ownership, cancel/accept alias revocation, missing-candidate rejection and quota retry. Existing 84 checks remain. These are not browser/device evidence.",
+  "review": "Independent source/test review found no blocking issue. Optional displayed filenames are omitted to keep existing dialog layout unchanged; native file choice, saved confirmation identity and final data prove ownership without claiming visible filename review.",
+  "verification_boundary": "Check final PR head and merged main CI/artifacts separately; no prior green run covers a later commit.",
+  "not_tested": [
+    "physical Android/iOS",
+    "screen readers",
+    "mobile soft keyboards",
+    "OS storage pressure",
+    "cross-tab conflict merging",
+    "external services"
+  ],
+  "candidate_verification": {
+    "source_head": "28975e3c540e32ac3e3d0a87a275c4804a52b714",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37611856799",
+    "conclusion": "success",
+    "counts": {
+      "static": 25,
+      "unit": 92,
+      "dom_fixture": 127,
+      "native_storage": 19,
+      "native_keyboard": 41,
+      "native_candidates": 8
+    },
+    "artifact": {
+      "id": 11477713701,
+      "sha256": "8f474d11553bcadbef9e460b736f6533ca467c124b46bcca4356b70548a4d2e2",
+      "download_digest_verified": true,
+      "source_head_file_verified": true,
+      "built_html_bytes_verified": true
+    },
+    "browser": "143.0.7499.4",
+    "checks": [
+      {
+        "name": "backup-accept-A-after-B-pending",
+        "status": "pass"
+      },
+      {
+        "name": "backup-accept-A-after-B-cancelled",
+        "status": "pass"
+      },
+      {
+        "name": "backup-accept-A-after-B-invalid",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cancel-A-accept-B",
+        "status": "pass"
+      },
+      {
+        "name": "photo-cancel-B-resume-accept-A",
+        "status": "pass"
+      },
+      {
+        "name": "backup-quota-retry-A-after-cancel-B",
+        "status": "pass"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ],
+    "candidate_trace": [
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:before-accept-after-B-pending",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:after-production-reload",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-A.png",
+        "notes": "candidate-A notes",
+        "nickname": "candidate-A phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:before-accept-after-B-cancelled",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:after-production-reload",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-A.png",
+        "notes": "candidate-A notes",
+        "nickname": "candidate-A phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:before-accept-after-B-invalid",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "A:after-production-reload",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [],
+        "photo": "candidate-A.png",
+        "notes": "candidate-A notes",
+        "nickname": "candidate-A phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "photo:B:above-A",
+        "task": "photo",
+        "route": "IMG-02",
+        "reviews": [
+          {
+            "mode": "import",
+            "suiteMode": null,
+            "title": "用这张照片继续",
+            "name": null,
+            "consumed": false
+          },
+          {
+            "mode": "import",
+            "suiteMode": null,
+            "title": "用这张照片继续",
+            "name": null,
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "photo:A:after-accept",
+        "task": "photo",
+        "route": "IMG-02",
+        "reviews": [],
+        "photo": "candidate-A.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-A:reviewed",
+        "task": "ui-SET-01",
+        "route": "SET-01",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-A.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      },
+      {
+        "stage": "candidate-B:reviewed",
+        "task": "ui-CLD-17",
+        "route": "CLD-17",
+        "reviews": [
+          {
+            "mode": "suite",
+            "suiteMode": "restore",
+            "title": "恢复本机资料",
+            "name": "candidate-B.json",
+            "consumed": false
+          }
+        ],
+        "photo": "original.png",
+        "notes": "original notes",
+        "nickname": "original phone"
+      }
+    ]
+  }
+}

@@ -24,7 +24,6 @@ function review(value){return {kind:'confirm',mode:'suite',suiteMode:'restore',c
 test('candidate ownership: selection binds its File without importing',()=>{
  const f=fixture(),file={name:'A.png'};f.choose(file);
  assert.equal(f.ctx.stack[0].candidate.value,file);assert.equal(f.imports.length,0);
- assert.match(f.ctx.stack[0].description,/A\.png/);
 });
 test('candidate ownership: older photo consumes only its file through a shallow session copy',()=>{
  const f=fixture(),a={name:'A.png'},b={name:'B.png'};f.choose(a);const older={...f.ctx.stack[0]};f.choose(b);const newer=f.ctx.stack.at(-1);

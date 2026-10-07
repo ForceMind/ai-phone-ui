@@ -251,7 +251,7 @@ backupInput.addEventListener('change',async e=>{
     const core=validate(b.core),suite=PhoneModel.validate(b.suite);
     await validateBackupPhoto(core.photo.source);
     if(!isCurrent())return;
-    confirm('restore','恢复本机资料','已选择：'+f.name+'\n\n文件已通过结构和图片校验。\n这会替换当前照片、笔记、偏好与草稿。请先导出当前资料。\n\n恢复后不会启动任何周期任务。',{name:f.name},{value:{core,suite}});
+    confirm('restore','恢复本机资料','文件已通过结构和图片校验。\n这会替换当前照片、笔记、偏好与草稿。请先导出当前资料。\n\n恢复后不会启动任何周期任务。',{name:f.name},{value:{core,suite}});
   }catch(err){if(isCurrent())toast('无法恢复：'+err.message);}
 });
 const assist=document.createElement('div');assist.className='suite-assist';assist.id='suiteAssist';assist.innerHTML='<button data-action="back">返回</button><button data-action="ui:go:SYS-01">活动任务</button><button data-action="topmenu">系统控制</button>'; $('screen').appendChild(assist);

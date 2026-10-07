@@ -90,3 +90,10 @@ PR #7 合并提交 `713e44be072462c41fded92fa76ad370f76ff17a` 的 [首次 main C
 测试先行 `a7b8fde` 记录 25 个直接焦点/取消返回失败与 7 个原生选择器启动超时；初版候选 `8e08e6b` 新键盘 suite 为 30/41，保留完整失败 artifact。嵌套确认焦点、测试点击已恢复的 Pulley 和选择器监听时序分别修正，不减少既有断言或重试到成功。
 
 `a3da63073cd399745117be456ef57293795a6c95` 的 [run 37608195038](https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038) 实际通过 25 静态、84 单元、127 DOM、19 native 存储/图像与 41 native 键盘。ZIP SHA256、source-head、预览 HTML 与截图均已复核。这里的计数只适用于该 SHA；最终文案小改与合并 main 必须分别复跑。证据与未测边界见 [UI014_FOCUS_EVIDENCE.json](UI014_FOCUS_EVIDENCE.json)。
+
+
+## M2：导入候选隔离
+
+[PR #11](https://github.com/ForceMind/ai-phone-ui/pull/11) 首个测试提交 d3430714 的 [run 37611026086](https://github.com/ForceMind/ai-phone-ui/actions/runs/37611026086) 保持 25/84/127/19/41 通过，新增候选检查 3/7：两种旧备份确认提交 B、无效 B 使 A 不再提交，以及旧照片确认导入 B，均由真实浏览器确认。ZIP 摘要与 source-head 已核对。候选修复、最终 head 与 main 的结果按 SHA 单列在 [候选证据](UI011_CANDIDATE_EVIDENCE.json)，不能把某一绿灯外推。
+
+候选 `28975e3` 的 run 37611856799 已核对通过 25/92/127/19/41/8；artifact ZIP、source-head 与预览 HTML 匹配。独立 review 无阻塞问题；最终小改仅撤去可选文件名显示、同步文档与登记验收，仍须自己的 CI，再核对正常合并 main。
