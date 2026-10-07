@@ -8,7 +8,6 @@ No device, HTTPS, cross-tab conflict, or OS storage-pressure claim is made.
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-import copy
 import json
 import os
 import re
@@ -16,6 +15,7 @@ import subprocess
 import sys
 import time
 import traceback
+from urllib.parse import parse_qs, urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -100,9 +100,26 @@ def preview_server():
                 process.wait(timeout=5)
 
 
-def ready(page):
-    page.wait_for_function('typeof Suite !== "undefined" && ready')
+def ready(page, initial_route):
+    # Core image initialization sets `ready` before Workbench's scheduled deep-link
+    # restoration. Wait for that visible route too, or the old URL route can
+    # overwrite the test's next navigation on a fast runner after reload.
+    page.wait_for_function('''route => typeof Suite !== "undefined" && ready &&
+        typeof Workbench !== "undefined" && Suite.current().id === route &&
+        location.hash === "#screen=" + route''', arg=initial_route)
     ensure(page.evaluate('localStorage instanceof Storage'), 'Native Storage is required')
+
+
+def initial_route(page):
+    route = parse_qs(urlsplit(page.url).fragment).get('screen', [''])[0]
+    ensure(re.fullmatch(r'[A-Z]{2,3}-\d{2}', route), 'Explicit startup route is required')
+    return route
+
+
+def reload_page(page):
+    route = initial_route(page)
+    page.reload(wait_until='load')
+    ready(page, route)
 
 
 @contextmanager
@@ -118,9 +135,9 @@ def case(browser, origin, snapshot=False):
         route.request.url.startswith(origin + '/') else
         (OUTBOUND.append(route.request.url), route.abort())[-1])
     try:
-        response = page.goto(origin + '/index.html', wait_until='load')
+        response = page.goto(origin + '/index.html#screen=SET-10', wait_until='load')
         ensure(response.status == 200, 'Preview must be served successfully over HTTP')
-        ready(page)
+        ready(page, 'SET-10')
         yield page
     finally:
         context.close()
@@ -165,9 +182,10 @@ def click_dialog(page, action):
 
 def commit_and_reload(page):
     # This observes the application's real reload. No call to location.reload is stubbed.
+    route = initial_route(page)
     with page.expect_navigation(wait_until='load'):
         click_dialog(page, 'accept')
-    ready(page)
+    ready(page, route)
     ensure(page.evaluate('performance.getEntriesByType("navigation")[0].type') == 'reload',
            'The production confirmation must reload the document')
 
@@ -205,8 +223,7 @@ def migration(browser, origin, snapshot=False):
         ensure(not page.evaluate('S.focus.running'), 'Restored focus auto-started')
         ensure(page.evaluate('Suite.state().remoteState') == 'disconnected', 'Forged connection survived')
         ensure(not page.evaluate('Suite.state().schedules[0].enabled'), 'Restored schedule enabled itself')
-        page.reload(wait_until='load')
-        ready(page)
+        reload_page(page)
         assert_restored(page, new)
         # Exercise normal production saves after migration, preserving the other half.
         go(page, 'DOC-02')
@@ -214,8 +231,7 @@ def migration(browser, origin, snapshot=False):
         page.wait_for_function('JSON.parse(JSON.parse(localStorage.getItem("ai-phone-ui-state-v1")).core).notes === "edited after real reload"')
         go(page, 'DAY-02')
         page.locator('[data-field="eventTitle"]').filter(visible=True).last.fill('new suite draft')
-        page.reload(wait_until='load')
-        ready(page)
+        reload_page(page)
         ensure(page.evaluate('S.notes') == 'edited after real reload', 'Suite save overwrote core')
         ensure(page.evaluate('Suite.state().forms["DAY-02"].eventTitle') == 'new suite draft', 'Core save overwrote suite')
         ensure(page.evaluate('S.photo.source') == PNG, 'Normal saves lost original photo')
@@ -225,8 +241,7 @@ def legacy_reload(browser, origin):
     with case(browser, origin) as page:
         assert_original(page)
         ensure(stored(page)[SNAPSHOT] is None, 'Startup must not migrate before a successful restore')
-        page.reload(wait_until='load')
-        ready(page)
+        reload_page(page)
         assert_original(page)
         ensure(stored(page)[SNAPSHOT] is None, 'Reload must retain legacy mode')
 
@@ -240,8 +255,7 @@ def cancel(browser, origin):
         ensure(not page.evaluate('stack.some(p => p.suiteMode === "restore")'), 'Cancelled dialog remains')
         ensure(stored(page) == before, 'Cancel changed durable data')
         assert_original(page)
-        page.reload(wait_until='load')
-        ready(page)
+        reload_page(page)
         assert_original(page)
 
 
@@ -254,8 +268,7 @@ def reject(browser, origin, raw, expected):
         ensure(not page.evaluate('stack.some(p => p.suiteMode === "restore")'), 'Invalid file opened confirmation')
         ensure(stored(page) == before, 'Rejected file changed native storage')
         assert_original(page)
-        page.reload(wait_until='load')
-        ready(page)
+        reload_page(page)
         assert_original(page)
 
 
@@ -304,16 +317,14 @@ def quota(browser, origin, snapshot=False, retry=True):
             page.evaluate('key => localStorage.removeItem(key)', FILLER)
             commit_and_reload(page)
             assert_restored(page, new)
-            page.reload(wait_until='load')
-            ready(page)
+            reload_page(page)
             assert_restored(page, new)
         else:
             click_dialog(page, 'back')
             ensure(not page.evaluate('stack.some(p => p.suiteMode === "restore")'), 'Cancel left a pending dialog')
             ensure(stored(page) == before, 'Cancel after failure changed durable data')
             page.evaluate('key => localStorage.removeItem(key)', FILLER)
-            page.reload(wait_until='load')
-            ready(page)
+            reload_page(page)
             assert_original(page)
             # Same file can be selected after cancellation; approval is required again.
             review(page, new)
