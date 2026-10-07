@@ -14,9 +14,11 @@
 
 ## 当前浏览器执行方式
 
-受限运行环境禁止 file:// 与localhost导航。测试通过 `page.set_content` 加载完整HTML，没有修改管理员策略；成功路径显式使用内存localStorage fixture，另一个页面保留存储拒绝行为。触摸是Chromium CDP事件，不是真实手机。
+历史受限环境的原回归采用 DOM fixture。`npm run test:ui` 通过 `page.set_content` 加载完整HTML，没有修改管理员策略；成功路径显式使用内存localStorage fixture，另一个页面保留存储拒绝行为。触摸是Chromium CDP事件，不是真实手机。
 
-因此，路由与动作通过不等于已验证真实origin持久存储或全部手机权限。CI配置也不等于CI已经在远端运行。
+因此，路由与动作通过不等于已验证真实origin持久存储或全部手机权限。CI 配置本身也不等于对应提交已经运行成功。
+
+`npm run test:storage` 是独立套件：从 `scripts/serve.py` 的回环 HTTP origin 加载实际构建产物，不注入 HTML、不模拟 Storage、不截获 reload。覆盖 native legacy/snapshot 数据、批准/取消、格式/大小拒绝及有界真实 quota 失败后取消/重试。每例独立 context，配额只消耗合成数据，结束关闭 context。参见 [存储协议与边界](STORAGE_RECOVERY.md)。
 
 ## 回归矩阵
 
@@ -30,4 +32,4 @@
 
 build/check/unit/browser均通过，未测项有明确记录；小范围改动也要复核全部登记页面可达。真实服务PR需新增服务测试和隐私审查。
 
-UI-011 重建：17 项 storage 测试 + 7 项生产处理器 VM 测试，保留原 32 项。新增浏览器配额失败回归尚未获得实际浏览器成功证据。
+UI-011 重建：17 项 storage 测试 + 7 项生产处理器 VM 测试，保留原 32 项。原 127 项 DOM fixture 已有远端证据；新的真实 origin 回归必须另行核对本批 exact-head CI。

@@ -91,7 +91,7 @@
       "title": "备份异常与大图存储压力",
       "milestone": "M2",
       "acceptance": "损坏/过大/空间不足不覆盖旧资料；真实origin恢复",
-      "note": "原子恢复修复已发布 8544894e9c32511c9e3a03a47fe96c19ceaf7918 并通过 127 浏览器回归；真实 origin、大图、配额和实机验收仍待完成。",
+      "note": "PR #7 测试提交 e82370e342fabc83eacd1ca322b40a5b576a10f4 已通过 25 静态/56 单元/127 原 DOM/14 真实 HTTP-origin 回归；原生 quota 失败、取消、重试及真实 reload 有 artifact 证据。整项仍 in_progress：大图/设备内存、OS 压力与实际手机验收未完成。",
       "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/1"
     },
     {
