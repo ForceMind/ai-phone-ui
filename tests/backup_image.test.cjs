@@ -51,3 +51,32 @@ test('backup image: stale failure cannot clear a newer reviewed snapshot',async(
   await f.choose('');const current=f.ctx.pendingRestore;gate.reject(Error('late decode'));await old;
   assert.equal(f.ctx.pendingRestore,current);assert.equal(f.reviews.length,1);assert.equal(f.toasts.length,0);
 });
+
+function installProductionDismissal(f){
+  const core=fs.readFileSync(path.join(__dirname,'../src/js/core.js'),'utf8');
+  // Use the actual session/minimize/lock implementations, not a stack-pop stand-in.
+  const element={classList:{remove(){},add(){},toggle(){}},lastElementChild:null};
+  Object.assign(f.ctx,{appOpen:true,currentTask:'photo',S:{drafts:{}},sessions:{},gesture:null,overlay:'',
+    locked:false,sleeping:false,pulleyPinned:false,$:id=>['talkInput','noteEditor'].includes(id)?null:element,
+    direct(){},stopVoice(){},setHome(){},syncAccess(){},report(){},clock(){}});
+  for(const name of ['captureSession','minimize','lockPhone']){
+    vm.runInContext(core.split('\n').find(line=>line.startsWith('function '+name+'(')),f.ctx);
+  }
+  f.ctx.original={captureSession:f.ctx.captureSession};
+  const hook=source.split('\n').find(line=>line.startsWith('captureSession=function(){'));
+  if(hook)vm.runInContext(hook,f.ctx);
+}
+for(const action of ['minimize','lock','sleep']){
+  for(const reject of [false,true]){
+    test('backup image: production '+action+' invalidates delayed '+(reject?'failure':'success')+' even after return',async()=>{
+      const gate=deferred(),f=fixture({decode:()=>gate.promise});installProductionDismissal(f);
+      const pending=f.choose();await f.started;const origin=f.ctx.stack.at(-1);
+      vm.runInContext(action==='minimize'?'minimize(false)':`lockPhone(${action==='sleep'})`,f.ctx);
+      assert.equal(f.ctx.stack.at(-1),origin,'This reproduction must retain the production stack');
+      // Returning to the exact same object must not revive abandoned validation.
+      f.ctx.appOpen=true;f.ctx.locked=false;f.ctx.sleeping=false;
+      if(reject)gate.reject(Error('late decode'));else gate.resolve();
+      await pending;assert.equal(f.reviews.length,0);assert.equal(f.toasts.length,0);assert.equal(f.ctx.pendingRestore,null);
+    });
+  }
+}

@@ -1,0 +1,391 @@
+{
+  "scope": "M2 UI-011 bounded image restore, synthetic data only",
+  "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/9",
+  "reproduction": {
+    "source_head": "cbd799cb81183ed17d862230da75a4742b8ff623",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37602605392",
+    "conclusion": "failure",
+    "counts": {
+      "static": 25,
+      "unit": 56,
+      "dom_fixture": 127,
+      "native_origin_passed": 17,
+      "native_origin_total": 19
+    },
+    "artifact": {
+      "id": 11474050219,
+      "sha256": "30d4586fc56f64a8396653a8591b30fcbcedba9061b62c69e415d9e9be1c81a4",
+      "download_digest_verified": true,
+      "source_head_file_verified": true
+    },
+    "native_storage_report": {
+      "timestamp": "2026-10-07T09:45:57.282741+00:00",
+      "source_head": "cbd799cb81183ed17d862230da75a4742b8ff623",
+      "browser": "143.0.7499.4",
+      "origin": "http://127.0.0.1:40527",
+      "harness": "HTTP scripts/serve.py; native localStorage; real file input, confirmation clicks and document reload",
+      "not_tested": [
+        "physical Android/iOS",
+        "HTTPS deployment",
+        "OS disk pressure",
+        "physical-device large-image memory pressure",
+        "concurrent-tab conflict resolution",
+        "camera/microphone permissions"
+      ],
+      "total": 19,
+      "passed": 17,
+      "failed": 2,
+      "page_errors": [],
+      "external_requests": [],
+      "quota_probes": [
+        {
+          "filledCodeUnits": 5241281,
+          "attempts": 25,
+          "quotaErrors": 11,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 5241281,
+          "attempts": 25,
+          "quotaErrors": 11,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 5240987,
+          "attempts": 25,
+          "quotaErrors": 10,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 5240987,
+          "attempts": 25,
+          "quotaErrors": 10,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 4191701,
+          "attempts": 25,
+          "quotaErrors": 8,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 4191407,
+          "attempts": 25,
+          "quotaErrors": 8,
+          "boundCodeUnits": 16777216
+        }
+      ],
+      "synthetic_images": [
+        {
+          "width": 4000,
+          "height": 4000,
+          "pixels": 16000000,
+          "encoded_bytes": 56311,
+          "sha256": "e0b300e96d39eb6a9b6e62b564a946d0cb2eb0b1cb51d22ccfa96d79e55efc22",
+          "noisy": false
+        },
+        {
+          "width": 4001,
+          "height": 4000,
+          "pixels": 16004000,
+          "encoded_bytes": 56312,
+          "sha256": "0ff189d3e8efdd3396179da4a996bba5a9cadb8048834ec4c5d50f313cbf1d4e",
+          "noisy": false
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "pixels": 262144,
+          "encoded_bytes": 787252,
+          "sha256": "e943d6332be73522ddc8285c1fca6f5cd8ab338285a404df3ef274a52bdb57ad",
+          "noisy": true
+        }
+      ],
+      "checks": [
+        {
+          "name": "native:legacy-reload-without-premature-migration",
+          "status": "pass"
+        },
+        {
+          "name": "native:legacy-to-snapshot-confirm-reload-and-normal-saves",
+          "status": "pass"
+        },
+        {
+          "name": "native:snapshot-replacement-confirm-reload-and-normal-saves",
+          "status": "pass"
+        },
+        {
+          "name": "native:cancel-valid-import-retains-both-sections-after-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:malformed-json-rejected-before-writing",
+          "status": "pass"
+        },
+        {
+          "name": "native:unsupported-backup-version-rejected",
+          "status": "pass"
+        },
+        {
+          "name": "native:external-photo-backup-rejected",
+          "status": "pass"
+        },
+        {
+          "name": "native:over-12MiB-backup-rejected-before-writing",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-legacy-cancel",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-legacy-retry",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-snapshot-cancel",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-snapshot-retry",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-exact-16MP-confirm-and-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-over-16MP-rejected-before-replacement",
+          "status": "fail",
+          "error": "Undecodable/over-16MP image reached replacement approval instead of rejection"
+        },
+        {
+          "name": "native:image-valid-base64-undecodable-rejected",
+          "status": "fail",
+          "error": "Undecodable/over-16MP image reached replacement approval instead of rejection"
+        },
+        {
+          "name": "native:image-occupied-legacy-quota-cancel-and-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-occupied-snapshot-quota-retry-and-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:no-page-errors",
+          "status": "pass"
+        },
+        {
+          "name": "native:no-external-requests",
+          "status": "pass"
+        }
+      ]
+    }
+  },
+  "fix_source_head": "ab06fa90e955c1664ad0f86d4abafc73785440ff",
+  "not_tested": [
+    "physical Android/iOS",
+    "HTTPS deployment",
+    "OS disk pressure",
+    "physical-device large-image memory pressure",
+    "concurrent-tab conflict resolution",
+    "camera/microphone permissions"
+  ],
+  "image_fix_verification": {
+    "source_head": "ab06fa90e955c1664ad0f86d4abafc73785440ff",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37603387322",
+    "conclusion": "success",
+    "counts": {
+      "static": 25,
+      "unit": 64,
+      "dom_fixture": 127,
+      "native_origin": 19
+    },
+    "artifact": {
+      "id": 11473479894,
+      "sha256": "ba7066e2e5cda0d04ef3874ce2f8abf853976a37e7f487f5114f89f0e883bb2b",
+      "download_digest_verified": true,
+      "source_head_file_verified": true
+    },
+    "native_storage_report": {
+      "timestamp": "2026-10-07T09:52:54.827841+00:00",
+      "source_head": "ab06fa90e955c1664ad0f86d4abafc73785440ff",
+      "browser": "143.0.7499.4",
+      "origin": "http://127.0.0.1:45295",
+      "harness": "HTTP scripts/serve.py; native localStorage; real file input, confirmation clicks and document reload",
+      "not_tested": [
+        "physical Android/iOS",
+        "HTTPS deployment",
+        "OS disk pressure",
+        "physical-device large-image memory pressure",
+        "concurrent-tab conflict resolution",
+        "camera/microphone permissions"
+      ],
+      "total": 19,
+      "passed": 19,
+      "failed": 0,
+      "page_errors": [],
+      "external_requests": [],
+      "quota_probes": [
+        {
+          "filledCodeUnits": 5241281,
+          "attempts": 25,
+          "quotaErrors": 11,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 5241281,
+          "attempts": 25,
+          "quotaErrors": 11,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 5240987,
+          "attempts": 25,
+          "quotaErrors": 10,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 5240987,
+          "attempts": 25,
+          "quotaErrors": 10,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 4191701,
+          "attempts": 25,
+          "quotaErrors": 8,
+          "boundCodeUnits": 16777216
+        },
+        {
+          "filledCodeUnits": 4191407,
+          "attempts": 25,
+          "quotaErrors": 8,
+          "boundCodeUnits": 16777216
+        }
+      ],
+      "synthetic_images": [
+        {
+          "width": 4000,
+          "height": 4000,
+          "pixels": 16000000,
+          "encoded_bytes": 56311,
+          "sha256": "e0b300e96d39eb6a9b6e62b564a946d0cb2eb0b1cb51d22ccfa96d79e55efc22",
+          "noisy": false
+        },
+        {
+          "width": 4001,
+          "height": 4000,
+          "pixels": 16004000,
+          "encoded_bytes": 56312,
+          "sha256": "0ff189d3e8efdd3396179da4a996bba5a9cadb8048834ec4c5d50f313cbf1d4e",
+          "noisy": false
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "pixels": 262144,
+          "encoded_bytes": 787252,
+          "sha256": "e943d6332be73522ddc8285c1fca6f5cd8ab338285a404df3ef274a52bdb57ad",
+          "noisy": true
+        }
+      ],
+      "checks": [
+        {
+          "name": "native:legacy-reload-without-premature-migration",
+          "status": "pass"
+        },
+        {
+          "name": "native:legacy-to-snapshot-confirm-reload-and-normal-saves",
+          "status": "pass"
+        },
+        {
+          "name": "native:snapshot-replacement-confirm-reload-and-normal-saves",
+          "status": "pass"
+        },
+        {
+          "name": "native:cancel-valid-import-retains-both-sections-after-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:malformed-json-rejected-before-writing",
+          "status": "pass"
+        },
+        {
+          "name": "native:unsupported-backup-version-rejected",
+          "status": "pass"
+        },
+        {
+          "name": "native:external-photo-backup-rejected",
+          "status": "pass"
+        },
+        {
+          "name": "native:over-12MiB-backup-rejected-before-writing",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-legacy-cancel",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-legacy-retry",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-snapshot-cancel",
+          "status": "pass"
+        },
+        {
+          "name": "native:bounded-quota-snapshot-retry",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-exact-16MP-confirm-and-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-over-16MP-rejected-before-replacement",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-valid-base64-undecodable-rejected",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-occupied-legacy-quota-cancel-and-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:image-occupied-snapshot-quota-retry-and-reload",
+          "status": "pass"
+        },
+        {
+          "name": "native:no-page-errors",
+          "status": "pass"
+        },
+        {
+          "name": "native:no-external-requests",
+          "status": "pass"
+        }
+      ]
+    }
+  },
+  "review_followup": {
+    "finding": "Minimize/Home and lock/sleep preserve stack identity, so pending validation needs sticky session-transition invalidation.",
+    "reproduction": "Unit-only reproduction using the actual production captureSession/minimize/lockPhone functions, with delayed Image.decode success/failure; no real-browser execution claimed.",
+    "against_source_head": "ab06fa90e955c1664ad0f86d4abafc73785440ff",
+    "before_fix": {
+      "total": 14,
+      "passed": 8,
+      "failed": 6
+    },
+    "red_log_sha256": "96cf81fe570a2eb4fdd4b01cd0496950ddb4b2c05fc178d5006278d9bff9c6e2",
+    "fix": "Existing captureSession boundary increments only the pending restore request serial, preserving the original session save.",
+    "local_after_fix": {
+      "static": 25,
+      "unit": 70
+    },
+    "final_ci": "Check the PR final head and subsequent main CI separately; the earlier green image-fix commit does not cover this follow-up."
+  }
+}

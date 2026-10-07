@@ -14,10 +14,14 @@ UI-011 原 CI 为 25 静态、56 单元、127 DOM fixture。[PR #7](https://gith
 
 原 5 次提交/注释标签在 provenance 的原始 bundle 中，不在远端祖先图；根目录 LICENSE 原字节保留。先前工作区回退的恢复记载是历史，当前仓库可直接正常克隆。禁止 force push 或重建原始标签。
 
-继续工作前运行 npm run build、npm run check、npm test、npm run test:ui、npm run test:storage；受限环境失败必须记录，不用旧报告替代。下一批仅按 [M2 卡](NEXT_ACTION.md) 验收真实存储/设备，UI-011 整项仍不应提前关闭。
+继续工作前运行 npm run build、npm run check、npm test、npm run test:ui、npm run test:storage；受限环境失败必须记录，不用旧报告替代。下一批仅按 [M2 卡](NEXT_ACTION.md) 验收现有确认页键盘焦点；设备验证仍开放，UI-011 整项仍不应提前关闭。
 
 ## 本批跟踪文字边界
 
 PR #7 进入既定审阅/合并流程，代码与 main 合并结果需分别核对 exact-head CI。Testing Epic #1 的进度正文更新被取消，已保持原样；这只是未更新的跟踪文字，不阻塞已授权的独立代码 PR 收尾，也不应另写评论或重试该 issue 修改。
 
 合并后测试时序记录：713e44b 的首次 main CI 暴露 native harness 提前导航（12/14），详见 QA 报告。测试须等待 core ready 与 Workbench 初始 deep link 都就绪；只等 core 标志会被延迟旧路由覆盖。保留失败证据，不能以 PR 通过代替 main 通过。
+
+## 本批图像边界接续
+
+PR #9 已保存 test-only 失败证据，再加入确认前的真实图片验证，保持原 URL 字节、16MP 启动限制及单快照提交协议。普通照片导入的 1400px 工作副本没有改动。单元的 Image mock 仅覆盖 14 个入口分支，不替代新增 5 个 native 图片场景。必须核对 [图像证据](../qa/UI011_IMAGE_EVIDENCE.json) 的对应 SHA，并在收尾时查最终 head 与 main 自身 CI。不要重新创建图像范围或将 UI-011 整项关闭；下一张卡仍位于 M2。

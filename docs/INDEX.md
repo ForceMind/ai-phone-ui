@@ -23,3 +23,5 @@
 [远端发布证据](qa/PUBLICATION_EVIDENCE.json)
 
 [UI-011 真实 origin 验证证据](qa/UI011_ORIGIN_EVIDENCE.json)
+
+[UI-011 图像边界与失败复现证据](qa/UI011_IMAGE_EVIDENCE.json)

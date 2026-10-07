@@ -1,5 +1,11 @@
 # v0.1.0 验证记录
 
+## 2026-10-07 UI-011 图像缺陷复现
+
+测试先行提交 `cbd799cb81183ed17d862230da75a4742b8ff623` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37602605392) 通过 25 静态、56 单元和原 127 DOM；native 为 17/19。准确 16MP 和图像占用的 quota 取消/重试通过，超过 16MP 与有效 base64 但不能解码的文件仍进入替换确认。实际 artifact 的 source-head 和 SHA256 已校对。该失败保留在 [图像证据](UI011_IMAGE_EVIDENCE.json)，不能用后续绿灯抹去。
+
+修复在恢复确认前验证解码/尺寸，保留原片；本地 build、25 静态和 64 单元通过。当地 Chromium socket EPERM 仍在首次断言前阻止启动，未绕过安全策略；真正浏览器验收通过正常 GitHub CI。图片修复提交 `ab06fa90e955c1664ad0f86d4abafc73785440ff` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37603387322) 已通过 25/64/127/19，artifact 摘要与 source-head 已核对。独立审阅随后发现过时解码可在最小化/锁屏后弹回确认：使用实际生产导航函数的单元复现为 8 通过/6 失败。后续修复仅在既有 captureSession 边界使请求序号失效，保留原会话保存；本地 70 单元通过。此后续修复与最终文档提交必须再核对 exact-head 及 main CI，不能沿用 ab06 的绿灯。
+
 ## 合并后发现的测试就绪竞争（2026-10-07）
 
 PR #7 合并提交 `713e44be072462c41fded92fa76ad370f76ff17a` 的 [首次 main CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37600514374) 为 25/25 静态、56/56 单元、127/127 DOM，native 12/14。两项迁移测试已完成恢复与 reload 的数据断言，随后切往 DOC-02 时等待 `#noteEditor` 超时。不能把此前 PR 的成功当作这次 main 成功。
