@@ -45,6 +45,8 @@ jobs:
         run: npm run test:ui 2>&1 | tee test-results/browser.log
       - name: Browser HTTP-origin native storage regression
         run: npm run test:storage 2>&1 | tee test-results/storage-origin.log
+      - name: Browser HTTP-origin keyboard focus regression
+        run: npm run test:keyboard 2>&1 | tee test-results/keyboard-focus.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4

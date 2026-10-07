@@ -1,0 +1,604 @@
+{
+  "scope": "M2 UI-014: keyboard focus and cancellation in existing photo/backup confirmations",
+  "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/10",
+  "reproduction": {
+    "source_head": "a7b8fde3f1fcbbc360245c971f9d2f88e2025c20",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37606085412",
+    "conclusion": "failure",
+    "counts": {
+      "static": 25,
+      "unit": 70,
+      "dom_fixture": 127,
+      "native_storage": 19,
+      "native_keyboard_total": 34,
+      "native_keyboard_passed": 2
+    },
+    "artifact": {
+      "id": 11475241658,
+      "sha256": "1518ce0fd02898a8729bcb6168b9a9716d16200f35a1421da4cac29d8066b249",
+      "download_digest_verified": true,
+      "source_head_file_verified": true
+    },
+    "browser": "143.0.7499.4",
+    "checks": [
+      {
+        "name": "backup-settings:entry",
+        "status": "fail",
+        "error": "backup-settings:safe-initial-focus: {\"route\": \"SET-01\", \"task\": \"ui-SET-01\", \"page\": \"confirm\", \"mode\": \"suite\", \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "backup-settings:tab-cycle",
+        "status": "fail",
+        "error": "backup-settings:Tab:back: {\"route\": \"SET-01\", \"task\": \"ui-SET-01\", \"page\": \"confirm\", \"mode\": \"suite\", \"focus\": {\"tag\": \"SELECT\", \"id\": \"viewState\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "backup-settings:escape-return-reopen",
+        "status": "fail",
+        "error": "backup-settings:focus-return: {\"route\": \"SET-10\", \"task\": \"ui-SET-01\", \"page\": \"suite\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "backup-settings:keyboard-cancel-return-reopen",
+        "status": "fail",
+        "error": "backup-settings:focus-return: {\"route\": \"SET-10\", \"task\": \"ui-SET-01\", \"page\": \"suite\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "backup-settings:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "backup-settings:focus-return: {\"route\": \"SET-10\", \"task\": \"ui-SET-01\", \"page\": \"suite\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "backup-settings:minimize-resume-cancel",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "backup-cloud:entry",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "backup-cloud:tab-cycle",
+        "status": "fail",
+        "error": "backup-cloud:Tab:back: {\"route\": \"CLD-17\", \"task\": \"ui-CLD-17\", \"page\": \"confirm\", \"mode\": \"suite\", \"focus\": {\"tag\": \"SELECT\", \"id\": \"viewState\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "backup-cloud:escape-return-reopen",
+        "status": "fail",
+        "error": "backup-cloud:focus-return: {\"route\": \"CLD-17\", \"task\": \"ui-CLD-17\", \"page\": \"root\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "backup-cloud:keyboard-cancel-return-reopen",
+        "status": "fail",
+        "error": "backup-cloud:focus-return: {\"route\": \"CLD-17\", \"task\": \"ui-CLD-17\", \"page\": \"root\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "backup-cloud:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "backup-cloud:focus-return: {\"route\": \"CLD-17\", \"task\": \"ui-CLD-17\", \"page\": \"root\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "backup-cloud:minimize-resume-cancel",
+        "status": "fail",
+        "error": "backup-cloud:resumed-review-focus: {\"route\": \"CLD-17\", \"task\": \"ui-CLD-17\", \"page\": \"confirm\", \"mode\": \"suite\", \"focus\": {\"tag\": \"DIV\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-gallery:entry",
+        "status": "fail",
+        "error": "photo-gallery:safe-initial-focus: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"import\", \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-gallery:tab-cycle",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-gallery:escape-return-reopen",
+        "status": "fail",
+        "error": "Cancel lost its origin: {'route': 'IMG-02', 'task': 'photo', 'page': 'root', 'mode': None, 'focus': {'tag': 'BODY', 'id': '', 'action': None, 'menu': None, 'inReview': False}, 'reviewCount': 0}"
+      },
+      {
+        "name": "photo-gallery:keyboard-cancel-return-reopen",
+        "status": "fail",
+        "error": "Cancel lost its origin: {'route': 'IMG-02', 'task': 'photo', 'page': 'root', 'mode': None, 'focus': {'tag': 'BODY', 'id': '', 'action': None, 'menu': None, 'inReview': False}, 'reviewCount': 0}"
+      },
+      {
+        "name": "photo-gallery:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-gallery:minimize-resume-cancel",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-camera:entry",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-camera:tab-cycle",
+        "status": "fail",
+        "error": "photo-camera:Tab:back: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"import\", \"focus\": {\"tag\": \"SELECT\", \"id\": \"viewState\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-camera:escape-return-reopen",
+        "status": "fail",
+        "error": "Cancel lost its origin: {'route': 'IMG-02', 'task': 'photo', 'page': 'root', 'mode': None, 'focus': {'tag': 'BODY', 'id': '', 'action': None, 'menu': None, 'inReview': False}, 'reviewCount': 0}"
+      },
+      {
+        "name": "photo-camera:keyboard-cancel-return-reopen",
+        "status": "fail",
+        "error": "Cancel lost its origin: {'route': 'IMG-02', 'task': 'photo', 'page': 'root', 'mode': None, 'focus': {'tag': 'BODY', 'id': '', 'action': None, 'menu': None, 'inReview': False}, 'reviewCount': 0}"
+      },
+      {
+        "name": "photo-camera:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "Cancel lost its origin: {'route': 'IMG-02', 'task': 'photo', 'page': 'root', 'mode': None, 'focus': {'tag': 'BODY', 'id': '', 'action': None, 'menu': None, 'inReview': False}, 'reviewCount': 0}"
+      },
+      {
+        "name": "photo-camera:minimize-resume-cancel",
+        "status": "fail",
+        "error": "photo-camera:resumed-review-focus: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"import\", \"focus\": {\"tag\": \"DIV\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-export:entry",
+        "status": "fail",
+        "error": "photo-export:safe-initial-focus: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"photo\", \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-export:tab-cycle",
+        "status": "fail",
+        "error": "photo-export:Tab:back: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"photo\", \"focus\": {\"tag\": \"SELECT\", \"id\": \"viewState\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-export:escape-return-reopen",
+        "status": "fail",
+        "error": "photo-export:reopened-safe-focus: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"photo\", \"focus\": {\"tag\": \"BUTTON\", \"id\": \"\", \"action\": \"pulley-action\", \"menu\": \"2\", \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "photo-export:keyboard-cancel-return-reopen",
+        "status": "fail",
+        "error": "photo-export:focus-return: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"root\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "photo-export:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "photo-export:focus-return: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"root\", \"mode\": null, \"focus\": {\"tag\": \"BODY\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "photo-export:minimize-resume-cancel",
+        "status": "fail",
+        "error": "photo-export:resumed-review-focus: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"confirm\", \"mode\": \"photo\", \"focus\": {\"tag\": \"DIV\", \"id\": \"\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 1}"
+      },
+      {
+        "name": "backup-settings:gesture-reversal-pointercancel-right-cancel",
+        "status": "fail",
+        "error": "backup-settings:focus-return: {\"route\": \"SET-10\", \"task\": \"ui-SET-01\", \"page\": \"suite\", \"mode\": null, \"focus\": {\"tag\": \"DIV\", \"id\": \"screen\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "photo-export:gesture-reversal-pointercancel-right-cancel",
+        "status": "fail",
+        "error": "photo-export:focus-return: {\"route\": \"IMG-02\", \"task\": \"photo\", \"page\": \"root\", \"mode\": null, \"focus\": {\"tag\": \"DIV\", \"id\": \"screen\", \"action\": null, \"menu\": null, \"inReview\": false}, \"reviewCount\": 0}"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ]
+  },
+  "initial_candidate": {
+    "source_head": "8e08e6bc98396c6b71a0abff854681504f9ad6fe",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37607384792",
+    "conclusion": "failure",
+    "counts": {
+      "static": 25,
+      "unit": 82,
+      "dom_fixture": 127,
+      "native_storage": 19,
+      "native_keyboard_total": 41,
+      "native_keyboard_passed": 30
+    },
+    "artifact": {
+      "id": 11475249072,
+      "sha256": "448a726acdf8e287a77dacbfcbf3b5071b5f7a8961cb5f08b73fda18ae8239db",
+      "download_digest_verified": true,
+      "source_head_file_verified": true
+    },
+    "browser": "143.0.7499.4",
+    "checks": [
+      {
+        "name": "backup-settings:entry",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:escape-return-reopen",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "backup-settings:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:entry",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "backup-cloud:tab-cycle",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "backup-cloud:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:tab-cycle",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-gallery:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:entry",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-camera-import:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-camera-import:minimize-resume-cancel",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "photo-export:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:escape-return-reopen",
+        "status": "fail",
+        "error": "Page.wait_for_function: Timeout 5000ms exceeded."
+      },
+      {
+        "name": "photo-export:keyboard-cancel-return-reopen",
+        "status": "fail",
+        "error": "Page.wait_for_function: Timeout 5000ms exceeded."
+      },
+      {
+        "name": "photo-export:mouse-cancel-return-reopen",
+        "status": "fail",
+        "error": "Page.wait_for_function: Timeout 5000ms exceeded."
+      },
+      {
+        "name": "photo-export:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:gesture-reversal-pointercancel-right-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:gesture-reversal-pointercancel-right-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "overlay-and-inert-guards",
+        "status": "fail",
+        "error": "Timeout 5000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================"
+      },
+      {
+        "name": "other-task-resume",
+        "status": "pass"
+      },
+      {
+        "name": "keyboard-quota-failure",
+        "status": "pass"
+      },
+      {
+        "name": "abandoned-picker",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ]
+  },
+  "interpretation": [
+    "Reproduction: 25 direct focus/return failures and 7 file-chooser startup timeouts, not 32 proven product defects.",
+    "Initial candidate: 30/41 keyboard checks passed. Eight chooser timeouts remained; three export-reopen failures came from a harness coordinate click selecting the now-restored Pulley history command.",
+    "Final code, independent review, exact-head CI, and merged main artifacts must be verified separately.",
+    "a3da630 passed all 41 native keyboard checks after stable chooser observation and keyboard-only Pulley setup; the precise internal cause of prior chooser timeouts is not proven.",
+    "Pixel review showed a pre-existing restore approval caption incorrectly said export. The final small correction labels that existing button as restore, with a native assertion; the final head must run its own CI.",
+    "Independent code review identified and verified the nested-review focus correction; no remaining focus-code blocker reported at a3da630."
+  ],
+  "not_tested": [
+    "screen readers",
+    "physical Android/iOS",
+    "mobile soft keyboards",
+    "real-device gesture/OS conflicts",
+    "production services or deployment"
+  ],
+  "unrelated_observation": "Static review found global pendingFile/pendingRestore candidates may outlive their individual review sessions; separate native reproduction and a bounded follow-up card are needed, not a claim of fixed behavior here.",
+  "verified_candidate": {
+    "source_head": "a3da63073cd399745117be456ef57293795a6c95",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038",
+    "conclusion": "success",
+    "counts": {
+      "static": 25,
+      "unit": 84,
+      "dom_fixture": 127,
+      "native_storage": 19,
+      "native_keyboard_total": 41,
+      "native_keyboard_passed": 41
+    },
+    "artifact": {
+      "id": 11476295913,
+      "sha256": "0d9ce4dc0e849fc56c4d4988c1b2e5417244ff23f1bcbe3dc2c08db91532ca11",
+      "download_digest_verified": true,
+      "source_head_file_verified": true,
+      "built_html_bytes_verified": true
+    },
+    "browser": "143.0.7499.4",
+    "screenshots_inspected": [
+      "keyboard-focus-backup-settings.png",
+      "keyboard-focus-photo-export.png"
+    ],
+    "checks": [
+      {
+        "name": "backup-settings:entry",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:entry",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "backup-cloud:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-camera-import:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:entry",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:tab-cycle",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:escape-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:keyboard-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:mouse-cancel-return-reopen",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:minimize-resume-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:gesture-reversal-pointercancel-right-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:gesture-reversal-pointercancel-right-cancel",
+        "status": "pass"
+      },
+      {
+        "name": "overlay-and-inert-guards",
+        "status": "pass"
+      },
+      {
+        "name": "other-task-resume",
+        "status": "pass"
+      },
+      {
+        "name": "keyboard-quota-failure",
+        "status": "pass"
+      },
+      {
+        "name": "abandoned-picker",
+        "status": "pass"
+      },
+      {
+        "name": "backup-settings:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "photo-export:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "photo-gallery:keyboard-accept",
+        "status": "pass"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ]
+  }
+}

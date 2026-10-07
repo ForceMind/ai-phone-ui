@@ -83,3 +83,10 @@ PR #7 合并提交 `713e44be072462c41fded92fa76ad370f76ff17a` 的 [首次 main C
 ## 2026-10-07 重建后验证
 
 构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。该本地记录当时没有新远端 CI，当前结果见顶部。
+
+
+## UI-014：有界确认键盘回归
+
+测试先行 `a7b8fde` 记录 25 个直接焦点/取消返回失败与 7 个原生选择器启动超时；初版候选 `8e08e6b` 新键盘 suite 为 30/41，保留完整失败 artifact。嵌套确认焦点、测试点击已恢复的 Pulley 和选择器监听时序分别修正，不减少既有断言或重试到成功。
+
+`a3da63073cd399745117be456ef57293795a6c95` 的 [run 37608195038](https://github.com/ForceMind/ai-phone-ui/actions/runs/37608195038) 实际通过 25 静态、84 单元、127 DOM、19 native 存储/图像与 41 native 键盘。ZIP SHA256、source-head、预览 HTML 与截图均已复核。这里的计数只适用于该 SHA；最终文案小改与合并 main 必须分别复跑。证据与未测边界见 [UI014_FOCUS_EVIDENCE.json](UI014_FOCUS_EVIDENCE.json)。
