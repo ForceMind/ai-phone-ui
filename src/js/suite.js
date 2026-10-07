@@ -11,7 +11,7 @@ const STORE_UI='ai-phone-ui-suite-v1';
 let D=PhoneModel.initial();
 let uiStorageWarned=false,renderingRoute='SYS-01';
 try{const raw=PhoneStorage.getItem(STORE_UI);if(raw)D=PhoneModel.validate(JSON.parse(raw));}catch{uiStorageWarned=true;}
-let activeRoute='SYS-01',viewState='default',pendingRestore=null,restoreSerial=0,lastDeleted=null,selectedDay=new Date().getDate(),monthOffset=0;
+let activeRoute='SYS-01',viewState='default',restoreSerial=0,lastDeleted=null,selectedDay=new Date().getDate(),monthOffset=0;
 let callMuted=false,callSpeaker=false,playingPreview=false;
 const rootForTask=new Map(),liveRouteForTask=new Map();
 const row=(title,sub='',target='',glyph='arrow',extra='')=>`<${target?'button':'div'} class="s-row" ${target?`data-action="ui:go:${target}"`:''}>${glyph?icon(glyph):''}<span class="grow"><b>${esc(title)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span>${extra|| (target?'<span class="chev">›</span>':'')}</${target?'button':'div'}>`;
@@ -147,14 +147,14 @@ pinPulley=function(){if(stack.at(-1)?.kind!=='suite')return original.pinPulley()
 coverAction=function(id,dir){if(!rootForTask.has(id))return original.coverAction(id,dir);const r=routes.get(rootForTask.get(id));if(r.type==='music'){D.musicPlaying=!D.musicPlaying;persist();toast(D.musicPlaying?'播放状态预览已开启；没有播放真实歌曲':'播放状态已暂停');}else{persist();saveNow();toast('已保留「'+r.name+'」的本机草稿；任务没有退出');}feedback();};
 coverPreview=function(id,dx){if(!rootForTask.has(id))return original.coverPreview(id,dx);const face=$('face-'+id),under=$('under-'+id);face.parentElement.classList.add('dragging');under.innerHTML=icon('check')+'<span>保留草稿 / 控制状态</span>';direct(face,{transform:`translateX(${clamp(dx,-140,140)}px)`});};
 capHTML=function(){return '<div class="caps-scroll stack-scroll" style="position:relative;inset:auto">'+original.capHTML()+`<div class="suite-quick-group">更多持续能力</div>`+[['AI-01','直接交代','带着当前对象开始','talk'],['DOC-01','找回一份资料','照片、笔记与成果','note'],['CLD-01','我的个人环境','任务、授权与服务连接','cloud'],['DAY-01','安排我的一天','日程、专注与提醒草稿','clock'],['DAY-04','与人联系','消息和通话的界面预览','talk'],['DAY-09','听一会儿','音乐与封面控制预览','play'],['DAY-14','找一件事','搜索本机笔记与页面','list'],['SET-01','调整这部手机','氛围、权限和无障碍','lock']].map(([id,n,d,i])=>`<button class="cap suite-quick-cap" data-action="ui:go:${id}">${icon(i)}<span><strong>${n}</strong><small>${d}</small></span></button>`).join('')+'</div>';};
-function confirm(mode,title,description,payload){pushPage({kind:'confirm',mode:'suite',suiteMode:mode,title,description,returnFocus:mode==='restore'?{task:currentTask,action:'ui:restore',menu:null}:undefined,payload:JSON.parse(JSON.stringify(payload||{}))});}
+function confirm(mode,title,description,payload,candidate){pushPage({kind:'confirm',mode:'suite',suiteMode:mode,title,description,candidate,returnFocus:mode==='restore'?{task:currentTask,action:'ui:restore',menu:null}:undefined,payload:JSON.parse(JSON.stringify(payload||{}))});}
 acceptDialog=function(){const p=stack.at(-1);if(p?.mode!=='suite')return original.acceptDialog();if(p.consumed)return;
 if(p.suiteMode==='restore'){
-  if(!pendingRestore)return;
+  const candidate=p.candidate?.value;if(!candidate)return;
   let nextCore,nextSuite;
   try{
-    nextCore=JSON.parse(JSON.stringify(pendingRestore.core));
-    nextSuite=JSON.parse(JSON.stringify(pendingRestore.suite));
+    nextCore=JSON.parse(JSON.stringify(candidate.core));
+    nextSuite=JSON.parse(JSON.stringify(candidate.suite));
     nextCore.job.status=nextCore.job.status==='running'?'paused':nextCore.job.status;
     nextCore.focus.running=false;
     PhoneStorage.replace(JSON.stringify(nextCore),JSON.stringify(nextSuite));
@@ -164,7 +164,7 @@ if(p.suiteMode==='restore'){
     return;
   }
   p.consumed=true;clearTimeout(saveTimer);S=nextCore;D=nextSuite;
-  pendingRestore=null;stack.pop();renderStack();location.reload();return;
+  p.candidate.value=null;stack.pop();renderStack();location.reload();return;
 }
 p.consumed=true;stack.pop();renderStack();switch(p.suiteMode){case 'message':D.localOutbox.push({id:uid(),text:p.payload.text,recipient:p.payload.recipient,status:'local-preview-only'});D.messageDraft='';if(D.forms?.['DAY-05'])D.forms['DAY-05'].message='';log('消息确认预览','仅本机记录，未发送给任何人');go('DAY-05');toast('已记入本机预览，没有发送消息');break;case 'approval':log('交付动作获本机预览确认','固定版本：'+p.payload.versionId+'；未调用服务');go('AI-06');toast('确认已记录。外部动作没有执行。');break;case 'service':log('服务授权预览','未建立 OAuth 或外部连接');go('CLD-10');toast('仅记录授权预览，服务仍未连接');break;case 'delete':{const i=D.memories.findIndex(m=>m.id===p.payload.id);if(i>=0){lastDeleted={...D.memories[i]};D.memories.splice(i,1);D.selectedMemory=0;log('删除本机偏好',p.payload.id);}go('SET-07');toast('偏好已删除；到删除确认页可撤销');break;}case 'call':go('DAY-08');toast('只打开通话 UI，没有拨出电话');break;}persist();};
 function fields(){const v={};document.querySelectorAll('#screen [data-field]').forEach(el=>{if(!el.closest('[inert]'))v[el.dataset.field]=el.value;});return v;}
@@ -241,7 +241,7 @@ async function validateBackupPhoto(source){
 const backupInput=document.createElement('input');backupInput.id='suiteBackupInput';backupInput.type='file';backupInput.accept='application/json,.json';backupInput.hidden=true;document.body.appendChild(backupInput);
 backupInput.addEventListener('change',async e=>{
   const f=e.target.files?.[0];e.target.value='';if(!f)return;
-  const serial=++restoreSerial,originPage=stack.at(-1);pendingRestore=null;
+  const serial=++restoreSerial,originPage=stack.at(-1);
   const isCurrent=()=>serial===restoreSerial&&stack.at(-1)===originPage;
   if(f.size>12*1024*1024){toast('备份超过 12 MB，请选择有效的小型备份');return;}
   try{
@@ -251,9 +251,8 @@ backupInput.addEventListener('change',async e=>{
     const core=validate(b.core),suite=PhoneModel.validate(b.suite);
     await validateBackupPhoto(core.photo.source);
     if(!isCurrent())return;
-    pendingRestore={core,suite};
-    confirm('restore','恢复本机资料','文件已通过结构和图片校验。\n这会替换当前照片、笔记、偏好与草稿。请先导出当前资料。\n\n恢复后不会启动任何周期任务。',{name:f.name});
-  }catch(err){if(isCurrent()){pendingRestore=null;toast('无法恢复：'+err.message);}}
+    confirm('restore','恢复本机资料','文件已通过结构和图片校验。\n这会替换当前照片、笔记、偏好与草稿。请先导出当前资料。\n\n恢复后不会启动任何周期任务。',{name:f.name},{value:{core,suite}});
+  }catch(err){if(isCurrent())toast('无法恢复：'+err.message);}
 });
 const assist=document.createElement('div');assist.className='suite-assist';assist.id='suiteAssist';assist.innerHTML='<button data-action="back">返回</button><button data-action="ui:go:SYS-01">活动任务</button><button data-action="topmenu">系统控制</button>'; $('screen').appendChild(assist);
 // Extra line icons are built-in, not fetched assets.
