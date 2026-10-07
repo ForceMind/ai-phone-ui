@@ -9,8 +9,9 @@
     "test": "node --test tests/*.test.cjs",
     "test:ui": "python tests/browser_test.py",
     "dev": "python scripts/serve.py",
-    "verify": "npm run build && npm run check && npm test && npm run test:ui",
-    "docs": "python scripts/docs-html.py"
+    "verify": "npm run build && npm run check && npm test && npm run test:ui && npm run test:storage",
+    "docs": "python scripts/docs-html.py",
+    "test:storage": "python tests/storage_origin_test.py"
   },
   "engines": {
     "node": ">=22"

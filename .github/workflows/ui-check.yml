@@ -18,11 +18,14 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Prepare fresh reports
         run: |
           mkdir -p test-results
           rm -f docs/qa/static-results.json docs/qa/browser-results.json
-          printf '%s\n' "$GITHUB_SHA" > test-results/source-head.txt
+          git rev-parse HEAD > test-results/source-head.txt
+          printf '%s\n' "$GITHUB_SHA" > test-results/event-sha.txt
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -40,6 +43,8 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Browser DOM fixture regression
         run: npm run test:ui 2>&1 | tee test-results/browser.log
+      - name: Browser HTTP-origin native storage regression
+        run: npm run test:storage 2>&1 | tee test-results/storage-origin.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4
