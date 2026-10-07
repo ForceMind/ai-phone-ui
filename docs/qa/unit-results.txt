@@ -1,0 +1,206 @@
+
+> ai-phone-ui@0.1.0 test
+> node --test tests/model.test.cjs
+
+TAP version 13
+# Subtest: initial state is local only
+ok 1 - initial state is local only
+  ---
+  duration_ms: 1.038989
+  type: 'test'
+  ...
+# Subtest: default has no implied camera consent
+ok 2 - default has no implied camera consent
+  ---
+  duration_ms: 0.157021
+  type: 'test'
+  ...
+# Subtest: independent initial objects
+ok 3 - independent initial objects
+  ---
+  duration_ms: 0.124724
+  type: 'test'
+  ...
+# Subtest: schema validation rejects missing schema
+ok 4 - schema validation rejects missing schema
+  ---
+  duration_ms: 0.367812
+  type: 'test'
+  ...
+# Subtest: schema validation rejects future schema
+ok 5 - schema validation rejects future schema
+  ---
+  duration_ms: 0.160666
+  type: 'test'
+  ...
+# Subtest: roundtrip has correct schema
+ok 6 - roundtrip has correct schema
+  ---
+  duration_ms: 0.251189
+  type: 'test'
+  ...
+# Subtest: remote connection cannot be forged by backup
+ok 7 - remote connection cannot be forged by backup
+  ---
+  duration_ms: 0.234405
+  type: 'test'
+  ...
+# Subtest: restoring never resumes music or call state
+ok 8 - restoring never resumes music or call state
+  ---
+  duration_ms: 0.131864
+  type: 'test'
+  ...
+# Subtest: bounds volume
+ok 9 - bounds volume
+  ---
+  duration_ms: 0.36699
+  type: 'test'
+  ...
+# Subtest: nonfinite volume uses safe default
+ok 10 - nonfinite volume uses safe default
+  ---
+  duration_ms: 0.323406
+  type: 'test'
+  ...
+# Subtest: nickname max length
+ok 11 - nickname max length
+  ---
+  duration_ms: 0.896619
+  type: 'test'
+  ...
+# Subtest: strict consent booleans
+ok 12 - strict consent booleans
+  ---
+  duration_ms: 0.115721
+  type: 'test'
+  ...
+# Subtest: messages bounded to 80
+ok 13 - messages bounded to 80
+  ---
+  duration_ms: 0.175418
+  type: 'test'
+  ...
+# Subtest: invalid list rejected
+ok 14 - invalid list rejected
+  ---
+  duration_ms: 0.104935
+  type: 'test'
+  ...
+# Subtest: schedule restoration remains disabled
+ok 15 - schedule restoration remains disabled
+  ---
+  duration_ms: 0.117022
+  type: 'test'
+  ...
+# Subtest: invalid clock normalized
+ok 16 - invalid clock normalized
+  ---
+  duration_ms: 0.087889
+  type: 'test'
+  ...
+# Subtest: valid clock retained
+ok 17 - valid clock retained
+  ---
+  duration_ms: 0.072506
+  type: 'test'
+  ...
+# Subtest: restore outbox cannot forge sent status
+ok 18 - restore outbox cannot forge sent status
+  ---
+  duration_ms: 0.085596
+  type: 'test'
+  ...
+# Subtest: unknown fields dropped
+ok 19 - unknown fields dropped
+  ---
+  duration_ms: 0.070734
+  type: 'test'
+  ...
+# Subtest: form drafts survive
+ok 20 - form drafts survive
+  ---
+  duration_ms: 0.151984
+  type: 'test'
+  ...
+# Subtest: invalid form keys dropped
+ok 21 - invalid form keys dropped
+  ---
+  duration_ms: 0.522349
+  type: 'test'
+  ...
+# Subtest: extract does not hallucinate extra lines
+ok 22 - extract does not hallucinate extra lines
+  ---
+  duration_ms: 0.23117
+  type: 'test'
+  ...
+# Subtest: empty notes extract empty checklist
+ok 23 - empty notes extract empty checklist
+  ---
+  duration_ms: 0.071626
+  type: 'test'
+  ...
+# Subtest: checklist bounded
+ok 24 - checklist bounded
+  ---
+  duration_ms: 0.105546
+  type: 'test'
+  ...
+# Subtest: square center crop geometry
+ok 25 - square center crop geometry
+  ---
+  duration_ms: 0.119656
+  type: 'test'
+  ...
+# Subtest: landscape crop remains in source
+ok 26 - landscape crop remains in source
+  ---
+  duration_ms: 0.152584
+  type: 'test'
+  ...
+# Subtest: invalid crop ratio rejected
+ok 27 - invalid crop ratio rejected
+  ---
+  duration_ms: 0.114018
+  type: 'test'
+  ...
+# Subtest: invalid source geometry rejected
+ok 28 - invalid source geometry rejected
+  ---
+  duration_ms: 0.094238
+  type: 'test'
+  ...
+# Subtest: empty search has no matches
+ok 29 - empty search has no matches
+  ---
+  duration_ms: 0.090694
+  type: 'test'
+  ...
+# Subtest: local notes searched with source label
+ok 30 - local notes searched with source label
+  ---
+  duration_ms: 0.174667
+  type: 'test'
+  ...
+# Subtest: catalog search case insensitive
+ok 31 - catalog search case insensitive
+  ---
+  duration_ms: 0.11566
+  type: 'test'
+  ...
+# Subtest: approval payload detached and immutable
+ok 32 - approval payload detached and immutable
+  ---
+  duration_ms: 0.2442
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 62.384368

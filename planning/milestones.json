@@ -1,0 +1,41 @@
+{
+  "remoteMilestonesCreated": false,
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "基线与仓库",
+      "status": "partial",
+      "exit": "基线归档完成；远端等待写入授权"
+    },
+    {
+      "id": "M1",
+      "title": "完整范围UI原型",
+      "status": "done",
+      "exit": "86页可达、交互规则统一、文档齐备"
+    },
+    {
+      "id": "M2",
+      "title": "实机与质量门槛",
+      "status": "in_progress",
+      "exit": "自动化+真实设备+存储恢复+无障碍"
+    },
+    {
+      "id": "M3",
+      "title": "体验打磨与模块收敛",
+      "status": "planned",
+      "exit": "任务中心状态和组件可持续维护"
+    },
+    {
+      "id": "M4",
+      "title": "受控能力接入",
+      "status": "planned",
+      "exit": "从一个真实服务开始，契约和安全先行"
+    },
+    {
+      "id": "M5",
+      "title": "系统与云环境试验",
+      "status": "later",
+      "exit": "单独立项与真实平台验收"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "total": 24,
+  "passed": 24,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "catalog count matches manifest",
+      "status": "pass"
+    },
+    {
+      "name": "unique canonical IDs",
+      "status": "pass"
+    },
+    {
+      "name": "valid route IDs and deep links",
+      "status": "pass"
+    },
+    {
+      "name": "all parents exist and graph is acyclic",
+      "status": "pass"
+    },
+    {
+      "name": "all modes are explicit",
+      "status": "pass"
+    },
+    {
+      "name": "all pages have name and purpose",
+      "status": "pass"
+    },
+    {
+      "name": "all catalog types have renderer or native alias",
+      "status": "pass"
+    },
+    {
+      "name": "linked UI route IDs resolve",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:image.js",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:core.js",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:model.cjs",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:suite.js",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:workbench.js",
+      "status": "pass"
+    },
+    {
+      "name": "built HTML has no unresolved placeholders",
+      "status": "pass"
+    },
+    {
+      "name": "self contained: no external executable/style assets",
+      "status": "pass"
+    },
+    {
+      "name": "default app has no network clients",
+      "status": "pass"
+    },
+    {
+      "name": "no default bottom navigation regression",
+      "status": "pass"
+    },
+    {
+      "name": "baseline checksum unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "baseline storage isolated",
+      "status": "pass"
+    },
+    {
+      "name": "required documentation exists",
+      "status": "pass"
+    },
+    {
+      "name": "local plans do not impersonate remote issues",
+      "status": "pass"
+    },
+    {
+      "name": "documented remote boundary matches manifest",
+      "status": "pass"
+    },
+    {
+      "name": "package has no runtime dependencies",
+      "status": "pass"
+    },
+    {
+      "name": "GitHub script exists",
+      "status": "pass"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101b20">
+<title>SWIPE / AI · 全界面设计工作台</title>
+<!-- BUILD:STYLES -->
+</head>
+<body>
+<svg aria-hidden="true" style="width:0;height:0;position:absolute"><defs>
+<symbol id="i-picture" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8" cy="8" r="1.5"/><path d="m3 18 6-6 4 4 3-6 5 8"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M6 18a5 5 0 1 1 .3-10A6 6 0 0 1 18 7a5.5 5.5 0 0 1 1 11M12 10v11m-4-4 4 4 4-4"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M16 3H4v18h16V9M8 8h5m-5 5h8m-8 4h8M16 3l4 6h-4z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 8v5l4 2M9 2h6"/></symbol>
+<symbol id="i-talk" viewBox="0 0 24 24"><path d="M4 3h16v14H9l-5 4V3Zm4 5h8m-8 5h6"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v3a7 7 0 0 0 14 0v-3m-7 10v3m-4 0h8"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m7 4 12 8-12 8Z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="1"/><path d="M23 10v4M5 10h11v4H5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h4l2-4h6l2 4h4v14H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+</defs></svg>
+<div class="web">
+<header class="web-head"><div class="mark">SWIPE <span>/ AI</span></div><div class="web-actions"><span class="edition">GESTURE SYSTEM STUDY · 03</span><button data-action="demo" id="demoTop">看手势演示</button><button data-action="help">交互地图</button><button data-action="fullscreen">全屏</button></div></header>
+<main class="workspace">
+<section class="intro"><div class="kicker">N9 STRUCTURE × SAILFISH INTERACTION</div><h1>不是点开。<br>是把世界<br><em>轻轻推开。</em></h1><p>从屏幕边缘开始，把当前内容推开。<br>只看一眼，再推回去。<br>留在背后的事情，仍在继续。</p><button class="start-demo" data-action="demo" id="demoButton">看一遍，跟着手势走<svg><use href="#i-arrow"/></svg></button><div class="source-tag">三视图 · 半滑窥视 · 活动封面<br>拉绳菜单 · 层叠页面 · 全局氛围<br><span style="color:#6c929c">独立 HTML，无需登录；云端为本机演示。</span></div></section>
+<div class="device-area" id="deviceArea"><div class="device-slot" id="deviceSlot"><div class="phone" id="phone"><div class="speaker"></div><div class="camera-dot"></div><div class="case-label">SWIPE / AI</div><button class="hw power" data-action="power" aria-label="息屏或唤醒" title="息屏 / 唤醒"></button><button class="hw volume" data-action="topmenu" aria-label="打开系统氛围菜单" title="系统氛围"></button>
+<div class="screen" id="screen" tabindex="0" aria-label="手势手机，按 H 返回活动任务，按 M 打开拉绳菜单，按空格暂停或继续">
+<div class="wallpaper"></div>
+<section class="system" id="system"><div class="system-status"><span id="clock">21:15</span><span class="symbols">本机原型<svg aria-label="装饰电量"><use href="#i-battery"/></svg></span></div>
+<div class="system-track" id="systemTrack">
+<section class="system-page" id="eventsPage" inert><h2 class="page-title">发生了什么</h2><div class="page-sub">事情的结果，回到同一条时间线。</div><div class="events-list" id="eventsList"></div></section>
+<section class="system-page" id="homePage"><h2 class="page-title">正在发生</h2><div class="page-sub">4 件事，留在你离开的地方。</div>
+<div class="home-covers" id="covers">
+<div class="cover cover-photo" data-task="photo" tabindex="0" role="button" aria-label="照片任务；左右滑动封面切换版本"><div class="cover-under" id="under-photo"><svg><use href="#i-next"/></svg><span>下一个版本</span></div><div class="cover-face" id="face-photo"><canvas id="coverPhoto"></canvas><div class="photo-cover-info"><strong>山径 · 黄昏</strong><small id="coverPhotoLabel">冷调 · 第 3 个版本</small></div></div></div>
+<div class="cover" data-task="cloud" tabindex="0" role="button" aria-label="资料整理任务；向右滑封面运行或暂停，向左滑查看结果"><div class="cover-under" id="under-cloud"><svg><use href="#i-play"/></svg><span>开始整理</span></div><div class="cover-face" id="face-cloud"><div class="overline">RUNTIME · 本机整理</div><strong>整理我的想法</strong><div class="cover-percent"><span id="coverJobPercent">0</span><i>%</i></div><div class="meter"><i id="coverJobMeter"></i></div><div class="cover-bottom"><small id="coverJobLabel">右滑封面 → 开始</small><svg id="coverJobIcon"><use href="#i-play"/></svg></div></div></div>
+<div class="cover" data-task="notes" tabindex="0" role="button" aria-label="笔记任务；向右滑朗读，向左滑导出"><div class="cover-under" id="under-notes"><svg><use href="#i-talk"/></svg><span>朗读笔记</span></div><div class="cover-face" id="face-notes"><div class="overline">MEMORY · 留下的念头</div><div class="cover-note-preview" id="coverNotePreview"></div><div class="cover-bottom"><small>右滑朗读 · 左滑导出</small><svg><use href="#i-note"/></svg></div></div></div>
+<div class="cover" data-task="focus" tabindex="0" role="button" aria-label="专注计时；向右滑开始或暂停，向左滑重置"><div class="cover-under" id="under-focus"><svg><use href="#i-play"/></svg><span>开始专注</span></div><div class="cover-face" id="face-focus"><div class="overline">FOCUS · 给自己一刻</div><div class="cover-focus-time" id="coverFocusTime">15:00</div><div class="cover-bottom"><small id="coverFocusLabel">右滑封面 → 开始</small><svg><use href="#i-clock"/></svg></div></div></div>
+</div><p class="home-caption">轻点继续这件事。<br>左右滑动封面，不打开也能操作。</p></section>
+<section class="system-page" id="capsPage" inert><h2 class="page-title">开始一件事</h2><div class="page-sub">找的是能力，不是应用。</div><div class="cap-list" id="capsList"></div><p class="cap-note">也可以直接说你的目的。<br>这一层在任何内容上，都能从底边唤出。</p></section>
+</div><div class="system-dots" id="systemDots"><i></i><i class="on"></i><i></i></div></section>
+<div class="peek-caption" id="peekCaption">只是看一眼。推回边缘，继续原来的内容。</div>
+<section class="task" id="task" inert><div class="task-wall"></div><div class="pulley" id="pulley"></div><div class="task-surface" id="taskSurface"><div class="surface-content" id="surfaceContent"></div><div class="pulley-glow"></div></div><div id="stackRoot"></div></section>
+<section class="overlay top-menu" id="topMenu" inert><h2>换一种氛围</h2><p class="sub">壁纸、强调色与界面一起改变。<br>这是系统层；内容里的下拉是另一套菜单。</p><div class="ambiences"><button class="ambience sea" data-action="theme-sea"><span>海风</span></button><button class="ambience dusk" data-action="theme-dusk"><span>余晖</span></button><button class="ambience rose" data-action="theme-rose"><span>暮色</span></button></div><button class="settings-row" data-action="sound"><span>手势声音</span><small id="soundState">关闭</small></button><button class="settings-row" data-action="motion"><span>减少动画</span><small id="motionState">关闭</small></button><button class="settings-row" data-action="backup"><span>导出本机资料</span><small>JSON →</small></button><button class="settings-row" data-action="lock"><span>锁屏</span><small>任务在页面内继续</small></button><p class="menu-footer">从最上边缘向下：系统菜单。<br>从画面内部向下：当前内容的拉绳菜单。<br>向上滑，回到你离开的地方。</p></section>
+<section class="overlay launcher" id="launcher" inert><h2 class="page-title">这次，想做什么</h2><p class="page-sub">能力就在底边，不必离开当前事情寻找。</p><div class="cap-list" id="launcherList"></div><p class="cap-note">这里调用的是本机能力演示。<br>没有控制真实 Android，也没有调用生成模型。</p><div class="menu-footer">向下推回，回到原来的内容。</div></section>
+<div class="lock" id="lock" inert><div class="wallpaper"></div><div class="lock-time" id="lockTime"></div><div class="lock-date" id="lockDate"></div><div class="lock-message" id="lockMessage">你的事情仍在这里。<br>不是退出，只是暂时离开。</div><div class="lock-hint">从左 / 右边缘推开，解锁。</div></div><div class="sleep" id="sleep" inert><span>双击唤醒</span></div>
+<div class="edge-mark left"></div><div class="edge-mark right"></div><div class="gesture-toast" id="gestureToast"></div><div class="toast" id="toast" role="status" aria-live="polite"></div><div class="finger" id="finger"></div><div class="training-strip" id="trainingStrip"></div><div class="storage-error" id="storageError" hidden>未能保存到浏览器，请从系统菜单导出资料。</div>
+</div></div></div></div>
+<aside class="guide"><div class="kicker">FEEL THE DIFFERENCE</div><h2 class="guide-title">手指还没松开，<br>你就知道去往哪里。</h2><div class="guide-item"><span class="no">01</span><div><strong>边缘是系统，内部是内容</strong><p>侧边推开 → 活动任务。<br>内部横滑 → 版本或上一层。</p></div></div><div class="guide-item"><span class="no">02</span><div><strong>拉一半，再推回去</strong><p>窥视进度而不离开。<br>松手完成，或反向返回。</p></div></div><div class="guide-item"><span class="no">03</span><div><strong>往下拉，松手就执行</strong><p>从内容内部开始。<br>不同拉动距离，选中不同命令。</p></div></div><div class="gesture-monitor"><label>LIVE GESTURE</label><h3 id="monitorTitle">轻点照片封面开始</h3><p id="monitorText">页面里没有 Home 按钮，也没有底部导航条。</p><div class="training-progress" id="trainingProgress"><i></i><i></i><i></i><i></i><i></i></div></div></aside>
+</main><footer class="footer"><span>鼠标拖动或手指滑动 · 独立文件 · 真实本机操作</span><span>AI 模型未接入 · 非官方 ROM · 不是像素级复刻</span></footer>
+</div>
+<div class="help-overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="help-body"><button class="help-close" data-action="help-close" aria-label="关闭">×</button><h2 id="helpTitle">系统交互，不是换一层皮肤。</h2><p>本稿融合 N9 的三视图结构与 Sailfish 的交互语法。它不是任何一个版本的原样复制：封面左右滑参考早期 Jolla；顶部系统菜单、底部能力入口参考较新的 Sailfish 映射。</p><table><thead><tr><th>起点 / 动作</th><th>这一版的实际行为</th></tr></thead><tbody><tr><td>任务中，从左右边缘向内</td><td>实时推开当前内容，露出活动任务；超过阈值松手即最小化。</td></tr><tr><td>同一手势拉一半再推回</td><td>Peek：原内容、版本、文字草稿和页面位置不变。</td></tr><tr><td>活动封面上左右滑</td><td>照片前后版本；整理开始 / 暂停；专注开始 / 暂停；不必打开任务。</td></tr><tr><td>主屏标题或空白处横滑</td><td>事件、活动任务、发起能力三视图。封面上的横滑优先执行封面操作。</td></tr><tr><td>任务内容内部下拉</td><td>Pulley：约 68 / 124 / 180 px 三档选择；反向收回可取消；深拉固定后也可点选。</td></tr><tr><td>最顶部边缘下拉</td><td>系统氛围菜单；不与内容的拉绳菜单混用。</td></tr><tr><td>最底部边缘上滑</td><td>随时拉出能力层。下推收回，恢复原任务。</td></tr><tr><td>子页面内部向右拖</td><td>回到父页面；侧边缘拖动仍是最小化整个任务。</td></tr><tr><td>导出确认页内部横滑</td><td>向左接受并导出已固定版本；向右取消。抬手前反向拖回可撤销。</td></tr><tr><td>长按内容 / 能力层的“直接交代”</td><td>继续描述当前对象；当前是本机规则解释，不是假装已联网的 AI。</td></tr></tbody></table><h3>先试这段</h3><p>点照片 → 从左边缘推到一半 → 不松手推回 → 再从边缘推开并松手 → 右滑整理封面让它开始 → 重回照片 → 从画面内部下拉约一掌距离 → 松手执行“暖一点”。</p><h3>能力范围</h3><p>照片像素调整、导入与 PNG 下载、笔记、原文整理、专注计时、本机存储确实工作。任务只在本网页中运行；关闭网页不在云端继续，重新打开时等待手动恢复。没有真实大模型、生成式换背景或云 Android。浏览器语音识别需手动授权，且可能使用浏览器厂商的联网服务。</p><h3>参考来源</h3><p><a href="https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/" target="_blank" rel="noreferrer">Nokia N9：三视图与 Swipe</a><br><a href="https://sailfishos.org/design/gestures/" target="_blank" rel="noreferrer">Sailfish：边缘导航与 Peek</a><br><a href="https://jolla.com/guide/en/index.html" target="_blank" rel="noreferrer">Jolla 早期指南：封面手势、Pulley、确认页</a><br><a href="https://docs.sailfishos.org/Develop/Apps/UI/" target="_blank" rel="noreferrer">Sailfish UI：页面栈、活动封面与氛围</a></p><p class="mini">键盘替代：H 返回活动任务，M 展开当前拉绳菜单，A 打开能力层，E 事件，T 顶部菜单，Esc 返回，空格暂停 / 继续。网页内的边缘指拟真手机屏幕边缘，不会接管实体手机的系统手势。</p><button class="start-demo" data-action="demo">演示核心手势 <svg><use href="#i-play"/></svg></button></div></div>
+<input type="file" accept="image/*" id="imageInput" hidden><input type="file" accept="image/*" capture="environment" id="cameraInput" hidden><input type="file" accept=".json,application/json" id="backupInput" hidden>
+<noscript>请在启用 JavaScript 的浏览器中打开此 HTML 文件。</noscript>
+
+
+<!-- BUILD:SCRIPTS -->
+</body></html>

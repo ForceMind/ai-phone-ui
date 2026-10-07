@@ -1,0 +1,10 @@
+{
+  "name": "ai-phone-ui",
+  "displayName": "SWIPE / AI",
+  "version": "0.1.0",
+  "baseline": "V3 accepted gesture design",
+  "screens": 86,
+  "networkDefault": "none",
+  "remoteRepositoryStatus": "public-source-snapshot-history-bundle",
+  "proposedRepository": "ForceMind/ai-phone-ui"
+}

@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const catalog=JSON.parse(read('src/data/screens.json'));
+const manifest=JSON.parse(read('src/data/manifest.json'));
+const tokens=JSON.parse(read('src/data/tokens.json'));
+const safeJSON=o=>JSON.stringify(o).replace(/</g,'\\u003c');
+const css=['base','suite','workbench'].map(x=>read(`src/styles/${x}.css`)).join('\n');
+const js=['image.js','core.js','model.cjs','suite.js','workbench.js'].map(x=>`\n/* SOURCE: src/js/${x} */\n`+read(`src/js/${x}`)).join('\n');
+let html=read('src/template.html').replace('<!-- BUILD:STYLES -->',`<style>\n${css}\n</style>`).replace('<!-- BUILD:SCRIPTS -->',`<script>window.UI_CATALOG=${safeJSON(catalog)};window.UI_MANIFEST=${safeJSON(manifest)};window.UI_TOKENS=${safeJSON(tokens)};\n${js.replace(/<\/script/gi,'<\\/script')}\n</script>`);
+if(html.includes('<!-- BUILD:'))throw Error('Unresolved build placeholder');
+fs.mkdirSync(path.join(root,'dist'),{recursive:true});fs.writeFileSync(path.join(root,'dist/index.html'),html);
+fs.writeFileSync(path.join(root,'dist/screens.json'),JSON.stringify(catalog,null,2)+'\n');
+console.log(`Built ${manifest.version}: ${catalog.length} screens, ${Buffer.byteLength(html)} bytes. No network runtime dependencies.`);

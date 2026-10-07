@@ -1,0 +1,893 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWIPE / AI · 项目计划与设计文档</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8f6;color:#253330;font-family:system-ui,"Microsoft YaHei",sans-serif;line-height:1.85;font-size:15px}header{padding:32px 34px;border-bottom:1px solid #d6dfdb;background:#fff;position:relative}header h1{font-size:26px;margin:0 0 8px;font-weight:500}header p{margin:0;color:#687b75;font-size:13px}aside{position:fixed;top:162px;bottom:0;left:0;width:265px;padding:22px;overflow:auto;background:#eef3ef;border-right:1px solid #dae3dd}aside a{display:block;padding:8px 4px;text-decoration:none;font-size:12px;color:#48665b;border-bottom:1px solid #dce5dd}main{max-width:1120px;margin-left:265px;padding:0 42px 60px}article{padding:38px 0;border-bottom:1px solid #c8d4cc;scroll-margin-top:18px}.filename{font:11px monospace;color:#80968a;letter-spacing:.3px;margin-bottom:15px}h2{font-size:28px;line-height:1.5;font-weight:500;color:#214c3b;margin:8px 0 25px}h3{font-size:21px;font-weight:500;margin-top:30px}h4{font-size:17px;font-weight:600;margin-top:24px}p{margin:9px 0}a{color:#237a68;text-underline-offset:3px}pre{background:#eaf0ea;border:1px solid #dbe4dc;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}code{font-family:ui-monospace,monospace;font-size:.9em;background:#e6eee8;padding:2px 4px;border-radius:3px}pre code{padding:0;background:none}.table-scroll{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:11px 12px;text-align:left;vertical-align:top;border:1px solid #d4dfd6;min-width:80px}th{background:#eaf2ea;font-weight:600}blockquote{border-left:3px solid #bb9272;background:#faf4ea;margin:18px 0;padding:14px 18px;font-size:14px}.list-item{padding-left:14px;color:#3b5148}button{background:#e0ebe0;color:#285a47;border:1px solid #aec6b5;padding:7px 12px;cursor:pointer}#menu{display:none}@media(max-width:880px){header{padding:24px}aside{display:none;position:relative;top:auto;width:100%;max-height:50vh}aside.show{display:block}main{margin-left:0;padding:0 22px 40px}#menu{display:block;margin-top:16px}h2{font-size:23px}body{font-size:14px}}@media print{aside,#menu{display:none}main{margin:0;max-width:none}article{break-before:page}header{border:0}}</style></head><body><header><h1>SWIPE / AI · 项目计划与设计文档</h1><p>v0.1.0 · 86页UI工作台 · 基于认可的V3 · 公开源码快照与原始历史包；模型与云端服务未连接</p><button id="menu" onclick="document.querySelector('aside').classList.toggle('show')">文档目录</button></header><aside><a href="#doc-0">SWIPE / AI — AI Phone UI</a><a href="#doc-1">项目协作规则</a><a href="#doc-2">Changelog</a><a href="#doc-3">文档导航</a><a href="#doc-4">无障碍与替代操作</a><a href="#doc-5">文案规则</a><a href="#doc-6">设计系统 v1</a><a href="#doc-7">信息架构</a><a href="#doc-8">手势与状态契约 v1</a><a href="#doc-9">响应式与设备适配</a><a href="#doc-10">完整界面清单 — 0.1.0</a><a href="#doc-11">状态与恢复矩阵</a><a href="#doc-12">全流程交互设计</a><a href="#doc-13">未来能力适配契约（未实现）</a><a href="#doc-14">架构与维护边界</a><a href="#doc-15">发布与交付</a><a href="#doc-16">远端状态与历史边界</a><a href="#doc-17">测试计划</a><a href="#doc-18">项目宪章</a><a href="#doc-19">当前状态 — v0.1.0</a><a href="#doc-20">决策记录</a><a href="#doc-21">开发交接入口</a><a href="#doc-22">下一步，只从这里继续</a><a href="#doc-23">执行计划</a><a href="#doc-24">v0.1.0 验证记录</a><a href="#doc-25">官方参考与采用方式</a></aside><main><article id="doc-0"><div class="filename">README.md</div><h2>SWIPE / AI — AI Phone UI</h2>
+<p>一套以 <strong>N9 三视图 + Sailfish 边缘手势、Peek、活动封面、Pulley</strong> 为基础的 AI 手机界面与交互项目。</p>
+<p><strong>当前：v0.1.0 UI 原型 / 86 个登记界面 / 单文件离线预览。</strong> 这是用户认可的 V3 的工程化延续，不是回到“聊天机器人 + 底部导航”。</p>
+<p>!<span>SWIPE / AI</span></p>
+<p><a href="https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml/badge.svg?branch=main" target="_blank" rel="noopener noreferrer">![UI quality</a>](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml)</p>
+<p><a href="https://img.shields.io/github/license/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">![Repository license</a>](LICENSE)</p>
+<blockquote>本仓库采用完整源码快照 + 原始历史包。原来的 5 次提交及 v0.1.0-ui 注释标签可从 <span>历史包</span> 恢复，未导入 GitHub 提交祖先图。保留现有 LICENSE 初始提交，未部署网站。徽章读取真实状态；CI 证据见 <a href="#doc-16">远端状态</a>。</blockquote>
+<h3>立即体验</h3>
+<p>打开 <code>dist/index.html</code>。手机或电脑浏览器都可使用；不需要登录、安装依赖或输入 API 密钥。左侧目录 / 手机端“界面目录”可进入全部界面；右侧是设计检查面板，<strong>不是手机系统的一部分</strong>。</p>
+<p>下载文件在应用内预览不执行脚本时，请保存后用浏览器打开。部分浏览器限制本地文件持久存储、相机或语音，原型会显示限制，不会声称授权成功。</p>
+<p>首先试：进入照片 → 从左边缘推到一半再推回 → 完整推开 → 横滑整理封面启动任务 → 返回照片 → 在内容顶部向下拉，松手执行暖调。也可点击“手势演示”。</p>
+<h3>项目内容</h3>
+<p class="list-item">- 86 个明确编号页面（55 本机交互页、31 未连接服务预览页）：系统、首次使用、AI 会话、影像、资料、云端任务、日常能力、设置及异常状态。</p>
+<p class="list-item">- 保留整套 V3 手势；状态、资料、草稿与当前页面分离。</p>
+<p class="list-item">- 本机照片调色、版本比对、中心裁切导出、笔记、清单、原文整理、专注计时、草稿及 JSON 备份。</p>
+<p class="list-item">- 模型、云端 Android、音乐服务、消息发送、电话、地图、计费等 <strong>未连接</strong>，相关页面明确显示预览状态。</p>
+<p class="list-item">- 设计工作台提供默认/空/加载/失败/离线检查；这是共用状态样式，不是 430 个独立业务页面。</p>
+<p class="list-item">- 文档、计划、QA、CI 配置与交接入口一起维护。</p>
+<h3>本地开发</h3>
+<pre><code># Node.js 22+ / Python 3.11+
+npm run build
+npm run check
+npm test
+python -m pip install -r requirements-dev.txt
+python -m playwright install chromium
+npm run test:ui
+npm run dev
+# 可选：重新导出可浏览的项目文档
+npm run docs</code></pre>
+<p>开发服务仅监听本机 <code>127.0.0.1:4173</code>。生产发布不需要 Node 服务，<code>dist/</code> 是静态文件；没有自动发布或遥测。</p>
+<p>浏览器测试默认通过 DOM 注入运行，并显式采用内存存储成功路径与存储拒绝路径，方便在受限沙盒中复现。它<strong>不证明</strong>真实 file:// 持久化或实机权限行为。设置 <code>CHROMIUM_PATH</code> 可选择已有 Chromium。</p>
+<h3>目录与事实来源</h3>
+<div class="table-scroll"><table><tr><th>路径</th><th>用途</th></tr><tr><td><code>reference/</code></td><td>原封不动的已认可 V3 与 SHA256 来源记录</td></tr><tr><td><code>src/template.html</code></td><td>原型外壳</td></tr><tr><td><code>src/js/core.js</code></td><td>已认可手势、任务会话及本机能力；仍有待拆分的旧全局代码</td></tr><tr><td><code>src/js/suite.js</code></td><td>完整界面与本机动作</td></tr><tr><td><code>src/js/model.cjs</code></td><td>可独立测试的状态校验与纯逻辑</td></tr><tr><td><code>src/js/workbench.js</code></td><td>手机外的目录、状态检查、流程检查工具</td></tr><tr><td><code>src/styles/</code></td><td>基础外观、页面组件、工作台样式</td></tr><tr><td><code>src/data/screens.json</code></td><td><strong>唯一界面目录</strong>：编号、父级、状态与本机/预览边界</td></tr><tr><td><code>src/data/tokens.json</code></td><td>设计参数参考；改动需同步实际 CSS/手势实现并测试</td></tr><tr><td><code>src/contracts/</code></td><td>未来能力适配契约；不表示已有后端</td></tr><tr><td><code>docs/</code></td><td>产品、设计、工程、QA 与交接</td></tr><tr><td><code>planning/</code></td><td>本地里程碑与待办，不是假装已经创建的 GitHub Issues</td></tr><tr><td><code>dist/index.html</code></td><td>由构建生成的独立体验文件，请勿直接修改</td></tr></table></div>
+<h3>继续工作之前</h3>
+<p>依次阅读 <a href="#doc-1">AGENTS</a> → <a href="#doc-18">项目宪章</a> → <a href="#doc-19">当前状态</a> → <a href="#doc-22">下一步</a> → <a href="#doc-21">交接</a>。</p>
+<p>设计人员从 <a href="#doc-10">界面总表</a>、<a href="#doc-8">手势规范</a>、<a href="#doc-12">用户流程</a> 开始。开发人员从 <a href="#doc-14">架构</a>、<a href="#doc-17">测试计划</a>、<a href="#doc-15">发布</a> 开始。</p>
+<h3>继续维护此仓库</h3>
+<p>公开仓库已存在，不再执行历史建仓脚本。基于实际远端 HEAD 进行普通提交或既定 PR；不 force push、不重新创建原始标签。旧历史按 <span>恢复说明</span> 克隆到新目录。</p>
+<p>完整入口：<a href="#doc-3">文档索引</a> · <a href="#doc-23">路线图</a> · <span>交接</span></p>
+<h3>设计来源与授权</h3>
+<p>本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。<a href="#doc-25">来源与映射</a>。根目录 <span>LICENSE</span> 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。</p></article><article id="doc-1"><div class="filename">AGENTS.md</div><h2>项目协作规则</h2>
+<h3>必须先恢复事实</h3>
+<p class="list-item">1. <code>git status --short</code>、<code>git branch --show-current</code>、<code>git log -5 --oneline</code>；保护未提交内容。</p>
+<p class="list-item">2. 有远端且已授权时才 fetch；核对实际 HEAD、PR、exact-head CI。不能把旧报告当最新成功。</p>
+<p class="list-item">3. 阅读 <code>docs/project/DEVELOPMENT_HANDOFF.md</code>、<code>CURRENT_STATE.md</code>、<code>NEXT_ACTION.md</code>。</p>
+<p class="list-item">4. 以已提交内容为交付事实。沙盒路径、聊天中“已完成”不能替代提交。</p>
+<h3>不可擅改的产品约束</h3>
+<p class="list-item">- 已认可 V3 是基线。三视图、侧边最小化、半滑窥视、活动封面、拉绳菜单必须保留。</p>
+<p class="list-item">- 不增加常驻底部导航、主页 AI 光球或常驻聊天卡片来替代系统空间结构。</p>
+<p class="list-item">- 手机以当前内容为中心；工作台目录只用于设计验收。</p>
+<p class="list-item">- UI 仓库，不偷偷扩成完整 Android、支付平台或云手机运维系统。</p>
+<p class="list-item">- 资料和执行状态不能因切换界面而丢失。退出、取消、超时从来不是同意。</p>
+<p class="list-item">- 原图保留；生成结果与事实记录分开；预览不能显示真实“已发送”“已连接”。</p>
+<p class="list-item">- 默认离线，不收集密钥、不上传私人照片，不自动执行外部动作。</p>
+<p class="list-item">- 保留单 HTML 交付；源码可以模块化，构建产物不可手改。</p>
+<h3>每批工作结束</h3>
+<p>更新相关设计规范和 <code>screens.json</code>；运行 build/check/unit/browser tests；记录测试环境及未测边界；更新 CHANGELOG、CURRENT_STATE、NEXT_ACTION、HANDOFF 与本地 backlog；创建带目的的提交。</p>
+<p>如果缺少写权限，明确标注远端未同步，提供本地提交、bundle 和可执行恢复路径。没有远端 CI 就不得写“CI 全绿”。</p>
+<h3>实现习惯</h3>
+<p class="list-item">- 当前功能基于原生 DOM/CSS/JS，运行时零依赖。大框架迁移需记录 ADR，不要因为个人偏好重写。</p>
+<p class="list-item">- 用户输入必须转义；Canvas 输入允许本地文件；不接受任意外链或备份中的脚本。</p>
+<p class="list-item">- 任何服务操作用独立 adapter 接口；真实凭据留服务端。模拟器不能复用真实成功语义。</p>
+<p class="list-item">- 每个新页面需编号、父级、空/错/取消方案、至少一个交互断言和可检索入口。</p>
+<p class="list-item">- 手势阈值按 360×672 逻辑坐标；不要混用页面缩放后的物理像素。</p>
+<p class="list-item">- 不删除已经存在的 tests 来“修复”失败；不能把断言换成只看页面存在。</p></article><article id="doc-2"><div class="filename">CHANGELOG.md</div><h2>Changelog</h2>
+<h3>2026-10-06 — M0 源码快照与证据修正</h3>
+<p class="list-item">- 保留 LICENSE 初始提交、原始 bundle、五次历史提交和原注释标签；明确旧历史不在远端祖先图</p>
+<p class="list-item">- 修正文档和状态元数据，补 README 真实徽章、标记、文档索引及 M2 下一步卡</p>
+<p class="list-item">- CI 清除归档结果，只上传当前运行报告、SHA 和日志</p>
+<p class="list-item">- 工作区恢复后重新验证实际候选，不使用丢失候选或历史浏览器结果冒充本轮通过</p>
+<p class="list-item">- UI 行为、V3 原版和 86 页目录不变；未部署或接入真实服务</p>
+<h3>原始归档记录（历史）</h3>
+<h3>0.1.0 — UI foundation</h3>
+<p class="list-item">- 原样归档并校验已认可 V3，初始化本地 Git。</p>
+<p class="list-item">- 拆分源模板、基础手势、Canvas 处理、状态模型、页面套件和工作台；保持单文件构建。</p>
+<p class="list-item">- 建立 86 个界面编号，55 个含本机交互、31 个服务边界预览；不是生产服务完成率。</p>
+<p class="list-item">- 扩展完整首次使用、AI/影像/资料/云端/日常/设置/异常界面；保留 Peek、活动封面、Pulley 与页面接受/取消。</p>
+<p class="list-item">- 增加草稿保存、裁切导出、清单、本机日程与周期草稿、消息固定快照确认、偏好删除撤销、备份校验。</p>
+<p class="list-item">- 增加设计文档、手势契约、交接、适配器边界、本地 backlog、测试与 CI 配置。</p>
+<p class="list-item">- 本次未创建 GitHub 远端，未上传到公开站点，未运行远端 CI。</p>
+<p>具体测试结果以 <code>docs/qa/browser-results.json</code> 和 <code>docs/qa/TEST_REPORT.md</code> 为准，不能仅根据版本号推定通过。</p></article><article id="doc-3"><div class="filename">docs/INDEX.md</div><h2>文档导航</h2>
+<h3>项目</h3>
+<p><a href="#doc-18">宪章</a> · <a href="#doc-19">当前状态</a> · <a href="#doc-23">路线与计划</a> · <a href="#doc-22">下一步</a> · <a href="#doc-20">决策</a> · <a href="#doc-21">交接</a></p>
+<h3>设计</h3>
+<p><a href="#doc-7">信息架构</a> · <a href="#doc-10">界面目录</a> · <a href="#doc-8">交互契约</a> · <a href="#doc-6">设计系统</a> · <a href="#doc-12">用户流程</a> · <a href="#doc-11">状态矩阵</a> · <a href="#doc-4">无障碍</a> · <a href="#doc-9">响应式</a> · <a href="#doc-5">文案</a></p>
+<h3>工程与验收</h3>
+<p><a href="#doc-14">架构</a> · <a href="#doc-13">适配器</a> · <a href="#doc-17">测试</a> · <a href="#doc-15">发布</a> · <a href="#doc-16">远端边界</a> · <a href="#doc-24">QA 报告</a> · <a href="#doc-25">来源</a></p>
+<p>开始开发必须优先核对实际 Git 工作区和当前 HEAD，文档本身不是远端同步证明。</p>
+<h3>来源与接续</h3>
+<p><a href="#doc-16">远端状态</a> · <span>原始历史恢复</span> · <span>交接</span></p></article><article id="doc-4"><div class="filename">docs/design/ACCESSIBILITY.md</div><h2>无障碍与替代操作</h2>
+<p>手势是默认交互，但不能是唯一入口。设置中可开启可点按的返回/活动/菜单控件；这不是给默认设计恢复底栏。已有键盘路径、焦点轮廓、语义按钮、输入标签和不活跃层 inert。</p>
+<p>快捷键 H 活动、E 事件、A 能力、T 控制、M 菜单、Esc 返回。文本输入中不拦截这些字母；焦点按钮的空格交给按钮本身。</p>
+<p>下一阶段验收：全部页面合理的焦点次序；弹层开启/关闭后的焦点归还；读屏能知道当前层级、错误和待确认对象；可达控件足够大；放大文字不截断；不通过颜色唯一表达成功/失败；减少动效关闭动态装饰；浏览器手势被系统抢走时不误提交。</p>
+<p>本版有基础功能与部分自动检查，没有 WCAG/读屏/真实触觉认证。小字和触控目标需独立真机测试。</p></article><article id="doc-5"><div class="filename">docs/design/CONTENT_GUIDE.md</div><h2>文案规则</h2>
+<p>优先“当前对象 + 状态 + 下一步”。例如“这张照片已新增一个暖调版本；原图保留。”不要“AI魔法处理中”“一切交给我”掩盖具体动作。</p>
+<div class="table-scroll"><table><tr><th>场景</th><th>使用</th><th>不使用</th></tr><tr><td>服务未接入</td><td>交互预览 · 未连接</td><td>在线 / 已授权 / 服务健康</td></tr><tr><td>本机预览消息</td><td>已记入本机预览，没有发送</td><td>已发送成功</td></tr><tr><td>下载</td><td>PNG 已交给浏览器下载</td><td>已永久保存</td></tr><tr><td>周期草稿</td><td>已保存草稿，未启用定时任务</td><td>我会每周替你执行</td></tr><tr><td>权限意向</td><td>使用时仍会请求设备权限</td><td>你已授予相机权限</td></tr><tr><td>图片处理</td><td>本机调色版本</td><td>AI 已重建真实细节</td></tr><tr><td>错误</td><td>保留输入；该步骤未完成</td><td>出错了，请稍后再试（无恢复方式）</td></tr></table></div>
+<p>英文只保留品牌、结构标签和开发标识，交互正文采用简体中文。设计检查编号不等于正式产品中要展示开发代码。</p></article><article id="doc-6"><div class="filename">docs/design/DESIGN_SYSTEM.md</div><h2>设计系统 v1</h2>
+<h3>视觉基调</h3>
+<p>保留 V3 的青色 N9 式一体机身、薄字重、全屏内容、几乎无圆角的活动封面。组件服从系统空间，不改成通用 SaaS 卡片墙。设备外的工作台采用深青底，以免抢走内容。</p>
+<p>三种氛围：海雾、暮色、夜航。背景、面板、强调色与设备外壳同步变化。颜色表达状态时必须配文字或图形，不能只凭红绿判断。</p>
+<h3>层级与空间</h3>
+<p>逻辑内容 360×672；侧边标准内距 24；系统标题31/32；正文14–17；辅助文字10–12；封面标签8–10。本版小字是桌面缩放原型遗留，不能直接等同真机可读尺寸；下一阶段必须按 CSS像素/物理密度再校准。</p>
+<p>头部保留侧向页点与拉绳提示，不加入常驻返回/主页按钮。任务空间和系统空间有明确前后层级；弹层仍要能退出。</p>
+<h3>共用组件</h3>
+<p><code>ScreenHeader</code> 编号仅在设计预览可见；<code>ModeChip</code> 区分本机与未连接；<code>ActionRow</code> 仅在可点击时使用 button，纯描述用静态行；<code>FormField</code> 保留草稿、原生焦点；<code>PulleyMenu</code> 三项优先动作；<code>ActiveCover</code> 小面板共享状态；<code>Confirmation</code> 固定快照；<code>VersionRail/Gallery</code> 比较派生图；<code>LocalNotice</code> 不冒充云端消息；<code>StateView</code> 空/错/离线/加载；<code>AlternativeControls</code> 默认关闭。</p>
+<h3>界面密度</h3>
+<p>主页面最多一个主目标；次要操作放拉绳/子页。不能为“展示86页”把所有模块塞到消费者主页。云端总览只呈现连接边界、任务和权限入口；详情层再展示日志/预算等。</p>
+<h3>参数维护</h3>
+<p><code>src/data/tokens.json</code> 当前是参数目录，不是完整自动编译 token 引擎；CSS与核心手势仍需同步修改。修改任何阈值必须增加正向/反向/取消测试。实际渲染优先于文档中的理想数值。</p>
+<h3>资源</h3>
+<p>内置风景由 Canvas 生成；图标由 SVG paths 组成；字体使用设备自带字体栈。没有网络图片依赖，也没有打包字体二进制。勿加入 Nokia/Jolla 标志来暗示官方产品。</p></article><article id="doc-7"><div class="filename">docs/design/INFORMATION_ARCHITECTURE.md</div><h2>信息架构</h2>
+<h3>两个空间，不是两套导航</h3>
+<p>手机内部是 <strong>事件 / 活动 / 能力</strong> 的连续水平系统空间。活动页居中；进入一件事后，内容覆盖系统空间，侧边可以把它推开或窥视。</p>
+<p>手机外部是 <strong>页面目录 / 真正运行的手机 / 规格与状态检查</strong>。目录只给维护者检查全部页面，不是消费者手机里的侧栏。</p>
+<h3>结构</h3>
+<pre><code>息屏 → 双击/电源 → 锁屏 → 侧边滑入 → 活动
+系统空间：事件 ← 活动任务 → 发起能力
+任何内容页：顶边 → 全局控制；底边 → 临时能力层
+单个任务：根内容 → 子页面 → 明确确认
+任何层级：侧边 → 把整个任务放回活动（保存层级）</code></pre>
+<p>事件显示已发生的本机动作和待决定内容，不混成聊天气泡。活动封面展示同一任务的状态，不是照片式最近使用列表。能力层从用户目的发起工作，不要求先打开某应用。</p>
+<h3>对象模型</h3>
+<p><code>Task</code> 保存目标、输入引用、执行状态与待确认动作。<code>Session</code> 保存页面栈、阅读位置和未发送输入。<code>Artifact</code> 保存原始材料和派生版本。<code>Event</code> 是带时间与来源的观察。<code>Preference</code> 是用户明确同意的偏好，不是模型猜测。UI route ID 不能当成 task ID 或 artifact ID。</p>
+<p>本版的 core 状态承接原片、笔记、整理、计时；suite 状态承接扩展表单和本机交互。动态封面在本次页面会话恢复；跨重载只恢复数据与草稿，不保证恢复所有动态封面的精确布局。</p>
+<h3>返回策略</h3>
+<p>根内容的内部右滑不冒充回主页；侧边才最小化整件事。子页面内部右滑退一层，确认页面左右分工明确。目录直接定位页面时会构建其父链，是验收便捷入口；从真实封面重新打开则恢复那件事的已有栈。</p>
+<p>锁屏/息屏是 UI 状态，不会锁住用户真实系统；浏览器关闭不能称为云端继续。</p></article><article id="doc-8"><div class="filename">docs/design/INTERACTION_SPEC.md</div><h2>手势与状态契约 v1</h2>
+<h3>总则</h3>
+<p>所有距离用 <strong>360×672 逻辑屏幕坐标</strong>，显示缩放后先换算。以下为本项目参数，不是 Nokia / Jolla 官方硬件阈值。手指或鼠标的画面反馈即时处理，大模型不得参与判断“返回/暂停/确认”。</p>
+<h3>优先级</h3>
+<p>输入框、选择框、滑块的原生交互优先；多指会取消当前单指动作。其次为锁屏/覆盖层；再处理从明确屏幕边缘发起的系统手势；随后处理确认页/子页返回、已滚动内容、活动封面、拉绳菜单和图片版本。方向在移动超过 8 逻辑像素后锁定，避免小抖动变成操作。</p>
+<h3>交互表</h3>
+<div class="table-scroll"><table><tr><th>手势</th><th>起点 / 范围</th><th>预览</th><th>松手成立</th><th>反转 / 取消</th></tr><tr><td>侧边向内</td><td>左右 18px</td><td>内容跟手，露出活动任务</td><td>超过宽度 36% 最小化</td><td>回到阈值内或 pointercancel 复位</td></tr><tr><td>Peek</td><td>与侧边同一动作</td><td>看见实时任务封面</td><td>不设独立“窥视页面”</td><td>不松手回推，保留原内容与草稿</td></tr><tr><td>三视图平移</td><td>系统背景，不是封面</td><td>显示固定邻页</td><td>水平超过 75px 切一页</td><td>复位；不循环穿越两端</td></tr><tr><td>封面横滑</td><td>活动封面内部</td><td>翻出当前直接动作</td><td>至少 48px</td><td>未达阈值回弹</td></tr><tr><td>内容下拉</td><td>根内容或套件子页顶部；滚动到顶</td><td>菜单逐项高亮</td><td>68px 第1项，每56px下一项</td><td>回推到68以内无执行</td></tr><tr><td>深拉固定</td><td>同一菜单</td><td>高亮取消，提示固定</td><td>达258px固定菜单</td><td>菜单内选择需明确点按</td></tr><tr><td>子页返回</td><td>内容内部右滑</td><td>子页跟手露父页</td><td>超过110px返回</td><td>pointercancel 或回推复位</td></tr><tr><td>确认接受/拒绝</td><td>确认页内部横滑</td><td>显示接受/取消词语</td><td>左超过110接受；右超过110取消</td><td>同一快照只允许消费一次</td></tr><tr><td>照片版本比较</td><td>图片内容内部</td><td>画面位移提示</td><td>超过65px切版本</td><td>侧边动作仍优先</td></tr><tr><td>顶边向下</td><td>顶部16px</td><td>系统菜单下落</td><td>超过125px打开</td><td>推回即关闭</td></tr><tr><td>底边向上</td><td>底部18px</td><td>能力层抬起</td><td>超过125px打开</td><td>推回即关闭</td></tr><tr><td>长按内容</td><td>无输入控件和冲突手势</td><td>打开继续交代</td><td>600ms</td><td>发生拖动则取消</td></tr><tr><td>锁屏侧滑</td><td>左右边缘</td><td>锁屏侧移</td><td>超过110px解锁UI</td><td>反转回弹</td></tr></table></div>
+<p>活动封面动作：照片比较已有版本；整理封面向右开始/暂停/继续，向左看已完成结果；专注向右开始/暂停，向左复位；笔记向右请求浏览器朗读、向左进入导出确认。新增服务封面使用明确本机预览或保留草稿动作，不能伪装真实云端控制。</p>
+<h3>页面栈与草稿</h3>
+<p>最小化前保存 taskId、stack、可恢复阅读位置和输入草稿。侧边 Peek 不触发重新渲染；手指尚未松开时不能重置模型会话、切版本或创建新任务。子页返回只改变 stack，不结束 Task。</p>
+<p>同一手势触发的后续浏览器 click 有短抑制窗，防止滑完又点中底层控件。抑制窗必须在测试里验证，不可延长到使正常点击失灵。</p>
+<h3>执行安全</h3>
+<p>确认页面绑定 <code>actionId + versionId + payload snapshot</code>。后台产生新版本不能替换已经展示的确认内容。返回、最小化、权限拒绝、超时、网络错误都不是“同意”。重试由未来执行器提供幂等保证，本版只有本机一次性消费。</p>
+<h3>触摸与滚动边界</h3>
+<p>已滚动内容的下拉用于滚回顶部；滚到顶后的新下拉才可选择 Pulley。文本选择、系统键盘与滑杆不能触发页面退出。Web 原型只捕获自己内容内手势，无法接管真实 Android/iOS 全局边缘；真机边缘冲突是独立待验收项。</p>
+<h3>反馈</h3>
+<p>动作过程中给短文案，松手后给结果。错误提示保留当前对象。氛围改变不改变手势映射。减少动效时仍有最终状态、选择词语和颜色之外的标记。辅助按钮可在设置开启，但默认不回退成底部导航栏。</p></article><article id="doc-9"><div class="filename">docs/design/RESPONSIVE.md</div><h2>响应式与设备适配</h2>
+<p>桌面工作台使用三列：页面目录 / 设备 / 当前规范。中间逻辑屏幕固定360×672，机身390×756，按剩余宽高缩放，不独立缩放手势阈值。</p>
+<p>小于730px宽时目录与检查器隐藏，顶端“界面目录”打开全屏目录；页面主体只展示可操作手机。可以鼠标、触摸或键盘操作。</p>
+<p>建议矩阵：390×844、360×800、430×932、768×1024、1366×768、1440×1000；另测横屏、200%文字缩放、浏览器地址栏收缩和软键盘。</p>
+<p>本版本保留拟真机身，是用户要求的网页手机，而不是上线的手机端消费者布局。将来真正安装为系统壳时去掉外层机身和工作台，不改变系统手势语义。</p>
+<p>已做模拟触摸与若干视口检查；实际Android/iOS浏览器系统边缘、视口resize和相机许可仍待实机验收。不得宣称网页已经取代系统导航。</p></article><article id="doc-10"><div class="filename">docs/design/SCREEN_CATALOG.md</div><h2>完整界面清单 — 0.1.0</h2>
+<p>共 86 个页面；55 个页面含本机可执行交互，31 个主要展示服务契约或能力预览。此计数不是功能完成率。</p>
+<p>以 <code>src/data/screens.json</code> 为唯一机器目录。UI完整 = 登记范围全部可检查；不意味着每个外部服务已经接入。父级为信息架构归属，原生V3别名的直接目录入口可能从根任务进入。</p>
+<p>每页均必须具备可观察内容、明确模式、返回/最小化路径和恢复入口。公用状态检查不是独立业务实现。</p>
+<h3>系统 / 6</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>SYS-01</td><td><strong>活动任务</strong>：持续任务封面与直接操作</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>SYS-02</td><td><strong>事件中心</strong>：通知与执行结果按时间呈现</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>SYS-03</td><td><strong>发起能力</strong>：表达目的而不是寻找应用</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>SYS-04</td><td><strong>系统控制</strong>：全局设置、氛围与锁屏</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>SYS-05</td><td><strong>锁屏</strong>：时钟、任务摘要与侧边解锁</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>SYS-06</td><td><strong>息屏</strong>：双击唤醒、保持前台状态</td><td>SYS-05</td><td>本机交互</td></tr></table></div>
+<h3>首次使用 / 5</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>ONB-01</td><td><strong>欢迎与体验边界</strong>：开始体验和理解本机与云端边界</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>ONB-02</td><td><strong>隐私选择</strong>：默认最少采集、按能力授权</td><td>ONB-01</td><td>本机交互</td></tr><tr><td>ONB-03</td><td><strong>本机个人资料</strong>：设置昵称与保存偏好</td><td>ONB-02</td><td>本机交互</td></tr><tr><td>ONB-04</td><td><strong>手势练习</strong>：学习推开、窥视、拉绳与封面</td><td>ONB-03</td><td>本机交互</td></tr><tr><td>ONB-05</td><td><strong>云端开通预览</strong>：呈现环境创建流程但不假装已连接</td><td>ONB-04</td><td>服务未连接 · UI预览</td></tr></table></div>
+<h3>AI 会话 / 8</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>AI-01</td><td><strong>持续会话</strong>：基于当前对象持续表达要求</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>AI-02</td><td><strong>语音输入</strong>：收音、转写、取消和发送前校对</td><td>AI-01</td><td>服务未连接 · UI预览</td></tr><tr><td>AI-03</td><td><strong>处理与中断</strong>：可见的处理步骤与明确停止</td><td>AI-01</td><td>服务未连接 · UI预览</td></tr><tr><td>AI-04</td><td><strong>执行计划</strong>：查看步骤、可改范围和授权边界</td><td>AI-01</td><td>服务未连接 · UI预览</td></tr><tr><td>AI-05</td><td><strong>执行确认</strong>：固定对象、版本、目的地后确认</td><td>AI-04</td><td>服务未连接 · UI预览</td></tr><tr><td>AI-06</td><td><strong>成果交付</strong>：检查成果并导出实际文字</td><td>AI-01</td><td>本机交互</td></tr><tr><td>AI-07</td><td><strong>会话历史</strong>：回到未完成的上下文</td><td>AI-01</td><td>本机交互</td></tr><tr><td>AI-08</td><td><strong>本次上下文</strong>：查看被引用的笔记与照片版本</td><td>AI-01</td><td>本机交互</td></tr></table></div>
+<h3>影像 / 10</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>IMG-01</td><td><strong>取景与拍摄</strong>：真实相机需授权、可用导入替代</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>IMG-02</td><td><strong>照片工作区</strong>：原图、局部调整、持续要求</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>IMG-03</td><td><strong>版本记录</strong>：选择不可变编辑版本</td><td>IMG-02</td><td>本机交互</td></tr><tr><td>IMG-04</td><td><strong>构图与裁切</strong>：选择比例、生成可下载裁切副本</td><td>IMG-02</td><td>本机交互</td></tr><tr><td>IMG-05</td><td><strong>局部选区</strong>：在图片上选圆形范围并调色</td><td>IMG-02</td><td>本机交互</td></tr><tr><td>IMG-06</td><td><strong>生成要求</strong>：说明保留、允许改变与目标风格</td><td>IMG-02</td><td>服务未连接 · UI预览</td></tr><tr><td>IMG-07</td><td><strong>生成队列</strong>：队列、取消和失败恢复预览</td><td>IMG-06</td><td>服务未连接 · UI预览</td></tr><tr><td>IMG-08</td><td><strong>原图对比</strong>：分隔滑杆对比原图与当前版本</td><td>IMG-02</td><td>本机交互</td></tr><tr><td>IMG-09</td><td><strong>导出确认</strong>：锁定版本后交给浏览器下载</td><td>IMG-02</td><td>本机交互</td></tr><tr><td>IMG-10</td><td><strong>相册与成果</strong>：按本机已有版本浏览、选择</td><td>任务/系统根</td><td>本机交互</td></tr></table></div>
+<h3>资料 / 6</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>DOC-01</td><td><strong>资料总览</strong>：本机照片、笔记与整理稿</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>DOC-02</td><td><strong>笔记编辑</strong>：连续文字编辑与草稿保留</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>DOC-03</td><td><strong>可勾选清单</strong>：将当前笔记条目转为清单</td><td>DOC-02</td><td>本机交互</td></tr><tr><td>DOC-04</td><td><strong>文档阅读</strong>：查看整理结果、原文及导出</td><td>DOC-01</td><td>本机交互</td></tr><tr><td>DOC-05</td><td><strong>录音准备</strong>：显式开始、收音状态与撤销</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DOC-06</td><td><strong>转写校对</strong>：时间段与说话人文本校对预览</td><td>DOC-05</td><td>服务未连接 · UI预览</td></tr></table></div>
+<h3>云端 / 17</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>CLD-01</td><td><strong>个人云端环境</strong>：真实连接状态与恢复入口</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>CLD-02</td><td><strong>任务列表</strong>：本机任务与演示任务清楚区分</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>CLD-03</td><td><strong>任务详情</strong>：实际笔记整理的进度、暂停、结果</td><td>CLD-02</td><td>本机交互</td></tr><tr><td>CLD-04</td><td><strong>执行步骤</strong>：查看当前本机处理状态</td><td>CLD-03</td><td>本机交互</td></tr><tr><td>CLD-05</td><td><strong>等待确认</strong>：尚未获授权的外部动作</td><td>CLD-02</td><td>服务未连接 · UI预览</td></tr><tr><td>CLD-06</td><td><strong>文件空间</strong>：展示本机文件而非伪造云端文件</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>CLD-07</td><td><strong>文件详情</strong>：来源、大小、版本与导出</td><td>CLD-06</td><td>本机交互</td></tr><tr><td>CLD-08</td><td><strong>服务连接</strong>：列出未接入能力与接入状态设计</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>CLD-09</td><td><strong>服务授权详情</strong>：最小权限和撤销连接预览</td><td>CLD-08</td><td>服务未连接 · UI预览</td></tr><tr><td>CLD-10</td><td><strong>权限中心</strong>：本地偏好和浏览器权限边界</td><td>CLD-08</td><td>本机交互</td></tr><tr><td>CLD-11</td><td><strong>周期任务</strong>：仅保存周期任务设计草稿</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>CLD-12</td><td><strong>编辑周期任务</strong>：频率、时区、来源、结果位置</td><td>CLD-11</td><td>本机交互</td></tr><tr><td>CLD-13</td><td><strong>活动时间线</strong>：真实本机执行记录</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>CLD-14</td><td><strong>设备接续</strong>：跨设备接续设计、未连接状态</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>CLD-15</td><td><strong>用量与预算</strong>：额度预算的界面模型、无真实账单</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>CLD-16</td><td><strong>授权审计</strong>：查看本机操作和许可偏好变更</td><td>CLD-10</td><td>本机交互</td></tr><tr><td>CLD-17</td><td><strong>备份与恢复</strong>：导出与校验恢复全量本机 JSON</td><td>任务/系统根</td><td>本机交互</td></tr></table></div>
+<h3>日常 / 14</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>DAY-01</td><td><strong>日程</strong>：本机日程草稿、日期与任务关联</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>DAY-02</td><td><strong>日程详情</strong>：标题、时间与本机保存</td><td>DAY-01</td><td>本机交互</td></tr><tr><td>DAY-03</td><td><strong>联系人</strong>：示例联系人与搜索</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-04</td><td><strong>消息列表</strong>：明确示例线程、不读取真实消息</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-05</td><td><strong>消息草稿</strong>：起草文本、模拟发送需确认</td><td>DAY-04</td><td>本机交互</td></tr><tr><td>DAY-06</td><td><strong>拨号</strong>：拨号与呼叫确认界面、不真实拨号</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-07</td><td><strong>来电预览</strong>：接听、拒接的界面状态</td><td>DAY-06</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-08</td><td><strong>通话中</strong>：计时、静音、扬声器的模拟控制</td><td>DAY-06</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-09</td><td><strong>音乐</strong>：播放状态、歌词与封面控制预览</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-10</td><td><strong>专注计时</strong>：实际前台计时、封面暂停</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>DAY-11</td><td><strong>闹钟草稿</strong>：保存时间、重复与启用偏好</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>DAY-12</td><td><strong>路线方案</strong>：抽象路线与行程 UI、无定位无地图服务</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-13</td><td><strong>网页阅读</strong>：内置示例文章、阅读和引用</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>DAY-14</td><td><strong>全局搜索</strong>：搜索本机笔记与界面目录</td><td>任务/系统根</td><td>本机交互</td></tr></table></div>
+<h3>设置 / 12</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>SET-01</td><td><strong>设置总览</strong>：分组查看系统偏好</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>SET-02</td><td><strong>氛围与显示</strong>：整套氛围切换并持久化</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-03</td><td><strong>手势与触觉</strong>：查看规则、教程和动作辅助</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-04</td><td><strong>声音与提示</strong>：音量、提示偏好与示例提示音</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-05</td><td><strong>AI 连接</strong>：未连接状态、服务端代理契约</td><td>SET-01</td><td>服务未连接 · UI预览</td></tr><tr><td>SET-06</td><td><strong>个人账户</strong>：本机身份与云端登录边界</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-07</td><td><strong>记忆管理</strong>：明确保存的偏好而非推断事实</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-08</td><td><strong>记忆详情</strong>：来源、修改、忘记与确认</td><td>SET-07</td><td>本机交互</td></tr><tr><td>SET-09</td><td><strong>隐私与数据</strong>：能力权限、本机数据和操作记录</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-10</td><td><strong>存储与备份</strong>：本机用量、JSON 导出和恢复</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-11</td><td><strong>无障碍</strong>：减少动效、字号、键盘辅助</td><td>SET-01</td><td>本机交互</td></tr><tr><td>SET-12</td><td><strong>关于与诊断</strong>：构建版本、覆盖清单和边界</td><td>SET-01</td><td>本机交互</td></tr></table></div>
+<h3>异常 / 8</h3>
+<div class="table-scroll"><table><tr><th>编号</th><th>界面 / 目的</th><th>父级</th><th>本版边界</th></tr><tr><td>ERR-01</td><td><strong>离线</strong>：本机仍可用、联网任务待恢复</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>ERR-02</td><td><strong>执行失败</strong>：错误信息、重试与输入保留</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>ERR-03</td><td><strong>权限被拒</strong>：解释缺失能力与替代路径</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>ERR-04</td><td><strong>额度不足</strong>：预算边界、保留草稿、无真实付费</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>ERR-05</td><td><strong>空内容</strong>：明确暂无资料而不是加载失败</td><td>任务/系统根</td><td>本机交互</td></tr><tr><td>ERR-06</td><td><strong>加载中</strong>：可停止的加载状态</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>ERR-07</td><td><strong>待批准动作</strong>：不代替用户默许外部写入</td><td>任务/系统根</td><td>服务未连接 · UI预览</td></tr><tr><td>ERR-08</td><td><strong>删除确认</strong>：范围说明、二次确认和可撤销删除</td><td>任务/系统根</td><td>本机交互</td></tr></table></div>
+<h3>逐页验收契约</h3>
+<p>所有页面可从桌面目录或手机端目录定位。目录直接定位不是唯一正常入口，用户旅程详见USER_FLOWS。</p>
+<h4>SYS-01 活动任务</h4>
+<p>目标：持续任务封面与直接操作。</p>
+<p>渲染类型：<code>home</code>；定位：<code>#screen=SYS-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SYS-02 事件中心</h4>
+<p>目标：通知与执行结果按时间呈现。</p>
+<p>渲染类型：<code>events</code>；定位：<code>#screen=SYS-02</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SYS-03 发起能力</h4>
+<p>目标：表达目的而不是寻找应用。</p>
+<p>渲染类型：<code>capabilities</code>；定位：<code>#screen=SYS-03</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SYS-04 系统控制</h4>
+<p>目标：全局设置、氛围与锁屏。</p>
+<p>渲染类型：<code>controls</code>；定位：<code>#screen=SYS-04</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SYS-05 锁屏</h4>
+<p>目标：时钟、任务摘要与侧边解锁。</p>
+<p>渲染类型：<code>lock</code>；定位：<code>#screen=SYS-05</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SYS-06 息屏</h4>
+<p>目标：双击唤醒、保持前台状态。</p>
+<p>渲染类型：<code>sleep</code>；定位：<code>#screen=SYS-06</code>；父级：<code>SYS-05</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ONB-01 欢迎与体验边界</h4>
+<p>目标：开始体验和理解本机与云端边界。</p>
+<p>渲染类型：<code>welcome</code>；定位：<code>#screen=ONB-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ONB-02 隐私选择</h4>
+<p>目标：默认最少采集、按能力授权。</p>
+<p>渲染类型：<code>consent</code>；定位：<code>#screen=ONB-02</code>；父级：<code>ONB-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ONB-03 本机个人资料</h4>
+<p>目标：设置昵称与保存偏好。</p>
+<p>渲染类型：<code>profile</code>；定位：<code>#screen=ONB-03</code>；父级：<code>ONB-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ONB-04 手势练习</h4>
+<p>目标：学习推开、窥视、拉绳与封面。</p>
+<p>渲染类型：<code>training</code>；定位：<code>#screen=ONB-04</code>；父级：<code>ONB-03</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ONB-05 云端开通预览</h4>
+<p>目标：呈现环境创建流程但不假装已连接。</p>
+<p>渲染类型：<code>enrollment</code>；定位：<code>#screen=ONB-05</code>；父级：<code>ONB-04</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-01 持续会话</h4>
+<p>目标：基于当前对象持续表达要求。</p>
+<p>渲染类型：<code>conversation</code>；定位：<code>#screen=AI-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-02 语音输入</h4>
+<p>目标：收音、转写、取消和发送前校对。</p>
+<p>渲染类型：<code>listening</code>；定位：<code>#screen=AI-02</code>；父级：<code>AI-01</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-03 处理与中断</h4>
+<p>目标：可见的处理步骤与明确停止。</p>
+<p>渲染类型：<code>thinking</code>；定位：<code>#screen=AI-03</code>；父级：<code>AI-01</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-04 执行计划</h4>
+<p>目标：查看步骤、可改范围和授权边界。</p>
+<p>渲染类型：<code>plan</code>；定位：<code>#screen=AI-04</code>；父级：<code>AI-01</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-05 执行确认</h4>
+<p>目标：固定对象、版本、目的地后确认。</p>
+<p>渲染类型：<code>approval</code>；定位：<code>#screen=AI-05</code>；父级：<code>AI-04</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-06 成果交付</h4>
+<p>目标：检查成果并导出实际文字。</p>
+<p>渲染类型：<code>deliverable</code>；定位：<code>#screen=AI-06</code>；父级：<code>AI-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-07 会话历史</h4>
+<p>目标：回到未完成的上下文。</p>
+<p>渲染类型：<code>history</code>；定位：<code>#screen=AI-07</code>；父级：<code>AI-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>AI-08 本次上下文</h4>
+<p>目标：查看被引用的笔记与照片版本。</p>
+<p>渲染类型：<code>context</code>；定位：<code>#screen=AI-08</code>；父级：<code>AI-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-01 取景与拍摄</h4>
+<p>目标：真实相机需授权、可用导入替代。</p>
+<p>渲染类型：<code>camera</code>；定位：<code>#screen=IMG-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-02 照片工作区</h4>
+<p>目标：原图、局部调整、持续要求。</p>
+<p>渲染类型：<code>photo</code>；定位：<code>#screen=IMG-02</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-03 版本记录</h4>
+<p>目标：选择不可变编辑版本。</p>
+<p>渲染类型：<code>versions</code>；定位：<code>#screen=IMG-03</code>；父级：<code>IMG-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-04 构图与裁切</h4>
+<p>目标：选择比例、生成可下载裁切副本。</p>
+<p>渲染类型：<code>crop</code>；定位：<code>#screen=IMG-04</code>；父级：<code>IMG-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-05 局部选区</h4>
+<p>目标：在图片上选圆形范围并调色。</p>
+<p>渲染类型：<code>selection</code>；定位：<code>#screen=IMG-05</code>；父级：<code>IMG-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-06 生成要求</h4>
+<p>目标：说明保留、允许改变与目标风格。</p>
+<p>渲染类型：<code>generate</code>；定位：<code>#screen=IMG-06</code>；父级：<code>IMG-02</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-07 生成队列</h4>
+<p>目标：队列、取消和失败恢复预览。</p>
+<p>渲染类型：<code>generation</code>；定位：<code>#screen=IMG-07</code>；父级：<code>IMG-06</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-08 原图对比</h4>
+<p>目标：分隔滑杆对比原图与当前版本。</p>
+<p>渲染类型：<code>compare</code>；定位：<code>#screen=IMG-08</code>；父级：<code>IMG-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-09 导出确认</h4>
+<p>目标：锁定版本后交给浏览器下载。</p>
+<p>渲染类型：<code>export</code>；定位：<code>#screen=IMG-09</code>；父级：<code>IMG-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>IMG-10 相册与成果</h4>
+<p>目标：按本机已有版本浏览、选择。</p>
+<p>渲染类型：<code>gallery</code>；定位：<code>#screen=IMG-10</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DOC-01 资料总览</h4>
+<p>目标：本机照片、笔记与整理稿。</p>
+<p>渲染类型：<code>library</code>；定位：<code>#screen=DOC-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DOC-02 笔记编辑</h4>
+<p>目标：连续文字编辑与草稿保留。</p>
+<p>渲染类型：<code>notes</code>；定位：<code>#screen=DOC-02</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DOC-03 可勾选清单</h4>
+<p>目标：将当前笔记条目转为清单。</p>
+<p>渲染类型：<code>checklist</code>；定位：<code>#screen=DOC-03</code>；父级：<code>DOC-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DOC-04 文档阅读</h4>
+<p>目标：查看整理结果、原文及导出。</p>
+<p>渲染类型：<code>document</code>；定位：<code>#screen=DOC-04</code>；父级：<code>DOC-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DOC-05 录音准备</h4>
+<p>目标：显式开始、收音状态与撤销。</p>
+<p>渲染类型：<code>recorder</code>；定位：<code>#screen=DOC-05</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DOC-06 转写校对</h4>
+<p>目标：时间段与说话人文本校对预览。</p>
+<p>渲染类型：<code>transcript</code>；定位：<code>#screen=DOC-06</code>；父级：<code>DOC-05</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-01 个人云端环境</h4>
+<p>目标：真实连接状态与恢复入口。</p>
+<p>渲染类型：<code>runtime</code>；定位：<code>#screen=CLD-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-02 任务列表</h4>
+<p>目标：本机任务与演示任务清楚区分。</p>
+<p>渲染类型：<code>jobs</code>；定位：<code>#screen=CLD-02</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-03 任务详情</h4>
+<p>目标：实际笔记整理的进度、暂停、结果。</p>
+<p>渲染类型：<code>job</code>；定位：<code>#screen=CLD-03</code>；父级：<code>CLD-02</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-04 执行步骤</h4>
+<p>目标：查看当前本机处理状态。</p>
+<p>渲染类型：<code>steps</code>；定位：<code>#screen=CLD-04</code>；父级：<code>CLD-03</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-05 等待确认</h4>
+<p>目标：尚未获授权的外部动作。</p>
+<p>渲染类型：<code>approvals</code>；定位：<code>#screen=CLD-05</code>；父级：<code>CLD-02</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-06 文件空间</h4>
+<p>目标：展示本机文件而非伪造云端文件。</p>
+<p>渲染类型：<code>files</code>；定位：<code>#screen=CLD-06</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-07 文件详情</h4>
+<p>目标：来源、大小、版本与导出。</p>
+<p>渲染类型：<code>file</code>；定位：<code>#screen=CLD-07</code>；父级：<code>CLD-06</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-08 服务连接</h4>
+<p>目标：列出未接入能力与接入状态设计。</p>
+<p>渲染类型：<code>services</code>；定位：<code>#screen=CLD-08</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-09 服务授权详情</h4>
+<p>目标：最小权限和撤销连接预览。</p>
+<p>渲染类型：<code>service</code>；定位：<code>#screen=CLD-09</code>；父级：<code>CLD-08</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-10 权限中心</h4>
+<p>目标：本地偏好和浏览器权限边界。</p>
+<p>渲染类型：<code>permissions</code>；定位：<code>#screen=CLD-10</code>；父级：<code>CLD-08</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-11 周期任务</h4>
+<p>目标：仅保存周期任务设计草稿。</p>
+<p>渲染类型：<code>schedules</code>；定位：<code>#screen=CLD-11</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-12 编辑周期任务</h4>
+<p>目标：频率、时区、来源、结果位置。</p>
+<p>渲染类型：<code>schedule-edit</code>；定位：<code>#screen=CLD-12</code>；父级：<code>CLD-11</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-13 活动时间线</h4>
+<p>目标：真实本机执行记录。</p>
+<p>渲染类型：<code>timeline</code>；定位：<code>#screen=CLD-13</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-14 设备接续</h4>
+<p>目标：跨设备接续设计、未连接状态。</p>
+<p>渲染类型：<code>devices</code>；定位：<code>#screen=CLD-14</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-15 用量与预算</h4>
+<p>目标：额度预算的界面模型、无真实账单。</p>
+<p>渲染类型：<code>usage</code>；定位：<code>#screen=CLD-15</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-16 授权审计</h4>
+<p>目标：查看本机操作和许可偏好变更。</p>
+<p>渲染类型：<code>audit</code>；定位：<code>#screen=CLD-16</code>；父级：<code>CLD-10</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>CLD-17 备份与恢复</h4>
+<p>目标：导出与校验恢复全量本机 JSON。</p>
+<p>渲染类型：<code>snapshots</code>；定位：<code>#screen=CLD-17</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-01 日程</h4>
+<p>目标：本机日程草稿、日期与任务关联。</p>
+<p>渲染类型：<code>calendar</code>；定位：<code>#screen=DAY-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-02 日程详情</h4>
+<p>目标：标题、时间与本机保存。</p>
+<p>渲染类型：<code>event-detail</code>；定位：<code>#screen=DAY-02</code>；父级：<code>DAY-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-03 联系人</h4>
+<p>目标：示例联系人与搜索。</p>
+<p>渲染类型：<code>contacts</code>；定位：<code>#screen=DAY-03</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-04 消息列表</h4>
+<p>目标：明确示例线程、不读取真实消息。</p>
+<p>渲染类型：<code>messages</code>；定位：<code>#screen=DAY-04</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-05 消息草稿</h4>
+<p>目标：起草文本、模拟发送需确认。</p>
+<p>渲染类型：<code>thread</code>；定位：<code>#screen=DAY-05</code>；父级：<code>DAY-04</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-06 拨号</h4>
+<p>目标：拨号与呼叫确认界面、不真实拨号。</p>
+<p>渲染类型：<code>dialer</code>；定位：<code>#screen=DAY-06</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-07 来电预览</h4>
+<p>目标：接听、拒接的界面状态。</p>
+<p>渲染类型：<code>incoming</code>；定位：<code>#screen=DAY-07</code>；父级：<code>DAY-06</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-08 通话中</h4>
+<p>目标：计时、静音、扬声器的模拟控制。</p>
+<p>渲染类型：<code>call</code>；定位：<code>#screen=DAY-08</code>；父级：<code>DAY-06</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-09 音乐</h4>
+<p>目标：播放状态、歌词与封面控制预览。</p>
+<p>渲染类型：<code>music</code>；定位：<code>#screen=DAY-09</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-10 专注计时</h4>
+<p>目标：实际前台计时、封面暂停。</p>
+<p>渲染类型：<code>focus</code>；定位：<code>#screen=DAY-10</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-11 闹钟草稿</h4>
+<p>目标：保存时间、重复与启用偏好。</p>
+<p>渲染类型：<code>alarm</code>；定位：<code>#screen=DAY-11</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-12 路线方案</h4>
+<p>目标：抽象路线与行程 UI、无定位无地图服务。</p>
+<p>渲染类型：<code>navigation</code>；定位：<code>#screen=DAY-12</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-13 网页阅读</h4>
+<p>目标：内置示例文章、阅读和引用。</p>
+<p>渲染类型：<code>reader</code>；定位：<code>#screen=DAY-13</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>DAY-14 全局搜索</h4>
+<p>目标：搜索本机笔记与界面目录。</p>
+<p>渲染类型：<code>search</code>；定位：<code>#screen=DAY-14</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-01 设置总览</h4>
+<p>目标：分组查看系统偏好。</p>
+<p>渲染类型：<code>settings</code>；定位：<code>#screen=SET-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-02 氛围与显示</h4>
+<p>目标：整套氛围切换并持久化。</p>
+<p>渲染类型：<code>appearance</code>；定位：<code>#screen=SET-02</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-03 手势与触觉</h4>
+<p>目标：查看规则、教程和动作辅助。</p>
+<p>渲染类型：<code>gestures</code>；定位：<code>#screen=SET-03</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-04 声音与提示</h4>
+<p>目标：音量、提示偏好与示例提示音。</p>
+<p>渲染类型：<code>sound</code>；定位：<code>#screen=SET-04</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-05 AI 连接</h4>
+<p>目标：未连接状态、服务端代理契约。</p>
+<p>渲染类型：<code>models</code>；定位：<code>#screen=SET-05</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-06 个人账户</h4>
+<p>目标：本机身份与云端登录边界。</p>
+<p>渲染类型：<code>account</code>；定位：<code>#screen=SET-06</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-07 记忆管理</h4>
+<p>目标：明确保存的偏好而非推断事实。</p>
+<p>渲染类型：<code>memories</code>；定位：<code>#screen=SET-07</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-08 记忆详情</h4>
+<p>目标：来源、修改、忘记与确认。</p>
+<p>渲染类型：<code>memory</code>；定位：<code>#screen=SET-08</code>；父级：<code>SET-07</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-09 隐私与数据</h4>
+<p>目标：能力权限、本机数据和操作记录。</p>
+<p>渲染类型：<code>privacy</code>；定位：<code>#screen=SET-09</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-10 存储与备份</h4>
+<p>目标：本机用量、JSON 导出和恢复。</p>
+<p>渲染类型：<code>storage</code>；定位：<code>#screen=SET-10</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-11 无障碍</h4>
+<p>目标：减少动效、字号、键盘辅助。</p>
+<p>渲染类型：<code>accessibility</code>；定位：<code>#screen=SET-11</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>SET-12 关于与诊断</h4>
+<p>目标：构建版本、覆盖清单和边界。</p>
+<p>渲染类型：<code>about</code>；定位：<code>#screen=SET-12</code>；父级：<code>SET-01</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：内容右滑返回上一层；侧边推开最小化整件事。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-01 离线</h4>
+<p>目标：本机仍可用、联网任务待恢复。</p>
+<p>渲染类型：<code>offline</code>；定位：<code>#screen=ERR-01</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-02 执行失败</h4>
+<p>目标：错误信息、重试与输入保留。</p>
+<p>渲染类型：<code>failure</code>；定位：<code>#screen=ERR-02</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-03 权限被拒</h4>
+<p>目标：解释缺失能力与替代路径。</p>
+<p>渲染类型：<code>denied</code>；定位：<code>#screen=ERR-03</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-04 额度不足</h4>
+<p>目标：预算边界、保留草稿、无真实付费。</p>
+<p>渲染类型：<code>quota</code>；定位：<code>#screen=ERR-04</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-05 空内容</h4>
+<p>目标：明确暂无资料而不是加载失败。</p>
+<p>渲染类型：<code>empty</code>；定位：<code>#screen=ERR-05</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-06 加载中</h4>
+<p>目标：可停止的加载状态。</p>
+<p>渲染类型：<code>loading</code>；定位：<code>#screen=ERR-06</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-07 待批准动作</h4>
+<p>目标：不代替用户默许外部写入。</p>
+<p>渲染类型：<code>pending</code>；定位：<code>#screen=ERR-07</code>；父级：<code>root</code>。</p>
+<p>操作边界：展示未连接状态和操作范围；用户确认仅用于本机预览或保存草稿，不执行外部动作。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p>
+<h4>ERR-08 删除确认</h4>
+<p>目标：范围说明、二次确认和可撤销删除。</p>
+<p>渲染类型：<code>delete</code>；定位：<code>#screen=ERR-08</code>；父级：<code>root</code>。</p>
+<p>操作边界：可在本机检查内容和相关动作；不因页面是local就宣称第三方服务已接入。</p>
+<p>离开：通过系统空间/侧边最小化/明确关闭入口离开；锁屏、息屏采用各自唤醒路径。</p>
+<p>验收：入口可达、正文可见、输入保留、恢复/退出可达；对应自动化route检查不能替代真机业务验收。</p></article><article id="doc-11"><div class="filename">docs/design/STATE_MATRIX.md</div><h2>状态与恢复矩阵</h2>
+<p>状态检查和真实任务状态是两个不同维度。工作台的 default/empty/loading/error/offline 只切换共用视觉覆盖层，不调用网络或重置任务。</p>
+<div class="table-scroll"><table><tr><th>对象</th><th>主状态</th><th>用户看到</th><th>可执行控制</th><th>保留内容</th></tr><tr><td>本机整理</td><td>idle/running/paused/done</td><td>确切原文进度和结果</td><td>开始、暂停、继续、结果</td><td>原文快照、处理索引、结果</td></tr><tr><td>真正远程任务（契约）</td><td>queued/running/needs_approval/paused/failed/completed/cancelled</td><td>服务回执</td><td>由adapter明确支持</td><td>taskId、步骤、版本与幂等键</td></tr><tr><td>服务连接</td><td>disconnected/authorizing/ready/expired/error</td><td>本版始终未连接</td><td>仅检查UI与范围</td><td>本机偏好，不保存凭据</td></tr><tr><td>图片</td><td>original/derived/selected</td><td>当前版本及源关系</td><td>比较、调整、裁切导出</td><td>原始像素与操作链</td></tr><tr><td>表单</td><td>draft/invalid/reviewing</td><td>当前输入，不自动提交</td><td>编辑/审阅/取消</td><td>路由+字段草稿</td></tr><tr><td>确认</td><td>pending/consumed/cancelled</td><td>固定对象、收件方、版本</td><td>左接受/右取消</td><td>不变的payload</td></tr><tr><td>备份</td><td>selected/invalid/review/restore</td><td>替换范围</td><td>拒绝/确认</td><td>校验成功前保留旧资料</td></tr><tr><td>存储</td><td>available/denied/quota</td><td>可见告警</td><td>继续临时使用、导出</td><td>内存内状态</td></tr></table></div>
+<h3>不能折叠的区别</h3>
+<p>“任务已停止输出”不等于“外部动作已经撤销”；“下载已交给浏览器”不等于“文件已成功落盘”；“用户勾选使用意向”不等于“设备已授予许可”；“本机预览确认”不等于“对方收到消息”。</p>
+<h3>组件状态范围</h3>
+<p>common empty/loading/error/offline 可复用，但相机拒绝、余额不足、删除、待审批各有独立页面。不要用一个通用错误弹窗覆盖所有业务风险。锁屏与息屏不要求展示所有工作台状态；检查重点是内容界面。</p>
+<h3>必须补验</h3>
+<p>真实断网、丢包、超时、中途关闭、存储配额满、大图内存压力、双击确认、恢复损坏备份、软键盘出现、系统边缘手势竞争。当前测试范围详见 QA 报告，未測项不得写成已通过。</p></article><article id="doc-12"><div class="filename">docs/design/USER_FLOWS.md</div><h2>全流程交互设计</h2>
+<h3>F01 首次开始</h3>
+<p>ONB-01 欢迎 → ONB-02 使用意向 → ONB-03 本机昵称 → ONB-04 手势教学 → ONB-05 云端边界 → SYS-01。</p>
+<p>可跳过教学；所有相机/麦克风许可在真实使用时另行请求。选择使用意向不是设备授权或云端登录。拒绝许可不阻止笔记和导入图片。</p>
+<h3>F02 拍摄到成品</h3>
+<p>IMG-01 原生相机/导入 → IMG-02 原图工作区 → 点选位置 → 内部下拉暖调 → IMG-03 版本 → IMG-08 比对 → IMG-04 可选中心裁切 → IMG-09 固定导出确认 → PNG。</p>
+<p>允许中途 Peek/最小化，重进保留版本。改图保留原始版本。裁切导出是副本而非改写源图；生成式背景替换在 IMG-06/07 仅保存要求，不能伪装成本机调色结果。相机拒绝转 ERR-03 → 导入。</p>
+<h3>F03 继续交代</h3>
+<p>AI-01 输入“记下：…” → 实际写入 DOC-02 → AI-08 看引用上下文 → AI-07 看会话。</p>
+<p>“暖一点”新增照片版本；“开始整理”调用本机原文整理。无匹配规则时明确告诉用户尚未接入模型，不自动编造回答。AI-02 展示语音许可和校对入口，需用户触发浏览器识别。</p>
+<h3>F04 计划、审批、成果</h3>
+<p>AI-01 → AI-04 执行计划 → AI-05 查看交付范围 → 手势确认 → AI-06 成果入口。</p>
+<p>服务尚未连接，确认只记录本机预览。取消返回原页；后台新版本不能改变本次 snapshot。未来 adapter 应携带幂等键、明确目标、费用上限和执行回执。</p>
+<h3>F05 整理笔记与任务接续</h3>
+<p>DOC-02 写笔记 → CLD-03 整理 → 侧边推开 → SYS-01 横滑整理封面暂停/继续 → 重新打开 → 结果 → 导出。</p>
+<p>整理基于开始时原文快照，提取非空行去重；不是 AI 概括。网页转入隐藏/退出会暂停，重新进入不会假装在云端完成。CLD-04展示各步，CLD-13/16展示本机记录。</p>
+<h3>F06 消息与确认</h3>
+<p>DAY-03 示例联系人 → DAY-05 草稿 → “审阅草稿” → 固定接收方/文字确认 → 左滑记录本机预览，右滑取消。</p>
+<p>本机预览记录明确标注未实际发送。输入尚未发送时切换任务，原草稿保留。无真实联系人连接、推送或电话权限。DAY-06/07/08只展示拨号/来电/通话状态。</p>
+<h3>F07 日程与周期任务</h3>
+<p>DAY-01 → DAY-02 保存本机日程；CLD-11 → CLD-12 名称/频率/时区/时间 → 保存草稿 → 周期列表。</p>
+<p>没有日历写入、邀请或服务端调度。草稿始终未启用；恢复备份也不能自动启用。真实接入后必须显示下一次运行的绝对时间、时区及最近结果。</p>
+<h3>F08 权限与服务</h3>
+<p>CLD-08 未连接服务 → CLD-09 范围详情 → 预览确认 → CLD-10 权限中心 → CLD-16 本机审计。</p>
+<p>演示授权不能改变连接为 ready，不发送外部 OAuth。模型密钥不出现在前端；SET-05只说明连接边界。</p>
+<h3>F09 明确记忆与忘记</h3>
+<p>SET-07 明确偏好 → SET-08 编辑/停用 → ERR-08 删除该条 → 手势确认 → 列表少一条 → 撤销恢复。</p>
+<p>删除仅针对固定 ID；不得清空别人的偏好、笔记或原图。撤销仅在当前运行会话可用，未提供生产级多版本回收站。</p>
+<h3>F10 迁移与恢复</h3>
+<p>SET-10 或 CLD-17 → 导出 JSON → 自行保管 → 选择备份 → 校验 format/schema/大小/图像地址 → 显示替换范围 → 明确确认后恢复并重新载入。</p>
+<p>非法内容不替换旧资料；恢复后整理暂停、专注不自动开启、远端保持未连接。失败应保留原资料。浏览器下载与文件落盘不能混称“云端已保存”。</p>
+<h3>F11 异常接续</h3>
+<p>加载可停止，失败展示保留范围；离线提供本机编辑；额度页只保存草稿；许可拒绝可以导入；待审批不自动执行。ERR-01..08都有明确恢复/退出入口。工作台状态切换不会改变真实网络。</p></article><article id="doc-13"><div class="filename">docs/engineering/ADAPTER_CONTRACTS.md</div><h2>未来能力适配契约（未实现）</h2>
+<p>UI 不驱动第三方图形界面点击；以结构化意图调用已授权能力。实现一个真实adapter时需在单独PR申请范围，不能把模拟器直接改成默认网络连接。</p>
+<h3>最小请求</h3>
+<p><code>requestId, taskId, capability, inputArtifactRefs, userIntent, grantedScopes, deadline, idempotencyKey, requireApproval</code>。模型可以建议步骤，执行器验证参数、授权和幂等；返回真实receipt和artifact version。</p>
+<h3>结果与事件</h3>
+<p>统一分为 local_result / preview_only / remote_result。远程状态只能来自有效服务返回。事件包含 eventId、taskId、sequence、serverTime、status、step、outputs、error 与 canRetry，重复/乱序事件不能造成重复提交。</p>
+<h3>取消与暂停</h3>
+<p>取消请求收到ACK仅说明服务接受请求；若已不可逆执行，必须显示实际结果和补救方式。暂停处理和停止播报不同，分别记录。后台计划不能因为用户离开当前页而重新执行已提交步骤。</p>
+<h3>许可</h3>
+<p>请求范围最小化，明示向哪里发送哪份资料；OAuth等真实授权不在静态HTML中完成。个人输入、返回结果、资料版本都属于租户，服务端必须隔离。密钥留可信代理；不接受任意URL代理或把密钥塞进localStorage。</p>
+<h3>类型</h3>
+<p><code>src/contracts/services.ts</code> 是设计契约，不参与当前运行，也不是已连接SDK。原型不收集密钥，不调用这些远程接口。</p>
+<h3>接入门槛</h3>
+<p>先以契约测试覆盖：未授权、过期、空输出、失败、超时、重复事件、重复确认、取消竞态、部分成果、费用超限；再选择一条真实流程，不能一次开启所有服务。</p></article><article id="doc-14"><div class="filename">docs/engineering/ARCHITECTURE.md</div><h2>架构与维护边界</h2>
+<h3>零运行时依赖构建</h3>
+<p><code>template.html + styles/* + data/* + image.js + core.js + model.cjs + suite.js + workbench.js → scripts/build.mjs → dist/index.html</code>。</p>
+<p>源文件可分开维护，但加载时按既定顺序组合一个脚本作用域；单文件因此可离线打开。不存在后端、数据库或生产构建服务器。开发Python服务器只用于静态预览。</p>
+<h3>模块责任</h3>
+<p class="list-item">- <code>image.js</code>：内置素材和像素处理。</p>
+<p class="list-item">- <code>core.js</code>：被认可的V3外壳，输入仲裁、页面栈、封面、原片与本机任务。大量全局函数仍然存在，是刻意保留行为的增量迁移，不是理想架构终态。</p>
+<p class="list-item">- <code>model.cjs</code>：纯状态校验、搜索、清单、裁切几何、快照；Node测试共享。</p>
+<p class="list-item">- <code>suite.js</code>：86页中的扩展页面、UI状态和动作；通过明确包装已有函数，避免两套手势引擎。需要后续按域拆分，不要继续无限增大 switch。</p>
+<p class="list-item">- <code>workbench.js</code>：开发目录、规格、演示、共用异常覆盖层，不能进入消费者App运行逻辑。</p>
+<p class="list-item">- <code>screens.json</code>：唯一登记表；类型、父节点、模式可静态校验。</p>
+<h3>数据与存储</h3>
+<p>Core key <code>ai-phone-ui-core-v1</code>（schema3），suite key <code>ai-phone-ui-suite-v1</code>（schema1）。与V3原存储键隔离，避免不明迁移覆盖。窗口内session保存页面栈，localStorage保存可恢复资料与表单。</p>
+<p>备份格式包含两个经过验证的数据块。外部图像URL被拒绝；只允许限定data URL；未来对大图应迁移IndexedDB/分块存储并增加配额与恢复策略。没有加密存储承诺。</p>
+<h3>当前技术债</h3>
+<p>全局函数包装和跨域状态引用需要逐步替换成明确的controller/store；CSS tokens仍为记录而非自动生成；不是所有页面都有独立业务状态机；恢复时不重建全部动态封面的排列；个别原生V3动作与工作台目录的精确子页映射需进一步统一。</p>
+<p>在行为测试保护下重构，绝不能为了换框架破坏已认可手势。</p></article><article id="doc-15"><div class="filename">docs/engineering/RELEASE.md</div><h2>发布与交付</h2>
+<p>先运行 npm run build、npm run check、npm test、npm run test:ui。dist/index.html 是生成的单 HTML，不手改；运行时零依赖。浏览器测试依赖见 README。</p>
+<p>本仓库采用源码快照 + <span>原始历史包</span>，在已存在 LICENSE 初始提交后正常提交。旧 publish-github.sh 只保留为历史建仓工具，不用于现有仓库；不 force push、不重制原始标签。</p>
+<p>Actions 只构建、检查、测试和上传当次日志/静态产物；先清除历史结果，不自动部署、不申请 secret。必须核对 exact-head CI 和 artifact/source-head.txt。公开仓库不代表网站已部署，本批不启用 Pages 或发布 release。</p>
+<p>0.1.x 维护 UI 基线；0.2.0 聚焦体验与模块化；真实能力接入按独立里程碑。不能称为已完成 Android 系统。</p></article><article id="doc-16"><div class="filename">docs/engineering/REMOTE_STATUS.md</div><h2>远端状态与历史边界</h2>
+<p>公开仓库 <a href="https://github.com/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">ForceMind/ai-phone-ui</a> 使用用户批准的源码快照同步。在所有者 LICENSE 初始提交 <code>e5c33cbadedebcc4fb8f4d09132045f907bd7af0</code> 后新增普通提交，不覆盖历史、不 force push。</p>
+<p>原始五次提交与 v0.1.0-ui 注释标签完整保存在 <span>原始历史包</span>，未成为 GitHub 祖先或远端标签。原始 HEAD 为 <code>47b882b43b70750f250ff945aa2b7f0468bb0855</code>，156 个跟踪文件可独立恢复。本快照仅叠加 M0 文档、CI、远端状态和许可元数据修正；UI 行为与 V3 原版不变。</p>
+<p>根目录 LICENSE blob 保持 <code>0ad25db4bd1d86c452db3f9602ccdbe172438f52</code>；历史占位通知另存。现有连接可完成同步，无需新的 CLI 登录、凭据或持久授权。</p>
+<h3>CI 证据</h3>
+<p>必须查看 <a href="https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml" target="_blank" rel="noopener noreferrer">UI quality</a> 与当前提交 SHA 一致的运行。此快照的远端 CI 待核对，不能提前宣称通过。CI 先移除归档结果，记录 source-head.txt 并保留当次日志与产物；本地成功或历史 126/126 不能冒充远端成功。</p>
+<p>2026-10-06 重建候选的本地 build/static/unit 单独复验。此前受限环境的浏览器在启动时失败，0 项断言；归档浏览器 126/126 仅为旧 DOM fixture 结果。即使 GitHub CI 通过，也不能替代 Android/iOS 实机、真实 origin 存储和相机/语音权限验收。</p>
+<h3>发布边界</h3>
+<p>仓库公开不等于网站部署；本批不启用 Pages、不部署、不发布 release、不接入真实服务。历史建仓脚本不用于此现有仓库。后续以实际远端、CI 和 <a href="#doc-22">下一步</a> 为准。</p></article><article id="doc-17"><div class="filename">docs/engineering/TEST_PLAN.md</div><h2>测试计划</h2>
+<h3>分层</h3>
+<p class="list-item">1. 静态：目录编号唯一、父链有效、渲染类型存在、动作入口可解释、schema/manifest一致、无未替换构建标记、无外链脚本/样式、文档齐备、V3哈希不变。</p>
+<p class="list-item">2. 单元：状态校验、裁切范围、提取语义、搜索、数据限制、快照不可变、备份不能恢复伪造连接或周期启用。</p>
+<p class="list-item">3. 浏览器：全部86路由挂载；鼠标和模拟触摸检查边缘、Peek、Pulley、返回、封面、确认；真实本机表单/下载；网络请求和JS异常捕捉。</p>
+<p class="list-item">4. 真实设备：Android/iOS/桌面浏览器，系统边缘、软键盘、读屏、触觉、相机/语音拒绝、本地文件保存与大图。</p>
+<p class="list-item">5. 未来服务：adapter契约、权限、幂等、费用、断线恢复。当前没有远程服务，不能报告这层通过。</p>
+<h3>当前浏览器执行方式</h3>
+<p>受限运行环境禁止 file:// 与localhost导航。测试通过 <code>page.set_content</code> 加载完整HTML，没有修改管理员策略；成功路径显式使用内存localStorage fixture，另一个页面保留存储拒绝行为。触摸是Chromium CDP事件，不是真实手机。</p>
+<p>因此，路由与动作通过不等于已验证真实origin持久存储或全部手机权限。CI配置也不等于CI已经在远端运行。</p>
+<h3>回归矩阵</h3>
+<p>每次手势改动至少：刚低于阈值、刚高于阈值、反向回推、pointercancel、开始在输入控件、已滚动子页、缩放视口、左/右侧、锁屏或弹层优先级。所有对外确认必须检查固定快照与取消不执行。</p>
+<h3>图像检查</h3>
+<p>比较同一尺寸截图；查看长正文滚动、遮挡、辅助文案、模态层和移动目录。<code>scripts/capture-ui.py</code> 可以输出实际运行画面的截图与总览，不能把静态截图当成可点击页面。</p>
+<h3>合并门槛</h3>
+<p>build/check/unit/browser均通过，未测项有明确记录；小范围改动也要复核全部登记页面可达。真实服务PR需新增服务测试和隐私审查。</p></article><article id="doc-18"><div class="filename">docs/project/CHARTER.md</div><h2>项目宪章</h2>
+<h3>目标</h3>
+<p>维护一套可以直接上手操作、持续迭代的 AI 手机 UI 和交互设计。继承用户已认可的 V3，而不是重新评估产品是否应该使用 N9 / Sailfish 交互。</p>
+<p>手机的主语是“正在做的事”，不是应用图标。AI 负责把意图转成可检查的任务；手势负责指代、比较、暂停、接续与确认。前期实体手机/网页是入口，未来云端个人环境提供连续资料和任务，但本仓库先把体验做清楚。</p>
+<h3>本次 UI 完整范围</h3>
+<p>86 个登记页面覆盖系统与主要能力，细表在 <code>SCREEN_CATALOG.md</code>。它是 0.1.0 的完整 UI 范围，不宣称包含现代手机的一切设置或运营业务。</p>
+<p>完成定义包括：可进入页面、有具体内容、可返回/最小化、关键动作有可观察结果、本机与预览分明、可从统一工作台检查。</p>
+<h3>非目标</h3>
+<p>Android ROM、驱动与无线基带；生产云手机集群；真实 OAuth/支付/订阅/账单；端到端加密账户体系；互联网地图、音乐版权库；真实 LLM、生图、语音服务。禁止用进度动画把这些缺失伪装成完成。</p>
+<h3>优先级</h3>
+<p>P0 交互语义稳定和用户数据不丢失；P1 操作可学、可逆和无障碍替代；P2 界面密度与美术一致；P3 对接真实能力。远程集成不能反向迫使 UI 变成模拟点击 App 的遥控器。</p>
+<h3>验收负责人</h3>
+<p>产品最终选择与公开发布由仓库所有者确认。AI 可以在已批准范围内实现、测试和补文档；不能擅自改变品牌、创建收费服务或公开私人资料。</p></article><article id="doc-19"><div class="filename">docs/project/CURRENT_STATE.md</div><h2>当前状态 — v0.1.0</h2>
+<h3>范围</h3>
+<p>已认可 V3、源码模块、单 HTML 构建、86 个登记界面（55 本机交互页 / 31 未连接服务预览页）及设计/工程/测试/交接完整保留。三视图、Peek、活动封面、Pulley 和取消语义不变。</p>
+<p>M0 使用公开源码快照 + 原始历史包，在原 LICENSE 提交之后普通提交。原 5 次提交及 v0.1.0-ui 标签在 bundle 内，未导入远端祖先图。见 <a href="#doc-16">远端状态</a> 和 <span>历史恢复</span>。</p>
+<h3>质量</h3>
+<p>2026-10-06 对重建候选重新运行 build、静态和单元检查；结果见 <a href="#doc-24">测试报告</a>。当前提交 exact-head GitHub CI 尚待核对，不能提前声称全绿。旧浏览器 126/126 不是本轮结果；本地环境曾在浏览器启动前阻塞，执行 0 项断言。</p>
+<h3>已知边界</h3>
+<p>真实 Android/iOS、系统边缘、软键盘、真实 origin 存储、配额/恢复和无障碍仍待 M2。文本回复是本机规则，整理只提取原文；模型、云手机、消息、电话、音乐、地图、OAuth、账单和日历账号都未连接，不是完整 Android 系统。</p>
+<p>存储本地且未加密；中心比例裁切与圆形选区不是语义抠图。跨重载不保证所有动态封面布局和精确页面栈。公共状态覆盖层不是每项业务的真实网络错误。后续先补质量证据与三条闭环，再按路线拆分旧全局代码。</p></article><article id="doc-20"><div class="filename">docs/project/DECISIONS.md</div><h2>决策记录</h2>
+<h3>ADR-001 / 接受V3而非重设计方向</h3>
+<p>用户明确认可V3融合的系统特性。保留三视图、边缘、Peek、活动封面、Pulley、页面确认；反对回到固定App横向轮播+底条。</p>
+<h3>ADR-002 / 独立UI仓库</h3>
+<p>项目暂名 <code>ai-phone-ui</code>，展示名SWIPE / AI。不是正式品牌定名，也不是Nokia/Jolla官方系统。专注可维护UI，不复用用户其他项目的私有数据。</p>
+<h3>ADR-003 / 公开仓库与快照历史保存（更新）</h3>
+<p>用户已批准公开仓库和“源码快照 + 原始历史包”。保留原 LICENSE 初始提交，原始五次提交/标签在 bundle 中，不称为远端祖先图导入，不改写历史。此决策替代早先私有建仓与原生历史导入方案。</p>
+<h3>ADR-004 / 源模块化，产物单文件</h3>
+<p>用户要求立即打开，不依赖私密站点。构建产出单HTML，维护时拆分模板/CSS/核心/套件/模型/工作台；以后可迁移框架但需保持交互与单文件体验。</p>
+<h3>ADR-005 / 86页是本版范围</h3>
+<p>覆盖主要系统与能力全景，不等于承诺所有现代手机设置都已完成。实际本机能力和服务预览必须在每页/文档里区分。</p>
+<h3>ADR-006 / 无真实凭据与默认网络</h3>
+<p>所有远端服务未连接；用户数据留本机。静态UI不可承担密钥代理。进入预览确认不代表外部授权或真实发送。</p>
+<h3>ADR-007 / 增量保留旧引擎</h3>
+<p>不抹掉已经认可的V3行为，先用回归测试保护再拆模块。suite函数包装、原生alias与catalog映射属于下一阶段需要统一的技术债。</p>
+<h3>ADR-008 / 诚实测试边界</h3>
+<p>受限浏览器环境采用DOM注入+显式内存存储fixture和CDP触摸；不能称作真机或file-origin实测。CI文件只是配置，实际远端结果另行读取。</p></article><article id="doc-21"><div class="filename">docs/project/DEVELOPMENT_HANDOFF.md</div><h2>开发交接入口</h2>
+<h3>产品与结构</h3>
+<p>以认可的 N9/Sailfish 融合 V3 为基线，展示名 SWIPE / AI。core 保留 V3 行为，suite 扩展页面，model 承载纯逻辑，workbench 只用于验收；screens.json 为 86 页唯一目录。</p>
+<h3>仓库与来源</h3>
+<p>公开仓库 <a href="https://github.com/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">ForceMind/ai-phone-ui</a> 在已有 LICENSE 提交后采用源码快照同步，不改写历史。原始五次提交、47b882b HEAD 与 v0.1.0-ui 注释标签保存在 <span>bundle</span>，未成为远端祖先或同名标签。根目录 LICENSE 保留；历史许可通知另存。</p>
+<p>2026-10-06 工作区回退后，原始 ZIP、bundle 与源码可按哈希精确恢复；M0 文档/CI 编辑按已批准范围重建，再对实际重建树测试，不将丢失候选的报告当作本次证据。已上传的同 SHA 对象复用，新增内容重新校验。</p>
+<h3>接手步骤</h3>
+<pre><code>git status --short
+git branch --show-current
+git log -6 --oneline
+npm run build
+npm run check
+npm test
+npm run test:ui</code></pre>
+<p>以实际远端 HEAD、PR 与 exact-head CI 为准。不要假设旧沙盒路径或旧报告代表当前成功。</p>
+<h3>不可遗漏</h3>
+<p>保留 Peek 反转、内容/边缘区别、子页 Pulley、固定快照确认、原片、草稿和无常驻底栏。退出/取消不是同意，服务预览不能写成已连接或已执行，前端不收集密钥。</p>
+<p>查看 <a href="#doc-19">当前状态</a>、<a href="#doc-24">QA</a> 和 <a href="#doc-22">M2 下一步</a>。本批只关闭 M0 并登记有限既有工作卡；不扩大云服务范围。</p></article><article id="doc-22"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>下一步，只从这里继续</h2>
+<h3>本批 M0 / UI-008 收尾</h3>
+<p>核对源码快照、LICENSE、原始 bundle 哈希、远端 HEAD 和 exact-head CI。只映射既有 backlog 建立少量工作卡，不重复生成页面、批量新增任务或接入外部能力。</p>
+<h3>下一张工作卡：M2 质量门槛</h3>
+<p class="list-item">- 范围：UI-010 / UI-011 / UI-014，聚焦照片、资料、明确确认三条闭环</p>
+<p class="list-item">- Android 与 iOS 各至少一台；记录机型、OS、浏览器；覆盖系统边缘、软键盘、Peek 反转、取消和重复操作</p>
+<p class="list-item">- 真实 origin 下验证备份导入/导出、重载、损坏/过大备份、配额不足和大图压力；失败不得覆盖旧资料</p>
+<p class="list-item">- 验证焦点进入/恢复、读屏、替代操作、大字体与长文</p>
+<p class="list-item">- 退出：缺陷、回归和设备证据齐备；未测项明确记录，DOM fixture 不替代实机结论</p>
+<p>本批在 M0 与 exact-head CI 完成后结束；M2 实机工作需要设备条件。M3 按 UI-012/013/015 等原顺序推进。真实服务、账号、云手机、部署与费用不属于本批，不重新规划 M0–M5。</p></article><article id="doc-23"><div class="filename">docs/project/ROADMAP.md</div><h2>执行计划</h2>
+<h3>已批准方向</h3>
+<p>继续V3的空间与手势，不重新回到“多个应用页面+底栏”。本仓库负责整个手机体验的UI、交互规则、资料状态与适配契约，实际云服务后续分批接入。</p>
+<div class="table-scroll"><table><tr><th>阶段</th><th>交付</th><th>退出条件</th><th>当前</th></tr><tr><td>M0 基线/仓库</td><td>V3归档、Git历史、远端</td><td>原版哈希不变，远端HEAD可读</td><td>源码快照 + 原始历史包；当前提交 CI 待核对</td></tr><tr><td>M1 UI全景</td><td>86页、完整信息架构、通用组件、主要流程</td><td>每页可进/可退/状态明确；一份HTML可演示</td><td>本次交付</td></tr><tr><td>M2 质量门槛</td><td>单元/浏览器/实机/存储/无障碍</td><td>缺陷关闭，未测项有证据或明确接受</td><td>自动化进行/完成见QA，实机待做</td></tr><tr><td>M3 体验和架构收敛</td><td>聚焦3条高频闭环、模块拆分、token统一</td><td>手感稳定、代码可维护、无隐式状态重置</td><td>下一版</td></tr><tr><td>M4 能力接入</td><td>先文字/相机，再生图/任务事件</td><td>真授权、真回执、失败恢复、成本边界</td><td>尚未开始</td></tr><tr><td>M5 原生与云手机</td><td>系统壳/云环境试验</td><td>另行确认范围、平台实测和成本</td><td>后续独立评估</td></tr></table></div>
+<h3>推荐节奏（不是交付承诺）</h3>
+<p>假设1位前端+1位交互设计、已有测试手机：第1个迭代做M2实机/存储/关键流程；第2个迭代收敛M3组件/状态；第3个迭代引入一个受控adapter；第4个迭代扩大真实任务接续。每个迭代建议1–2周，实际取决于反馈与平台权限，不把估算写成排期事实。</p>
+<h3>优先完成的三条闭环</h3>
+<p class="list-item">1. 照片：真实导入/采集 → 选区/版本 → 中断接续 → 可确认导出。</p>
+<p class="list-item">2. 资料：文字/文件 → 原文与推断区分 → 任务封面控制 → 成果带来源。</p>
+<p class="list-item">3. 执行：意图 → 可检查计划 → 范围确认 → 实际回执 → 失败/取消/续接。</p>
+<p>全套UI已经建立，后续不需要再建86个占位屏，而是把关键链路从原型提升到正式体验。</p>
+<h3>范围变更</h3>
+<p>新增支付、社交网络、App市场、复杂图像工具、后台云集群必须单独记录ADR/费用/许可/验收。先解决确认幂等、状态恢复和操作冲突，不能用增加页面数代替进展。</p></article><article id="doc-24"><div class="filename">docs/qa/TEST_REPORT.md</div><h2>v0.1.0 验证记录</h2>
+<h3>2026-10-06 重建候选验证</h3>
+<p>实际重建树重新执行 build、静态 24/24、单元 32/32，全部通过。构建为 238505 字节，SHA256 <code>db8ab10be7af577c55d465c062db477c4dc0911921ca91cd23c69436b7ec2fe3</code>。原始 ZIP、bundle 和 UI 行为源码精确恢复，文档/CI 修改重新生成。此前本地 Chromium 在首次断言前因 socket 限制启动失败，执行 0 项；未把旧浏览器报告算作新成功。</p>
+<p>当前 exact-head GitHub CI 待核对。远端 UI 测试是 DOM 注入与内存 storage fixture，不能代替真实 origin、权限或 Android/iOS 实机验收。</p>
+<h3>原始归档结果（历史，不计入本轮通过）</h3>
+<div class="table-scroll"><table><tr><th>层级</th><th>结果</th><th>证据</th></tr><tr><td>构建与静态规范</td><td>24/24通过</td><td>static-results.json</td></tr><tr><td>Node纯逻辑</td><td>32/32通过</td><td>unit-results.txt</td></tr><tr><td>浏览器UI回归</td><td>126/126通过</td><td>browser-results.json</td></tr><tr><td>界面渲染</td><td>86/86登记页可挂载与定位</td><td>route:开头的检查</td></tr><tr><td>浏览器异常</td><td>未捕获JS异常0个</td><td>page_errors</td></tr><tr><td>默认外发请求</td><td>HTTP/HTTPS/WS/WSS记录0个</td><td>network_requests</td></tr><tr><td>发布脚本</td><td>bash -n语法检查通过</td><td>scripts/publish-github.sh；未执行真实创建</td></tr><tr><td>GitHub Actions</td><td>未运行</td><td>仅提交workflow文件；原始归档当时未建远端</td></tr></table></div>
+<p>测试环境：v22.16.0；Chromium 144.0.7559.96 built on Debian GNU/Linux 13 (trixie)；Python Playwright按requirements-dev.txt。记录时间由运行环境生成：2026-10-04T16:46:26.132025+00:00。</p>
+<h3>浏览器测试确切方式</h3>
+<p>运行环境禁止file://与localhost导航；测试没有修改管理员策略。采用Playwright set_content把完整HTML加载到页面，成功路径使用显式内存localStorage fixture，另一个页面测试存储拒绝后的告警和继续编辑。触摸使用CDP事件，代表浏览器模拟触摸，不是手持设备。</p>
+<h3>行为覆盖</h3>
+<p>包括：86页目录、鼠标Pulley执行/取消/固定、Peek反转保留草稿、最小化再进入、内部返回、封面控制同一整理任务、顶/底边层、子页Pulley、嵌套任务父页、记下写入笔记、表单草稿、日程/周期草稿、固定消息快照与取消、选择性删除撤销、搜索、清单勾选、实际PNG/JSON下载、错误备份不覆盖、有效备份进入确认后可取消、无默认底栏、主题传递、状态检查、输入焦点快捷键、移动目录、设备适配、touch cancel和滚动冲突。</p>
+<p>过程中修正了测试选择器与实际属性不一致的问题；最终测试未删除失败断言，而是使用真实页面属性定位并保留行为校验。补充了子层级任务页面、静态描述行语义与快照纯逻辑校验。</p>
+<h3>图像检查</h3>
+<p>输出86个默认首屏截图与全界面atlas，工作台可直接检查所有可操作页。人工查看了12个代表性界面总览和8个异常界面，未观察到这些默认首屏的标题/主要恢复入口重叠。长内容仍需滚动，不把截图高度之外的内容当成不存在，也不声称逐行全量人工审查完成。</p>
+<h3>未测试 / 不能据此推断</h3>
+<p class="list-item">- 真实Android/iOS硬件、系统边缘竞争、软键盘、读屏、真实触觉。</p>
+<p class="list-item">- 真实file-origin或HTTPS部署的持久存储、配额压力和确认恢复后的整页reload；本次只测结构校验/拒绝/确认取消和纯模型roundtrip。</p>
+<p class="list-item">- 摄像头、麦克风真实许可与设备差异。</p>
+<p class="list-item">- 真实LLM、生图、Android云端、OAuth、消息、电话、计费等外部服务。</p>
+<p class="list-item">- 远端Git、PR、Actions或网站部署。</p>
+<p>这些是后续M2/M4验收任务，不应隐藏在“全绿”或“UI完成”的表述里。全部登记UI完成按项目明确范围计，不是生产系统完成声明。</p></article><article id="doc-25"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
+<p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
+<p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>
+<p class="list-item">2. Sailfish gesture design: https://sailfishos.org/design/gestures/</p>
+<p>   采用边缘Home、Peek、顶部控制、底部应用层、页面返回等思路；本项目底部改为目的/能力而非传统App Grid。</p>
+<p class="list-item">3. Sailfish UI documentation: https://docs.sailfishos.org/Develop/Apps/UI/</p>
+<p>   参考活动封面、氛围、导航与Pulley。本文将不同历史时期设计融合，不声称逐版精确复刻。</p>
+<p class="list-item">4. Jolla historical user guide: https://jolla.com/guide/en/index.html</p>
+<p>   早期封面滑动和拉绳操作参考。若页面失效，保留参考用途，不据此虚构现行平台实现。</p>
+<p class="list-item">5. Android gesture navigation: https://developer.android.com/develop/ui/views/touch-and-input/gestures/gesturenav</p>
+<p>   用于识别Web/应用不能独占系统保留边缘的限制，必须实机验收。</p>
+<p class="list-item">6. GitHub CLI create repository: https://cli.github.com/manual/gh_repo_create</p>
+<p>   用于出版脚本 <code>--private --source --remote --push</code> 参数核对；不表示本次已执行。</p>
+<p class="list-item">7. Playwright Python: https://playwright.dev/python/docs/intro</p>
+<p>   测试工具安装和浏览器自动化基础；模拟器不替代真实设备。</p>
+<p>自制资源：Canvas内置风景、SVG图标和示例文案。没有分发商业字体或原厂图标资源包。</p></article></main></body></html>

@@ -1,0 +1,197 @@
+{
+  "remoteIssuesCreated": false,
+  "items": [
+    {
+      "id": "UI-001",
+      "priority": "P0",
+      "status": "done",
+      "title": "归档已认可V3",
+      "milestone": "M0",
+      "acceptance": "SHA256保持；原版可独立打开"
+    },
+    {
+      "id": "UI-002",
+      "priority": "P0",
+      "status": "done",
+      "title": "可维护构建与单文件交付",
+      "milestone": "M1",
+      "acceptance": "运行时零依赖；源码与产物一致"
+    },
+    {
+      "id": "UI-003",
+      "priority": "P0",
+      "status": "done",
+      "title": "建立86页目录与工作台",
+      "milestone": "M1",
+      "acceptance": "所有页面可定位；本机/预览有明确标签"
+    },
+    {
+      "id": "UI-004",
+      "priority": "P0",
+      "status": "done",
+      "title": "保留V3系统手势并扩展子页Pulley",
+      "milestone": "M1",
+      "acceptance": "侧边/反转/子页/封面/取消有测试"
+    },
+    {
+      "id": "UI-005",
+      "priority": "P0",
+      "status": "done",
+      "title": "照片和资料本机链路",
+      "milestone": "M1",
+      "acceptance": "原图保留、导出真实文件、笔记可整理"
+    },
+    {
+      "id": "UI-006",
+      "priority": "P0",
+      "status": "done",
+      "title": "固定快照确认与选择性删除",
+      "milestone": "M1",
+      "acceptance": "取消不执行、确认内容固定、可撤销"
+    },
+    {
+      "id": "UI-007",
+      "priority": "P0",
+      "status": "done",
+      "title": "工程与设计文档及交接",
+      "milestone": "M1",
+      "acceptance": "范围、计划、架构、行为契约、边界完整"
+    },
+    {
+      "id": "UI-008",
+      "priority": "P0",
+      "status": "blocked",
+      "title": "创建私有远端并核对HEAD",
+      "milestone": "M0",
+      "acceptance": "需要已授权GitHub写入；不可虚报成功"
+    },
+    {
+      "id": "UI-009",
+      "priority": "P0",
+      "status": "done",
+      "title": "自动化回归与真实范围报告",
+      "milestone": "M2",
+      "acceptance": "本机检查通过；区分真实与模拟环境"
+    },
+    {
+      "id": "UI-010",
+      "priority": "P0",
+      "status": "todo",
+      "title": "实机手势冲突与软键盘验收",
+      "milestone": "M2",
+      "acceptance": "Android/iOS各至少一台；覆盖系统边缘和输入"
+    },
+    {
+      "id": "UI-011",
+      "priority": "P0",
+      "status": "todo",
+      "title": "备份异常与大图存储压力",
+      "milestone": "M2",
+      "acceptance": "损坏/过大/空间不足不覆盖旧资料；真实origin恢复"
+    },
+    {
+      "id": "UI-012",
+      "priority": "P1",
+      "status": "todo",
+      "title": "拆分suite域渲染与controller",
+      "milestone": "M3",
+      "acceptance": "删除跨模块隐式依赖时不改变手势语义"
+    },
+    {
+      "id": "UI-013",
+      "priority": "P1",
+      "status": "todo",
+      "title": "统一原生与扩展页面路由映射",
+      "milestone": "M3",
+      "acceptance": "所有进入路径使目录/父链与实际状态一致"
+    },
+    {
+      "id": "UI-014",
+      "priority": "P1",
+      "status": "todo",
+      "title": "完整焦点/读屏/大字验收",
+      "milestone": "M2",
+      "acceptance": "弹层焦点恢复；所有操作有替代；长文不裁切"
+    },
+    {
+      "id": "UI-015",
+      "priority": "P1",
+      "status": "todo",
+      "title": "活动封面持久布局与任务结束语义",
+      "milestone": "M3",
+      "acceptance": "重载恢复适当封面；关闭UI与取消执行分开"
+    },
+    {
+      "id": "UI-016",
+      "priority": "P1",
+      "status": "todo",
+      "title": "组件视觉回归基线",
+      "milestone": "M3",
+      "acceptance": "核心尺寸截图可比较；明确截图环境"
+    },
+    {
+      "id": "UI-017",
+      "priority": "P1",
+      "status": "todo",
+      "title": "设计token单一编译来源",
+      "milestone": "M3",
+      "acceptance": "CSS/JS阈值和文档不漂移"
+    },
+    {
+      "id": "UI-018",
+      "priority": "P1",
+      "status": "todo",
+      "title": "图像自由框裁切与选择保护",
+      "milestone": "M3",
+      "acceptance": "超出当前中心裁切/圆选区；依然保护原图"
+    },
+    {
+      "id": "UI-019",
+      "priority": "P2",
+      "status": "todo",
+      "title": "真实相机/识别权限闭环",
+      "milestone": "M4",
+      "acceptance": "请求/拒绝/撤回/后台停止有实机证据"
+    },
+    {
+      "id": "UI-020",
+      "priority": "P2",
+      "status": "todo",
+      "title": "单一文字模型adapter",
+      "milestone": "M4",
+      "acceptance": "服务端密钥、租户、费用、错误/取消/幂等契约"
+    },
+    {
+      "id": "UI-021",
+      "priority": "P2",
+      "status": "todo",
+      "title": "单一生成图像adapter",
+      "milestone": "M4",
+      "acceptance": "输入范围授权；生成和原图分离；进度来自服务"
+    },
+    {
+      "id": "UI-022",
+      "priority": "P2",
+      "status": "todo",
+      "title": "云端任务事件与接续",
+      "milestone": "M4",
+      "acceptance": "序列去重、断连、恢复、待审批、真实回执"
+    },
+    {
+      "id": "UI-023",
+      "priority": "P3",
+      "status": "todo",
+      "title": "系统壳或原生验证应用",
+      "milestone": "M5",
+      "acceptance": "操作系统保留手势与终端交互协调"
+    },
+    {
+      "id": "UI-024",
+      "priority": "P3",
+      "status": "todo",
+      "title": "Android云运行环境接入评估",
+      "milestone": "M5",
+      "acceptance": "独立后端范围，非本UI仓库顺手附带"
+    }
+  ]
+}

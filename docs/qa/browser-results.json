@@ -1,0 +1,523 @@
+{
+  "timestamp": "2026-10-04T16:46:26.132025+00:00",
+  "harness": "Chromium set_content; in-memory localStorage fixture; separate denied-storage run; CDP touch simulation",
+  "not_tested": [
+    "real device",
+    "file-origin persistence",
+    "HTTPS deployed origin",
+    "real microphone/camera",
+    "backend/Android/model",
+    "live GitHub Actions"
+  ],
+  "total": 126,
+  "passed": 126,
+  "failed": 0,
+  "page_errors": [],
+  "network_requests": [],
+  "checks": [
+    {
+      "name": "route:SYS-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:SYS-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:SYS-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:SYS-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:SYS-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:SYS-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:ONB-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:ONB-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:ONB-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:ONB-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:ONB-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-07",
+      "status": "pass"
+    },
+    {
+      "name": "route:AI-08",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-07",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-08",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-09",
+      "status": "pass"
+    },
+    {
+      "name": "route:IMG-10",
+      "status": "pass"
+    },
+    {
+      "name": "route:DOC-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:DOC-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:DOC-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:DOC-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:DOC-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:DOC-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-07",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-08",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-09",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-10",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-11",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-12",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-13",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-14",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-15",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-16",
+      "status": "pass"
+    },
+    {
+      "name": "route:CLD-17",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-07",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-08",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-09",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-10",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-11",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-12",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-13",
+      "status": "pass"
+    },
+    {
+      "name": "route:DAY-14",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-07",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-08",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-09",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-10",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-11",
+      "status": "pass"
+    },
+    {
+      "name": "route:SET-12",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-01",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-02",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-03",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-04",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-05",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-06",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-07",
+      "status": "pass"
+    },
+    {
+      "name": "route:ERR-08",
+      "status": "pass"
+    },
+    {
+      "name": "no-default-network",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:pulley-applies-warm-copy",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:pulley-reversal-cancels",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:peek-reversal-keeps-stack-and-draft",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:edge-minimize-resume-draft",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:content-back-not-minimize",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:deep-pull-pins-menu",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:active-cover-controls-same-job",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:top-edge-global-controls",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:bottom-edge-capability-layer",
+      "status": "pass"
+    },
+    {
+      "name": "mouse:child-page-pulley-and-draft",
+      "status": "pass"
+    },
+    {
+      "name": "flow:nested-job-parent-has-real-state",
+      "status": "pass"
+    },
+    {
+      "name": "flow:conversation-writes-local-note",
+      "status": "pass"
+    },
+    {
+      "name": "flow:unsent-form-draft-survives-route-switch",
+      "status": "pass"
+    },
+    {
+      "name": "flow:local-calendar-save",
+      "status": "pass"
+    },
+    {
+      "name": "flow:schedule-is-draft-not-running-automation",
+      "status": "pass"
+    },
+    {
+      "name": "flow:message-confirm-right-swipe-cancel",
+      "status": "pass"
+    },
+    {
+      "name": "flow:message-left-accept-freezes-snapshot",
+      "status": "pass"
+    },
+    {
+      "name": "flow:selective-delete-and-undo",
+      "status": "pass"
+    },
+    {
+      "name": "flow:local-search-updates-results",
+      "status": "pass"
+    },
+    {
+      "name": "flow:checklist-persists-toggle",
+      "status": "pass"
+    },
+    {
+      "name": "download:actual-crop-png",
+      "status": "pass"
+    },
+    {
+      "name": "download:actual-json-backup",
+      "status": "pass"
+    },
+    {
+      "name": "backup:malformed-file-preserves-current-data",
+      "status": "pass"
+    },
+    {
+      "name": "backup:valid-file-requires-confirmation-and-can-cancel",
+      "status": "pass"
+    },
+    {
+      "name": "design:no-default-bottom-nav-or-assistant-dock",
+      "status": "pass"
+    },
+    {
+      "name": "design:ambience-propagates",
+      "status": "pass"
+    },
+    {
+      "name": "design:four-state-inspector-recovery-controls",
+      "status": "pass"
+    },
+    {
+      "name": "keyboard:typing-does-not-trigger-shortcuts",
+      "status": "pass"
+    },
+    {
+      "name": "state:validated-backup-roundtrip-in-memory",
+      "status": "pass"
+    },
+    {
+      "name": "mobile:catalog-accessible",
+      "status": "pass"
+    },
+    {
+      "name": "mobile:device-fits-390x844",
+      "status": "pass"
+    },
+    {
+      "name": "touch:peek-reversal",
+      "status": "pass"
+    },
+    {
+      "name": "touch:edge-minimize",
+      "status": "pass"
+    },
+    {
+      "name": "touch:pulley-select-and-release",
+      "status": "pass"
+    },
+    {
+      "name": "touch:pointercancel-never-commits",
+      "status": "pass"
+    },
+    {
+      "name": "touch:scrolled-content-not-pulley",
+      "status": "pass"
+    },
+    {
+      "name": "storage:denied-fallback-editable-and-warning",
+      "status": "pass"
+    },
+    {
+      "name": "no-page-errors",
+      "status": "pass"
+    },
+    {
+      "name": "no-outbound-http-requests",
+      "status": "pass"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const checks=[];
+function verify(name,fn){try{fn();checks.push({name,status:'pass'});}catch(e){checks.push({name,status:'fail',error:e.message});}}
+function assert(x,message){if(!x)throw Error(message);}
+const catalog=JSON.parse(read('src/data/screens.json')),manifest=JSON.parse(read('src/data/manifest.json'));
+const suite=read('src/js/suite.js'),core=read('src/js/core.js');
+verify('catalog count matches manifest',()=>assert(catalog.length===manifest.screens,'count mismatch'));
+verify('unique canonical IDs',()=>assert(new Set(catalog.map(r=>r.id)).size===catalog.length,'duplicate IDs'));
+verify('valid route IDs and deep links',()=>catalog.forEach(r=>assert(/^[A-Z]{2,3}-\d{2}$/.test(r.id)&&r.route==='#screen='+r.id,'bad route '+r.id)));
+verify('all parents exist and graph is acyclic',()=>{const ids=new Map(catalog.map(r=>[r.id,r]));for(const r of catalog){let p=r.parent;const seen=new Set([r.id]);while(p){assert(ids.has(p),'missing parent '+p);assert(!seen.has(p),'cycle '+p);seen.add(p);p=ids.get(p).parent;}}});
+verify('all modes are explicit',()=>catalog.forEach(r=>assert(['local','prototype'].includes(r.mode),'missing mode '+r.id)));
+verify('all pages have name and purpose',()=>catalog.forEach(r=>assert(r.name&&r.purpose&&r.acceptance.length,'empty specification '+r.id)));
+verify('all catalog types have renderer or native alias',()=>{const native=['home','events','capabilities','controls','lock','sleep','photo','selection','versions','export','notes','job','focus'];for(const r of catalog)assert(native.includes(r.type)||suite.includes("case '"+r.type+"':"),'missing renderer '+r.type);});
+verify('linked UI route IDs resolve',()=>{const known=new Set(catalog.map(r=>r.id));for(const text of [suite,read('src/js/workbench.js')])for(const match of text.matchAll(/(?:ui:go:|go:|go\(')([A-Z]{2,3}-\d{2})/g))assert(known.has(match[1]),'unknown target '+match[1]);});
+for(const name of ['image.js','core.js','model.cjs','suite.js','workbench.js'])verify('syntax:'+name,()=>new vm.Script(read('src/js/'+name),{filename:name}));
+verify('built HTML has no unresolved placeholders',()=>assert(!read('dist/index.html').includes('<!-- BUILD:'),'unresolved build placeholder'));
+verify('self contained: no external executable/style assets',()=>assert(!/<script[^>]+src\s*=|<link[^>]+(?:stylesheet|preload)/i.test(read('dist/index.html')),'external dependency'));
+verify('default app has no network clients',()=>assert(!/\b(fetch\s*\(|new\s+(?:WebSocket|XMLHttpRequest|EventSource)|sendBeacon\s*\()/m.test(core+suite),'network client in UI'));
+verify('no default bottom navigation regression',()=>assert(!/class="(?:nav-region|assistant-dock|nav-bar)"/.test(read('src/template.html')),'forbidden default navigation'));
+verify('baseline checksum unchanged',()=>{const b=JSON.parse(read('reference/BASELINE.json'));const actual=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'reference/ai_phone_v3_swipe.html'))).digest('hex');const recorded=b.sha256||b.sha256sum||b.source_sha256;assert(recorded===actual,'baseline hash changed');});
+verify('baseline storage isolated',()=>assert(core.includes("'ai-phone-ui-core-v1'")&&suite.includes("'ai-phone-ui-suite-v1'"),'storage collision'));
+const required=['README.md','AGENTS.md','CONTRIBUTING.md','SECURITY.md','LICENSE','CHANGELOG.md','docs/INDEX.md','docs/project/CHARTER.md','docs/project/ROADMAP.md','docs/project/CURRENT_STATE.md','docs/project/NEXT_ACTION.md','docs/project/DEVELOPMENT_HANDOFF.md','docs/design/SCREEN_CATALOG.md','docs/design/INTERACTION_SPEC.md','docs/design/USER_FLOWS.md','docs/engineering/ADAPTER_CONTRACTS.md','docs/engineering/TEST_PLAN.md','docs/engineering/REMOTE_STATUS.md','planning/issues.json','planning/milestones.json'];
+verify('required documentation exists',()=>required.forEach(f=>assert(fs.existsSync(path.join(root,f)),'missing '+f)));
+verify('local plans do not impersonate remote issues',()=>assert(JSON.parse(read('planning/issues.json')).remoteIssuesCreated===false,'remote issue assertion'));
+verify('documented remote boundary matches manifest',()=>assert(manifest.remoteRepositoryStatus==='public-source-snapshot-history-bundle','remote status drift'));
+verify('package has no runtime dependencies',()=>assert(!Object.keys(JSON.parse(read('package.json')).dependencies||{}).length,'runtime dependency added'));
+verify('GitHub script exists',()=>assert(fs.existsSync(path.join(root,'scripts/publish-github.sh')),'missing publish script'));
+const result={total:checks.length,passed:checks.filter(x=>x.status==='pass').length,failed:checks.filter(x=>x.status==='fail').length,checks};
+fs.mkdirSync(path.join(root,'docs/qa'),{recursive:true});fs.writeFileSync(path.join(root,'docs/qa/static-results.json'),JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));if(result.failed)process.exitCode=1;

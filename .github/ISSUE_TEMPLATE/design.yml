@@ -1,0 +1,24 @@
+name: Interaction proposal
+description: Propose a scoped change, preserving the accepted V3 baseline
+title: '[Design] '
+body:
+  - type: input
+    id: screens
+    attributes:
+      label: Affected screen IDs
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: User goal, input, outcome and recovery
+    validations:
+      required: true
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: Non-goals and local / preview / real-service boundary
+  - type: textarea
+    id: tests
+    attributes:
+      label: Acceptance and regression tests

@@ -1,0 +1,7 @@
+License decision pending.
+
+No open-source license is granted by this repository at this time. The repository
+owner must explicitly choose a distribution license before public reuse is offered.
+Do not automatically replace this notice with MIT, Apache, or another license.
+Original design references and third-party names remain subject to their owners'
+rights. No third-party font binaries are distributed.

@@ -1,0 +1,52 @@
+name: UI quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ui-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  local-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare fresh reports
+        run: |
+          mkdir -p test-results
+          rm -f docs/qa/static-results.json docs/qa/browser-results.json
+          printf '%s\n' "$GITHUB_SHA" > test-results/source-head.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Build, static checks, unit tests
+        run: |
+          npm run build 2>&1 | tee test-results/build.log
+          npm run check 2>&1 | tee test-results/static.log
+          npm test 2>&1 | tee test-results/unit.log
+      - name: Browser test dependencies (test-only)
+        run: |
+          python -m pip install -r requirements-dev.txt
+          python -m playwright install --with-deps chromium
+      - name: Browser DOM fixture regression
+        run: npm run test:ui 2>&1 | tee test-results/browser.log
+      - name: Upload actual reports and preview, no deployment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-preview-and-reports
+          path: |
+            dist/
+            docs/qa/*results.json
+            test-results/
+          if-no-files-found: error
