@@ -1,10 +1,11 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWIPE / AI · 项目计划与设计文档</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8f6;color:#253330;font-family:system-ui,"Microsoft YaHei",sans-serif;line-height:1.85;font-size:15px}header{padding:32px 34px;border-bottom:1px solid #d6dfdb;background:#fff;position:relative}header h1{font-size:26px;margin:0 0 8px;font-weight:500}header p{margin:0;color:#687b75;font-size:13px}aside{position:fixed;top:162px;bottom:0;left:0;width:265px;padding:22px;overflow:auto;background:#eef3ef;border-right:1px solid #dae3dd}aside a{display:block;padding:8px 4px;text-decoration:none;font-size:12px;color:#48665b;border-bottom:1px solid #dce5dd}main{max-width:1120px;margin-left:265px;padding:0 42px 60px}article{padding:38px 0;border-bottom:1px solid #c8d4cc;scroll-margin-top:18px}.filename{font:11px monospace;color:#80968a;letter-spacing:.3px;margin-bottom:15px}h2{font-size:28px;line-height:1.5;font-weight:500;color:#214c3b;margin:8px 0 25px}h3{font-size:21px;font-weight:500;margin-top:30px}h4{font-size:17px;font-weight:600;margin-top:24px}p{margin:9px 0}a{color:#237a68;text-underline-offset:3px}pre{background:#eaf0ea;border:1px solid #dbe4dc;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}code{font-family:ui-monospace,monospace;font-size:.9em;background:#e6eee8;padding:2px 4px;border-radius:3px}pre code{padding:0;background:none}.table-scroll{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:11px 12px;text-align:left;vertical-align:top;border:1px solid #d4dfd6;min-width:80px}th{background:#eaf2ea;font-weight:600}blockquote{border-left:3px solid #bb9272;background:#faf4ea;margin:18px 0;padding:14px 18px;font-size:14px}.list-item{padding-left:14px;color:#3b5148}button{background:#e0ebe0;color:#285a47;border:1px solid #aec6b5;padding:7px 12px;cursor:pointer}#menu{display:none}@media(max-width:880px){header{padding:24px}aside{display:none;position:relative;top:auto;width:100%;max-height:50vh}aside.show{display:block}main{margin-left:0;padding:0 22px 40px}#menu{display:block;margin-top:16px}h2{font-size:23px}body{font-size:14px}}@media print{aside,#menu{display:none}main{margin:0;max-width:none}article{break-before:page}header{border:0}}</style></head><body><header><h1>SWIPE / AI · 项目计划与设计文档</h1><p>v0.1.0 · 86页UI工作台 · 基于认可的V3 · 公开源码快照与原始历史包；模型与云端服务未连接</p><button id="menu" onclick="document.querySelector('aside').classList.toggle('show')">文档目录</button></header><aside><a href="#doc-0">SWIPE / AI — AI Phone UI</a><a href="#doc-1">项目协作规则</a><a href="#doc-2">Changelog</a><a href="#doc-3">文档导航</a><a href="#doc-4">无障碍与替代操作</a><a href="#doc-5">文案规则</a><a href="#doc-6">设计系统 v1</a><a href="#doc-7">信息架构</a><a href="#doc-8">手势与状态契约 v1</a><a href="#doc-9">响应式与设备适配</a><a href="#doc-10">完整界面清单 — 0.1.0</a><a href="#doc-11">状态与恢复矩阵</a><a href="#doc-12">全流程交互设计</a><a href="#doc-13">未来能力适配契约（未实现）</a><a href="#doc-14">架构与维护边界</a><a href="#doc-15">发布与交付</a><a href="#doc-16">远端状态与历史边界</a><a href="#doc-17">UI-011：恢复一致性（重建后本地提交）</a><a href="#doc-18">测试计划</a><a href="#doc-19">项目宪章</a><a href="#doc-20">当前状态 — v0.1.0</a><a href="#doc-21">决策记录</a><a href="#doc-22">开发交接入口</a><a href="#doc-23">下一步，只从这里继续</a><a href="#doc-24">2026-10-07 本地提交恢复记录</a><a href="#doc-25">执行计划</a><a href="#doc-26">v0.1.0 验证记录</a><a href="#doc-27">官方参考与采用方式</a></aside><main><article id="doc-0"><div class="filename">README.md</div><h2>SWIPE / AI — AI Phone UI</h2>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWIPE / AI · 项目计划与设计文档</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8f6;color:#253330;font-family:system-ui,"Microsoft YaHei",sans-serif;line-height:1.85;font-size:15px}header{padding:32px 34px;border-bottom:1px solid #d6dfdb;background:#fff;position:relative}header h1{font-size:26px;margin:0 0 8px;font-weight:500}header p{margin:0;color:#687b75;font-size:13px}aside{position:fixed;top:162px;bottom:0;left:0;width:265px;padding:22px;overflow:auto;background:#eef3ef;border-right:1px solid #dae3dd}aside a{display:block;padding:8px 4px;text-decoration:none;font-size:12px;color:#48665b;border-bottom:1px solid #dce5dd}main{max-width:1120px;margin-left:265px;padding:0 42px 60px}article{padding:38px 0;border-bottom:1px solid #c8d4cc;scroll-margin-top:18px}.filename{font:11px monospace;color:#80968a;letter-spacing:.3px;margin-bottom:15px}h2{font-size:28px;line-height:1.5;font-weight:500;color:#214c3b;margin:8px 0 25px}h3{font-size:21px;font-weight:500;margin-top:30px}h4{font-size:17px;font-weight:600;margin-top:24px}p{margin:9px 0}a{color:#237a68;text-underline-offset:3px}pre{background:#eaf0ea;border:1px solid #dbe4dc;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}code{font-family:ui-monospace,monospace;font-size:.9em;background:#e6eee8;padding:2px 4px;border-radius:3px}pre code{padding:0;background:none}.table-scroll{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:11px 12px;text-align:left;vertical-align:top;border:1px solid #d4dfd6;min-width:80px}th{background:#eaf2ea;font-weight:600}blockquote{border-left:3px solid #bb9272;background:#faf4ea;margin:18px 0;padding:14px 18px;font-size:14px}.list-item{padding-left:14px;color:#3b5148}button{background:#e0ebe0;color:#285a47;border:1px solid #aec6b5;padding:7px 12px;cursor:pointer}#menu{display:none}@media(max-width:880px){header{padding:24px}aside{display:none;position:relative;top:auto;width:100%;max-height:50vh}aside.show{display:block}main{margin-left:0;padding:0 22px 40px}#menu{display:block;margin-top:16px}h2{font-size:23px}body{font-size:14px}}@media print{aside,#menu{display:none}main{margin:0;max-width:none}article{break-before:page}header{border:0}}</style></head><body><header><h1>SWIPE / AI · 项目计划与设计文档</h1><p>v0.1.0 · 86页UI工作台 · 基于认可的V3 · 公开源码快照与原始历史包；模型与云端服务未连接</p><button id="menu" onclick="document.querySelector('aside').classList.toggle('show')">文档目录</button></header><aside><a href="#doc-0">SWIPE / AI — AI Phone UI</a><a href="#doc-1">项目协作规则</a><a href="#doc-2">Changelog</a><a href="#doc-3">文档导航</a><a href="#doc-4">无障碍与替代操作</a><a href="#doc-5">文案规则</a><a href="#doc-6">设计系统 v1</a><a href="#doc-7">信息架构</a><a href="#doc-8">手势与状态契约 v1</a><a href="#doc-9">响应式与设备适配</a><a href="#doc-10">完整界面清单 — 0.1.0</a><a href="#doc-11">状态与恢复矩阵</a><a href="#doc-12">全流程交互设计</a><a href="#doc-13">未来能力适配契约（未实现）</a><a href="#doc-14">架构与维护边界</a><a href="#doc-15">发布与交付</a><a href="#doc-16">远端状态与历史边界</a><a href="#doc-17">UI-011：恢复一致性</a><a href="#doc-18">测试计划</a><a href="#doc-19">项目宪章</a><a href="#doc-20">当前状态 — v0.1.0</a><a href="#doc-21">决策记录</a><a href="#doc-22">开发交接入口</a><a href="#doc-23">下一步，只从这里继续</a><a href="#doc-24">2026-10-07 本地提交恢复记录（历史）</a><a href="#doc-25">执行计划</a><a href="#doc-26">v0.1.0 验证记录</a><a href="#doc-27">官方参考与采用方式</a></aside><main><article id="doc-0"><div class="filename">README.md</div><h2>SWIPE / AI — AI Phone UI</h2>
 <p>!<span>SWIPE / AI</span></p>
 <p><a href="https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml/badge.svg?branch=main" target="_blank" rel="noopener noreferrer">![UI quality</a>](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml)</p>
-<blockquote>2026-10-07 本地恢复检查点：远端仍只有 LICENSE，源码尚未形成远端提交。见 <a href="#doc-24">恢复记录</a>。</blockquote>
+<p><a href="https://img.shields.io/github/license/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">![Repository license</a>](LICENSE)</p>
+<blockquote>源码与 UI-011 恢复一致性修复已发布。UI 代码提交 <a href="https://github.com/ForceMind/ai-phone-ui/commit/8544894e9c32511c9e3a03a47fe96c19ceaf7918" target="_blank" rel="noopener noreferrer">8544894e</a> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482" target="_blank" rel="noopener noreferrer">GitHub CI</a> 通过：25 静态、56 单元、127 浏览器回归。原始五次提交/标签按字节保存在历史包中；没有部署网站或连接真实服务。</blockquote>
 <p>一套以 <strong>N9 三视图 + Sailfish 边缘手势、Peek、活动封面、Pulley</strong> 为基础的 AI 手机界面与交互项目。</p>
 <p><strong>当前：v0.1.0 UI 原型 / 86 个登记界面 / 单文件离线预览。</strong> 这是用户认可的 V3 的工程化延续，不是回到“聊天机器人 + 底部导航”。</p>
-<blockquote>本仓库采用完整源码快照 + 原始历史包。原来的 5 次提交及 v0.1.0-ui 注释标签可从 历史包 恢复，未导入 GitHub 提交祖先图。保留现有 LICENSE 初始提交，未部署网站。徽章读取真实状态；CI 证据见 <a href="#doc-16">远端状态</a>。</blockquote>
+<blockquote>本仓库采用完整源码快照 + 原始历史包。原来的 5 次提交及 v0.1.0-ui 注释标签可从 <span>历史包</span> 恢复，未导入 GitHub 提交祖先图。保留现有 LICENSE 初始提交，未部署网站。徽章读取真实状态；CI 证据见 <a href="#doc-16">远端状态</a>。</blockquote>
 <h3>立即体验</h3>
 <p>打开 <code>dist/index.html</code>。手机或电脑浏览器都可使用；不需要登录、安装依赖或输入 API 密钥。左侧目录 / 手机端“界面目录”可进入全部界面；右侧是设计检查面板，<strong>不是手机系统的一部分</strong>。</p>
 <p>下载文件在应用内预览不执行脚本时，请保存后用浏览器打开。部分浏览器限制本地文件持久存储、相机或语音，原型会显示限制，不会声称授权成功。</p>
@@ -30,15 +31,15 @@ npm run docs</code></pre>
 <p>开发服务仅监听本机 <code>127.0.0.1:4173</code>。生产发布不需要 Node 服务，<code>dist/</code> 是静态文件；没有自动发布或遥测。</p>
 <p>浏览器测试默认通过 DOM 注入运行，并显式采用内存存储成功路径与存储拒绝路径，方便在受限沙盒中复现。它<strong>不证明</strong>真实 file:// 持久化或实机权限行为。设置 <code>CHROMIUM_PATH</code> 可选择已有 Chromium。</p>
 <h3>目录与事实来源</h3>
-<div class="table-scroll"><table><tr><th>路径</th><th>用途</th></tr><tr><td><code>reference/</code></td><td>原封不动的已认可 V3 与 SHA256 来源记录</td></tr><tr><td><code>src/template.html</code></td><td>原型外壳</td></tr><tr><td><code>src/js/core.js</code></td><td>已认可手势、任务会话及本机能力；仍有待拆分的旧全局代码</td></tr><tr><td><code>src/js/suite.js</code></td><td>完整界面与本机动作</td></tr><tr><td><code>src/js/model.cjs</code></td><td>可独立测试的状态校验与纯逻辑</td></tr><tr><td><code>src/js/workbench.js</code></td><td>手机外的目录、状态检查、流程检查工具</td></tr><tr><td><code>src/styles/</code></td><td>基础外观、页面组件、工作台样式</td></tr><tr><td><code>src/data/screens.json</code></td><td><strong>唯一界面目录</strong>：编号、父级、状态与本机/预览边界</td></tr><tr><td><code>src/data/tokens.json</code></td><td>设计参数参考；改动需同步实际 CSS/手势实现并测试</td></tr><tr><td><code>src/contracts/</code></td><td>未来能力适配契约；不表示已有后端</td></tr><tr><td><code>docs/</code></td><td>产品、设计、工程、QA 与交接</td></tr><tr><td><code>planning/</code></td><td>本地里程碑与待办，不是假装已经创建的 GitHub Issues</td></tr><tr><td><code>dist/index.html</code></td><td>由构建生成的独立体验文件，请勿直接修改</td></tr></table></div>
+<div class="table-scroll"><table><tr><th>路径</th><th>用途</th></tr><tr><td><code>reference/</code></td><td>原封不动的已认可 V3 与 SHA256 来源记录</td></tr><tr><td><code>src/template.html</code></td><td>原型外壳</td></tr><tr><td><code>src/js/core.js</code></td><td>已认可手势、任务会话及本机能力；仍有待拆分的旧全局代码</td></tr><tr><td><code>src/js/suite.js</code></td><td>完整界面与本机动作</td></tr><tr><td><code>src/js/model.cjs</code></td><td>可独立测试的状态校验与纯逻辑</td></tr><tr><td><code>src/js/workbench.js</code></td><td>手机外的目录、状态检查、流程检查工具</td></tr><tr><td><code>src/styles/</code></td><td>基础外观、页面组件、工作台样式</td></tr><tr><td><code>src/data/screens.json</code></td><td><strong>唯一界面目录</strong>：编号、父级、状态与本机/预览边界</td></tr><tr><td><code>src/data/tokens.json</code></td><td>设计参数参考；改动需同步实际 CSS/手势实现并测试</td></tr><tr><td><code>src/contracts/</code></td><td>未来能力适配契约；不表示已有后端</td></tr><tr><td><code>docs/</code></td><td>产品、设计、工程、QA 与交接</td></tr><tr><td><code>planning/</code></td><td>原有里程碑、待办与六张已核对 Epic 的映射</td></tr><tr><td><code>dist/index.html</code></td><td>由构建生成的独立体验文件，请勿直接修改</td></tr></table></div>
 <h3>继续工作之前</h3>
 <p>依次阅读 <a href="#doc-1">AGENTS</a> → <a href="#doc-19">项目宪章</a> → <a href="#doc-20">当前状态</a> → <a href="#doc-23">下一步</a> → <a href="#doc-22">交接</a>。</p>
 <p>设计人员从 <a href="#doc-10">界面总表</a>、<a href="#doc-8">手势规范</a>、<a href="#doc-12">用户流程</a> 开始。开发人员从 <a href="#doc-14">架构</a>、<a href="#doc-18">测试计划</a>、<a href="#doc-15">发布</a> 开始。</p>
 <h3>继续维护此仓库</h3>
-<p>公开仓库已存在，不再执行历史建仓脚本。基于实际远端 HEAD 进行普通提交或既定 PR；不 force push、不重新创建原始标签。旧历史按 恢复说明 克隆到新目录。</p>
-<p>完整入口：<a href="#doc-3">文档索引</a> · <a href="#doc-25">路线图</a> · 交接</p>
+<p>公开仓库已存在，不再执行历史建仓脚本。基于实际远端 HEAD 进行普通提交或既定 PR；不 force push、不重新创建原始标签。旧历史按 <span>恢复说明</span> 克隆到新目录。</p>
+<p>完整入口：<a href="#doc-3">文档索引</a> · <a href="#doc-25">路线图</a> · <span>交接</span></p>
 <h3>设计来源与授权</h3>
-<p>本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。<a href="#doc-27">来源与映射</a>。根目录 LICENSE 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。</p></article><article id="doc-1"><div class="filename">AGENTS.md</div><h2>项目协作规则</h2>
+<p>本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。<a href="#doc-27">来源与映射</a>。根目录 <span>LICENSE</span> 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。</p></article><article id="doc-1"><div class="filename">AGENTS.md</div><h2>项目协作规则</h2>
 <h3>必须先恢复事实</h3>
 <p class="list-item">1. <code>git status --short</code>、<code>git branch --show-current</code>、<code>git log -5 --oneline</code>；保护未提交内容。</p>
 <p class="list-item">2. 有远端且已授权时才 fetch；核对实际 HEAD、PR、exact-head CI。不能把旧报告当最新成功。</p>
@@ -63,6 +64,11 @@ npm run docs</code></pre>
 <p class="list-item">- 每个新页面需编号、父级、空/错/取消方案、至少一个交互断言和可检索入口。</p>
 <p class="list-item">- 手势阈值按 360×672 逻辑坐标；不要混用页面缩放后的物理像素。</p>
 <p class="list-item">- 不删除已经存在的 tests 来“修复”失败；不能把断言换成只看页面存在。</p></article><article id="doc-2"><div class="filename">CHANGELOG.md</div><h2>Changelog</h2>
+<h3>2026-10-07 — 远端发布完成</h3>
+<p class="list-item">- M0 <code>dab0df96</code> 发布完整源码、不可变原始历史包及真实 CI；保留 LICENSE 父提交</p>
+<p class="list-item">- UI-011 <code>8544894e</code> 独立发布恢复一致性修复，25 静态/56 单元/127 新浏览器回归通过</p>
+<p class="list-item">- 更新当前状态、交接、路线图和质量证据，旧仅 LICENSE/审批阻塞记录改为历史</p>
+<p class="list-item">- 原 5 次提交及标签保存在 bundle，不宣称已导入远端祖先图；未部署或连接服务</p>
 <h3>2026-10-07 — 本地恢复及 UI-011 提交</h3>
 <p class="list-item">- 精确保留原历史包，并从已验证指南重建文档</p>
 <p class="list-item">- 重建已审核的恢复一致性修复，失败保留资料和可重试确认</p>
@@ -93,7 +99,8 @@ npm run docs</code></pre>
 <p>开始开发必须优先核对实际 Git 工作区和当前 HEAD，文档本身不是远端同步证明。</p>
 <h3>来源与接续</h3>
 <p><a href="#doc-16">远端状态</a> · 原始历史恢复 · 交接</p>
-<p><a href="#doc-24">2026-10-07 恢复记录</a> · <a href="#doc-17">UI-011 存储恢复</a></p></article><article id="doc-4"><div class="filename">docs/design/ACCESSIBILITY.md</div><h2>无障碍与替代操作</h2>
+<p><a href="#doc-24">2026-10-07 恢复记录</a> · <a href="#doc-17">UI-011 存储恢复</a></p>
+<p><span>远端发布证据</span></p></article><article id="doc-4"><div class="filename">docs/design/ACCESSIBILITY.md</div><h2>无障碍与替代操作</h2>
 <p>手势是默认交互，但不能是唯一入口。设置中可开启可点按的返回/活动/菜单控件；这不是给默认设计恢复底栏。已有键盘路径、焦点轮廓、语义按钮、输入标签和不活跃层 inert。</p>
 <p>快捷键 H 活动、E 事件、A 能力、T 控制、M 菜单、Esc 返回。文本输入中不拦截这些字母；焦点按钮的空格交给按钮本身。</p>
 <p>下一阶段验收：全部页面合理的焦点次序；弹层开启/关闭后的焦点归还；读屏能知道当前层级、错误和待确认对象；可达控件足够大；放大文字不截断；不通过颜色唯一表达成功/失败；减少动效关闭动态装饰；浏览器手势被系统抢走时不误提交。</p>
@@ -767,14 +774,18 @@ npm run docs</code></pre>
 <p>本仓库采用源码快照 + 原始历史包，在已存在 LICENSE 初始提交后正常提交。旧 publish-github.sh 只保留为历史建仓工具，不用于现有仓库；不 force push、不重制原始标签。</p>
 <p>Actions 只构建、检查、测试和上传当次日志/静态产物；先清除历史结果，不自动部署、不申请 secret。必须核对 exact-head CI 和 artifact/source-head.txt。公开仓库不代表网站已部署，本批不启用 Pages 或发布 release。</p>
 <p>0.1.x 维护 UI 基线；0.2.0 聚焦体验与模块化；真实能力接入按独立里程碑。不能称为已完成 Android 系统。</p></article><article id="doc-16"><div class="filename">docs/engineering/REMOTE_STATUS.md</div><h2>远端状态与历史边界</h2>
-<p>公开仓库 <a href="https://github.com/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">ForceMind/ai-phone-ui</a> 使用用户批准的源码快照同步。在所有者 LICENSE 初始提交 <code>e5c33cbadedebcc4fb8f4d09132045f907bd7af0</code> 后新增普通提交，不覆盖历史、不 force push。</p>
-<p>原始五次提交与 v0.1.0-ui 注释标签完整保存在 原始历史包，未成为 GitHub 祖先或远端标签。原始 HEAD 为 <code>47b882b43b70750f250ff945aa2b7f0468bb0855</code>，156 个跟踪文件可独立恢复。本快照仅叠加 M0 文档、CI、远端状态和许可元数据修正；UI 行为与 V3 原版不变。</p>
-<p>根目录 LICENSE blob 保持 <code>0ad25db4bd1d86c452db3f9602ccdbe172438f52</code>；历史占位通知另存。现有连接可完成同步，无需新的 CLI 登录、凭据或持久授权。</p>
-<h3>CI 证据</h3>
-<p>必须查看 <a href="https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml" target="_blank" rel="noopener noreferrer">UI quality</a> 与当前提交 SHA 一致的运行。此快照的远端 CI 待核对，不能提前宣称通过。CI 先移除归档结果，记录 source-head.txt 并保留当次日志与产物；本地成功或历史 126/126 不能冒充远端成功。</p>
-<p>2026-10-06 重建候选的本地 build/static/unit 单独复验。此前受限环境的浏览器在启动时失败，0 项断言；归档浏览器 126/126 仅为旧 DOM fixture 结果。即使 GitHub CI 通过，也不能替代 Android/iOS 实机、真实 origin 存储和相机/语音权限验收。</p>
-<h3>发布边界</h3>
-<p>仓库公开不等于网站部署；本批不启用 Pages、不部署、不发布 release、不接入真实服务。历史建仓脚本不用于此现有仓库。后续以实际远端、CI 和 <a href="#doc-23">下一步</a> 为准。</p></article><article id="doc-17"><div class="filename">docs/engineering/STORAGE_RECOVERY.md</div><h2>UI-011：恢复一致性（重建后本地提交）</h2>
+<h3>已完成发布（2026-10-07）</h3>
+<p><a href="https://github.com/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">ForceMind/ai-phone-ui</a> 公开源码已发布：</p>
+<p class="list-item">1. 原 LICENSE 提交 e5c33cbadedebcc4fb8f4d09132045f907bd7af0 保留为祖先</p>
+<p class="list-item">2. M0 快照 <a href="https://github.com/ForceMind/ai-phone-ui/commit/dab0df965aab58636c893161c6d4a6ef205a948d" target="_blank" rel="noopener noreferrer">dab0df96</a>，树 20f494d2b9a119ee5ec526cb0c9ecac5ef208388，163 个文件逐一核对</p>
+<p class="list-item">3. UI-011 <a href="https://github.com/ForceMind/ai-phone-ui/commit/8544894e9c32511c9e3a03a47fe96c19ceaf7918" target="_blank" rel="noopener noreferrer">8544894e</a>，树 25a804a7de786f5bec3797e6a55f1731d7fc9a55，168 个文件逐一核对</p>
+<p>两次 main 更新均非 force，并检查预期父提交。旧“仅 LICENSE / 图集审批待处理”的记载属于发布前历史，不再是当前阻塞。</p>
+<h3>来源未改写</h3>
+<p>根目录 LICENSE blob 始终为 0ad25db4bd1d86c452db3f9602ccdbe172438f52。provenance/project-history.bundle SHA256 为 76c662253478dbcf8946d3d40e8b4818a62fc48adbc11cffe46c83246f09e2f7，已从 GitHub 正常克隆后复核。</p>
+<p>原始 HEAD 47b882b43b70750f250ff945aa2b7f0468bb0855 的 5 次提交及原注释标签保存在 bundle 中；不声称是远端祖先，不在远端重新创建同名标签。历史待定许可通知保留，不能宣称原始版本原本采用 AGPL。见 <span>恢复说明</span>。</p>
+<h3>CI 与发布范围</h3>
+<p>M0 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789" target="_blank" rel="noopener noreferrer">运行</a> 与 UI-011 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482" target="_blank" rel="noopener noreferrer">运行</a> 均成功，日志及 artifact 对应各自 exact HEAD。当前分支后来有任何更新，都应再核对该提交自己的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml" target="_blank" rel="noopener noreferrer">CI</a>。</p>
+<p>未部署 Pages/站点、未发布 release、未接入真实账号或模型。公开仓库和 DOM fixture 成功不能证明真实设备、持久存储 origin 或外部服务通过。</p></article><article id="doc-17"><div class="filename">docs/engineering/STORAGE_RECOVERY.md</div><h2>UI-011：恢复一致性</h2>
 <p>恢复原本先替换内存、分别写 core/suite、吞掉失败后仍 reload，会留下新旧混合资料。本修复是已审核工作在工作区回退后的重建，没有增加新功能。</p>
 <h3>协议</h3>
 <p class="list-item">- 旧安装在首次成功恢复前继续使用原有两个 key，不在启动时迁移</p>
@@ -785,7 +796,7 @@ npm run docs</code></pre>
 <p>采用 <a href="https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-setitem" target="_blank" rel="noopener noreferrer">Web Storage setItem 规则</a>。不声称有跨窗口锁或断电耐久性；并发标签冲突、实机容量差异和真实 origin 尚待验证。首次写入需要临时额外空间，失败时不会先删除旧资料。</p>
 <h3>本次证据</h3>
 <p>2026-10-07 重建树重新运行构建、25/25 静态、56/56 单元（原 32 项 + 重建的 24 项存储/生产处理器故障注入），全部通过。新增的浏览器配额失败用例已恢复，但实际 Chromium 在 socket() 阶段启动失败，0 项断言执行；历史 126/126 不能替代本轮结果。</p>
-<p>远端仍只有 LICENSE，原图集平台审批未解决。本地提交不是已推送或远端 CI 成功。后续先完成 M0 正常发布，再对本修复运行 exact-head CI 和真实 origin/设备验收。</p></article><article id="doc-18"><div class="filename">docs/engineering/TEST_PLAN.md</div><h2>测试计划</h2>
+<p>UI-011 已发布，<a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482" target="_blank" rel="noopener noreferrer">https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482</a> 的 exact-head CI 通过 25 静态、56 单元、127 浏览器回归。真实 origin/设备与配额验收仍开放；早先本地 socket 阻塞是历史环境限制。</p></article><article id="doc-18"><div class="filename">docs/engineering/TEST_PLAN.md</div><h2>测试计划</h2>
 <h3>分层</h3>
 <p class="list-item">1. 静态：目录编号唯一、父链有效、渲染类型存在、动作入口可解释、schema/manifest一致、无未替换构建标记、无外链脚本/样式、文档齐备、V3哈希不变。</p>
 <p class="list-item">2. 单元：状态校验、裁切范围、提取语义、搜索、数据限制、快照不可变、备份不能恢复伪造连接或周期启用。</p>
@@ -814,16 +825,19 @@ npm run docs</code></pre>
 <p>P0 交互语义稳定和用户数据不丢失；P1 操作可学、可逆和无障碍替代；P2 界面密度与美术一致；P3 对接真实能力。远程集成不能反向迫使 UI 变成模拟点击 App 的遥控器。</p>
 <h3>验收负责人</h3>
 <p>产品最终选择与公开发布由仓库所有者确认。AI 可以在已批准范围内实现、测试和补文档；不能擅自改变品牌、创建收费服务或公开私人资料。</p></article><article id="doc-20"><div class="filename">docs/project/CURRENT_STATE.md</div><h2>当前状态 — v0.1.0</h2>
-<h3>范围</h3>
-<p>已认可 V3、源码模块、单 HTML 构建、86 个登记界面（55 本机交互页 / 31 未连接服务预览页）及设计/工程/测试/交接完整保留。三视图、Peek、活动封面、Pulley 和取消语义不变。</p>
-<p>M0 使用公开源码快照 + 原始历史包，在原 LICENSE 提交之后普通提交。原 5 次提交及 v0.1.0-ui 标签在 bundle 内，未导入远端祖先图。见 <a href="#doc-16">远端状态</a> 和 历史恢复。</p>
-<h3>质量</h3>
-<p>2026-10-06 对重建候选重新运行 build、静态和单元检查；结果见 <a href="#doc-26">测试报告</a>。当前提交 exact-head GitHub CI 尚待核对，不能提前声称全绿。旧浏览器 126/126 不是本轮结果；本地环境曾在浏览器启动前阻塞，执行 0 项断言。</p>
-<h3>已知边界</h3>
-<p>真实 Android/iOS、系统边缘、软键盘、真实 origin 存储、配额/恢复和无障碍仍待 M2。文本回复是本机规则，整理只提取原文；模型、云手机、消息、电话、音乐、地图、OAuth、账单和日历账号都未连接，不是完整 Android 系统。</p>
-<p>存储本地且未加密；中心比例裁切与圆形选区不是语义抠图。跨重载不保证所有动态封面布局和精确页面栈。公共状态覆盖层不是每项业务的真实网络错误。后续先补质量证据与三条闭环，再按路线拆分旧全局代码。</p>
-<h3>2026-10-07 恢复后的本地提交</h3>
-<p>UI-011 已从记录重建并重新通过构建、25 静态/56 单元。浏览器启动受 socket 限制，0 断言；不称远端 CI 成功。原 M0 图集审批保持不变，远端仍只有 LICENSE。本地恢复分支及私有恢复包仅用于保存工作。详见 <a href="#doc-24">恢复记录</a> 与 <a href="#doc-17">存储协议</a>。</p></article><article id="doc-21"><div class="filename">docs/project/DECISIONS.md</div><h2>决策记录</h2>
+<h3>已发布</h3>
+<p>2026-10-07 源码基线 <a href="https://github.com/ForceMind/ai-phone-ui/commit/dab0df965aab58636c893161c6d4a6ef205a948d" target="_blank" rel="noopener noreferrer">dab0df96</a> 与独立 UI-011 修复 <a href="https://github.com/ForceMind/ai-phone-ui/commit/8544894e9c32511c9e3a03a47fe96c19ceaf7918" target="_blank" rel="noopener noreferrer">8544894e</a> 已进入 main，并逐文件核对。保留原 LICENSE 初始提交和 LICENSE 字节，没有 force push。</p>
+<p>86 个登记界面仍为 55 本机交互页、31 未连接服务预览页；保留 V3 三视图、Peek、活动封面、Pulley、原片和单 HTML。原始 5 次提交与 v0.1.0-ui 注释标签保存在 <span>不可变历史包</span>，未导入 GitHub 祖先图或重建远端标签。</p>
+<h3>已核对质量</h3>
+<p class="list-item">- M0 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789" target="_blank" rel="noopener noreferrer">CI</a>：24/24 静态、32/32 单元、126/126 新浏览器回归</p>
+<p class="list-item">- UI-011 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482" target="_blank" rel="noopener noreferrer">CI</a>：25/25 静态、56/56 单元、127/127 新浏览器回归</p>
+<p class="list-item">- 已通过正常 Git clone 回读，历史包 SHA256 和 LICENSE blob 均匹配</p>
+<p>这是对应上述提交的真实 Actions 结果。后续文档或代码提交仍应核对自身 SHA 的 CI；不能把旧报告直接当作最新成功。详见 <span>发布证据</span> 与 <a href="#doc-26">测试报告</a>。</p>
+<h3>尚未完成</h3>
+<p>UI-011 原子恢复代码已实现并通过自动化；真实 origin 存储/容量、大图、Android/iOS、系统边缘、软键盘和无障碍仍属于 M2。浏览器测试使用 DOM 注入和内存存储 fixture，不代表这些实机结果。</p>
+<p>模型、云手机、消息、电话、音乐、地图、OAuth、账单及日历账号均未连接；没有部署网站，也不是完整 Android 系统。存储本地且未加密，中心裁切/圆形选区不是语义抠图。下一张工作卡见 <a href="#doc-23">NEXT_ACTION</a>。</p>
+<h3>计划映射</h3>
+<p>已从既有 backlog 建立六张 <span>Epic</span>，覆盖 15 个未完成条目且无重复；没有扩大功能范围，也未创建远端 Milestones。</p></article><article id="doc-21"><div class="filename">docs/project/DECISIONS.md</div><h2>决策记录</h2>
 <h3>ADR-001 / 接受V3而非重设计方向</h3>
 <p>用户明确认可V3融合的系统特性。保留三视图、边缘、Peek、活动封面、Pulley、页面确认；反对回到固定App横向轮播+底条。</p>
 <h3>ADR-002 / 独立UI仓库</h3>
@@ -840,36 +854,24 @@ npm run docs</code></pre>
 <p>不抹掉已经认可的V3行为，先用回归测试保护再拆模块。suite函数包装、原生alias与catalog映射属于下一阶段需要统一的技术债。</p>
 <h3>ADR-008 / 诚实测试边界</h3>
 <p>受限浏览器环境采用DOM注入+显式内存存储fixture和CDP触摸；不能称作真机或file-origin实测。CI文件只是配置，实际远端结果另行读取。</p></article><article id="doc-22"><div class="filename">docs/project/DEVELOPMENT_HANDOFF.md</div><h2>开发交接入口</h2>
-<h3>产品与结构</h3>
-<p>以认可的 N9/Sailfish 融合 V3 为基线，展示名 SWIPE / AI。core 保留 V3 行为，suite 扩展页面，model 承载纯逻辑，workbench 只用于验收；screens.json 为 86 页唯一目录。</p>
-<h3>仓库与来源</h3>
-<p>公开仓库 <a href="https://github.com/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">ForceMind/ai-phone-ui</a> 在已有 LICENSE 提交后采用源码快照同步，不改写历史。原始五次提交、47b882b HEAD 与 v0.1.0-ui 注释标签保存在 bundle，未成为远端祖先或同名标签。根目录 LICENSE 保留；历史许可通知另存。</p>
-<p>2026-10-06 工作区回退后，原始 ZIP、bundle 与源码可按哈希精确恢复；M0 文档/CI 编辑按已批准范围重建，再对实际重建树测试，不将丢失候选的报告当作本次证据。已上传的同 SHA 对象复用，新增内容重新校验。</p>
-<h3>接手步骤</h3>
-<pre><code>git status --short
-git branch --show-current
-git log -6 --oneline
-npm run build
-npm run check
-npm test
-npm run test:ui</code></pre>
-<p>以实际远端 HEAD、PR 与 exact-head CI 为准。不要假设旧沙盒路径或旧报告代表当前成功。</p>
-<h3>不可遗漏</h3>
-<p>保留 Peek 反转、内容/边缘区别、子页 Pulley、固定快照确认、原片、草稿和无常驻底栏。退出/取消不是同意，服务预览不能写成已连接或已执行，前端不收集密钥。</p>
-<p>查看 <a href="#doc-20">当前状态</a>、<a href="#doc-26">QA</a> 和 <a href="#doc-23">M2 下一步</a>。本批只关闭 M0 并登记有限既有工作卡；不扩大云服务范围。</p>
-<h3>2026-10-07 恢复后的本地提交</h3>
-<p>UI-011 已从记录重建并重新通过构建、25 静态/56 单元。浏览器启动受 socket 限制，0 断言；不称远端 CI 成功。原 M0 图集审批保持不变，远端仍只有 LICENSE。本地恢复分支及私有恢复包仅用于保存工作。详见 <a href="#doc-24">恢复记录</a> 与 <a href="#doc-17">存储协议</a>。</p></article><article id="doc-23"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>下一步，只从这里继续</h2>
-<h3>本批 M0 / UI-008 收尾</h3>
-<p>核对源码快照、LICENSE、原始 bundle 哈希、远端 HEAD 和 exact-head CI。只映射既有 backlog 建立少量工作卡，不重复生成页面、批量新增任务或接入外部能力。</p>
-<h3>下一张工作卡：M2 质量门槛</h3>
-<p class="list-item">- 范围：UI-010 / UI-011 / UI-014，聚焦照片、资料、明确确认三条闭环</p>
-<p class="list-item">- Android 与 iOS 各至少一台；记录机型、OS、浏览器；覆盖系统边缘、软键盘、Peek 反转、取消和重复操作</p>
-<p class="list-item">- 真实 origin 下验证备份导入/导出、重载、损坏/过大备份、配额不足和大图压力；失败不得覆盖旧资料</p>
-<p class="list-item">- 验证焦点进入/恢复、读屏、替代操作、大字体与长文</p>
-<p class="list-item">- 退出：缺陷、回归和设备证据齐备；未测项明确记录，DOM fixture 不替代实机结论</p>
-<p>本批在 M0 与 exact-head CI 完成后结束；M2 实机工作需要设备条件。M3 按 UI-012/013/015 等原顺序推进。真实服务、账号、云手机、部署与费用不属于本批，不重新规划 M0–M5。</p>
-<h3>2026-10-07 恢复后的本地提交</h3>
-<p>UI-011 已从记录重建并重新通过构建、25 静态/56 单元。浏览器启动受 socket 限制，0 断言；不称远端 CI 成功。原 M0 图集审批保持不变，远端仍只有 LICENSE。本地恢复分支及私有恢复包仅用于保存工作。详见 <a href="#doc-24">恢复记录</a> 与 <a href="#doc-17">存储协议</a>。</p></article><article id="doc-24"><div class="filename">docs/project/RECOVERY_20261007.md</div><h2>2026-10-07 本地提交恢复记录</h2>
+<h3>先恢复事实</h3>
+<p>读取 AGENTS、CURRENT_STATE 与 NEXT_ACTION；先检查工作区、实际远端 HEAD 和该 SHA 的 CI。源码基线 <a href="https://github.com/ForceMind/ai-phone-ui/commit/dab0df965aab58636c893161c6d4a6ef205a948d" target="_blank" rel="noopener noreferrer">dab0df96</a> 和 UI-011 <a href="https://github.com/ForceMind/ai-phone-ui/commit/8544894e9c32511c9e3a03a47fe96c19ceaf7918" target="_blank" rel="noopener noreferrer">8544894e</a> 已发布，不要再从“仓库只有 LICENSE”或“待恢复上传认证”继续。</p>
+<h3>当前实现</h3>
+<p>保留 V3 的三视图、Peek、活动封面、Pulley、固定快照确认、原片、草稿和单 HTML；86 页目录仍为唯一来源。UI-011 由 storage.cjs 在恢复时一次提交 core/suite，失败保持旧资料和可重试确认；不靠双写回滚假装原子性。</p>
+<p>UI-011 对应 CI 为 25 静态、56 单元、127 浏览器回归通过。测试 harness 仍是 DOM 注入/内存 storage；真实 origin、实机和并发标签冲突合并未证明。无外部服务连接或网站部署。</p>
+<h3>历史与接续</h3>
+<p>原 5 次提交/注释标签在 provenance 的原始 bundle 中，不在远端祖先图；根目录 LICENSE 原字节保留。先前工作区回退的恢复记载是历史，当前仓库可直接正常克隆。禁止 force push 或重建原始标签。</p>
+<p>继续工作前运行 npm run build、npm run check、npm test、npm run test:ui；受限环境失败必须记录，不用旧报告替代。下一批仅按 <a href="#doc-23">M2 卡</a> 验收真实存储/设备，UI-011 整项仍不应提前关闭。</p></article><article id="doc-23"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>下一步，只从这里继续</h2>
+<h3>本批已关闭</h3>
+<p>M0 / UI-008 的源码快照、原始历史包、LICENSE、远端 readback 和真实 CI 已完成。UI-011 的原子恢复修复已独立发布并通过新浏览器回归。本批到发布状态清理与最终 exact-head CI 为止，不新增功能或服务。</p>
+<h3>下一张工作卡：M2 实际环境验收</h3>
+<p class="list-item">- 对应既有 UI-010 / UI-011 / UI-014，聚焦照片、资料、明确确认三条闭环</p>
+<p class="list-item">- 正常 origin 下验证成功恢复、重载、存储拒绝、配额不足、损坏/过大备份和大图；失败不得覆盖原资料</p>
+<p class="list-item">- Android 与 iOS 各至少一台，记录机型/OS/浏览器，检查系统边缘、软键盘、Peek 反转、重复与取消</p>
+<p class="list-item">- 核对焦点恢复、读屏、替代操作、大字体和长文</p>
+<p class="list-item">- 退出条件：缺陷关闭且有实际环境证据；未测项明确记录，不能用 Node VM 或 DOM fixture 代替</p>
+<p>现有 planning/issues.json 保留 24 项计划；<span>六张已创建 Epic</span> 无重复映射 15 个既有未完成条目。M3/M4/M5 按原顺序后续推进，不重新规划、不重复生成 86 页、不自动连接云服务或部署。</p></article><article id="doc-24"><div class="filename">docs/project/RECOVERY_20261007.md</div><h2>2026-10-07 本地提交恢复记录（历史）</h2>
+<blockquote>后续结果：M0 与 UI-011 均已发布并通过 GitHub CI；下文保留恢复时点事实，不表示当前仍有审批或上传阻塞。当前状态见 <a href="#doc-16">REMOTE_STATUS</a>。</blockquote>
 <h3>可验证来源</h3>
 <p>工作区再次回退，原本的 M0 工作树 cce530cbd90a0c34d3f39a17908d01b1212fee89、UI-011 工作树 a5173d8ff17fcfc88baa60bcf54cf903b059c796 与补丁文件已不在本地，不能把它们说成仍然可用。</p>
 <p>原始 ZIP SHA256 0fcfeda117f705a210c54ca2608b318de18432e8f3709ed88fd597dba246c7b4；原始 bundle SHA256 76c662253478dbcf8946d3d40e8b4818a62fc48adbc11cffe46c83246f09e2f7，均重新核对。原始 5 次提交和注释标签可恢复，原始 HEAD 为 47b882b43b70750f250ff945aa2b7f0468bb0855。</p>
@@ -881,7 +883,7 @@ npm run test:ui</code></pre>
 <p>恢复了先前审核的单快照持久化、失败保留确认、24 项单元回归和 1 项浏览器回归。构建 241625 字节；25/25 静态及 56/56 单元通过。浏览器在首次断言前启动失败，执行 0 项。当前补丁与新提交不冒充已丢失的 6554da6b 旧补丁；新清单将记录本轮真实哈希和提交。</p></article><article id="doc-25"><div class="filename">docs/project/ROADMAP.md</div><h2>执行计划</h2>
 <h3>已批准方向</h3>
 <p>继续V3的空间与手势，不重新回到“多个应用页面+底栏”。本仓库负责整个手机体验的UI、交互规则、资料状态与适配契约，实际云服务后续分批接入。</p>
-<div class="table-scroll"><table><tr><th>阶段</th><th>交付</th><th>退出条件</th><th>当前</th></tr><tr><td>M0 基线/仓库</td><td>V3归档、Git历史、远端</td><td>原版哈希不变，远端HEAD可读</td><td>源码快照 + 原始历史包；当前提交 CI 待核对</td></tr><tr><td>M1 UI全景</td><td>86页、完整信息架构、通用组件、主要流程</td><td>每页可进/可退/状态明确；一份HTML可演示</td><td>本次交付</td></tr><tr><td>M2 质量门槛</td><td>单元/浏览器/实机/存储/无障碍</td><td>缺陷关闭，未测项有证据或明确接受</td><td>自动化进行/完成见QA，实机待做</td></tr><tr><td>M3 体验和架构收敛</td><td>聚焦3条高频闭环、模块拆分、token统一</td><td>手感稳定、代码可维护、无隐式状态重置</td><td>下一版</td></tr><tr><td>M4 能力接入</td><td>先文字/相机，再生图/任务事件</td><td>真授权、真回执、失败恢复、成本边界</td><td>尚未开始</td></tr><tr><td>M5 原生与云手机</td><td>系统壳/云环境试验</td><td>另行确认范围、平台实测和成本</td><td>后续独立评估</td></tr></table></div>
+<div class="table-scroll"><table><tr><th>阶段</th><th>交付</th><th>退出条件</th><th>当前</th></tr><tr><td>M0 基线/仓库</td><td>V3归档、Git历史、远端</td><td>原版哈希不变，远端HEAD可读</td><td>已发布并完成 readback / exact-head CI</td></tr><tr><td>M1 UI全景</td><td>86页、完整信息架构、通用组件、主要流程</td><td>每页可进/可退/状态明确；一份HTML可演示</td><td>本次交付</td></tr><tr><td>M2 质量门槛</td><td>单元/浏览器/实机/存储/无障碍</td><td>缺陷关闭，未测项有证据或明确接受</td><td>自动化进行/完成见QA，实机待做</td></tr><tr><td>M3 体验和架构收敛</td><td>聚焦3条高频闭环、模块拆分、token统一</td><td>手感稳定、代码可维护、无隐式状态重置</td><td>下一版</td></tr><tr><td>M4 能力接入</td><td>先文字/相机，再生图/任务事件</td><td>真授权、真回执、失败恢复、成本边界</td><td>尚未开始</td></tr><tr><td>M5 原生与云手机</td><td>系统壳/云环境试验</td><td>另行确认范围、平台实测和成本</td><td>后续独立评估</td></tr></table></div>
 <h3>推荐节奏（不是交付承诺）</h3>
 <p>假设1位前端+1位交互设计、已有测试手机：第1个迭代做M2实机/存储/关键流程；第2个迭代收敛M3组件/状态；第3个迭代引入一个受控adapter；第4个迭代扩大真实任务接续。每个迭代建议1–2周，实际取决于反馈与平台权限，不把估算写成排期事实。</p>
 <h3>优先完成的三条闭环</h3>
@@ -891,9 +893,14 @@ npm run test:ui</code></pre>
 <p>全套UI已经建立，后续不需要再建86个占位屏，而是把关键链路从原型提升到正式体验。</p>
 <h3>范围变更</h3>
 <p>新增支付、社交网络、App市场、复杂图像工具、后台云集群必须单独记录ADR/费用/许可/验收。先解决确认幂等、状态恢复和操作冲突，不能用增加页面数代替进展。</p></article><article id="doc-26"><div class="filename">docs/qa/TEST_REPORT.md</div><h2>v0.1.0 验证记录</h2>
+<h3>当前远端发布验证（2026-10-07）</h3>
+<p class="list-item">- M0 <code>dab0df965aab58636c893161c6d4a6ef205a948d</code>：<a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789" target="_blank" rel="noopener noreferrer">Actions</a> 成功，24/24 静态、32/32 单元、126/126 浏览器</p>
+<p class="list-item">- UI-011 <code>8544894e9c32511c9e3a03a47fe96c19ceaf7918</code>：<a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482" target="_blank" rel="noopener noreferrer">Actions</a> 成功，25/25 静态、56/56 单元、127/127 浏览器</p>
+<p class="list-item">- 两次均先删除历史结果，日志及 artifact 对应具体 source HEAD；新增恢复配额失败测试已在新运行通过</p>
+<p>这是正常 GitHub Chromium 的新 DOM fixture 结果，不是复用旧 126/126。以下保留本地恢复和原归档记录作为历史；不得用它们替代后续提交的 exact-head CI。真实 origin、Android/iOS、权限、配额/大图仍待实测。</p>
 <h3>2026-10-06 重建候选验证</h3>
 <p>实际重建树重新执行 build、静态 24/24、单元 32/32，全部通过。构建为 238505 字节，SHA256 <code>db8ab10be7af577c55d465c062db477c4dc0911921ca91cd23c69436b7ec2fe3</code>。原始 ZIP、bundle 和 UI 行为源码精确恢复，文档/CI 修改重新生成。此前本地 Chromium 在首次断言前因 socket 限制启动失败，执行 0 项；未把旧浏览器报告算作新成功。</p>
-<p>当前 exact-head GitHub CI 待核对。远端 UI 测试是 DOM 注入与内存 storage fixture，不能代替真实 origin、权限或 Android/iOS 实机验收。</p>
+<p>该历史恢复时点的 GitHub CI 尚未核对，当前结果见顶部。远端 UI 测试是 DOM 注入与内存 storage fixture，不能代替真实 origin、权限或 Android/iOS 实机验收。</p>
 <h3>原始归档结果（历史，不计入本轮通过）</h3>
 <div class="table-scroll"><table><tr><th>层级</th><th>结果</th><th>证据</th></tr><tr><td>构建与静态规范</td><td>24/24通过</td><td>static-results.json</td></tr><tr><td>Node纯逻辑</td><td>32/32通过</td><td>unit-results.txt</td></tr><tr><td>浏览器UI回归</td><td>126/126通过</td><td>browser-results.json</td></tr><tr><td>界面渲染</td><td>86/86登记页可挂载与定位</td><td>route:开头的检查</td></tr><tr><td>浏览器异常</td><td>未捕获JS异常0个</td><td>page_errors</td></tr><tr><td>默认外发请求</td><td>HTTP/HTTPS/WS/WSS记录0个</td><td>network_requests</td></tr><tr><td>发布脚本</td><td>bash -n语法检查通过</td><td>scripts/publish-github.sh；未执行真实创建</td></tr><tr><td>GitHub Actions</td><td>未运行</td><td>仅提交workflow文件；原始归档当时未建远端</td></tr></table></div>
 <p>测试环境：v22.16.0；Chromium 144.0.7559.96 built on Debian GNU/Linux 13 (trixie)；Python Playwright按requirements-dev.txt。记录时间由运行环境生成：2026-10-04T16:46:26.132025+00:00。</p>
@@ -912,7 +919,7 @@ npm run test:ui</code></pre>
 <p class="list-item">- 远端Git、PR、Actions或网站部署。</p>
 <p>这些是后续M2/M4验收任务，不应隐藏在“全绿”或“UI完成”的表述里。全部登记UI完成按项目明确范围计，不是生产系统完成声明。</p>
 <h3>2026-10-07 重建后验证</h3>
-<p>构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。没有新远端 CI。</p></article><article id="doc-27"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。该本地记录当时没有新远端 CI，当前结果见顶部。</p></article><article id="doc-27"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
 <p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
 <p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
 <p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>

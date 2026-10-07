@@ -19,3 +19,5 @@
 [远端状态](engineering/REMOTE_STATUS.md) · 原始历史恢复 · 交接
 
 [2026-10-07 恢复记录](project/RECOVERY_20261007.md) · [UI-011 存储恢复](engineering/STORAGE_RECOVERY.md)
+
+[远端发布证据](qa/PUBLICATION_EVIDENCE.json)

@@ -1,0 +1,110 @@
+{
+  "verified_code_commits": [
+    {
+      "scope": "M0 snapshot",
+      "sha": "dab0df965aab58636c893161c6d4a6ef205a948d",
+      "tree": "20f494d2b9a119ee5ec526cb0c9ecac5ef208388",
+      "files": 163,
+      "run_id": 37594652789,
+      "run_url": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789",
+      "conclusion": "success",
+      "static": 24,
+      "unit": 32,
+      "browser": 126,
+      "artifact_id": 11470146580
+    },
+    {
+      "scope": "UI-011 atomic restore",
+      "sha": "8544894e9c32511c9e3a03a47fe96c19ceaf7918",
+      "tree": "25a804a7de786f5bec3797e6a55f1731d7fc9a55",
+      "files": 168,
+      "run_id": 37595281482,
+      "run_url": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482",
+      "conclusion": "success",
+      "static": 25,
+      "unit": 56,
+      "browser": 127,
+      "artifact_id": 11470871155
+    }
+  ],
+  "original_license_parent": "e5c33cbadedebcc4fb8f4d09132045f907bd7af0",
+  "license_blob": "0ad25db4bd1d86c452db3f9602ccdbe172438f52",
+  "original_bundle_sha256": "76c662253478dbcf8946d3d40e8b4818a62fc48adbc11cffe46c83246f09e2f7",
+  "original_history_imported_into_remote_ancestry": false,
+  "original_tag_recreated_remotely": false,
+  "normal_git_clone_readback": true,
+  "later_commit_rule": "Read the Actions run for each later exact SHA; this file records the code commits above, not an automatically updating claim about HEAD.",
+  "remaining": [
+    "real-origin persistence and quotas",
+    "Android/iOS hardware",
+    "accessibility and large-image stress"
+  ],
+  "deployment": false,
+  "connected_services": false,
+  "epics": [
+    {
+      "group_id": "testing",
+      "title": "EPIC: Testing — M2 实机、存储恢复与无障碍",
+      "backlog_ids": [
+        "UI-010",
+        "UI-011",
+        "UI-014"
+      ],
+      "issue_number": 1,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/1"
+    },
+    {
+      "group_id": "interaction-foundation",
+      "title": "EPIC: Interaction Foundation",
+      "backlog_ids": [
+        "UI-012",
+        "UI-017"
+      ],
+      "issue_number": 2,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/2"
+    },
+    {
+      "group_id": "task-runtime",
+      "title": "EPIC: Task Runtime",
+      "backlog_ids": [
+        "UI-015",
+        "UI-020",
+        "UI-022"
+      ],
+      "issue_number": 3,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/3"
+    },
+    {
+      "group_id": "imaging",
+      "title": "EPIC: Imaging",
+      "backlog_ids": [
+        "UI-018",
+        "UI-019",
+        "UI-021"
+      ],
+      "issue_number": 4,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/4"
+    },
+    {
+      "group_id": "cloud-environment",
+      "title": "EPIC: Cloud Environment",
+      "backlog_ids": [
+        "UI-023",
+        "UI-024"
+      ],
+      "issue_number": 5,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/5"
+    },
+    {
+      "group_id": "ui-inventory",
+      "title": "EPIC: UI Inventory",
+      "backlog_ids": [
+        "UI-013",
+        "UI-016"
+      ],
+      "issue_number": 6,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/6"
+    }
+  ],
+  "github_milestones_created": false
+}

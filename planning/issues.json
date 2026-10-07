@@ -1,5 +1,5 @@
 {
-  "remoteIssuesCreated": false,
+  "remoteIssuesCreated": true,
   "items": [
     {
       "id": "UI-001",
@@ -60,11 +60,11 @@
     {
       "id": "UI-008",
       "priority": "P0",
-      "status": "blocked",
-      "title": "创建私有远端并核对HEAD",
+      "status": "done",
+      "title": "同步源码快照、保留原始历史包并核对 CI",
       "milestone": "M0",
-      "acceptance": "需要已授权GitHub写入；不可虚报成功",
-      "note": "远端只有 LICENSE；源码发布等待原图集平台审批，本地恢复提交不是远端交付。"
+      "acceptance": "保留 LICENSE 初始提交；完整源码与原 bundle 哈希一致；快进更新和 exact-head CI 验证；不宣称原五次提交进入远端图",
+      "note": "已发布 dab0df965aab58636c893161c6d4a6ef205a948d；完整 readback 与 CI 成功。"
     },
     {
       "id": "UI-009",
@@ -72,7 +72,8 @@
       "status": "done",
       "title": "自动化回归与真实范围报告",
       "milestone": "M2",
-      "acceptance": "本机检查通过；区分真实与模拟环境"
+      "acceptance": "本机检查通过；区分真实与模拟环境",
+      "note": "当前 UI-011 提交 8544894e9c32511c9e3a03a47fe96c19ceaf7918 的 GitHub CI：25 静态、56 单元、127 新浏览器回归通过；真实环境边界仍开放。"
     },
     {
       "id": "UI-010",
@@ -80,7 +81,8 @@
       "status": "todo",
       "title": "实机手势冲突与软键盘验收",
       "milestone": "M2",
-      "acceptance": "Android/iOS各至少一台；覆盖系统边缘和输入"
+      "acceptance": "Android/iOS各至少一台；覆盖系统边缘和输入",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/1"
     },
     {
       "id": "UI-011",
@@ -89,7 +91,8 @@
       "title": "备份异常与大图存储压力",
       "milestone": "M2",
       "acceptance": "损坏/过大/空间不足不覆盖旧资料；真实origin恢复",
-      "note": "已重建并本地提交恢复一致性；25 静态/56 单元通过，浏览器 0 断言；真实 origin、大图、配额、实机待测。"
+      "note": "原子恢复修复已发布 8544894e9c32511c9e3a03a47fe96c19ceaf7918 并通过 127 浏览器回归；真实 origin、大图、配额和实机验收仍待完成。",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/1"
     },
     {
       "id": "UI-012",
@@ -97,7 +100,8 @@
       "status": "todo",
       "title": "拆分suite域渲染与controller",
       "milestone": "M3",
-      "acceptance": "删除跨模块隐式依赖时不改变手势语义"
+      "acceptance": "删除跨模块隐式依赖时不改变手势语义",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/2"
     },
     {
       "id": "UI-013",
@@ -105,7 +109,8 @@
       "status": "todo",
       "title": "统一原生与扩展页面路由映射",
       "milestone": "M3",
-      "acceptance": "所有进入路径使目录/父链与实际状态一致"
+      "acceptance": "所有进入路径使目录/父链与实际状态一致",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/6"
     },
     {
       "id": "UI-014",
@@ -113,7 +118,8 @@
       "status": "todo",
       "title": "完整焦点/读屏/大字验收",
       "milestone": "M2",
-      "acceptance": "弹层焦点恢复；所有操作有替代；长文不裁切"
+      "acceptance": "弹层焦点恢复；所有操作有替代；长文不裁切",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/1"
     },
     {
       "id": "UI-015",
@@ -121,7 +127,8 @@
       "status": "todo",
       "title": "活动封面持久布局与任务结束语义",
       "milestone": "M3",
-      "acceptance": "重载恢复适当封面；关闭UI与取消执行分开"
+      "acceptance": "重载恢复适当封面；关闭UI与取消执行分开",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/3"
     },
     {
       "id": "UI-016",
@@ -129,7 +136,8 @@
       "status": "todo",
       "title": "组件视觉回归基线",
       "milestone": "M3",
-      "acceptance": "核心尺寸截图可比较；明确截图环境"
+      "acceptance": "核心尺寸截图可比较；明确截图环境",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/6"
     },
     {
       "id": "UI-017",
@@ -137,7 +145,8 @@
       "status": "todo",
       "title": "设计token单一编译来源",
       "milestone": "M3",
-      "acceptance": "CSS/JS阈值和文档不漂移"
+      "acceptance": "CSS/JS阈值和文档不漂移",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/2"
     },
     {
       "id": "UI-018",
@@ -145,7 +154,8 @@
       "status": "todo",
       "title": "图像自由框裁切与选择保护",
       "milestone": "M3",
-      "acceptance": "超出当前中心裁切/圆选区；依然保护原图"
+      "acceptance": "超出当前中心裁切/圆选区；依然保护原图",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/4"
     },
     {
       "id": "UI-019",
@@ -153,7 +163,8 @@
       "status": "todo",
       "title": "真实相机/识别权限闭环",
       "milestone": "M4",
-      "acceptance": "请求/拒绝/撤回/后台停止有实机证据"
+      "acceptance": "请求/拒绝/撤回/后台停止有实机证据",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/4"
     },
     {
       "id": "UI-020",
@@ -161,7 +172,8 @@
       "status": "todo",
       "title": "单一文字模型adapter",
       "milestone": "M4",
-      "acceptance": "服务端密钥、租户、费用、错误/取消/幂等契约"
+      "acceptance": "服务端密钥、租户、费用、错误/取消/幂等契约",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/3"
     },
     {
       "id": "UI-021",
@@ -169,7 +181,8 @@
       "status": "todo",
       "title": "单一生成图像adapter",
       "milestone": "M4",
-      "acceptance": "输入范围授权；生成和原图分离；进度来自服务"
+      "acceptance": "输入范围授权；生成和原图分离；进度来自服务",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/4"
     },
     {
       "id": "UI-022",
@@ -177,7 +190,8 @@
       "status": "todo",
       "title": "云端任务事件与接续",
       "milestone": "M4",
-      "acceptance": "序列去重、断连、恢复、待审批、真实回执"
+      "acceptance": "序列去重、断连、恢复、待审批、真实回执",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/3"
     },
     {
       "id": "UI-023",
@@ -185,7 +199,8 @@
       "status": "todo",
       "title": "系统壳或原生验证应用",
       "milestone": "M5",
-      "acceptance": "操作系统保留手势与终端交互协调"
+      "acceptance": "操作系统保留手势与终端交互协调",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/5"
     },
     {
       "id": "UI-024",
@@ -193,7 +208,74 @@
       "status": "todo",
       "title": "Android云运行环境接入评估",
       "milestone": "M5",
-      "acceptance": "独立后端范围，非本UI仓库顺手附带"
+      "acceptance": "独立后端范围，非本UI仓库顺手附带",
+      "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/5"
+    }
+  ],
+  "remoteIssueScope": "Six epics map fifteen existing open backlog items; completed historical items remain recorded locally.",
+  "remoteIssueGroups": [
+    {
+      "group_id": "testing",
+      "title": "EPIC: Testing — M2 实机、存储恢复与无障碍",
+      "backlog_ids": [
+        "UI-010",
+        "UI-011",
+        "UI-014"
+      ],
+      "issue_number": 1,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/1"
+    },
+    {
+      "group_id": "interaction-foundation",
+      "title": "EPIC: Interaction Foundation",
+      "backlog_ids": [
+        "UI-012",
+        "UI-017"
+      ],
+      "issue_number": 2,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/2"
+    },
+    {
+      "group_id": "task-runtime",
+      "title": "EPIC: Task Runtime",
+      "backlog_ids": [
+        "UI-015",
+        "UI-020",
+        "UI-022"
+      ],
+      "issue_number": 3,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/3"
+    },
+    {
+      "group_id": "imaging",
+      "title": "EPIC: Imaging",
+      "backlog_ids": [
+        "UI-018",
+        "UI-019",
+        "UI-021"
+      ],
+      "issue_number": 4,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/4"
+    },
+    {
+      "group_id": "cloud-environment",
+      "title": "EPIC: Cloud Environment",
+      "backlog_ids": [
+        "UI-023",
+        "UI-024"
+      ],
+      "issue_number": 5,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/5"
+    },
+    {
+      "group_id": "ui-inventory",
+      "title": "EPIC: UI Inventory",
+      "backlog_ids": [
+        "UI-013",
+        "UI-016"
+      ],
+      "issue_number": 6,
+      "url": "https://github.com/ForceMind/ai-phone-ui/issues/6"
     }
   ]
 }

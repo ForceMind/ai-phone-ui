@@ -6,4 +6,4 @@
 
 工作台页面编号不得复用或静默删除。破坏性变更需要 `docs/project/DECISIONS.md` 记录原因和迁移影响。新增依赖需要维护者批准；不得打包字体文件或第三方账号数据。
 
-本地恢复分支尚未发布，远端仍只有 LICENSE；详见 docs/project/RECOVERY_20261007.md。`planning/issues.json` 是原有工作清单。部署脚本不自动设置公开可见性或开启计费。
+源码和 UI-011 已发布；实际状态与 CI 见 docs/engineering/REMOTE_STATUS.md。`planning/issues.json` 是原有工作清单。部署脚本不自动设置公开可见性或开启计费。

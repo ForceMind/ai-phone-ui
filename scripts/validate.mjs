@@ -27,7 +27,19 @@ verify('baseline checksum unchanged',()=>{const b=JSON.parse(read('reference/BAS
 verify('baseline storage isolated',()=>assert(core.includes("'ai-phone-ui-core-v1'")&&suite.includes("'ai-phone-ui-suite-v1'"),'storage collision'));
 const required=['README.md','AGENTS.md','CONTRIBUTING.md','SECURITY.md','LICENSE','CHANGELOG.md','docs/INDEX.md','docs/project/CHARTER.md','docs/project/ROADMAP.md','docs/project/CURRENT_STATE.md','docs/project/NEXT_ACTION.md','docs/project/DEVELOPMENT_HANDOFF.md','docs/design/SCREEN_CATALOG.md','docs/design/INTERACTION_SPEC.md','docs/design/USER_FLOWS.md','docs/engineering/ADAPTER_CONTRACTS.md','docs/engineering/TEST_PLAN.md','docs/engineering/REMOTE_STATUS.md','planning/issues.json','planning/milestones.json'];
 verify('required documentation exists',()=>required.forEach(f=>assert(fs.existsSync(path.join(root,f)),'missing '+f)));
-verify('local plans do not impersonate remote issues',()=>assert(JSON.parse(read('planning/issues.json')).remoteIssuesCreated===false,'remote issue assertion'));
+verify('local plans do not impersonate remote issues',()=>{
+  const plan=JSON.parse(read('planning/issues.json'));
+  assert(typeof plan.remoteIssuesCreated==='boolean','missing remote issue status');
+  if(!plan.remoteIssuesCreated)return;
+  assert(Array.isArray(plan.remoteIssueGroups)&&plan.remoteIssueGroups.length>0,'missing verified issue groups');
+  const known=new Map(plan.items.map(i=>[i.id,i])),seen=new Set();
+  for(const group of plan.remoteIssueGroups){
+    assert(Number.isInteger(group.issue_number)&&group.issue_number>0,'invalid issue number');
+    assert(group.url==='https://github.com/ForceMind/ai-phone-ui/issues/'+group.issue_number,'invalid issue URL');
+    assert(Array.isArray(group.backlog_ids)&&group.backlog_ids.length>0,'empty issue mapping');
+    for(const id of group.backlog_ids){assert(known.has(id)&&!seen.has(id),'unknown or duplicate mapping '+id);assert(known.get(id).remoteIssueUrl===group.url,'backlog URL drift '+id);seen.add(id);}
+  }
+});
 verify('documented remote boundary matches manifest',()=>assert(manifest.remoteRepositoryStatus==='public-source-snapshot-history-bundle','remote status drift'));
 verify('package has no runtime dependencies',()=>assert(!Object.keys(JSON.parse(read('package.json')).dependencies||{}).length,'runtime dependency added'));
 verify('GitHub script exists',()=>assert(fs.existsSync(path.join(root,'scripts/publish-github.sh')),'missing publish script'));

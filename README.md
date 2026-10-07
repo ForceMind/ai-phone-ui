@@ -3,17 +3,15 @@
 ![SWIPE / AI](docs/assets/swipe-ai.svg)
 
 [![UI quality](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml/badge.svg?branch=main)](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml)
+[![Repository license](https://img.shields.io/github/license/ForceMind/ai-phone-ui)](LICENSE)
 
-> 2026-10-07 本地恢复检查点：远端仍只有 LICENSE，源码尚未形成远端提交。见 [恢复记录](docs/project/RECOVERY_20261007.md)。
+> 源码与 UI-011 恢复一致性修复已发布。UI 代码提交 [8544894e](https://github.com/ForceMind/ai-phone-ui/commit/8544894e9c32511c9e3a03a47fe96c19ceaf7918) 的 [GitHub CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482) 通过：25 静态、56 单元、127 浏览器回归。原始五次提交/标签按字节保存在历史包中；没有部署网站或连接真实服务。
 
 一套以 **N9 三视图 + Sailfish 边缘手势、Peek、活动封面、Pulley** 为基础的 AI 手机界面与交互项目。
 
 **当前：v0.1.0 UI 原型 / 86 个登记界面 / 单文件离线预览。** 这是用户认可的 V3 的工程化延续，不是回到“聊天机器人 + 底部导航”。
 
-
-
-
-> 本仓库采用完整源码快照 + 原始历史包。原来的 5 次提交及 v0.1.0-ui 注释标签可从 历史包 恢复，未导入 GitHub 提交祖先图。保留现有 LICENSE 初始提交，未部署网站。徽章读取真实状态；CI 证据见 [远端状态](docs/engineering/REMOTE_STATUS.md)。
+> 本仓库采用完整源码快照 + 原始历史包。原来的 5 次提交及 v0.1.0-ui 注释标签可从 [历史包](provenance/README.md) 恢复，未导入 GitHub 提交祖先图。保留现有 LICENSE 初始提交，未部署网站。徽章读取真实状态；CI 证据见 [远端状态](docs/engineering/REMOTE_STATUS.md)。
 
 ## 立即体验
 
@@ -71,7 +69,7 @@ npm run docs
 | `src/data/tokens.json` | 设计参数参考；改动需同步实际 CSS/手势实现并测试 |
 | `src/contracts/` | 未来能力适配契约；不表示已有后端 |
 | `docs/` | 产品、设计、工程、QA 与交接 |
-| `planning/` | 本地里程碑与待办，不是假装已经创建的 GitHub Issues |
+| `planning/` | 原有里程碑、待办与六张已核对 Epic 的映射 |
 | `dist/index.html` | 由构建生成的独立体验文件，请勿直接修改 |
 
 ## 继续工作之前
@@ -82,10 +80,10 @@ npm run docs
 
 ## 继续维护此仓库
 
-公开仓库已存在，不再执行历史建仓脚本。基于实际远端 HEAD 进行普通提交或既定 PR；不 force push、不重新创建原始标签。旧历史按 恢复说明 克隆到新目录。
+公开仓库已存在，不再执行历史建仓脚本。基于实际远端 HEAD 进行普通提交或既定 PR；不 force push、不重新创建原始标签。旧历史按 [恢复说明](provenance/README.md) 克隆到新目录。
 
-完整入口：[文档索引](docs/INDEX.md) · [路线图](docs/project/ROADMAP.md) · 交接
+完整入口：[文档索引](docs/INDEX.md) · [路线图](docs/project/ROADMAP.md) · [交接](HANDOFF.md)
 
 ## 设计来源与授权
 
-本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。[来源与映射](docs/reference/SOURCES.md)。根目录 LICENSE 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。
+本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。[来源与映射](docs/reference/SOURCES.md)。根目录 [LICENSE](LICENSE) 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。

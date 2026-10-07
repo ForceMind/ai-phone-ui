@@ -4,8 +4,8 @@
     {
       "id": "M0",
       "title": "基线与仓库",
-      "status": "partial",
-      "exit": "基线归档完成；远端等待写入授权"
+      "status": "done",
+      "exit": "源码快照、原始历史包、LICENSE 与远端 readback 已核对；M0 exact-head CI 成功"
     },
     {
       "id": "M1",

@@ -1,10 +1,19 @@
 # v0.1.0 验证记录
 
+## 当前远端发布验证（2026-10-07）
+
+- M0 `dab0df965aab58636c893161c6d4a6ef205a948d`：[Actions](https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789) 成功，24/24 静态、32/32 单元、126/126 浏览器
+- UI-011 `8544894e9c32511c9e3a03a47fe96c19ceaf7918`：[Actions](https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482) 成功，25/25 静态、56/56 单元、127/127 浏览器
+- 两次均先删除历史结果，日志及 artifact 对应具体 source HEAD；新增恢复配额失败测试已在新运行通过
+
+这是正常 GitHub Chromium 的新 DOM fixture 结果，不是复用旧 126/126。以下保留本地恢复和原归档记录作为历史；不得用它们替代后续提交的 exact-head CI。真实 origin、Android/iOS、权限、配额/大图仍待实测。
+
+
 ## 2026-10-06 重建候选验证
 
 实际重建树重新执行 build、静态 24/24、单元 32/32，全部通过。构建为 238505 字节，SHA256 `db8ab10be7af577c55d465c062db477c4dc0911921ca91cd23c69436b7ec2fe3`。原始 ZIP、bundle 和 UI 行为源码精确恢复，文档/CI 修改重新生成。此前本地 Chromium 在首次断言前因 socket 限制启动失败，执行 0 项；未把旧浏览器报告算作新成功。
 
-当前 exact-head GitHub CI 待核对。远端 UI 测试是 DOM 注入与内存 storage fixture，不能代替真实 origin、权限或 Android/iOS 实机验收。
+该历史恢复时点的 GitHub CI 尚未核对，当前结果见顶部。远端 UI 测试是 DOM 注入与内存 storage fixture，不能代替真实 origin、权限或 Android/iOS 实机验收。
 
 ## 原始归档结果（历史，不计入本轮通过）
 
@@ -51,4 +60,4 @@
 
 ## 2026-10-07 重建后验证
 
-构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。没有新远端 CI。
+构建通过；静态 25/25；单元 56/56。真实 Chromium 启动在 socket() Operation not permitted 处失败，退出 1，0 项断言。Node VM 故障注入不是浏览器或实机验收；保留的 126/126 是历史报告。该本地记录当时没有新远端 CI，当前结果见顶部。

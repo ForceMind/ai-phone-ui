@@ -1,21 +1,25 @@
 # 当前状态 — v0.1.0
 
-## 范围
+## 已发布
 
-已认可 V3、源码模块、单 HTML 构建、86 个登记界面（55 本机交互页 / 31 未连接服务预览页）及设计/工程/测试/交接完整保留。三视图、Peek、活动封面、Pulley 和取消语义不变。
+2026-10-07 源码基线 [dab0df96](https://github.com/ForceMind/ai-phone-ui/commit/dab0df965aab58636c893161c6d4a6ef205a948d) 与独立 UI-011 修复 [8544894e](https://github.com/ForceMind/ai-phone-ui/commit/8544894e9c32511c9e3a03a47fe96c19ceaf7918) 已进入 main，并逐文件核对。保留原 LICENSE 初始提交和 LICENSE 字节，没有 force push。
 
-M0 使用公开源码快照 + 原始历史包，在原 LICENSE 提交之后普通提交。原 5 次提交及 v0.1.0-ui 标签在 bundle 内，未导入远端祖先图。见 [远端状态](../engineering/REMOTE_STATUS.md) 和 历史恢复。
+86 个登记界面仍为 55 本机交互页、31 未连接服务预览页；保留 V3 三视图、Peek、活动封面、Pulley、原片和单 HTML。原始 5 次提交与 v0.1.0-ui 注释标签保存在 [不可变历史包](../../provenance/README.md)，未导入 GitHub 祖先图或重建远端标签。
 
-## 质量
+## 已核对质量
 
-2026-10-06 对重建候选重新运行 build、静态和单元检查；结果见 [测试报告](../qa/TEST_REPORT.md)。当前提交 exact-head GitHub CI 尚待核对，不能提前声称全绿。旧浏览器 126/126 不是本轮结果；本地环境曾在浏览器启动前阻塞，执行 0 项断言。
+- M0 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37594652789)：24/24 静态、32/32 单元、126/126 新浏览器回归
+- UI-011 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37595281482)：25/25 静态、56/56 单元、127/127 新浏览器回归
+- 已通过正常 Git clone 回读，历史包 SHA256 和 LICENSE blob 均匹配
 
-## 已知边界
+这是对应上述提交的真实 Actions 结果。后续文档或代码提交仍应核对自身 SHA 的 CI；不能把旧报告直接当作最新成功。详见 [发布证据](../qa/PUBLICATION_EVIDENCE.json) 与 [测试报告](../qa/TEST_REPORT.md)。
 
-真实 Android/iOS、系统边缘、软键盘、真实 origin 存储、配额/恢复和无障碍仍待 M2。文本回复是本机规则，整理只提取原文；模型、云手机、消息、电话、音乐、地图、OAuth、账单和日历账号都未连接，不是完整 Android 系统。
+## 尚未完成
 
-存储本地且未加密；中心比例裁切与圆形选区不是语义抠图。跨重载不保证所有动态封面布局和精确页面栈。公共状态覆盖层不是每项业务的真实网络错误。后续先补质量证据与三条闭环，再按路线拆分旧全局代码。
+UI-011 原子恢复代码已实现并通过自动化；真实 origin 存储/容量、大图、Android/iOS、系统边缘、软键盘和无障碍仍属于 M2。浏览器测试使用 DOM 注入和内存存储 fixture，不代表这些实机结果。
 
-## 2026-10-07 恢复后的本地提交
+模型、云手机、消息、电话、音乐、地图、OAuth、账单及日历账号均未连接；没有部署网站，也不是完整 Android 系统。存储本地且未加密，中心裁切/圆形选区不是语义抠图。下一张工作卡见 [NEXT_ACTION](NEXT_ACTION.md)。
 
-UI-011 已从记录重建并重新通过构建、25 静态/56 单元。浏览器启动受 socket 限制，0 断言；不称远端 CI 成功。原 M0 图集审批保持不变，远端仍只有 LICENSE。本地恢复分支及私有恢复包仅用于保存工作。详见 [恢复记录](RECOVERY_20261007.md) 与 [存储协议](../engineering/STORAGE_RECOVERY.md)。
+## 计划映射
+
+已从既有 backlog 建立六张 [Epic](../../planning/README.md)，覆盖 15 个未完成条目且无重复；没有扩大功能范围，也未创建远端 Milestones。
