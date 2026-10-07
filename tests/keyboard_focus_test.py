@@ -14,12 +14,12 @@ import storage_origin_test as native
 
 ROOT, OUT = native.ROOT, native.OUT
 RESULTS, TRACE = [], []
-SURFACES = ('backup-settings', 'backup-cloud', 'photo-gallery', 'photo-camera', 'photo-export')
+SURFACES = ('backup-settings', 'backup-cloud', 'photo-gallery', 'photo-camera-import', 'photo-export')
 
 
 def observe(page, stage):
     value = page.evaluate('''() => ({route: Suite.current().id, task: currentTask,
-        page: stack.at(-1)?.kind || 'root', mode: stack.at(-1)?.mode || null,
+        page: stack.at(-1)?.kind || 'root', documentFocused: document.hasFocus(), mode: stack.at(-1)?.mode || null,
         focus: {tag: document.activeElement?.tagName, id: document.activeElement?.id,
           action: document.activeElement?.dataset.action || null,
           menu: document.activeElement?.dataset.menu || null,
@@ -41,7 +41,7 @@ def dialog(page, action):
 
 def origin(surface):
     return {'backup-settings': 'SET-10', 'backup-cloud': 'CLD-17',
-            'photo-gallery': 'IMG-10', 'photo-camera': 'IMG-01', 'photo-export': 'IMG-02'}[surface]
+            'photo-gallery': 'IMG-10', 'photo-camera-import': 'IMG-01', 'photo-export': 'IMG-02'}[surface]
 
 
 def opener(page, surface):
@@ -63,7 +63,7 @@ def open_review(page, surface, navigate=True):
     else:
         opener(page, surface).focus()
         with page.expect_file_chooser() as chooser:
-            page.keyboard.press('Enter')
+            page.keyboard.press('Enter', delay=40)
         if surface.startswith('backup'):
             file = {'name': 'synthetic-backup.json', 'mimeType': 'application/json',
                     'buffer': json.dumps(native.fixture('candidate')).encode()}
@@ -118,6 +118,9 @@ def cancel_return(page, surface, method):
     focused(page, dialog(page, 'back'), surface + ':reopened-safe-focus')
     native.assert_original(page)
     native.ensure(not downloads, 'Reopening unexpectedly downloaded a file')
+    page.keyboard.press('Escape')
+    native.reload_page(page)
+    native.assert_original(page)
 
 
 def gesture(page, start, end, reverse=None, cancel=False):
@@ -160,10 +163,109 @@ def minimize_reopen(page, surface):
     assert_return(page, surface)
 
 
+
+def overlay_guards(page):
+    open_review(page, 'backup-settings')
+    dialog(page, 'accept').focus()
+    page.evaluate('syncAccess()')
+    focused(page, dialog(page, 'accept'), 'same-review-does-not-steal-accept-focus')
+    page.keyboard.press('t')
+    native.ensure(page.evaluate('overlay') == 'top', 'Existing T overlay did not open')
+    page.keyboard.press('Escape')
+    focused(page, dialog(page, 'back'), 'overlay-close-resumes-review-focus')
+    page.locator('[data-action="ui:catalog"]').click()
+    focused(page, page.locator('#mobileCatalogSearch'), 'catalog-focus-not-stolen')
+    page.keyboard.press('Tab')
+    native.ensure(page.evaluate('!!document.activeElement.closest("#catalogModal")'),
+                  'Confirmation trapped Tab through inert workbench')
+    page.keyboard.press('Escape')
+    native.ensure(page.evaluate('stack.at(-1)?.suiteMode') == 'restore', 'Catalog Escape cancelled review')
+    page.keyboard.press('Tab')
+    focused(page, dialog(page, 'back'), 'return-from-catalog-remains-reachable')
+    native.assert_original(page)
+
+
+def other_task_resume(page):
+    open_review(page, 'backup-settings')
+    task = page.evaluate('currentTask')
+    page.keyboard.press('h')
+    page.locator('[data-task="notes"]').click()
+    native.ensure(page.evaluate('currentTask') == 'notes', 'Did not enter another task')
+    page.keyboard.press('h')
+    page.locator('[data-task="' + task + '"]').click()
+    focused(page, dialog(page, 'back'), 'copied-session-retains-safe-focus')
+    page.keyboard.press('Escape')
+    assert_return(page, 'backup-settings')
+
+
+def keyboard_accept(page, surface):
+    open_review(page, surface)
+    focused(page, dialog(page, 'back'), surface + ':before-accept')
+    page.keyboard.press('Tab')
+    focused(page, dialog(page, 'accept'), surface + ':accept-reachable')
+    if surface.startswith('backup'):
+        route = native.initial_route(page)
+        with page.expect_navigation(wait_until='load'):
+            page.keyboard.press('Enter')
+        native.ready(page, route)
+        native.assert_restored(page, native.fixture('candidate'))
+    elif surface == 'photo-export':
+        version = page.evaluate('stack.at(-1).versionId')
+        source = page.evaluate('S.photo.source')
+        # A newer selected version must not replace the reviewed export snapshot.
+        page.evaluate('S.photo.current = 0')
+        downloads = []
+        page.on('download', lambda d: downloads.append(d.suggested_filename))
+        with page.expect_download() as result:
+            page.keyboard.press('Enter')
+        native.ensure(result.value.suggested_filename == 'SWIPE-' + version + '.png', 'Export changed fixed version')
+        page.keyboard.press('Enter')
+        page.wait_for_timeout(100)
+        native.ensure(downloads == ['SWIPE-' + version + '.png'], 'Accepted more than once')
+        native.ensure(page.evaluate('S.photo.source') == source, 'Export changed original pixels')
+        native.ensure(page.evaluate('S.drafts.photo') == 'original photo draft', 'Export lost draft')
+    else:
+        page.keyboard.press('Enter')
+        page.wait_for_function('S.photo.name === "synthetic-photo.png"')
+        native.ensure(page.evaluate('currentTask') == 'photo', 'Accepted import changed destination')
+        native.ensure(page.evaluate('S.photo.versions.length') == 1, 'Import did not create its single original')
+        native.ensure(page.evaluate('S.drafts.photo') == 'original photo draft', 'Import lost continuing draft')
+
+
+def keyboard_quota(page):
+    open_review(page, 'backup-settings')
+    native.fill_quota(page)
+    before = native.stored(page)
+    page.keyboard.press('Tab')
+    page.keyboard.press('Enter')
+    page.wait_for_function('document.getElementById("toast").textContent.includes("恢复未完成")')
+    native.ensure(not page.evaluate('stack.at(-1).consumed'), 'Quota failure consumed review')
+    focused(page, dialog(page, 'accept'), 'quota-failure-keeps-accept-focused')
+    native.ensure(native.stored(page) == before, 'Quota failure changed durable state')
+    native.assert_original(page)
+    page.keyboard.press('Escape')
+    assert_return(page, 'backup-settings')
+
+
+def abandoned_picker(page):
+    native.go(page, 'IMG-10')
+    opener(page, 'photo-gallery').focus()
+    with page.expect_file_chooser() as chooser:
+        page.keyboard.press('Enter', delay=40)
+    native.go(page, 'DOC-02')
+    chooser.value.set_files({'name': 'stale.png', 'mimeType': 'image/png',
+                            'buffer': base64.b64decode(native.PNG.split(',')[1])})
+    native.ensure(page.evaluate('currentTask') == 'notes', 'Old picker resurrected photo task')
+    native.ensure(not page.evaluate('stack.some(p => p.kind === "confirm")'), 'Old picker reopened review')
+    native.assert_original(page)
+
+
 def run_case(browser, server, name, fn):
     print('RUN', name, flush=True)
     try:
         with native.case(browser, server) as page:
+            page.bring_to_front()
+            page.wait_for_function('document.hasFocus()')
             try:
                 fn(page)
             except Exception:
@@ -195,6 +297,11 @@ def main():
             for surface in ('backup-settings', 'photo-export'):
                 run_case(browser, server, surface + ':gesture-reversal-pointercancel-right-cancel',
                          lambda p, s=surface: interrupted_gestures(p, s))
+            for name, fn in [('overlay-and-inert-guards', overlay_guards), ('other-task-resume', other_task_resume),
+                             ('keyboard-quota-failure', keyboard_quota), ('abandoned-picker', abandoned_picker)]:
+                run_case(browser, server, name, fn)
+            for surface in ('backup-settings', 'photo-export', 'photo-gallery'):
+                run_case(browser, server, surface + ':keyboard-accept', lambda p, s=surface: keyboard_accept(p, s))
             browser.close()
     except Exception as exc:
         traceback.print_exc()

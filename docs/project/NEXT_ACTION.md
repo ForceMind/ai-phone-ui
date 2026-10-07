@@ -1,17 +1,16 @@
 # 下一步，只从这里继续
 
-## 本批 UI-011 合成图边界
+## 本批 UI-014：现有确认页的键盘焦点与取消
 
-[PR #9](https://github.com/ForceMind/ai-phone-ui/pull/9) 先用真实 HTTP-origin Chromium 在 `cbd799cb81183ed17d862230da75a4742b8ff623` 重现两个图像校验缺陷：超过既有 16MP 上限及无法解码的 data URL 仍进入替换确认。修复在确认前验证图片，不重编码或覆盖原片，保持双区原子提交。此前 127 DOM / 14 native 全保留，另增 5 图像 native 场景和 8 入口单元。详见 [失败及修复证据](../qa/UI011_IMAGE_EVIDENCE.json)。
+[Draft PR #10](https://github.com/ForceMind/ai-phone-ui/pull/10) 从 main `3299ba0217caa9850f39677aafd25eba9e3086f7` 开始。首个提交 `a7b8fde3f1fcbbc360245c971f9d2f88e2025c20` 只加入真实 HTTP-origin 键盘回归；先保存实际 Chromium 失败证据，再修复已复现问题。
 
-本卡收尾需要独立审阅、最终 exact-head CI 和正常合并后的 main CI；旧提交的绿灯不替代当前 HEAD。UI-011 整项继续开放：本批合成图片不代表实际手机内存和 OS 磁盘压力。没有更改 Testing Epic #1 正文或另写评论。
+- 范围：IMG-10 / IMG-01 的本机照片导入、IMG-02 的 Pulley 导出、SET-10 / CLD-17 的备份恢复确认
+- 验收：进入确认先聚焦取消；Tab / Shift+Tab 可达且不落入底层；Escape、键盘/鼠标取消、右滑取消恢复可见的原入口；最小化后重新打开保留确认与草稿
+- 照片导入取消回到发起的任务；明确接受仍遵循现有照片导入流程。导出取消只在有效原上下文恢复现有 Pulley，不执行命令
+- 保留 V3 手势、固定快照和所有既有回归，不新增页面、功能、常驻导航或架构层
+- 退出条件：实际失败与修复证据、独立审阅、最终 exact-head CI、正常合并后的 main CI/artifact 核对。设备、读屏与移动软键盘仍不在本卡完成声明中
 
-## 下一张有界工作卡：UI-014 现有确认页的键盘焦点与取消
-
-- 只检查已有照片导入/导出与备份恢复确认页的 Tab、Shift+Tab、返回/取消和再次打开
-- 在 HTTP-origin Chromium 记录真实焦点、当前页面和原资料/草稿；先复现，再仅修复阻断现有操作的焦点缺陷
-- 保留 V3 手势、现有确认方式和全部回归；不新增页面、能力或架构层
-- 退出条件：以上路径有明确结果、修复回归和 exact-head CI；读屏、移动软键盘与实际设备结果仍单列未测
+UI-011 合成图边界已通过 PR #9 合入上述 main；保留 [既有证据](../qa/UI011_IMAGE_EVIDENCE.json)。UI-011 整项继续开放，不把桌面合成图当实机内存或 OS 压力结果。Testing Epic #1 正文维持原样，不重试、不另写评论。
 
 ## M2 实际设备边界仍开放
 
