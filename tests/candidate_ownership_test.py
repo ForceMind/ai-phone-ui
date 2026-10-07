@@ -41,6 +41,7 @@ def backup(page, label, route):
     select(page, 'ui:restore', label + '.json', json.dumps(native.fixture(label)).encode(), 'application/json')
     page.wait_for_function('stack.at(-1)?.suiteMode === "restore"')
     task = page.evaluate('currentTask')
+    native.ensure(label + '.json' in page.locator('.dialog-inner').last.inner_text(), 'Reviewed backup filename is not visible')
     observe(page, label + ':reviewed')
     native.assert_original(page)
     return task
@@ -72,6 +73,8 @@ def backup_older(page, newer):
     native.ensure(page.evaluate('stack.at(-1)?.payload?.name') == 'candidate-A.json', 'Did not resume older A review')
     native.assert_original(page)
     observe(page, 'A:before-accept-after-B-' + newer)
+    if newer == 'cancelled':
+        page.screenshot(path=str(native.OUT / 'candidate-backup-A-review.png'), animations='disabled')
     native.commit_and_reload(page)
     observe(page, 'A:after-production-reload')
     native.assert_restored(page, native.fixture('candidate-A'))
@@ -88,6 +91,25 @@ def backup_cancel_older(page):
     native.ensure(page.evaluate('stack.at(-1)?.payload?.name') == 'candidate-B.json', 'Newer B review lost')
     native.commit_and_reload(page)
     native.assert_restored(page, native.fixture('candidate-B'))
+
+
+
+def backup_quota_resume(page):
+    older = backup(page, 'candidate-A', 'SET-10')
+    native.fill_quota(page)
+    before = native.stored(page)
+    native.click_dialog(page, 'accept')
+    page.wait_for_function('document.getElementById("toast").textContent.includes("恢复未完成")')
+    native.ensure(native.stored(page) == before, 'Failed A restore changed durable state')
+    native.assert_original(page)
+    leave(page)
+    backup(page, 'candidate-B', 'CLD-17')
+    native.click_dialog(page, 'back')
+    # Release only the synthetic quota filler; application state is never mocked.
+    page.evaluate('key => localStorage.removeItem(key)', native.FILLER)
+    resume(page, older)
+    native.commit_and_reload(page)
+    native.assert_restored(page, native.fixture('candidate-A'))
 
 
 def photo_cancel_newer(page):
@@ -107,6 +129,8 @@ def photo_cancel_newer(page):
     resume(page, 'photo')
     native.ensure(page.evaluate('stack.filter(p => p.mode === "import").length') == 1, 'Older photo review lost')
     native.assert_original(page)
+    native.ensure('candidate-A.png' in page.locator('.dialog-inner').last.inner_text(), 'Resumed photo filename is not visible')
+    page.screenshot(path=str(native.OUT / 'candidate-photo-A-review.png'), animations='disabled')
     native.click_dialog(page, 'accept')
     page.wait_for_function('S.photo.name !== "original.png"')
     observe(page, 'photo:A:after-accept')
@@ -150,6 +174,7 @@ def main():
                 run(browser, origin, 'backup-accept-A-after-B-' + newer, lambda p, n=newer: backup_older(p, n))
             run(browser, origin, 'backup-cancel-A-accept-B', backup_cancel_older)
             run(browser, origin, 'photo-cancel-B-resume-accept-A', photo_cancel_newer)
+            run(browser, origin, 'backup-quota-retry-A-after-cancel-B', backup_quota_resume)
             browser.close()
     except Exception as exc:
         traceback.print_exc()
