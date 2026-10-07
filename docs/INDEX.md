@@ -27,3 +27,5 @@
 [UI-011 图像边界与失败复现证据](qa/UI011_IMAGE_EVIDENCE.json)
 
 [UI-014 确认焦点/取消的失败与修复证据](qa/UI014_FOCUS_EVIDENCE.json)
+
+[UI-014 长消息确认阅读的失败与修复证据](qa/UI014_READING_EVIDENCE.json)
