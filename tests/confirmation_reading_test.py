@@ -62,6 +62,7 @@ def open_review(page, text=LONG, large=False):
     page.locator('#task textarea[data-field="message"]').filter(visible=True).last.fill(text)
     page.locator('#task [data-action="ui:confirm-message"]').filter(visible=True).last.click()
     page.wait_for_function('stack.at(-1)?.suiteMode === "message"')
+    page.wait_for_function('!topPage().getAnimations().some(a => a.playState === "running")')
     native.ensure(page.evaluate('stack.at(-1).payload.text') == text, 'Review changed exact draft')
     native.ensure(review(page).locator('p').inner_text().endswith(DISCLAIMER), 'Local-only disclaimer missing')
     native.ensure(control(page, 'back').evaluate('el => document.activeElement === el'), 'Initial focus must stay on cancel')
