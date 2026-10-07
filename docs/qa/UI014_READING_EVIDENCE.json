@@ -1,0 +1,326 @@
+{
+  "scope": "M2 UI-014: existing DAY-05 long confirmation reading",
+  "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/12",
+  "starting_main": "2139d5e9a800b53dec890e1373c772eeeacc0432",
+  "reproduction": {
+    "source_head": "3491e20794920acf1a312746a20062243c1ef2bc",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37637506704",
+    "conclusion": "failure",
+    "browser": "143.0.7499.4",
+    "counts": {
+      "static": 25,
+      "unit": 92,
+      "dom_fixture": 127,
+      "native_storage_image": 19,
+      "native_keyboard": 41,
+      "native_candidates": 8,
+      "native_reading_total": 8,
+      "native_reading_passed": 2
+    },
+    "artifact": {
+      "id": 11490792278,
+      "sha256": "771ce0abc14bedb3c1263057b8ce5566cf8e2b7e55cc678edade4e0d04da6500",
+      "download_digest_verified": true,
+      "source_head_file_verified": true,
+      "build_bytes_verified": [
+        "dist/index.html",
+        "dist/screens.json",
+        "dist/project-guide.html"
+      ]
+    },
+    "checks": [
+      {
+        "name": "ordinary",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport"
+      },
+      {
+        "name": "large",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport"
+      },
+      {
+        "name": "unbroken",
+        "status": "fail",
+        "error": "Draft text is horizontally clipped instead of wrapping"
+      },
+      {
+        "name": "keyboard",
+        "status": "fail",
+        "error": "PageDown cannot read review from safe cancel focus"
+      },
+      {
+        "name": "gestures",
+        "status": "fail",
+        "error": "Vertical drag does not scroll review"
+      },
+      {
+        "name": "resume-accept",
+        "status": "fail",
+        "error": "Review cannot be scrolled before resume"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "error": ""
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "error": ""
+      }
+    ],
+    "measured_defects": {
+      "ordinary_body_height": 1353,
+      "ordinary_scroll_after_wheel": 0,
+      "unbroken_scroll_width": 15808,
+      "unbroken_client_width": 310,
+      "large_text_body_font_px": 12,
+      "ordinary_screen_logical_height": 672
+    }
+  },
+  "implementation": {
+    "approach": "Reuse existing stack-scroll viewport, vertical gesture classifier and task-session reading position; wrap long tokens; apply existing large-text preference; scroll with reading keys from focused active confirmation",
+    "unchanged": [
+      "accept/cancel execution handlers",
+      "fixed payload and candidate ownership",
+      "all previous test files",
+      "LICENSE and provenance",
+      "storage schema and state engine",
+      "route count and offline preview boundary"
+    ]
+  },
+  "independent_source_review": {
+    "reviewed_tree": "4fb93ac94939154776fa7e32c658e503cff07d2f",
+    "result": "No blocking findings; all 92 unit tests and independent keyboard guards pass"
+  },
+  "harness_note": "After baseline RED, the new suite waits for the existing review entrance animation to finish before reading coordinates or starting gestures. No production state or layout is patched. Native pointercancel is deliberately dispatched by the existing helper; it is not physical-device evidence.",
+  "completion_gate": "Final docs/source head and normal-merge main each require their own CI, downloaded artifact source/digest/build-byte and pixel verification. Candidate evidence is not proof for a later head.",
+  "not_tested": [
+    "physical Android/iOS",
+    "screen readers",
+    "mobile soft keyboards",
+    "OS text scaling"
+  ],
+  "first_candidate_regression": {
+    "source_head": "56d411bba840c10217832d17551d72a36332dc92",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37638875702",
+    "conclusion": "failure",
+    "counts": {
+      "static": 25,
+      "unit": 92,
+      "dom_fixture": 127,
+      "native_storage_image": 19,
+      "native_keyboard_total": 41,
+      "native_keyboard_passed": 39
+    },
+    "native_candidates": "not run because the preceding keyboard suite failed",
+    "native_reading": "not run because the preceding keyboard suite failed",
+    "artifact": {
+      "id": 11491660544,
+      "sha256": "b8c245dcd2b11cd89c2a2a434340b933bb1ae849ae68ff05b873acde27f5f0a7",
+      "download_digest_verified": true,
+      "source_head_file_verified": true,
+      "build_bytes_verified": [
+        "dist/index.html",
+        "dist/screens.json",
+        "dist/project-guide.html"
+      ]
+    },
+    "finding": "Reused stack-scroll also enabled text selection. Artifact screenshot shows selected review text, and two existing repeated horizontal cancel gestures failed. Restore the confirmation original user-select:none; do not weaken the original tests.",
+    "failed_checks": [
+      "backup-settings:gesture-reversal-pointercancel-right-cancel",
+      "photo-export:gesture-reversal-pointercancel-right-cancel"
+    ]
+  },
+  "correction_review": {
+    "source_head": "f16a9129aae5d4aeb483e2d67053cd33703ff5d9",
+    "reviewed_tree": "200e8d2dd7dd2d78f0ca97491ec878be74534536",
+    "result": "No blocking source findings. Independent 92 unit tests pass; original tests, LICENSE and provenance hashes unchanged; source/generated screens match. Native CI remains required."
+  },
+  "corrected_candidate": {
+    "source_head": "f16a9129aae5d4aeb483e2d67053cd33703ff5d9",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37639719218",
+    "conclusion": "success",
+    "browser": "143.0.7499.4",
+    "counts": {
+      "static": 25,
+      "unit": 92,
+      "dom_fixture": 127,
+      "native_storage_image": 19,
+      "native_keyboard": 41,
+      "native_candidates": 8,
+      "native_reading": 8
+    },
+    "artifact": {
+      "id": 11491791588,
+      "sha256": "06f534fee77c202792f53e8b7d1c77e5458cf646fc70040dca6d1862882babf6",
+      "download_digest_verified": true,
+      "source_head_file_verified": true,
+      "build_bytes_verified": [
+        "dist/index.html",
+        "dist/screens.json",
+        "dist/project-guide.html"
+      ]
+    },
+    "checks": [
+      {
+        "name": "ordinary",
+        "status": "pass"
+      },
+      {
+        "name": "large",
+        "status": "pass"
+      },
+      {
+        "name": "unbroken",
+        "status": "pass"
+      },
+      {
+        "name": "keyboard",
+        "status": "pass"
+      },
+      {
+        "name": "gestures",
+        "status": "pass"
+      },
+      {
+        "name": "resume-accept",
+        "status": "pass"
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-external-requests",
+        "status": "pass",
+        "details": []
+      }
+    ],
+    "reading_trace": [
+      {
+        "stage": "ordinary:start",
+        "scroll_top": 0,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "ordinary:end",
+        "scroll_top": 856,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "large:start",
+        "scroll_top": 0,
+        "viewport_height": 497,
+        "content_height": 1845,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 16,
+        "focus": "back"
+      },
+      {
+        "stage": "large:end",
+        "scroll_top": 1348,
+        "viewport_height": 497,
+        "content_height": 1845,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 16,
+        "focus": "back"
+      },
+      {
+        "stage": "unbroken:start",
+        "scroll_top": 0,
+        "viewport_height": 497,
+        "content_height": 1473,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "unbroken:end",
+        "scroll_top": 976,
+        "viewport_height": 497,
+        "content_height": 1473,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "keyboard:page-down",
+        "scroll_top": 447,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "keyboard:end",
+        "scroll_top": 856,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "keyboard:home",
+        "scroll_top": 0,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "gesture:vertical",
+        "scroll_top": 270,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": null
+      },
+      {
+        "stage": "resume:before",
+        "scroll_top": 856,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      },
+      {
+        "stage": "resume:after",
+        "scroll_top": 856,
+        "viewport_height": 497,
+        "content_height": 1353,
+        "client_width": 310,
+        "scroll_width": 310,
+        "font_px": 12,
+        "focus": "back"
+      }
+    ],
+    "pixel_review": "Ordinary/large/unbroken start and end plus resumed end show final draft marker and full local-only disclaimer, with fixed reachable controls. Existing short review title inherited a dimmer text color through stack-scroll; final CSS restores original inherited color. Final head needs fresh CI and pixel verification."
+  }
+}

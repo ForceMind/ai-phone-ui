@@ -42,3 +42,14 @@ UI-014 的代码候选 `a3da630` 已经由独立审阅和真实 CI/artifact 验�
 从已核对 main df55643 开始。d3430714 的真实 HTTP 测试已确认 pendingFile / pendingRestore 串用，而非仅代码怀疑；修复使候选随确认的共享对象保存，浅复制会话不会获得第二次执行权。取消先释放当前候选再恢复焦点，恢复只在 replace 成功后释放；失败保留同一候选。新增八项生产 handler 单元与六条 native 行为路径，详见 UI011_CANDIDATE_EVIDENCE.json。保留所有历史 RED，必须查最终 head/main CI，Epic #1 取消的文字更新继续不动。
 
 候选 `28975e3` 的 run 37611856799 已核对通过 25/92/127/19/41/8；artifact ZIP、source-head 与预览 HTML 匹配。独立 review 无阻塞问题；最终小改仅撤去可选文件名显示、同步文档与登记验收，仍须自己的 CI，再核对正常合并 main。
+
+
+## PR #12 当前接续：长确认阅读
+
+[PR #12](https://github.com/ForceMind/ai-phone-ui/pull/12) 的 test-only `3491e207` 在真实 HTTP-origin Chromium 复现普通/大字长文不可滚读、无空格文本横向溢出以及键盘/纵向阅读失效；六条行为路径失败，异常/外部请求检查通过。首候选 `56d411b` 因继承文字选择使旧横滑取消回归失败（39/41），保留失败证据并只恢复原确认页的不可选择文字样式。
+
+修正候选 `f16a9129aae5d4aeb483e2d67053cd33703ff5d9` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37639719218) 通过 25 静态、92 单元、127 DOM、19 native 存储/图像、41 native 键盘、8 native 候选及 8 native 阅读检查；ZIP、source-head 与三份构建文件字节已核对。普通/大字/不换行文本末尾、边界说明及跨任务阅读位置均有实际截图与几何证据。独立审阅无阻塞问题；最终像素收尾恢复原短确认标题颜色。见 [阅读证据](../qa/UI014_READING_EVIDENCE.json)。
+
+这只是上述候选的通过结果。最终文档/样式 head 与正常合并 main 仍须分别核对 exact-head CI、artifact 和截图，不能沿用候选绿灯。完整 UI-014 仍开放，实际 Android/iOS、读屏、手机软键盘与 OS 字号未测；未调用真实消息/电话或外部服务。
+
+产品改动复用既有 stack-scroll、手势分类与 sessions 阅读位置；新增读取键只作用于拥有焦点的当前确认。接受/取消处理器、候选一次消费和持久化协议不动。所有旧测试逐字保留。Epic #1 取消的正文更新继续不动。后续按 NEXT_ACTION 收尾，不把新阅读回归当成整个 M2 已结束。

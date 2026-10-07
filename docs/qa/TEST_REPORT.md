@@ -1,5 +1,15 @@
 # v0.1.0 验证记录
 
+## 2026-10-07 UI-014 长确认阅读
+
+[PR #12](https://github.com/ForceMind/ai-phone-ui/pull/12) 的 test-only `3491e207` 在真实 HTTP-origin Chromium 复现普通/大字长文不可滚读、无空格文本横向溢出以及键盘/纵向阅读失效；六条行为路径失败，异常/外部请求检查通过。首候选 `56d411b` 因继承文字选择使旧横滑取消回归失败（39/41），保留失败证据并只恢复原确认页的不可选择文字样式。
+
+修正候选 `f16a9129aae5d4aeb483e2d67053cd33703ff5d9` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37639719218) 通过 25 静态、92 单元、127 DOM、19 native 存储/图像、41 native 键盘、8 native 候选及 8 native 阅读检查；ZIP、source-head 与三份构建文件字节已核对。普通/大字/不换行文本末尾、边界说明及跨任务阅读位置均有实际截图与几何证据。独立审阅无阻塞问题；最终像素收尾恢复原短确认标题颜色。见 [阅读证据](UI014_READING_EVIDENCE.json)。
+
+这只是上述候选的通过结果。最终文档/样式 head 与正常合并 main 仍须分别核对 exact-head CI、artifact 和截图，不能沿用候选绿灯。完整 UI-014 仍开放，实际 Android/iOS、读屏、手机软键盘与 OS 字号未测；未调用真实消息/电话或外部服务。
+
+本地 build/check/92 unit 通过；Chromium 在首个断言前遭遇 socket EPERM。未绕过系统限制，原生结果均来自上述官方 Actions。6 条行为 + 2 条环境检查的矩阵有界，原测试/许可证/来源历史字节不变。
+
 ## 2026-10-07 UI-011 图像缺陷复现
 
 测试先行提交 `cbd799cb81183ed17d862230da75a4742b8ff623` 的 [CI](https://github.com/ForceMind/ai-phone-ui/actions/runs/37602605392) 通过 25 静态、56 单元和原 127 DOM；native 为 17/19。准确 16MP 和图像占用的 quota 取消/重试通过，超过 16MP 与有效 base64 但不能解码的文件仍进入替换确认。实际 artifact 的 source-head 和 SHA256 已校对。该失败保留在 [图像证据](UI011_IMAGE_EVIDENCE.json)，不能用后续绿灯抹去。
