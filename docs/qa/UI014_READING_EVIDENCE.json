@@ -322,5 +322,89 @@
       }
     ],
     "pixel_review": "Ordinary/large/unbroken start and end plus resumed end show final draft marker and full local-only disclaimer, with fixed reachable controls. Existing short review title inherited a dimmer text color through stack-scroll; final CSS restores original inherited color. Final head needs fresh CI and pixel verification."
+  },
+  "final_head_gate": {
+    "source_head": "6323a2dd3bf27d8d6bb58e984e280e3f5788d365",
+    "tree": "1b5fe320d3edf07d235ba6df655074aba6ecb257",
+    "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/12",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37641154241",
+    "conclusion": "success",
+    "artifact_id": 11492806557,
+    "artifact_sha256": "9c39638102fe06fa4c0298993af1a49b8cdcd816ce7d2c1d4207057c84353a6f",
+    "digest_verified": true,
+    "source_head_verified": true,
+    "event_sha": "972c931456bf30a9ab6c6a450e484d43074acb61",
+    "build_bytes_verified": [
+      "dist/index.html",
+      "dist/screens.json",
+      "dist/project-guide.html"
+    ],
+    "counts": {
+      "static": 25,
+      "unit": 92,
+      "dom": 127,
+      "native_storage_image": 19,
+      "native_keyboard": 41,
+      "native_candidate": 8,
+      "native_reading": 8
+    },
+    "independent_review": "Final source/tree, docs and seven reading screenshots reviewed independently; no blocking findings",
+    "pixel_review": "Final actual ordinary/large/unbroken/end/resume verified. Final short photo export screenshot pixel-identical to baseline; backup only a two-pixel-wide glyph-overhang clipping strip differs. No material reading or layout regression.",
+    "license_and_provenance_unchanged": true,
+    "not_tested": [
+      "physical Android/iOS",
+      "screen readers",
+      "mobile soft keyboards",
+      "OS text scaling"
+    ]
+  },
+  "main_gate": {
+    "source_head": "a287cf068fccd8cc2b0b25b2bab8548b2bb7ec50",
+    "tree": "1b5fe320d3edf07d235ba6df655074aba6ecb257",
+    "pull_request": "https://github.com/ForceMind/ai-phone-ui/pull/12",
+    "workflow_run": "https://github.com/ForceMind/ai-phone-ui/actions/runs/37642165642",
+    "conclusion": "success",
+    "artifact_id": 11491459979,
+    "artifact_sha256": "3d8d7eea4b3103a900d4593ce2ab0bffb06eb03f31948fb6c75dca2ddbea0580",
+    "digest_verified": true,
+    "source_head_verified": true,
+    "event_sha": "a287cf068fccd8cc2b0b25b2bab8548b2bb7ec50",
+    "build_bytes_verified": [
+      "dist/index.html",
+      "dist/screens.json",
+      "dist/project-guide.html"
+    ],
+    "counts": {
+      "static": 25,
+      "unit": 92,
+      "dom": 127,
+      "native_storage_image": 19,
+      "native_keyboard": 41,
+      "native_candidate": 8,
+      "native_reading": 8
+    },
+    "independent_review": "Final source/tree, docs and seven reading screenshots reviewed independently; no blocking findings",
+    "pixel_review": "All seven main reading screenshots pixel-identical to verified final PR screenshots; final long/large/unbroken/resumed end also viewed.",
+    "license_and_provenance_unchanged": true,
+    "not_tested": [
+      "physical Android/iOS",
+      "screen readers",
+      "mobile soft keyboards",
+      "OS text scaling"
+    ],
+    "event": "push",
+    "event_sha_verified": true,
+    "parents": [
+      "2139d5e9a800b53dec890e1373c772eeeacc0432",
+      "6323a2dd3bf27d8d6bb58e984e280e3f5788d365"
+    ]
+  },
+  "preview_action_label_card": {
+    "starting_main": "a287cf068fccd8cc2b0b25b2bab8548b2bb7ec50",
+    "reproduced_in": "Main artifact 11491459979, reading-ordinary-start/end.png: existing message acceptance is labeled 确认导出",
+    "requested_label": "确认本机预览",
+    "scope": "Only existing suite/message accept label and one exact native assertion; preserve payload, cancel, one-time local-preview-only effect and all other confirmation semantics",
+    "new_test_matrix": false,
+    "verification": "Requires its own exact-head CI/artifact/pixels, independent review and normal-merge exact-main verification; prior card evidence is not reused as current pass"
   }
 }

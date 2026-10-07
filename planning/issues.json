@@ -120,7 +120,7 @@
       "milestone": "M2",
       "acceptance": "弹层焦点恢复；所有操作有替代；长文不裁切",
       "remoteIssueUrl": "https://github.com/ForceMind/ai-phone-ui/issues/1",
-      "progress": "PR #10 仅覆盖已有照片/备份确认页的原生键盘焦点与取消接续；完整读屏、大字和实际设备验收仍开放。 PR #12 仅补 DAY-05 长确认阅读：保留 test-only 原生 RED，再复用既有滚动与会话逻辑处理长文/不换行文本/大字；阅读键不改变执行权限，最终 head 和合并 main 各自取证。完整 UI-014 仍开放。",
+      "progress": "PR #10 仅覆盖已有照片/备份确认页的原生键盘焦点与取消接续；完整读屏、大字和实际设备验收仍开放。 PR #12 仅补 DAY-05 长确认阅读：保留 test-only 原生 RED，再复用既有滚动与会话逻辑处理长文/不换行文本/大字；阅读键不改变执行权限，最终 head 和合并 main 各自取证。完整 UI-014 仍开放。 PR #12 已由 final/main 各自通过25/92/127/19/41/8/8。后继独立卡仅将 DAY-05 接受名纠正为确认本机预览，增加既有原生测试的精确名称断言；验收后停止文字微调，继续保留实机/读屏未测边界。",
       "evidence": "docs/qa/UI014_FOCUS_EVIDENCE.json",
       "readingEvidence": "docs/qa/UI014_READING_EVIDENCE.json"
     },
