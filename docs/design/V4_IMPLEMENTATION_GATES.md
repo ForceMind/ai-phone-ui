@@ -57,3 +57,17 @@ PR14 main eaf0874 只加 Pages 工作流；首次 run37646443486 Configure Pages
 ## Mounted task / foreground presentation boundary
 
 PR18's confirmed interruption RED requires task presentation to remain tied to its content route through system menus, lock, and sleep. The candidate scopes content styles to `[data-design-surface][data-design-sample=true]`; the root's visible-route flag is diagnostic only. Approved D2/D3 style extensions must retain this surface qualifier, including self-target selectors for overlay/toast surfaces, and must not change the sample list merely to mask interruption failures. Reading offsets remain owned by the original DOM/session implementation, with no presentation cache. See the preserved RED and candidate details in `../qa/V4_PRESENTATION_SUSPEND.md`.
+
+## D4 representative browser gates (PR21)
+
+The bounded browser subset now has an independent test-only RED: 96 actual
+composited-background samples pass, SET-01 text-only 200% reading passes, and
+DAY-05/CLD-03 text-only 200% layout fails across six presentation combinations.
+The layout candidate must pass its own old and new jobs, source/artifact readback
+and screenshots. This does not close physical-device, OS-text-size or assistive
+technology gates. See `../qa/V4_D4_ACCESSIBILITY.md`.
+
+Runtime `ec5c716` subsequently passed the complete old regression job and all
+50 D4 checks (run 37778706779), with actual artifact/pixel readback and independent
+source review. The final docs-only head and merge main each retain their own
+verification gate; this closes only the representative browser subset.

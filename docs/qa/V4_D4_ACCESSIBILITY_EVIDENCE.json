@@ -1,0 +1,1079 @@
+{
+  "scope": "representative browser subset of V4 plan section 12; not all-page or device certification",
+  "baseline_main": "8f50572631b4330ff3867c45c618e9107cd26d7c",
+  "initial_test_only": {
+    "sha": "dd557fac986c40ebd07374cae46a46223b67fa32",
+    "run": 37774131301,
+    "artifact": 11549816758,
+    "zip_sha256": "341686be2276d86327d2a93f77ce586f79509ab992466e0a894454949ecff7a4",
+    "status": "32/44 initial; contrast clip and scrollIntoView findings are superseded harness evidence; DAY-05 geometry RED retained",
+    "old_core_failure": "backup-cancel-resume filechooser timeout, 9/10"
+  },
+  "conservative_test_only": {
+    "sha": "69cb11f9fbe1f2a2f670d1f066cec6bb98e4823a",
+    "run": 37775681970,
+    "artifact": 11550176376,
+    "zip_sha256": "dd4560ab8a1174f8e89f3bc28a5a99783039623eb769961a6426a65d31b4d062",
+    "browser": "143.0.7499.4",
+    "passed": 32,
+    "failed": 12,
+    "checks": [
+      {
+        "name": "light-glass-DAY-05-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".dialog-inner h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".dialog-inner p",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 17,
+            "rendered_font": 16.019229956862276
+          },
+          {
+            "selector": ".dialog-head .accept",
+            "minimum_ratio": 6.373409163249365,
+            "threshold": 4.5,
+            "color": "rgb(0, 107, 102)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": ".dialog-head [data-action=\"back\"]",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "light-glass-DAY-05-resize",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport: {\"scrollTop\": 0, \"scrollHeight\": 5997, \"clientHeight\": 677, \"scrollWidth\": 343, \"clientWidth\": 343, \"box\": {\"x\": 558.3954467773438, \"y\": 220.88461303710938, \"right\": 881.60693359375, \"bottom\": 858.8269958496094, \"width\": 323.21148681640625, \"height\": 637.9423828125}, \"screen\": {\"x\": 534.8377685546875, \"y\": 110.63461303710938, \"right\": 905.1646728515625, \"bottom\": 913.4808044433594, \"width\": 370.326904296875, \"height\": 802.84619140625}, \"head\": {\"x\": 555.5684814453125, \"y\": 133.25, \"right\": 884.4338989257812, \"bottom\": 178.48077392578125, \"width\": 328.86541748046875, \"height\": 45.23077392578125}, \"hint\": {\"x\": 534.8377685546875, \"y\": 850.34619140625, \"right\": 905.1646728515625, \"bottom\": 883.3269653320312, \"width\": 370.326904296875, \"height\": 32.98077392578125}, \"tail\": {\"x\": 558.3954467773438, \"y\": 5692.71826171875, \"right\": 878.780029296875, \"bottom\": 5832.9453125, \"width\": 320.38458251953125, \"height\": 140.22705078125}, \"horizontalFit\": true, \"fontSize\": 34, \"focus\": \"back\", \"payloadLength\": 929, \"outbox\": 0}"
+      },
+      {
+        "name": "light-glass-SET-01-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".suite-header h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".s-row b",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": ".s-row small",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "light-glass-SET-01-resize",
+        "status": "pass"
+      },
+      {
+        "name": "light-glass-CLD-03-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".app-header h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 31,
+            "rendered_font": 29.211536980160624
+          },
+          {
+            "selector": ".job-desc",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-phases span",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-foot",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "light-glass-CLD-03-resize",
+        "status": "fail",
+        "error": "200% header overlaps reading body: {'header': {'x': 556.5108032226562, 'y': 146.4423065185547, 'width': 326.98077392578125, 'height': 348.44773864746094}, 'body': {'x': 558.3954467773438, 'y': 272.7115478515625, 'width': 323.21148681640625, 'height': 685.8233032226562}, 'screen_scroll': [0, 0]}"
+      },
+      {
+        "name": "light-glass-SYS-04-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": "#topMenu h2",
+            "minimum_ratio": 15.931831046112709,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": "#topMenu .sub",
+            "minimum_ratio": 6.4765094985217075,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .settings-row > span",
+            "minimum_ratio": 15.903033545246174,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": "#topMenu .settings-row small",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .menu-footer",
+            "minimum_ratio": 6.3858022800075975,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "light-opaque-DAY-05-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".dialog-inner h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".dialog-inner p",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 17,
+            "rendered_font": 16.019229956862276
+          },
+          {
+            "selector": ".dialog-head .accept",
+            "minimum_ratio": 6.373409163249365,
+            "threshold": 4.5,
+            "color": "rgb(0, 107, 102)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": ".dialog-head [data-action=\"back\"]",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "light-opaque-DAY-05-resize",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport: {\"scrollTop\": 0, \"scrollHeight\": 5997, \"clientHeight\": 677, \"scrollWidth\": 343, \"clientWidth\": 343, \"box\": {\"x\": 558.3954467773438, \"y\": 220.88461303710938, \"right\": 881.60693359375, \"bottom\": 858.8269958496094, \"width\": 323.21148681640625, \"height\": 637.9423828125}, \"screen\": {\"x\": 534.8377685546875, \"y\": 110.63461303710938, \"right\": 905.1646728515625, \"bottom\": 913.4808044433594, \"width\": 370.326904296875, \"height\": 802.84619140625}, \"head\": {\"x\": 555.5684814453125, \"y\": 133.25, \"right\": 884.4338989257812, \"bottom\": 178.48077392578125, \"width\": 328.86541748046875, \"height\": 45.23077392578125}, \"hint\": {\"x\": 534.8377685546875, \"y\": 850.34619140625, \"right\": 905.1646728515625, \"bottom\": 883.3269653320312, \"width\": 370.326904296875, \"height\": 32.98077392578125}, \"tail\": {\"x\": 558.3954467773438, \"y\": 5692.71826171875, \"right\": 878.780029296875, \"bottom\": 5832.9453125, \"width\": 320.38458251953125, \"height\": 140.22705078125}, \"horizontalFit\": true, \"fontSize\": 34, \"focus\": \"back\", \"payloadLength\": 929, \"outbox\": 0}"
+      },
+      {
+        "name": "light-opaque-SET-01-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".suite-header h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".s-row b",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": ".s-row small",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "light-opaque-SET-01-resize",
+        "status": "pass"
+      },
+      {
+        "name": "light-opaque-CLD-03-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".app-header h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 31,
+            "rendered_font": 29.211536980160624
+          },
+          {
+            "selector": ".job-desc",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-phases span",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-foot",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "light-opaque-CLD-03-resize",
+        "status": "fail",
+        "error": "200% header overlaps reading body: {'header': {'x': 556.5108032226562, 'y': 146.4423065185547, 'width': 326.98077392578125, 'height': 348.44773864746094}, 'body': {'x': 558.3954467773438, 'y': 272.7115478515625, 'width': 323.21148681640625, 'height': 685.8233032226562}, 'screen_scroll': [0, 0]}"
+      },
+      {
+        "name": "light-opaque-SYS-04-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": "#topMenu h2",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 3,
+            "color": "rgb(32, 33, 38)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": "#topMenu .sub",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .settings-row > span",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": "#topMenu .settings-row small",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .menu-footer",
+            "minimum_ratio": 6.701909075400298,
+            "threshold": 4.5,
+            "color": "rgb(83, 93, 104)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "light-contrast-DAY-05-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".dialog-inner h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".dialog-inner p",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 17,
+            "rendered_font": 16.019229956862276
+          },
+          {
+            "selector": ".dialog-head .accept",
+            "minimum_ratio": 10.756023839020019,
+            "threshold": 4.5,
+            "color": "rgb(0, 70, 65)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": ".dialog-head [data-action=\"back\"]",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "light-contrast-DAY-05-resize",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport: {\"scrollTop\": 0, \"scrollHeight\": 5997, \"clientHeight\": 677, \"scrollWidth\": 343, \"clientWidth\": 343, \"box\": {\"x\": 558.3954467773438, \"y\": 220.88461303710938, \"right\": 881.60693359375, \"bottom\": 858.8269958496094, \"width\": 323.21148681640625, \"height\": 637.9423828125}, \"screen\": {\"x\": 534.8377685546875, \"y\": 110.63461303710938, \"right\": 905.1646728515625, \"bottom\": 913.4808044433594, \"width\": 370.326904296875, \"height\": 802.84619140625}, \"head\": {\"x\": 555.5684814453125, \"y\": 133.25, \"right\": 884.4338989257812, \"bottom\": 178.48077392578125, \"width\": 328.86541748046875, \"height\": 45.23077392578125}, \"hint\": {\"x\": 534.8377685546875, \"y\": 850.34619140625, \"right\": 905.1646728515625, \"bottom\": 883.3269653320312, \"width\": 370.326904296875, \"height\": 32.98077392578125}, \"tail\": {\"x\": 558.3954467773438, \"y\": 5692.71826171875, \"right\": 878.780029296875, \"bottom\": 5832.9453125, \"width\": 320.38458251953125, \"height\": 140.22705078125}, \"horizontalFit\": true, \"fontSize\": 34, \"focus\": \"back\", \"payloadLength\": 929, \"outbox\": 0}"
+      },
+      {
+        "name": "light-contrast-SET-01-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".suite-header h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".s-row b",
+            "minimum_ratio": 21.0,
+            "threshold": 4.5,
+            "color": "rgb(0, 0, 0)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": ".s-row small",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "light-contrast-SET-01-resize",
+        "status": "pass"
+      },
+      {
+        "name": "light-contrast-CLD-03-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".app-header h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 31,
+            "rendered_font": 29.211536980160624
+          },
+          {
+            "selector": ".job-desc",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-phases span",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-foot",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "light-contrast-CLD-03-resize",
+        "status": "fail",
+        "error": "200% header overlaps reading body: {'header': {'x': 556.5108032226562, 'y': 146.4423065185547, 'width': 326.98077392578125, 'height': 348.44773864746094}, 'body': {'x': 558.3954467773438, 'y': 272.7115478515625, 'width': 323.21148681640625, 'height': 685.8233032226562}, 'screen_scroll': [0, 0]}"
+      },
+      {
+        "name": "light-contrast-SYS-04-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": "#topMenu h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": "#topMenu .sub",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .settings-row > span",
+            "minimum_ratio": 21.0,
+            "threshold": 4.5,
+            "color": "rgb(0, 0, 0)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": "#topMenu .settings-row small",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .menu-footer",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "dark-glass-DAY-05-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".dialog-inner h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".dialog-inner p",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 17,
+            "rendered_font": 16.019229956862276
+          },
+          {
+            "selector": ".dialog-head .accept",
+            "minimum_ratio": 9.394565131971905,
+            "threshold": 4.5,
+            "color": "rgb(112, 217, 206)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": ".dialog-head [data-action=\"back\"]",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "dark-glass-DAY-05-resize",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport: {\"scrollTop\": 0, \"scrollHeight\": 5997, \"clientHeight\": 677, \"scrollWidth\": 343, \"clientWidth\": 343, \"box\": {\"x\": 558.3954467773438, \"y\": 220.88461303710938, \"right\": 881.60693359375, \"bottom\": 858.8269958496094, \"width\": 323.21148681640625, \"height\": 637.9423828125}, \"screen\": {\"x\": 534.8377685546875, \"y\": 110.63461303710938, \"right\": 905.1646728515625, \"bottom\": 913.4808044433594, \"width\": 370.326904296875, \"height\": 802.84619140625}, \"head\": {\"x\": 555.5684814453125, \"y\": 133.25, \"right\": 884.4338989257812, \"bottom\": 178.48077392578125, \"width\": 328.86541748046875, \"height\": 45.23077392578125}, \"hint\": {\"x\": 534.8377685546875, \"y\": 850.34619140625, \"right\": 905.1646728515625, \"bottom\": 883.3269653320312, \"width\": 370.326904296875, \"height\": 32.98077392578125}, \"tail\": {\"x\": 558.3954467773438, \"y\": 5692.71826171875, \"right\": 878.780029296875, \"bottom\": 5832.9453125, \"width\": 320.38458251953125, \"height\": 140.22705078125}, \"horizontalFit\": true, \"fontSize\": 34, \"focus\": \"back\", \"payloadLength\": 929, \"outbox\": 0}"
+      },
+      {
+        "name": "dark-glass-SET-01-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".suite-header h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".s-row b",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 4.5,
+            "color": "rgb(242, 244, 247)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": ".s-row small",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "dark-glass-SET-01-resize",
+        "status": "pass"
+      },
+      {
+        "name": "dark-glass-CLD-03-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".app-header h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 31,
+            "rendered_font": 29.211536980160624
+          },
+          {
+            "selector": ".job-desc",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-phases span",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-foot",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "dark-glass-CLD-03-resize",
+        "status": "fail",
+        "error": "200% header overlaps reading body: {'header': {'x': 556.5108032226562, 'y': 146.4423065185547, 'width': 326.98077392578125, 'height': 348.44773864746094}, 'body': {'x': 558.3954467773438, 'y': 272.7115478515625, 'width': 323.21148681640625, 'height': 685.8233032226562}, 'screen_scroll': [0, 0]}"
+      },
+      {
+        "name": "dark-glass-SYS-04-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": "#topMenu h2",
+            "minimum_ratio": 14.142172202626375,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": "#topMenu .sub",
+            "minimum_ratio": 8.24767585951579,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .settings-row > span",
+            "minimum_ratio": 13.980071401684935,
+            "threshold": 4.5,
+            "color": "rgb(242, 244, 247)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": "#topMenu .settings-row small",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .menu-footer",
+            "minimum_ratio": 8.103529393774442,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "dark-opaque-DAY-05-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".dialog-inner h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".dialog-inner p",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 17,
+            "rendered_font": 16.019229956862276
+          },
+          {
+            "selector": ".dialog-head .accept",
+            "minimum_ratio": 9.394565131971905,
+            "threshold": 4.5,
+            "color": "rgb(112, 217, 206)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": ".dialog-head [data-action=\"back\"]",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "dark-opaque-DAY-05-resize",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport: {\"scrollTop\": 0, \"scrollHeight\": 5997, \"clientHeight\": 677, \"scrollWidth\": 343, \"clientWidth\": 343, \"box\": {\"x\": 558.3954467773438, \"y\": 220.88461303710938, \"right\": 881.60693359375, \"bottom\": 858.8269958496094, \"width\": 323.21148681640625, \"height\": 637.9423828125}, \"screen\": {\"x\": 534.8377685546875, \"y\": 110.63461303710938, \"right\": 905.1646728515625, \"bottom\": 913.4808044433594, \"width\": 370.326904296875, \"height\": 802.84619140625}, \"head\": {\"x\": 555.5684814453125, \"y\": 133.25, \"right\": 884.4338989257812, \"bottom\": 178.48077392578125, \"width\": 328.86541748046875, \"height\": 45.23077392578125}, \"hint\": {\"x\": 534.8377685546875, \"y\": 850.34619140625, \"right\": 905.1646728515625, \"bottom\": 883.3269653320312, \"width\": 370.326904296875, \"height\": 32.98077392578125}, \"tail\": {\"x\": 558.3954467773438, \"y\": 5692.71826171875, \"right\": 878.780029296875, \"bottom\": 5832.9453125, \"width\": 320.38458251953125, \"height\": 140.22705078125}, \"horizontalFit\": true, \"fontSize\": 34, \"focus\": \"back\", \"payloadLength\": 929, \"outbox\": 0}"
+      },
+      {
+        "name": "dark-opaque-SET-01-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".suite-header h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".s-row b",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 4.5,
+            "color": "rgb(242, 244, 247)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": ".s-row small",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "dark-opaque-SET-01-resize",
+        "status": "pass"
+      },
+      {
+        "name": "dark-opaque-CLD-03-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".app-header h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 31,
+            "rendered_font": 29.211536980160624
+          },
+          {
+            "selector": ".job-desc",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-phases span",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-foot",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "dark-opaque-CLD-03-resize",
+        "status": "fail",
+        "error": "200% header overlaps reading body: {'header': {'x': 556.5108032226562, 'y': 146.4423065185547, 'width': 326.98077392578125, 'height': 348.44773864746094}, 'body': {'x': 558.3954467773438, 'y': 272.7115478515625, 'width': 323.21148681640625, 'height': 685.8233032226562}, 'screen_scroll': [0, 0]}"
+      },
+      {
+        "name": "dark-opaque-SYS-04-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": "#topMenu h2",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 3,
+            "color": "rgb(242, 244, 247)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": "#topMenu .sub",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .settings-row > span",
+            "minimum_ratio": 14.317820030278973,
+            "threshold": 4.5,
+            "color": "rgb(242, 244, 247)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": "#topMenu .settings-row small",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .menu-footer",
+            "minimum_ratio": 8.675078660646347,
+            "threshold": 4.5,
+            "color": "rgb(184, 193, 205)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "dark-contrast-DAY-05-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".dialog-inner h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".dialog-inner p",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 17,
+            "rendered_font": 16.019229956862276
+          },
+          {
+            "selector": ".dialog-head .accept",
+            "minimum_ratio": 10.756023839020019,
+            "threshold": 4.5,
+            "color": "rgb(0, 70, 65)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": ".dialog-head [data-action=\"back\"]",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "dark-contrast-DAY-05-resize",
+        "status": "fail",
+        "error": "Review body extends under controls or past the reading viewport: {\"scrollTop\": 0, \"scrollHeight\": 5997, \"clientHeight\": 677, \"scrollWidth\": 343, \"clientWidth\": 343, \"box\": {\"x\": 558.3954467773438, \"y\": 220.88461303710938, \"right\": 881.60693359375, \"bottom\": 858.8269958496094, \"width\": 323.21148681640625, \"height\": 637.9423828125}, \"screen\": {\"x\": 534.8377685546875, \"y\": 110.63461303710938, \"right\": 905.1646728515625, \"bottom\": 913.4808044433594, \"width\": 370.326904296875, \"height\": 802.84619140625}, \"head\": {\"x\": 555.5684814453125, \"y\": 133.25, \"right\": 884.4338989257812, \"bottom\": 178.48077392578125, \"width\": 328.86541748046875, \"height\": 45.23077392578125}, \"hint\": {\"x\": 534.8377685546875, \"y\": 850.34619140625, \"right\": 905.1646728515625, \"bottom\": 883.3269653320312, \"width\": 370.326904296875, \"height\": 32.98077392578125}, \"tail\": {\"x\": 558.3954467773438, \"y\": 5692.71826171875, \"right\": 878.780029296875, \"bottom\": 5832.9453125, \"width\": 320.38458251953125, \"height\": 140.22705078125}, \"horizontalFit\": true, \"fontSize\": 34, \"focus\": \"back\", \"payloadLength\": 929, \"outbox\": 0}"
+      },
+      {
+        "name": "dark-contrast-SET-01-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".suite-header h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": ".s-row b",
+            "minimum_ratio": 21.0,
+            "threshold": 4.5,
+            "color": "rgb(0, 0, 0)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": ".s-row small",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          }
+        ]
+      },
+      {
+        "name": "dark-contrast-SET-01-resize",
+        "status": "pass"
+      },
+      {
+        "name": "dark-contrast-CLD-03-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": ".app-header h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 31,
+            "rendered_font": 29.211536980160624
+          },
+          {
+            "selector": ".job-desc",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-phases span",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          },
+          {
+            "selector": ".job-foot",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "dark-contrast-CLD-03-resize",
+        "status": "fail",
+        "error": "200% header overlaps reading body: {'header': {'x': 556.5108032226562, 'y': 146.4423065185547, 'width': 326.98077392578125, 'height': 348.44773864746094}, 'body': {'x': 558.3954467773438, 'y': 272.7115478515625, 'width': 323.21148681640625, 'height': 685.8233032226562}, 'screen_scroll': [0, 0]}"
+      },
+      {
+        "name": "dark-contrast-SYS-04-contrast",
+        "status": "pass",
+        "samples": [
+          {
+            "selector": "#topMenu h2",
+            "minimum_ratio": 21.0,
+            "threshold": 3,
+            "color": "rgb(0, 0, 0)",
+            "font": 30,
+            "rendered_font": 28.269229335639313
+          },
+          {
+            "selector": "#topMenu .sub",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .settings-row > span",
+            "minimum_ratio": 21.0,
+            "threshold": 4.5,
+            "color": "rgb(0, 0, 0)",
+            "font": 15,
+            "rendered_font": 14.134614667819656
+          },
+          {
+            "selector": "#topMenu .settings-row small",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 14,
+            "rendered_font": 13.192307023298346
+          },
+          {
+            "selector": "#topMenu .menu-footer",
+            "minimum_ratio": 16.067994334843153,
+            "threshold": 4.5,
+            "color": "rgb(32, 33, 38)",
+            "font": 13,
+            "rendered_font": 12.249999378777035
+          }
+        ]
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass"
+      },
+      {
+        "name": "no-outbound",
+        "status": "pass"
+      }
+    ]
+  },
+  "candidate": {
+    "sha": "ec5c716ccea5abbfcf94c3166a57c1d3a1ebad33",
+    "run": 37778706779,
+    "old_job": "success",
+    "d4_job": "success",
+    "d4_passed": 50,
+    "d4_failed": 0,
+    "static_passed": 26,
+    "unit_passed": 134,
+    "contrast_samples": 96,
+    "minimum_contrast": 6.373409163249365,
+    "resume_all_six": {
+      "before": 471,
+      "after": 471,
+      "percentage_font": "144px"
+    },
+    "artifacts": [
+      {
+        "id": 11551292744,
+        "name": "d4-accessibility-report",
+        "sha256": "47a47b7c01c4e845e6a97a5de4748a11c710a1fedb013364a0cc500918e3f2b4"
+      },
+      {
+        "id": 11551860068,
+        "name": "ui-preview-and-reports",
+        "sha256": "f81b13936dc14a9da7ab9cfb3ad5590b3f18b5abdacccdd7294880f64d09e14b"
+      }
+    ],
+    "runtime_html_sha256": "e95d63e58be4107a00ef3f5f0eac5c93a154324905134781ceaa1eb2778928e2",
+    "runtime_html_bytes": 297285,
+    "independent_source_review": "no blocking findings",
+    "final_head_and_main": "each require own full CI/artifact readback; consult PR21 and final delivery report"
+  },
+  "not_tested": [
+    "physical devices",
+    "OS text scaling",
+    "screen readers",
+    "all 86 routes",
+    "native browser zoom",
+    "OS contrast/transparency media preferences"
+  ],
+  "resume_test_only": {
+    "sha": "673a632cc12405af41819f3aa50e6f7a27616371",
+    "run": 37777618704,
+    "artifact": 11550557197,
+    "zip_sha256": "14f5456e469b0d55c7e8a7461a9d613d638dad6ba4f9df1346fe7bfc2909d6d7",
+    "native_passed": 38,
+    "native_failed": 12,
+    "true_resume_failure": "six cases: same 200% font rules, offset442 -> 0",
+    "percentage_finding": "six full font Range clip failures; screenshots do not establish missing glyph ink",
+    "old_job": "intentional two new unit REDs stop dependency setup; downstream dependency failures are not runtime regressions"
+  }
+}
