@@ -1024,7 +1024,39 @@
       }
     ]
   },
-  "candidate": "session/positive-leading candidate pending exact-head native checks",
+  "candidate": {
+    "sha": "ec5c716ccea5abbfcf94c3166a57c1d3a1ebad33",
+    "run": 37778706779,
+    "old_job": "success",
+    "d4_job": "success",
+    "d4_passed": 50,
+    "d4_failed": 0,
+    "static_passed": 26,
+    "unit_passed": 134,
+    "contrast_samples": 96,
+    "minimum_contrast": 6.373409163249365,
+    "resume_all_six": {
+      "before": 471,
+      "after": 471,
+      "percentage_font": "144px"
+    },
+    "artifacts": [
+      {
+        "id": 11551292744,
+        "name": "d4-accessibility-report",
+        "sha256": "47a47b7c01c4e845e6a97a5de4748a11c710a1fedb013364a0cc500918e3f2b4"
+      },
+      {
+        "id": 11551860068,
+        "name": "ui-preview-and-reports",
+        "sha256": "f81b13936dc14a9da7ab9cfb3ad5590b3f18b5abdacccdd7294880f64d09e14b"
+      }
+    ],
+    "runtime_html_sha256": "e95d63e58be4107a00ef3f5f0eac5c93a154324905134781ceaa1eb2778928e2",
+    "runtime_html_bytes": 297285,
+    "independent_source_review": "no blocking findings",
+    "final_head_and_main": "each require own full CI/artifact readback; consult PR21 and final delivery report"
+  },
   "not_tested": [
     "physical devices",
     "OS text scaling",

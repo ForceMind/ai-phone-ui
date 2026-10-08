@@ -1,3 +1,11 @@
+# Verified representative browser subset
+
+Runtime candidate `ec5c716` passed both jobs in [run 37778706779](https://github.com/ForceMind/ai-phone-ui/actions/runs/37778706779): complete existing regressions plus 50/50 D4 checks, 26 static and 134 unit checks. The 96 measured contrast samples have a minimum 6.373409163249365:1. All six same-200%-font cross-task cases restore 471 → 471. Source-head, both artifact digests and all dist bytes are verified; normal/enlarged start/end/resumed screenshots were inspected. Independent source review found no blocking issue.
+
+D4 artifact 11551292744 SHA256 `47a47b7c01c4e845e6a97a5de4748a11c710a1fedb013364a0cc500918e3f2b4`; old regression artifact 11551860068 SHA256 `f81b13936dc14a9da7ab9cfb3ad5590b3f18b5abdacccdd7294880f64d09e14b`. Runtime HTML is 297285 bytes, SHA256 `e95d63e58be4107a00ef3f5f0eac5c93a154324905134781ceaa1eb2778928e2`.
+
+Final documentation-only head and merge main must each pass their own CI and artifact checks. This record does not substitute candidate results for those commits. PR21 and the final delivery report carry merge/main facts. The historical RED/candidate sections below remain as a test-first record, not the latest status. Physical devices, OS text scaling, native zoom and screen readers remain open.
+
 # D4 bounded rendered contrast and 200% text resize
 
 ## Scope and method

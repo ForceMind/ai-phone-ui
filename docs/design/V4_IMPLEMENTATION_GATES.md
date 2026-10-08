@@ -66,3 +66,8 @@ DAY-05/CLD-03 text-only 200% layout fails across six presentation combinations.
 The layout candidate must pass its own old and new jobs, source/artifact readback
 and screenshots. This does not close physical-device, OS-text-size or assistive
 technology gates. See `../qa/V4_D4_ACCESSIBILITY.md`.
+
+Runtime `ec5c716` subsequently passed the complete old regression job and all
+50 D4 checks (run 37778706779), with actual artifact/pixel readback and independent
+source review. The final docs-only head and merge main each retain their own
+verification gate; this closes only the representative browser subset.
