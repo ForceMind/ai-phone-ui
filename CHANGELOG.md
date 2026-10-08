@@ -3,6 +3,7 @@
 - 既有完整iOS26方案原文落库，补充性能预算、玻璃降级与普通revert回滚门槛。
 - 新增外置样板检查开关、浅深色与减少透明度；范围限七个编号和下拉组件，未迁移页明确V3。
 - 四项单元验证呈现开关不依赖业务状态/存储API，新增HTTP-origin状态保全和截图套件；全部旧测试保留。
+- 两轮exact-head CI分别通过全部旧回归及design5/design6；保留像素缺陷和fixture问题，细节见V4_ACCEPTANCE。
 - 本地build/static26/unit96通过；本地Chromium在启动前socket EPERM，未改安全配置。精确提交CI与像素验证待执行。
 
 # Changelog

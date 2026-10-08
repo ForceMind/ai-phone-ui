@@ -36,10 +36,6 @@ def invariant(page):
     reading.tail_visible(reading.observe(page,'v4-long-tail'))
     reading.control(page,'back').click();reading.cancelled(page)
 def samples(page,theme):
-    # Visual fixtures use the bundled generated scenery, not the 1px storage probe.
-    page.evaluate('localStorage.clear()')
-    page.reload(wait_until='load');native.ready(page,'SET-10')
-    page.locator('#designVersion').select_option('v4')
     page.locator('#designTheme').select_option(theme)
     for route in SAMPLES:
         reading.go(page,route)
@@ -76,7 +72,12 @@ def main():
             if os.environ.get('CHROMIUM_PATH'):options['executable_path']=os.environ['CHROMIUM_PATH']
             browser=pw.chromium.launch(**options);version=browser.version
             for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast)]:
-                with native.case(browser,origin) as page:
+                visual=native.fixture('visual',source='') if name.endswith('-samples') else None
+                if visual:
+                    visual['core']['photo']['name']='山径 · 黄昏'
+                    visual['core']['notes']='把今天的想法留在这里。\n照片、笔记和进行中的事，都能从刚才的地方继续。'
+                    visual['core']['events']=[{'title':'照片已准备好','body':'内置生成风景，本机编辑演示。','task':'photo','at':1791414000000},{'title':'接着写下想法','body':'示例笔记留在本机，可以继续编辑。','task':'notes','at':1791413940000}]
+                with native.case(browser,origin,original=visual) as page:
                     page.locator('#designVersion').select_option('v4')
                     check(name,lambda:fn(page))
             browser.close()
