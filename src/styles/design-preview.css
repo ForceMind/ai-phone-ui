@@ -61,3 +61,13 @@
 /* Media marks keep two-tone edges; status feedback uses an explicit inverse palette. */
 [data-design-sample=true] .selection{border:2px solid #fff;box-shadow:0 0 0 1px #111,inset 0 0 0 1px #111}
 [data-design-sample=true] :is(.toast,.gesture-toast){background:var(--v4-text);color:var(--v4-surface);border:1px solid var(--v4-line);border-radius:12px}
+/* D1 responsive geometry: layout sizes vary; gesture thresholds remain 360×672 logical units. */
+[data-design=v4][data-design-viewport=portrait]{--surface-width:393px;--surface-height:852px;--device-width:423px;--device-height:936px}
+[data-design-sample=true] .home-covers.suite-expanded{max-height:calc(var(--surface-height) - 206px)}
+[data-design-sample=true] .events-list{max-height:calc(var(--surface-height) - 203px)}
+[data-design-sample=true] .caps-scroll{max-height:calc(var(--surface-height) - 162px)}
+[data-design-sample=true][data-design-route=IMG-02] .photo-stage{height:calc(var(--surface-height) - 192px)}
+[data-design-sample=true][data-design-route=IMG-02] .photo-meta{top:calc(var(--surface-height) - 83px)}
+[data-design=v4] .pulley{top:calc(var(--surface-height) / 56)}
+[data-design=v4] .pulley-row{height:calc(var(--surface-height) / 12)}
+@media(max-width:730px){.workspace{height:calc(100dvh - 163px)}}

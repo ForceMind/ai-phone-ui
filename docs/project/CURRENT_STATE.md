@@ -1,3 +1,7 @@
+# D1 独立画板适配进行中
+
+PR15的360×672浅深样板已按0ac9d00验证并交审。当前分支继续393×852实际布局/逻辑坐标适配，见docs/design/V4_VIEWPORT_ADAPTER.md；必须核验本分支自身CI与截图，不覆盖用户正在审阅的样板附件，也不提前进入D2/D3。
+
 # V4 D0 / D1 接续 — 2026-10-08
 
 当前已获准持续实施既有 iOS26 方案。方案原文见 `docs/design/V4_REDESIGN_PLAN.md`，执行门槛与回滚见 `docs/design/V4_IMPLEMENTATION_GATES.md`。PR13已合并main d164cdf并验证，PR14已进入eaf0874但Pages首次配置404；下方旧阶段文字作为历史保留。

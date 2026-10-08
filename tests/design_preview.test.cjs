@@ -1,6 +1,6 @@
 const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');
 function harness(search=''){
- const elements={};for(const id of ['designVersion','designTheme','designOpaque','designScope'])elements[id]={value:id==='designVersion'?'baseline':'light',checked:false,disabled:false,handlers:{},addEventListener(t,f){this.handlers[t]=f;}};
+ const elements={};for(const id of ['designVersion','designTheme','designOpaque','designViewport','designScope'])elements[id]={value:id==='designVersion'?'baseline':'light',checked:false,disabled:false,handlers:{},addEventListener(t,f){this.handlers[t]=f;}};
  const panel={className:'',setAttribute(){},querySelector(s){return elements[s.slice(1)];}};
  const root={dataset:{}},events={};let mounts=0;
  const context={URLSearchParams,location:{search},document:{documentElement:root,createElement(){mounts++;return panel;},querySelector(){return {after(){}};}},Suite:{current(){return{id:'SYS-01'};}},window:{addEventListener(t,f){events[t]=f;}}};
