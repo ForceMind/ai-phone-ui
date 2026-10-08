@@ -55,6 +55,8 @@ jobs:
         run: npm run test:design 2>&1 | tee test-results/v4-design.log
       - name: V4 portrait geometry and unchanged logical gestures
         run: npm run test:viewport 2>&1 | tee test-results/viewport.log
+      - name: Presentation interruption reading and photo geometry
+        run: npm run test:presentation 2>&1 | tee test-results/presentation-suspend.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4
