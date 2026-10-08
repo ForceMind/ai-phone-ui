@@ -113,6 +113,21 @@ def photo_drag_region(page):
     reading.gesture(page,(270,y),(90,y))
     native.ensure(page.evaluate('S.photo.current')==1 and page.evaluate('stack.length')==0,'Upper photo region opened a page instead of selecting the next version')
 
+def presentation_visibility(page):
+    reading.go(page,'DOC-02')
+    page.wait_for_function('document.documentElement.dataset.designSample==="false"')
+    page.keyboard.press('h')
+    page.wait_for_function('!appOpen && document.documentElement.dataset.designSample==="true" && document.documentElement.dataset.designRoute==="SYS-01"')
+    page.keyboard.press('t')
+    page.wait_for_function('overlay==="top" && document.documentElement.dataset.designSample==="false"')
+    page.keyboard.press('Escape')
+    page.wait_for_function('overlay==="" && document.documentElement.dataset.designRoute==="SYS-01"')
+    page.keyboard.press('a')
+    page.wait_for_function('overlay==="caps" && document.documentElement.dataset.designRoute==="SYS-03"')
+    page.keyboard.press('Escape')
+    page.wait_for_function('overlay==="" && document.documentElement.dataset.designRoute==="SYS-01"')
+    native.assert_original(page)
+
 def frame_sample(page):
     global FRAME_SAMPLE
     reading.go(page,'SYS-01')
@@ -133,7 +148,7 @@ def main():
             options={'headless':True}
             if os.environ.get('CHROMIUM_PATH'):options['executable_path']=os.environ['CHROMIUM_PATH']
             browser=pw.chromium.launch(**options);version=browser.version
-            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast),('record-frame-baseline',frame_sample),('photo-selection-geometry',photo_geometry),('v4-cross-task-reading-resume',reading.resume_accept),('photo-stage-swipe-region',photo_drag_region)]:
+            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast),('record-frame-baseline',frame_sample),('photo-selection-geometry',photo_geometry),('v4-cross-task-reading-resume',reading.resume_accept),('photo-stage-swipe-region',photo_drag_region),('presentation-follows-visible-surface',presentation_visibility)]:
                 visual=native.fixture('visual',source='') if name.endswith('-samples') else None
                 if visual:
                     visual['core']['photo']['name']='山径 · 黄昏'

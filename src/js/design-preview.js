@@ -24,5 +24,7 @@ panel.querySelector('#designTheme').addEventListener('change',e=>{theme=e.target
 panel.querySelector('#designOpaque').addEventListener('change',e=>{opaque=e.target.checked;apply();});
 panel.querySelector('#designViewport').addEventListener('change',e=>{viewport=e.target.value;apply();});
 window.addEventListener('design:route',e=>{routeId=e.detail.id;apply();});
+let visibilityQueued=false;
+window.addEventListener('ui:visibility',()=>{if(visibilityQueued)return;visibilityQueued=true;queueMicrotask(()=>{visibilityQueued=false;routeId=Suite.current().id;apply();});});
 apply();
 })();

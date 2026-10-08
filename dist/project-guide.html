@@ -1383,7 +1383,9 @@ npm run docs</code></pre>
 <p>修复只在原captureSession完成后、目标页面渲染和scrollTop恢复前准备目标呈现样式。保存旧任务时仍使用它原有样式，恢复目标时使用其正确样式；不改变payload、候选、存储或确认行为。在原design套件新增完整V4跨任务阅读/焦点/一次接受断言，原断言全部保留。已交付附件在新head正式CI通过后沿原Library身份更新。</p>
 <p>修复首轮56ed79d/run37722727966仍在新增V4接续断言失败，旧套件通过。进一步定位：DAY-05属于DAY-04任务根，确认自身没有routeId；只看栈顶会把呈现route误回落到DAY-04。修正为确认继承其下面最近的suite页面route，并同时用于恢复前准备与恢复后事件/current()。新增4项路由归属单元和恢复后DAY-05原生断言，保留全部既有断言。新head待CI，不把初候选当修复完成。</p>
 <h3>放大照片的手势命中区域审计</h3>
-<p>后续审计发现chooseMode仍用旧y=148..572判断照片版本横滑。生产函数单元RED1/3：扩展照片上方区域不响应，旧y范围中的非照片目标也可能误判；系统边缘优先级仍正确。修复以实际photoStage祖先命中判断，保留方向、阈值和系统边缘优先级。新增真实pointer在旧y范围上方左右切两个版本且不打开页面的回归；固定画布和393均验证，不以点击选区回归代替横滑。</p></article><article id="doc-32"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>后续审计发现chooseMode仍用旧y=148..572判断照片版本横滑。生产函数单元RED1/3：扩展照片上方区域不响应，旧y范围中的非照片目标也可能误判；系统边缘优先级仍正确。修复以实际photoStage祖先命中判断，保留方向、阈值和系统边缘优先级。新增真实pointer在旧y范围上方左右切两个版本且不打开页面的回归；固定画布和393均验证，不以点击选区回归代替横滑。</p>
+<h4>可见层与呈现同步</h4>
+<p>完整手势入口审计还补充H回任务、T系统层、A能力层、Esc关闭后的样板归属同步。原Workbench只覆盖显式路由和部分指针结束；键盘返回可能保留上一个非样板页样式。syncAccess只发可见状态通知，呈现层用一次microtask读取最终Suite.current()，不写业务状态/历史；恢复前prepareView仍负责避免阅读位置被提前裁剪。新增合并通知单元与键盘层级原生回归，保留输入优先级和所有旧断言。</p></article><article id="doc-32"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
 <p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
 <p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
 <p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>
