@@ -102,6 +102,17 @@ def photo_geometry(page):
     page.mouse.click(stage['x']+stage['width']/2,stage['y']+5)
     native.ensure(page.evaluate('JSON.stringify(S.photo.selection)')==selection,'Letterbox became image content')
 
+def photo_drag_region(page):
+    reading.go(page,'IMG-02')
+    page.wait_for_function('!document.getElementById("task").getAnimations().some(a=>a.playState==="running")')
+    stage=page.locator('#photoStage').bounding_box();screen=page.locator('#screen').bounding_box()
+    y=(stage['y']+12-screen['y'])*672/screen['height']
+    native.ensure(y<148,'This regression must start above the old hard-coded image band')
+    reading.gesture(page,(90,y),(270,y))
+    native.ensure(page.evaluate('S.photo.current')==0 and page.evaluate('stack.length')==0,'Upper photo region did not select the previous version')
+    reading.gesture(page,(270,y),(90,y))
+    native.ensure(page.evaluate('S.photo.current')==1 and page.evaluate('stack.length')==0,'Upper photo region opened a page instead of selecting the next version')
+
 def frame_sample(page):
     global FRAME_SAMPLE
     reading.go(page,'SYS-01')
@@ -122,7 +133,7 @@ def main():
             options={'headless':True}
             if os.environ.get('CHROMIUM_PATH'):options['executable_path']=os.environ['CHROMIUM_PATH']
             browser=pw.chromium.launch(**options);version=browser.version
-            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast),('record-frame-baseline',frame_sample),('photo-selection-geometry',photo_geometry),('v4-cross-task-reading-resume',reading.resume_accept)]:
+            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast),('record-frame-baseline',frame_sample),('photo-selection-geometry',photo_geometry),('v4-cross-task-reading-resume',reading.resume_accept),('photo-stage-swipe-region',photo_drag_region)]:
                 visual=native.fixture('visual',source='') if name.endswith('-samples') else None
                 if visual:
                     visual['core']['photo']['name']='山径 · 黄昏'
