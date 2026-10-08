@@ -13,7 +13,7 @@ function apply(){
  const active=version.value==='v4',id=routeId;
  root.dataset.design=active?'v4':'baseline';root.dataset.designTheme=theme;
  root.dataset.designSample=active&&samples.includes(id)?'true':'false';
- root.dataset.designOpaque=opaque?'true':'false';
+ root.dataset.designOpaque=opaque?'true':'false';root.dataset.designRoute=id;
  panel.querySelector('#designTheme').disabled=!active;panel.querySelector('#designOpaque').disabled=!active;
  panel.querySelector('#designScope').textContent=active?(samples.includes(id)?'D1 样板 · 下拉菜单随当前任务验收':'此页保留 V3 · 全量迁移尚未开始'):'现有 V3 回归基线';
 }

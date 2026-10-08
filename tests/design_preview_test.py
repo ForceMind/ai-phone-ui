@@ -18,6 +18,7 @@ def state(page):
     return page.evaluate('JSON.stringify({core:JSON.parse(localStorage.getItem("ai-phone-ui-state-v1")||"null"),stack:stack.map(s=>({kind:s.kind,payload:s.payload})),route:Suite.current().id})')
 def image(page,name):
     page.locator('#phone').screenshot(path=str(native.OUT/('v4-'+name+'.png')))
+    page.screenshot(path=str(native.OUT/('v4-'+name+'-full.png')),full_page=True)
 def invariant(page):
     reading.open_review(page)
     before=state(page)
@@ -35,6 +36,10 @@ def invariant(page):
     reading.tail_visible(reading.observe(page,'v4-long-tail'))
     reading.control(page,'back').click();reading.cancelled(page)
 def samples(page,theme):
+    # Visual fixtures use the bundled generated scenery, not the 1px storage probe.
+    page.evaluate('localStorage.clear()')
+    page.reload(wait_until='load');native.ready(page,'SET-10')
+    page.locator('#designVersion').select_option('v4')
     page.locator('#designTheme').select_option(theme)
     for route in SAMPLES:
         reading.go(page,route)
@@ -50,6 +55,19 @@ def samples(page,theme):
     page.keyboard.press('m')
     image(page,theme+'-pulley')
     page.keyboard.press('Escape')
+def contrast(page):
+    page.locator('#designTheme').select_option('dark')
+    page.emulate_media(contrast='more')
+    reading.go(page,'SET-01')
+    palette=page.locator('#screen').evaluate("el=>{const s=getComputedStyle(el);return {accent:s.getPropertyValue('--v4-accent').trim(),background:s.getPropertyValue('--v4-bg').trim(),control:s.getPropertyValue('--v4-control-text').trim()}}")
+    native.ensure(palette=={'accent':'#004641','background':'#fff','control':'#fff'},'Incomplete high-contrast palette: '+str(palette))
+    image(page,'dark-high-contrast')
+    page.set_viewport_size({'width':390,'height':844})
+    page.wait_for_timeout(100)
+    a=page.locator('#phone').bounding_box();b=page.locator('.design-preview-tools').bounding_box()
+    native.ensure(a['y']+a['height']<=b['y'],'Review controls overlap mobile phone')
+    image(page,'mobile-dark-high-contrast')
+
 def main():
     version=None
     try:
@@ -57,7 +75,7 @@ def main():
             options={'headless':True}
             if os.environ.get('CHROMIUM_PATH'):options['executable_path']=os.environ['CHROMIUM_PATH']
             browser=pw.chromium.launch(**options);version=browser.version
-            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark'))]:
+            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast)]:
                 with native.case(browser,origin) as page:
                     page.locator('#designVersion').select_option('v4')
                     check(name,lambda:fn(page))

@@ -72,6 +72,33 @@
 @media(prefers-reduced-transparency:reduce){[data-design-sample=true] :is(.pulley,.overlay){background:var(--v4-surface);backdrop-filter:none!important}}
 @media(prefers-contrast:more){[data-design-sample=true] .screen{--v4-text:#000;--v4-secondary:#202126;--v4-bg:#fff;--v4-surface:#fff;--v4-line:#000;--v4-glass:#fff}[data-design-sample=true] :is(.pulley,.overlay){backdrop-filter:none!important}}
 @media(max-width:730px){.design-preview-tools{gap:6px;padding:6px;flex-wrap:wrap;width:max-content;justify-content:center}.design-preview-tools span{display:none}}
+/* Complete contrast palette: a dark-mode accent must never survive on white. */
+@media(prefers-contrast:more){[data-design-sample=true] .screen{--v4-accent:#004641;--v4-control-text:#fff;--v4-shadow:none}}
+[data-design-sample=true] .stack-page:before{background:none}
+[data-design-sample=true] :is(.dialog-head,.dialog-hint,.pulley-hint,.task-hint,.job-desc,.job-phases,.job-foot,.photo-meta small){color:var(--v4-secondary);font-size:13px}
+[data-design-sample=true] .dialog-head button{min-height:44px;font-size:14px}
+[data-design-sample=true] .pulley-row.selected{background:var(--v4-bg);color:var(--v4-accent);border-bottom-color:var(--v4-accent)}
+[data-design-sample=true] .home-covers .cover:first-child{grid-column:1/-1;height:174px}
+[data-design-sample=true] .home-covers .cover:not(:first-child){height:154px}
+[data-design-sample=true] .cover-percent,[data-design-sample=true] .cover-focus-time{font-weight:600;font-size:32px;margin:8px 0}
+/* Reserve the tool lane, including narrow screens; it never sits over phone actions. */
+@media(max-width:730px){.workspace{height:calc(100dvh - 119px)}.design-preview-tools{bottom:25px;min-height:42px}.design-preview-tools label{font-size:11px}.design-preview-tools select{max-width:88px}}
+/* A neutral presentation frame, preserving the proven 360×672 gesture canvas. */
+[data-design=v4] .phone{background:transparent;box-shadow:none}
+[data-design=v4] .phone:before{inset:27px 5px 27px;border-radius:30px;background:#25282c;box-shadow:0 20px 50px #0004,inset 0 0 0 1px #676d75}
+[data-design=v4] .phone:after{display:none}
+[data-design-sample=true][data-design-route=IMG-02] .app-header .eyebrow,[data-design-sample=true][data-design-route=IMG-02] .app-header .metadata{display:none}
+[data-design-sample=true][data-design-route=IMG-02] .app-header h2{font-size:22px;line-height:1.4}
+[data-design-sample=true][data-design-route=IMG-02] .photo-stage{top:92px;height:480px;border-radius:20px}
+[data-design-sample=true] .event{padding:18px 0 18px 17px;border-left:2px solid var(--v4-line);border-bottom:0;position:relative}
+[data-design-sample=true] .event:before{content:'';position:absolute;left:-5px;top:24px;width:8px;height:8px;border-radius:50%;background:var(--v4-accent)}
+[data-design-sample=true] .events-list{padding-left:5px}
+[data-design-sample=true] .task-surface:before,[data-design-sample=true] .task-wall:after{background:none}
+[data-design-sample=true] .big-percent{font-size:72px;font-weight:600;letter-spacing:-3px}
+[data-design-sample=true] .job-detail{top:172px}
+[data-design-sample=true] .job-phases{line-height:2.4;margin-top:16px}
+[data-design-sample=true] .job-foot{margin-top:18px}
+[data-design-sample=true] .mode-chip{color:var(--v4-secondary);border-color:var(--v4-line);font-size:12px}
 
 </style>
 </head>
@@ -723,7 +750,7 @@ function apply(){
  const active=version.value==='v4',id=routeId;
  root.dataset.design=active?'v4':'baseline';root.dataset.designTheme=theme;
  root.dataset.designSample=active&&samples.includes(id)?'true':'false';
- root.dataset.designOpaque=opaque?'true':'false';
+ root.dataset.designOpaque=opaque?'true':'false';root.dataset.designRoute=id;
  panel.querySelector('#designTheme').disabled=!active;panel.querySelector('#designOpaque').disabled=!active;
  panel.querySelector('#designScope').textContent=active?(samples.includes(id)?'D1 样板 · 下拉菜单随当前任务验收':'此页保留 V3 · 全量迁移尚未开始'):'现有 V3 回归基线';
 }
