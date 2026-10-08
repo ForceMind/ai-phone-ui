@@ -99,3 +99,26 @@ nonoverflow and V3 keep their original gesture selection. Three unit regressions
 and a native pointer check cover that boundary. No SET-01 or color changes.
 Candidate build/26 static/132 unit checks pass locally; exact candidate native
 jobs and screenshots must be checked before merge.
+
+## Enlarged-task resume RED and completion candidate
+
+Test-only `673a632` / run 37777618704 / independent artifact 11550557197
+(SHA256 `14f5456e469b0d55c7e8a7461a9d613d638dad6ba4f9df1346fe7bfc2909d6d7`)
+extends the matrix to 50 checks. Its six actual cross-task cases lose task reading
+offset 442 → 0. Persistent test-only 200% font rules remain identical after
+production re-render, ruling out an inline-style-loss artifact. The existing
+session capture/restore now carries a `jobScroll` number alongside `noteScroll`;
+there is no new persistence key or separate reading cache.
+
+Adding the percentage number itself to line coverage also finds its font Range
+crossing the scrollport's upper edge. The screenshots do not establish missing
+ink, so this is recorded as a conservative text-box clipping finding, not a claim
+that the visible zero disappeared. Give the percentage normal positive leading
+(1.3 instead of 1.1) so the full measured font box fits the scrolling area.
+
+Two intentional test-first unit failures at 673a632 prevented that run's old
+browser setup; the later missing-dependency failures in that job are not product
+regressions. Candidate d6fff59's complete old job and 44 D4 checks had passed.
+After the session fix, all 134 local units pass; the old backup-image fixture only
+adds a null `querySelector` DOM interface and retains every assertion. Exact new
+candidate native results remain required.

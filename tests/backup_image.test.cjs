@@ -55,7 +55,7 @@ test('backup image: stale failure cannot clear a newer reviewed snapshot',async(
 function installProductionDismissal(f){
   const core=fs.readFileSync(path.join(__dirname,'../src/js/core.js'),'utf8');
   // Use the actual session/minimize/lock implementations, not a stack-pop stand-in.
-  const element={classList:{remove(){},add(){},toggle(){}},lastElementChild:null};
+  const element={classList:{remove(){},add(){},toggle(){}},lastElementChild:null,querySelector(){return null;}};
   Object.assign(f.ctx,{photoPickerOrigin:null,appOpen:true,currentTask:'photo',S:{drafts:{}},sessions:{},gesture:null,overlay:'',
     locked:false,sleeping:false,pulleyPinned:false,$:id=>['talkInput','noteEditor'].includes(id)?null:element,
     direct(){},stopVoice(){},setHome(){},syncAccess(){},report(){},clock(){}});

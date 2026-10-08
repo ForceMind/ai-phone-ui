@@ -1024,7 +1024,7 @@
       }
     ]
   },
-  "candidate": "pending exact-head native, old suites, artifact/screenshots and independent review",
+  "candidate": "session/positive-leading candidate pending exact-head native checks",
   "not_tested": [
     "physical devices",
     "OS text scaling",
@@ -1032,5 +1032,16 @@
     "all 86 routes",
     "native browser zoom",
     "OS contrast/transparency media preferences"
-  ]
+  ],
+  "resume_test_only": {
+    "sha": "673a632cc12405af41819f3aa50e6f7a27616371",
+    "run": 37777618704,
+    "artifact": 11550557197,
+    "zip_sha256": "14f5456e469b0d55c7e8a7461a9d613d638dad6ba4f9df1346fe7bfc2909d6d7",
+    "native_passed": 38,
+    "native_failed": 12,
+    "true_resume_failure": "six cases: same 200% font rules, offset442 -> 0",
+    "percentage_finding": "six full font Range clip failures; screenshots do not establish missing glyph ink",
+    "old_job": "intentional two new unit REDs stop dependency setup; downstream dependency failures are not runtime regressions"
+  }
 }

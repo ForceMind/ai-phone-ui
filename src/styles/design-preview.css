@@ -207,3 +207,5 @@
 [data-design-surface][data-design-sample=true] .surface-content:has(>.job-detail)>.app-header{position:static;flex:0 0 auto}
 [data-design-surface][data-design-sample=true] .job-detail{position:relative;inset:auto;flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;margin:30px 0 16px;overflow-wrap:anywhere}
 [data-design-surface][data-design-sample=true] .surface-content:has(>.job-detail)>.task-hint{position:static;flex:0 0 auto}
+/* Keep the percentage text's font box inside the scrollport at enlarged sizes. */
+[data-design-surface][data-design-sample=true] .job-detail .big-percent{line-height:1.3}
