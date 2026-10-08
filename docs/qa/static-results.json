@@ -1,6 +1,6 @@
 {
-  "total": 25,
-  "passed": 25,
+  "total": 26,
+  "passed": 26,
   "failed": 0,
   "checks": [
     {
@@ -57,6 +57,10 @@
     },
     {
       "name": "syntax:workbench.js",
+      "status": "pass"
+    },
+    {
+      "name": "syntax:design-preview.js",
       "status": "pass"
     },
     {

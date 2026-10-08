@@ -36,6 +36,43 @@
 @media(max-width:1160px){.workspace{grid-template-columns:minmax(230px,1fr) 400px;max-width:960px;padding:12px 24px}.guide{display:none}.intro{margin:0;max-width:none}}@media(max-width:730px){.web-head{height:43px;padding:0 14px}.workspace{display:flex;height:calc(100dvh - 67px);padding:8px 12px;gap:0}.intro,.guide{display:none}.footer{height:24px;padding:0}.web-actions{gap:13px}.web-actions button{font-size:10px}.web-actions button[data-action='fullscreen']{display:none}.wb-mobile-tools{display:inline}.wb-catalog-modal{padding:18px}.wb-catalog-modal .wb-nav{flex:1}.mark{font-size:11px}.web-actions .edition{display:none}}
 @media(max-height:600px) and (min-width:731px){.workspace{height:calc(100dvh - 78px)}.web-head{height:46px}.wb-link{padding:5px 8px}.wb-spec-line{padding:8px 0}}
 
+/* V4 D1: isolated review surfaces. V3 business logic and logical geometry remain unchanged. */
+.design-preview-tools{position:fixed;z-index:110;left:50%;bottom:7px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:7px 12px;border-radius:14px;background:#fff;color:#202126;box-shadow:0 4px 24px #0003;font-size:12px;max-width:95vw}
+.design-preview-tools label{display:flex;align-items:center;gap:5px;white-space:nowrap}.design-preview-tools select{font:inherit;min-height:32px;background:#f5f6f8;color:#202126;border:1px solid #bbc0c7;border-radius:7px}.design-preview-tools span{max-width:180px;font-size:11px}.design-preview-tools input{accent-color:#006b66}
+:root[data-design=v4]{--v4-bg:#f5f6f8;--v4-surface:#fff;--v4-text:#202126;--v4-secondary:#535d68;--v4-line:#d8dee3;--v4-accent:#006b66;--v4-glass:#ffffffed;--v4-shadow:0 8px 24px #14232a12;--v4-control-text:#fff}
+:root[data-design=v4][data-design-theme=dark]{--v4-bg:#101113;--v4-surface:#202327;--v4-text:#f2f4f7;--v4-secondary:#b8c1cd;--v4-line:#424a53;--v4-accent:#70d9ce;--v4-glass:#202327ed;--v4-shadow:0 8px 24px #0004;--v4-control-text:#102a29}
+[data-design=v4] .phone{background:#34373b;box-shadow:0 22px 55px #0005,inset 0 0 0 1px #81868d;padding:41px 15px 43px;border-radius:36px}
+[data-design=v4] .phone:before{background:#101113;border-color:#5c626a}[data-design=v4] .phone:after{box-shadow:none}[data-design=v4] .case-label,[data-design=v4] .speaker,[data-design=v4] .camera-dot{visibility:hidden}
+[data-design-sample=true] .screen{--accent:var(--v4-accent);--ink:var(--v4-text);color:var(--v4-text);background:var(--v4-bg)}
+[data-design-sample=true] .wallpaper,[data-design-sample=true] .task-wall{background:var(--v4-bg);filter:none;transform:none}
+[data-design-sample=true] .wallpaper:after{background:none}
+[data-design-sample=true] :is(.task-surface,.stack-page,.cover-face){background:var(--v4-surface);color:var(--v4-text)}
+[data-design-sample=true] :is(.page-title,.app-header h2,.suite-header h2){font-weight:650;letter-spacing:-.6px;color:var(--v4-text)}
+[data-design-sample=true] :is(.page-sub,.home-caption,.cap-note,.metadata,.eyebrow,.photo-meta,.suite-scroll p,.suite-scroll .muted,.s-row small,.s-form,.s-form small,.s-notice,.s-env-status,.s-metric-caption){color:var(--v4-secondary);font-size:14px;line-height:1.6}
+[data-design-sample=true] :is(.system-status,.system-status .symbols,.suite-cover-text,.cover-note-preview){color:var(--v4-text)}
+[data-design-sample=true] .home-covers{gap:12px}[data-design-sample=true] .cover{border-radius:22px;border:1px solid var(--v4-line);box-shadow:var(--v4-shadow)}
+[data-design-sample=true] .cover strong{font-weight:600}[data-design-sample=true] .cover small{color:var(--v4-secondary);font-size:12px}
+[data-design-sample=true] .cover .overline{color:var(--v4-secondary);font-size:11px;letter-spacing:0}
+[data-design-sample=true] .cover-photo .photo-cover-info{color:#fff}[data-design-sample=true] .cover-photo small{color:#f2f4f7}
+[data-design-sample=true] :is(.event,.cap,.s-row,.s-task-step){border-color:var(--v4-line)}
+[data-design-sample=true] :is(.event strong,.cap strong,.s-row b){font-weight:600;color:var(--v4-text)}
+[data-design-sample=true] :is(.event p,.event time,.cap small){color:var(--v4-secondary);font-size:14px}
+[data-design-sample=true] :is(.s-button,.s-chip){border-color:var(--v4-line);border-radius:14px;min-height:44px;font-size:15px;background:var(--v4-surface);color:var(--v4-accent)}
+[data-design-sample=true] .s-button.primary{background:var(--v4-accent);color:var(--v4-control-text)}
+[data-design-sample=true] :is(.s-form input,.s-form textarea,.s-form select){background:var(--v4-surface);color:var(--v4-text);border:1px solid var(--v4-line);border-radius:12px;font-size:17px;color-scheme:light}
+[data-design-sample=true][data-design-theme=dark] :is(.s-form input,.s-form textarea,.s-form select){color-scheme:dark}
+[data-design-sample=true] :is(.s-form input,.s-form textarea)::placeholder{color:var(--v4-secondary)}
+[data-design-sample=true] .s-notice{background:var(--v4-bg);border-radius:10px}
+[data-design-sample=true] :is(.pulley,.overlay){background:var(--v4-glass);color:var(--v4-text);border:1px solid var(--v4-line);box-shadow:var(--v4-shadow)}
+[data-design-sample=true] .pulley-row{color:var(--v4-text);font-weight:500}[data-design-sample=true] .pulley-row.on{color:var(--v4-accent)}
+[data-design-sample=true] .dialog-inner{color:var(--v4-text)}[data-design-sample=true] .dialog-inner p{color:var(--v4-secondary);font-size:17px;line-height:1.6}
+[data-design-sample=true] .stack-page{border-radius:20px}
+@supports(backdrop-filter:blur(1px)){[data-design-sample=true][data-design-opaque=false] :is(.pulley,.overlay){backdrop-filter:blur(12px)}}
+[data-design-sample=true][data-design-opaque=true] :is(.pulley,.overlay){background:var(--v4-surface);backdrop-filter:none}
+@media(prefers-reduced-transparency:reduce){[data-design-sample=true] :is(.pulley,.overlay){background:var(--v4-surface);backdrop-filter:none!important}}
+@media(prefers-contrast:more){[data-design-sample=true] .screen{--v4-text:#000;--v4-secondary:#202126;--v4-bg:#fff;--v4-surface:#fff;--v4-line:#000;--v4-glass:#fff}[data-design-sample=true] :is(.pulley,.overlay){backdrop-filter:none!important}}
+@media(max-width:730px){.design-preview-tools{gap:6px;padding:6px;flex-wrap:wrap;width:max-content;justify-content:center}.design-preview-tools span{display:none}}
+
 </style>
 </head>
 <body>
@@ -661,12 +698,40 @@ function links(){const query=filter.toLowerCase();return groups.map(group=>{cons
 function refreshNav(){const html=links();$('catalogNav').innerHTML=$('mobileCatalogNav').innerHTML=html;const id=Suite.current().id;document.querySelectorAll('[data-screen-id]').forEach(el=>el.classList.toggle('active',el.dataset.screenId===id));}
 function openCatalog(){modalOpen=true;modal.classList.add('open');modal.inert=false;document.querySelector('.web').inert=true;$('mobileCatalogSearch').focus();}
 function closeCatalog(){modalOpen=false;modal.classList.remove('open');modal.inert=true;document.querySelector('.web').inert=false;}
-function update(id){const r=catalog.find(x=>x.id===id);if(!r)return;document.querySelectorAll('[data-screen-id]').forEach(el=>el.classList.toggle('active',el.dataset.screenId===id));$('specTitle').textContent=r.name;$('specPurpose').textContent=r.purpose;$('specMode').textContent=r.mode==='local'?'本机可操作 · 不依赖云端':'交互预览 · 外部服务未连接';$('specMode').classList.toggle('preview',r.mode!=='local');$('specEntry').textContent=r.parent?`${r.parent} ${catalog.find(x=>x.id===r.parent)?.name||''} → ${r.name}`:'活动封面 / 发起能力 / 全界面目录';$('specLeave').textContent=r.parent?'内容右滑返回父页；从侧边推开最小化整件事。':'从左右边缘推开回活动任务；半推不松手可窥视。';$('viewState').value=$('mobileViewState').value=Suite.current().viewState;try{history.replaceState(null,'','#screen='+id);}catch{}if(modalOpen)closeCatalog();}
+function update(id){const r=catalog.find(x=>x.id===id);if(!r)return;document.querySelectorAll('[data-screen-id]').forEach(el=>el.classList.toggle('active',el.dataset.screenId===id));$('specTitle').textContent=r.name;$('specPurpose').textContent=r.purpose;$('specMode').textContent=r.mode==='local'?'本机可操作 · 不依赖云端':'交互预览 · 外部服务未连接';$('specMode').classList.toggle('preview',r.mode!=='local');$('specEntry').textContent=r.parent?`${r.parent} ${catalog.find(x=>x.id===r.parent)?.name||''} → ${r.name}`:'活动封面 / 发起能力 / 全界面目录';$('specLeave').textContent=r.parent?'内容右滑返回父页；从侧边推开最小化整件事。':'从左右边缘推开回活动任务；半推不松手可窥视。';$('viewState').value=$('mobileViewState').value=Suite.current().viewState;try{history.replaceState(null,'','#screen='+id);}catch{}if(modalOpen)closeCatalog();window.dispatchEvent(new CustomEvent('design:route',{detail:{id}}));}
 $('catalogSearch').addEventListener('input',e=>{filter=e.target.value;$('mobileCatalogSearch').value=filter;refreshNav();});$('mobileCatalogSearch').addEventListener('input',e=>{filter=e.target.value;$('catalogSearch').value=filter;refreshNav();});$('viewState').addEventListener('change',e=>Suite.showState(e.target.value));$('mobileViewState').addEventListener('change',e=>{Suite.showState(e.target.value);closeCatalog();});$('closeCatalog').addEventListener('click',closeCatalog);window.addEventListener('ui:catalog',openCatalog);window.addEventListener('ui:route',e=>update(e.detail.id));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modalOpen){closeCatalog();e.stopImmediatePropagation();}},true);
 const originalFinish=finishGesture;finishGesture=function(e,cancel=false){originalFinish(e,cancel);if(!appOpen&&!overlay&&!locked&&!sleeping){const id=['SYS-02','SYS-01','SYS-03'][homeIndex];update(id);}else if(overlay)update(overlay==='top'?'SYS-04':'SYS-03');};
 window.Workbench={openCatalog,closeCatalog,refreshNav,update};
 refreshNav();update('SYS-01');const initialId=originalHashId;
 function finish(){if(!ready){setTimeout(finish,50);return;}if(initialId&&catalog.some(r=>r.id===initialId))Suite.go(initialId);else update('SYS-01');fit();}finish();
+})();
+
+
+/* SOURCE: src/js/design-preview.js */
+/* D1 review controls live outside the phone. Presentation only: no storage/state writes. */
+(function(){
+'use strict';
+const samples=['SYS-01','SYS-02','SYS-03','IMG-02','CLD-03','DAY-05','SET-01'];
+const root=document.documentElement;
+const enabled=new URLSearchParams(location.search).get('design')==='v4';
+let theme='light',opaque=false,routeId=Suite.current().id;
+const panel=document.createElement('section');panel.className='design-preview-tools';panel.setAttribute('aria-label','V4 样板外观检查');
+panel.innerHTML='<label>设计版本 <select id="designVersion"><option value="baseline">现有 V3</option><option value="v4">V4 样板</option></select></label><label>外观 <select id="designTheme"><option value="light">浅色</option><option value="dark">深色</option></select></label><label><input type="checkbox" id="designOpaque"> 减少透明度</label><span id="designScope" role="status"></span>';
+document.querySelector('.web-head').after(panel);
+const version=panel.querySelector('#designVersion');version.value=enabled?'v4':'baseline';
+function apply(){
+ const active=version.value==='v4',id=routeId;
+ root.dataset.design=active?'v4':'baseline';root.dataset.designTheme=theme;
+ root.dataset.designSample=active&&samples.includes(id)?'true':'false';
+ root.dataset.designOpaque=opaque?'true':'false';
+ panel.querySelector('#designTheme').disabled=!active;panel.querySelector('#designOpaque').disabled=!active;
+ panel.querySelector('#designScope').textContent=active?(samples.includes(id)?'D1 样板 · 下拉菜单随当前任务验收':'此页保留 V3 · 全量迁移尚未开始'):'现有 V3 回归基线';
+}
+version.addEventListener('change',apply);
+panel.querySelector('#designTheme').addEventListener('change',e=>{theme=e.target.value;apply();});
+panel.querySelector('#designOpaque').addEventListener('change',e=>{opaque=e.target.checked;apply();});
+window.addEventListener('design:route',e=>{routeId=e.detail.id;apply();});
+apply();
 })();
 
 </script>

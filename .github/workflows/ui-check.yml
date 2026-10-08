@@ -51,6 +51,8 @@ jobs:
         run: npm run test:candidates 2>&1 | tee test-results/candidate-ownership.log
       - name: Browser HTTP-origin long confirmation reading
         run: npm run test:reading 2>&1 | tee test-results/confirmation-reading.log
+      - name: V4 opt-in samples and presentation invariance
+        run: npm run test:design 2>&1 | tee test-results/v4-design.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4

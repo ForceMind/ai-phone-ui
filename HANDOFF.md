@@ -1,3 +1,7 @@
+# 当前接续
+
+V4 D0/D1已开始。先读docs/design/V4_REDESIGN_PLAN.md和V4_IMPLEMENTATION_GATES.md，再查当前分支exact-head CI。样板待视觉确认，不扩大真实服务或Pages权限。
+
 # AI Phone UI 交接
 
 先读 [AGENTS](AGENTS.md)，再读 [当前状态](docs/project/CURRENT_STATE.md)、[下一步](docs/project/NEXT_ACTION.md) 和 [完整交接](docs/project/DEVELOPMENT_HANDOFF.md)。
