@@ -27,3 +27,9 @@ run37718261811首次通过所有旧套件及新增6项（含dark+增强对比与
 run37718681784首轮成功，artifact11524812862摘要067bad546e8d6bec6daebd8df26dbe8e16904d82d84d8420906877df5df80a11。ZIP、source-head、三份dist文件均逐字验证。实际照片/主页现在正确呈现内置生成风景，浅深任务与动态样板可审阅。
 
 下拉截图尚可能在内部动画过程中采集：phone外壳稳定不代表taskSurface内部已稳定。下一测试提交等待该真实动画结束，检查每个固定菜单命令没有被taskSurface遮住，再拍图；不修改生产动画或手势。另记录5秒CI RAF基线并强制HTML≤300000字节。尚不声称真机60fps。
+
+## 尺寸接续自查：照片选区几何
+
+D1将photoStage从424增为480，但旧selectPhoto/renderPhoto仍硬编码424。局部生产handler测试在旧代码上复现V4中心点偏移及letterbox可选（424基线仍过）；原始本地RED输出保存在V4_GEOMETRY_RED.json；此处不是原生浏览器RED证据。该问题在交付HTML前被发现，未称样板完成。
+
+修复使用实际容器clientWidth/clientHeight统一计算contain图片和选区环；点击通过实际bounding rect归一化。样板切换只重新投影已有ring，不重绘图片、不修改选区/版本/草稿。新增4项单元（基线424、V4480、letterbox、切换ring）及原生真实点击/切换/圆环几何验证；尚需新head CI。原手势阈值、原图与选区数据结构不变。

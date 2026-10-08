@@ -70,6 +70,25 @@ def contrast(page):
     native.ensure(a['y']+a['height']<=b['y'],'Review controls overlap mobile phone')
     image(page,'mobile-dark-high-contrast')
 
+def photo_geometry(page):
+    reading.go(page,'IMG-02')
+    page.wait_for_function('!document.getElementById("task").getAnimations().some(a=>a.playState==="running")')
+    stage=page.locator('#photoStage').bounding_box()
+    page.mouse.click(stage['x']+stage['width']/2,stage['y']+stage['height']/2)
+    selection=page.evaluate('JSON.stringify(S.photo.selection)')
+    point=json.loads(selection)
+    native.ensure(abs(point['x']-.5)<.001 and abs(point['y']-.5)<.001,'Click selected a different image point')
+    for design in ['baseline','v4']:
+        page.locator('#designVersion').select_option(design)
+        stage=page.locator('#photoStage').bounding_box();ring=page.locator('#selection').bounding_box()
+        native.ensure(abs((ring['x']+ring['width']/2)-(stage['x']+stage['width']/2))<1,'Ring x drift after design switch')
+        native.ensure(abs((ring['y']+ring['height']/2)-(stage['y']+stage['height']/2))<1,'Ring y drift after design switch')
+        native.ensure(page.evaluate('JSON.stringify(S.photo.selection)')==selection,'Theme rollback changed selected image region')
+    image(page,'photo-selection-aligned')
+    stage=page.locator('#photoStage').bounding_box()
+    page.mouse.click(stage['x']+stage['width']/2,stage['y']+5)
+    native.ensure(page.evaluate('JSON.stringify(S.photo.selection)')==selection,'Letterbox became image content')
+
 def frame_sample(page):
     global FRAME_SAMPLE
     reading.go(page,'SYS-01')
@@ -90,7 +109,7 @@ def main():
             options={'headless':True}
             if os.environ.get('CHROMIUM_PATH'):options['executable_path']=os.environ['CHROMIUM_PATH']
             browser=pw.chromium.launch(**options);version=browser.version
-            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast),('record-frame-baseline',frame_sample)]:
+            for name,fn in [('state-invariance',invariant),('light-samples',lambda p:samples(p,'light')),('dark-samples',lambda p:samples(p,'dark')),('contrast-and-mobile-controls',contrast),('record-frame-baseline',frame_sample),('photo-selection-geometry',photo_geometry)]:
                 visual=native.fixture('visual',source='') if name.endswith('-samples') else None
                 if visual:
                     visual['core']['photo']['name']='山径 · 黄昏'
