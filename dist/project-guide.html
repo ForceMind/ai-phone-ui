@@ -1341,7 +1341,10 @@ npm run docs</code></pre>
 <p>下拉截图尚可能在内部动画过程中采集：phone外壳稳定不代表taskSurface内部已稳定。下一测试提交等待该真实动画结束，检查每个固定菜单命令没有被taskSurface遮住，再拍图；不修改生产动画或手势。另记录5秒CI RAF基线并强制HTML≤300000字节。尚不声称真机60fps。</p>
 <h3>尺寸接续自查：照片选区几何</h3>
 <p>D1将photoStage从424增为480，但旧selectPhoto/renderPhoto仍硬编码424。局部生产handler测试在旧代码上复现V4中心点偏移及letterbox可选（424基线仍过）；原始本地RED输出保存在V4_GEOMETRY_RED.json；此处不是原生浏览器RED证据。该问题在交付HTML前被发现，未称样板完成。</p>
-<p>修复使用实际容器clientWidth/clientHeight统一计算contain图片和选区环；点击通过实际bounding rect归一化。样板切换只重新投影已有ring，不重绘图片、不修改选区/版本/草稿。新增4项单元（基线424、V4480、letterbox、切换ring）及原生真实点击/切换/圆环几何验证；尚需新head CI。原手势阈值、原图与选区数据结构不变。</p></article><article id="doc-31"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>修复使用实际容器clientWidth/clientHeight统一计算contain图片和选区环；点击通过实际bounding rect归一化。样板切换只重新投影已有ring，不重绘图片、不修改选区/版本/草稿。新增4项单元（基线424、V4480、letterbox、切换ring）及原生真实点击/切换/圆环几何验证；尚需新head CI。原手势阈值、原图与选区数据结构不变。</p>
+<h3>第五候选 e535bd6 原生结果</h3>
+<p>run37719463909：所有旧回归通过，新增design 7/8；照片几何项首个“请求中心=精确0.5±0.001”断言失败，尚未进入ring切换检查。失败artifact11524834438，ZIP摘要4f663cf06a8ad44588e10acdf4360fee5763dadfa0d579d3d84483260e7014c6已下载核对。不可将此轮写成通过。</p>
+<p>后续测试记录浏览器实际click坐标，以独立计算的square contain几何核对归一化选区，同时限定实际click距请求中心≤1设备CSS像素，避免把浏览器整数click舍入与产品选区错误混同。不是放弃原中心/letterbox/ring要求；实际点击到选区的误差仍严格≤0.00001，ring及两次设计切换断言保留。尚须新CI确认真实失败原因。</p></article><article id="doc-31"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
 <p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
 <p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
 <p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>

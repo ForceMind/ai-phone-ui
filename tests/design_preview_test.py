@@ -9,6 +9,7 @@ import confirmation_reading_test as reading
 
 RESULTS=[]
 FRAME_SAMPLE={}
+GEOMETRY_OBSERVATION={}
 SAMPLES=['SYS-01','SYS-02','SYS-03','IMG-02','CLD-03','DAY-05','SET-01']
 def check(name,fn):
     try:
@@ -71,13 +72,21 @@ def contrast(page):
     image(page,'mobile-dark-high-contrast')
 
 def photo_geometry(page):
+    global GEOMETRY_OBSERVATION
     reading.go(page,'IMG-02')
     page.wait_for_function('!document.getElementById("task").getAnimations().some(a=>a.playState==="running")')
     stage=page.locator('#photoStage').bounding_box()
+    page.locator('#photoStage').evaluate("el=>el.addEventListener('click',e=>window.__photoClick={x:e.clientX,y:e.clientY},{once:true})")
     page.mouse.click(stage['x']+stage['width']/2,stage['y']+stage['height']/2)
     selection=page.evaluate('JSON.stringify(S.photo.selection)')
     point=json.loads(selection)
-    native.ensure(abs(point['x']-.5)<.001 and abs(point['y']-.5)<.001,'Click selected a different image point')
+    click=page.evaluate('window.__photoClick')
+    # The square 1px fixture is contain-fitted: infer geometry independently of production helpers.
+    side=min(stage['width'],stage['height']);left=stage['x']+(stage['width']-side)/2;top=stage['y']+(stage['height']-side)/2
+    expected={'x':(click['x']-left)/side,'y':(click['y']-top)/side}
+    GEOMETRY_OBSERVATION={'stage':stage,'actual_click':click,'expected_image_point':expected,'actual_selection':point}
+    native.ensure(abs(click['x']-(stage['x']+stage['width']/2))<=1 and abs(click['y']-(stage['y']+stage['height']/2))<=1,'Browser click did not land within one device CSS pixel of requested center')
+    native.ensure(abs(point['x']-expected['x'])<.00001 and abs(point['y']-expected['y'])<.00001,'Selection does not match actual browser click: '+json.dumps(GEOMETRY_OBSERVATION))
     for design in ['baseline','v4']:
         page.locator('#designVersion').select_option(design)
         stage=page.locator('#photoStage').bounding_box();ring=page.locator('#selection').bounding_box()
@@ -123,7 +132,7 @@ def main():
         traceback.print_exc();RESULTS.append({'name':'harness','status':'fail','error':str(exc)})
     for name,items in [('no-page-errors',native.ERRORS),('no-outbound',native.OUTBOUND)]:
         RESULTS.append({'name':name,'status':'fail' if items else 'pass','details':items})
-    report={'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=native.ROOT,text=True).strip(),'browser':version,'frame_sample':FRAME_SAMPLE,'checks':RESULTS,'passed':sum(r['status']=='pass' for r in RESULTS),'failed':sum(r['status']=='fail' for r in RESULTS),'not_tested':['physical devices','screen readers','mobile keyboard','OS font scaling','60fps qualification']}
+    report={'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=native.ROOT,text=True).strip(),'browser':version,'frame_sample':FRAME_SAMPLE,'geometry_observation':GEOMETRY_OBSERVATION,'checks':RESULTS,'passed':sum(r['status']=='pass' for r in RESULTS),'failed':sum(r['status']=='fail' for r in RESULTS),'not_tested':['physical devices','screen readers','mobile keyboard','OS font scaling','60fps qualification']}
     native.OUT.mkdir(exist_ok=True);(native.OUT/'v4-design-results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
     print(json.dumps(report,ensure_ascii=False,indent=2));return bool(report['failed'])
 if __name__=='__main__':raise SystemExit(main())

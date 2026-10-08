@@ -33,3 +33,9 @@ run37718681784首轮成功，artifact11524812862摘要067bad546e8d6bec6daebd8df2
 D1将photoStage从424增为480，但旧selectPhoto/renderPhoto仍硬编码424。局部生产handler测试在旧代码上复现V4中心点偏移及letterbox可选（424基线仍过）；原始本地RED输出保存在V4_GEOMETRY_RED.json；此处不是原生浏览器RED证据。该问题在交付HTML前被发现，未称样板完成。
 
 修复使用实际容器clientWidth/clientHeight统一计算contain图片和选区环；点击通过实际bounding rect归一化。样板切换只重新投影已有ring，不重绘图片、不修改选区/版本/草稿。新增4项单元（基线424、V4480、letterbox、切换ring）及原生真实点击/切换/圆环几何验证；尚需新head CI。原手势阈值、原图与选区数据结构不变。
+
+## 第五候选 e535bd6 原生结果
+
+run37719463909：所有旧回归通过，新增design 7/8；照片几何项首个“请求中心=精确0.5±0.001”断言失败，尚未进入ring切换检查。失败artifact11524834438，ZIP摘要4f663cf06a8ad44588e10acdf4360fee5763dadfa0d579d3d84483260e7014c6已下载核对。不可将此轮写成通过。
+
+后续测试记录浏览器实际click坐标，以独立计算的square contain几何核对归一化选区，同时限定实际click距请求中心≤1设备CSS像素，避免把浏览器整数click舍入与产品选区错误混同。不是放弃原中心/letterbox/ring要求；实际点击到选区的误差仍严格≤0.00001，ring及两次设计切换断言保留。尚须新CI确认真实失败原因。
