@@ -22,5 +22,7 @@ version.addEventListener('change',apply);
 panel.querySelector('#designTheme').addEventListener('change',e=>{theme=e.target.value;apply();});
 panel.querySelector('#designOpaque').addEventListener('change',e=>{opaque=e.target.checked;apply();});
 window.addEventListener('design:route',e=>{routeId=e.detail.id;apply();});
+let visibilityQueued=false;
+window.addEventListener('ui:visibility',()=>{if(visibilityQueued)return;visibilityQueued=true;queueMicrotask(()=>{visibilityQueued=false;routeId=Suite.current().id;apply();});});
 apply();
 })();
