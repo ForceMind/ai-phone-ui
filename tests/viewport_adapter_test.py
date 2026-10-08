@@ -65,7 +65,7 @@ def main():
             options={'headless':True}
             if os.environ.get('CHROMIUM_PATH'):options['executable_path']=os.environ['CHROMIUM_PATH']
             browser=pw.chromium.launch(**options);version=browser.version
-            cases=[('peek-and-resume',peek),('three-spaces',spaces),('top-bottom-overlays',overlays),('confirmation-gestures',reading.gesture_reading),('confirmation-resume-once',reading.resume_accept),('resize-cancels-pending-acceptance',interrupt),('translation-cancels-pending-acceptance',interrupt_translation),('photo-ring-reprojection',design.photo_geometry),('light-portrait',lambda p:snapshots(p,'light')),('dark-portrait',lambda p:snapshots(p,'dark'))]
+            cases=[('peek-and-resume',peek),('three-spaces',spaces),('top-bottom-overlays',overlays),('confirmation-gestures',reading.gesture_reading),('confirmation-resume-once',reading.resume_accept),('resize-cancels-pending-acceptance',interrupt),('translation-cancels-pending-acceptance',interrupt_translation),('photo-ring-reprojection',design.photo_geometry),('photo-stage-swipe-region',design.photo_drag_region),('light-portrait',lambda p:snapshots(p,'light')),('dark-portrait',lambda p:snapshots(p,'dark'))]
             for name,fn in cases:
                 visual=native.fixture('portrait',source='') if name.endswith('-portrait') else None
                 try:
