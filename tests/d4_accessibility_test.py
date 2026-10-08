@@ -88,7 +88,17 @@ def resize(page,name,route):
     snapshot=page.evaluate('JSON.stringify({core:S,suite:Suite.state(),payload:stack.at(-1)?.payload})')
     # Snapshot first: no cascading/compound doubling. Absolute computed line-heights
     # double with glyphs; normal remains normal. No width/height/transform changes.
-    fonts=page.locator('#screen').evaluate('''root=>{const all=[root,...root.querySelectorAll('*')].map(e=>({e,font:parseFloat(getComputedStyle(e).fontSize),line:getComputedStyle(e).lineHeight}));for(const x of all){x.e.style.setProperty('font-size',x.font*2+'px','important');if(x.line!=='normal')x.e.style.setProperty('line-height',parseFloat(x.line)*2+'px','important');}return all.map(x=>({before:x.font,after:parseFloat(getComputedStyle(x.e).fontSize)}));}''')
+    fonts=page.locator('#screen').evaluate('''(root,route)=>{const all=[root,...root.querySelectorAll('*')].map(e=>({e,font:parseFloat(getComputedStyle(e).fontSize),line:getComputedStyle(e).lineHeight}));
+      if(route==='CLD-03'){
+        // Keep the same 200% font rules after production re-renders cloud DOM.
+        // This avoids mistaking loss of one-off inline test styles for lost scroll.
+        const scope=document.getElementById('surfaceContent'),rules=[];
+        for(const x of all.filter(x=>scope.contains(x.e))){let path='',n=x.e;while(n!==scope){path=' > '+n.tagName.toLowerCase()+':nth-child('+([...n.parentElement.children].indexOf(n)+1)+')'+path;n=n.parentElement;}
+          rules.push('#surfaceContent:has(>.job-detail)'+path+'{font-size:'+x.font*2+'px!important;line-height:'+(x.line==='normal'?'normal':parseFloat(x.line)*2+'px')+'!important}');}
+        const style=document.createElement('style');style.dataset.d4Resize='cloud';style.textContent=rules.join('\\n');document.head.append(style);
+      }
+      for(const x of all){x.e.style.setProperty('font-size',x.font*2+'px','important');if(x.line!=='normal')x.e.style.setProperty('line-height',parseFloat(x.line)*2+'px','important');}
+      return all.map(x=>({before:x.font,after:parseFloat(getComputedStyle(x.e).fontSize)}));}''',route)
     native.ensure(all(abs(x['after']-2*x['before'])<.01 for x in fonts),'Computed text size was not exactly 200%')
     settle(page)
     native.ensure(page.evaluate('JSON.stringify({core:S,suite:Suite.state(),payload:stack.at(-1)?.payload})')==snapshot,'Text-only resize changed business state or fixed payload')
@@ -110,7 +120,7 @@ def resize(page,name,route):
         page.mouse.move(x,region['y']+region['height']*.2,steps=12);page.mouse.up();settle(page)
         native.ensure(box.evaluate('e=>e.scrollTop')>0,'Real pointer reading gesture did not scroll enlarged job detail')
         native.ensure(page.evaluate('Suite.current().id')=='CLD-03','Reading gesture navigated away from the task')
-    targets=box.locator('b,small,.job-phases span,.job-foot,.job-desc')
+    targets=box.locator('b,small,.job-phases span,.job-foot,.job-desc,#jobPercent')
     native.ensure(targets.count()>0,'No resize targets')
     seen=set();expected=set();measurements=[]
     # Only actual wheel input can establish reachability. scrollIntoView would
@@ -145,6 +155,21 @@ def resize(page,name,route):
     native.assert_original(page)
     return {'fonts_checked':len(fonts),'reading':measurements,'geometry':geometry}
 
+def resume_job(page,name):
+    box=page.locator('.job-detail').filter(visible=True).last
+    offset=box.evaluate('e=>e.scrollTop');font=box.locator('#jobPercent').evaluate('e=>getComputedStyle(e).fontSize')
+    native.ensure(offset>0,'Resume precondition must be a genuinely scrolled 200% task')
+    before=page.evaluate('JSON.stringify({core:S,suite:Suite.state()})')
+    page.locator('#screen').focus();page.keyboard.press('h');page.locator('[data-task="notes"]').click()
+    page.keyboard.press('h');page.locator('[data-task="cloud"]').click();settle(page)
+    box=page.locator('.job-detail').filter(visible=True).last
+    restored=box.evaluate('e=>e.scrollTop')
+    native.ensure(box.locator('#jobPercent').evaluate('e=>getComputedStyle(e).fontSize')==font,'Resume test lost its persistent 200% font rules')
+    page.locator('#phone').screenshot(path=str(native.OUT/(name+'-200-resumed.png')),animations='disabled')
+    native.ensure(abs(restored-offset)<=1,'Enlarged task reading position lost across another task: '+str({'before':offset,'after':restored}))
+    native.ensure(page.evaluate('JSON.stringify({core:S,suite:Suite.state()})')==before,'Task resume changed business data')
+    return {'before':offset,'restored':restored,'font':font}
+
 def main():
     native.OUT=native.OUT/'d4-accessibility';native.OUT.mkdir(parents=True,exist_ok=True);version=None
     try:
@@ -160,6 +185,7 @@ def main():
                             configure(page,theme,mode);open_route(page,route)
                             check(name+'-contrast',lambda:contrast(page,name,route))
                             if route!='SYS-04':check(name+'-resize',lambda:resize(page,name,route))
+                            if route=='CLD-03':check(name+'-resize-resume',lambda:resume_job(page,name))
             browser.close()
     except Exception as e:traceback.print_exc();RESULTS.append(dict(name='harness',status='fail',error=str(e)))
     for name,items in [('no-page-errors',native.ERRORS),('no-outbound',native.OUTBOUND)]:RESULTS.append(dict(name=name,status='fail' if items else 'pass',details=items))
