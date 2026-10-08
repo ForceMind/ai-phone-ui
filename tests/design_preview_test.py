@@ -114,7 +114,7 @@ def photo_drag_region(page):
     native.ensure(page.evaluate('S.photo.current')==1 and page.evaluate('stack.length')==0,'Upper photo region opened a page instead of selecting the next version')
 
 def presentation_visibility(page):
-    reading.go(page,'DOC-02')
+    reading.go(page,'ONB-01')
     page.wait_for_function('document.documentElement.dataset.designSample==="false"')
     page.keyboard.press('h')
     page.wait_for_function('!appOpen && document.documentElement.dataset.designSample==="true" && document.documentElement.dataset.designRoute==="SYS-01"')

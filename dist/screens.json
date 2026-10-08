@@ -288,7 +288,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "AI-02",
@@ -360,7 +365,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "AI-05",
@@ -384,7 +394,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "AI-06",
@@ -408,7 +423,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "AI-07",
@@ -432,7 +452,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "AI-08",
@@ -456,7 +481,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "IMG-01",
@@ -531,7 +561,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "IMG-04",
@@ -555,7 +590,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "IMG-05",
@@ -579,7 +619,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "IMG-06",
@@ -651,7 +696,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "IMG-09",
@@ -676,7 +726,12 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "确认聚焦取消，Tab/Shift+Tab 保持可达；取消恢复有效原 Pulley，Enter 接受只导出固定版本一次"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "IMG-10",
@@ -702,7 +757,12 @@
       "按钮具有具体反馈或目的页面",
       "本机导入确认：取消恢复原任务与入口焦点；再次打开仍须明确接受",
       "导入候选随当前确认及任务会话绑定；取消较新文件后接续旧确认不串用候选；同一候选仅消费一次"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "DOC-01",
@@ -726,7 +786,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "DOC-02",
@@ -750,7 +815,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "DOC-03",
@@ -774,7 +844,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "DOC-04",
@@ -798,7 +873,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "DOC-05",
@@ -894,7 +974,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "CLD-03",
@@ -943,7 +1028,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "CLD-05",
@@ -991,7 +1081,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "CLD-07",
@@ -1015,7 +1110,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "CLD-08",
@@ -1260,7 +1360,12 @@
       "备份图片须先解码且不超过 1600 万像素；拒绝、取消和配额失败保留原片、版本与双区草稿",
       "键盘进入/接续确认聚焦取消；取消恢复当前入口，配额失败仍可键盘重试；原片和草稿不丢失",
       "导入候选随当前确认及任务会话绑定；取消较新文件后接续旧确认不串用候选；同一候选仅消费一次"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "DAY-01",
@@ -1846,7 +1951,12 @@
       "备份图片须先解码且不超过 1600 万像素；拒绝、取消和配额失败保留原片、版本与双区草稿",
       "键盘进入/接续确认聚焦取消；取消恢复当前入口，配额失败仍可键盘重试；原片和草稿不丢失",
       "导入候选随当前确认及任务会话绑定；取消较新文件后接续旧确认不串用候选；同一候选仅消费一次"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "SET-11",
@@ -1870,7 +1980,12 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   },
   {
     "id": "SET-12",
@@ -2086,6 +2201,11 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D2",
+      "status": "candidate",
+      "evidence": "tests/core_flows_test.py"
+    }
   }
 ]

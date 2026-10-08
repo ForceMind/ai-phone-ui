@@ -9,14 +9,15 @@
     "test": "node --test tests/*.test.cjs",
     "test:ui": "python tests/browser_test.py",
     "dev": "python scripts/serve.py",
-    "verify": "npm run build && npm run check && npm test && npm run test:ui && npm run test:storage && npm run test:keyboard && npm run test:candidates && npm run test:reading && npm run test:design && npm run test:viewport",
+    "verify": "npm run build && npm run check && npm test && npm run test:ui && npm run test:storage && npm run test:keyboard && npm run test:candidates && npm run test:reading && npm run test:design && npm run test:viewport && npm run test:core",
     "docs": "python scripts/docs-html.py",
     "test:storage": "python tests/storage_origin_test.py",
     "test:keyboard": "python tests/keyboard_focus_test.py",
     "test:candidates": "python tests/candidate_ownership_test.py",
     "test:reading": "python tests/confirmation_reading_test.py",
     "test:design": "python tests/design_preview_test.py",
-    "test:viewport": "python tests/viewport_adapter_test.py"
+    "test:viewport": "python tests/viewport_adapter_test.py",
+    "test:core": "python tests/core_flows_test.py"
   },
   "engines": {
     "node": ">=22"

@@ -1,7 +1,7 @@
 /* D1 review controls live outside the phone. Presentation only: no storage/state writes. */
 (function(){
 'use strict';
-const samples=['SYS-01','SYS-02','SYS-03','IMG-02','CLD-03','DAY-05','SET-01'];
+const samples=['SYS-01','SYS-02','SYS-03','IMG-02','CLD-03','DAY-05','SET-01','IMG-03','IMG-04','IMG-05','IMG-08','IMG-09','IMG-10','DOC-01','DOC-02','DOC-03','DOC-04','AI-01','AI-04','AI-05','AI-06','AI-07','AI-08','CLD-02','CLD-04','CLD-06','CLD-07','CLD-17','SET-10','SET-11','ERR-08'];
 const root=document.documentElement;
 const enabled=new URLSearchParams(location.search).get('design')==='v4';
 let theme='light',opaque=false,viewport='baseline',routeId=Suite.current().id;
@@ -17,7 +17,7 @@ function apply(){
  if(previousViewport!==root.dataset.designViewport&&typeof fit==='function')fit();
  if(typeof renderPhotoSelection==='function')renderPhotoSelection();
  panel.querySelector('#designViewport').disabled=!active;panel.querySelector('#designTheme').disabled=!active;panel.querySelector('#designOpaque').disabled=!active;
- panel.querySelector('#designScope').textContent=active?(samples.includes(id)?'D1 样板 · 下拉菜单随当前任务验收':'此页保留 V3 · 全量迁移尚未开始'):'现有 V3 回归基线';
+ panel.querySelector('#designScope').textContent=active?(samples.includes(id)?'D2 核心闭环 · 31 页候选':'此页保留 V3 · 其余分组待迁移'):'现有 V3 回归基线';
 }
 version.addEventListener('change',apply);
 panel.querySelector('#designTheme').addEventListener('change',e=>{theme=e.target.value;apply();});
