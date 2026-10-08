@@ -44,7 +44,11 @@ def reading_state(page, stage):
     return state
 
 
-def assert_review_unchanged(page, before, after):
+def assert_review_unchanged(page, before, after, covered):
+    native.ensure(covered['fontSize'] == before['fontSize'] and
+                  covered['scrollHeight'] == before['scrollHeight'] and
+                  covered['scrollTop'] == before['scrollTop'],
+                  'Foreground presentation reflowed the mounted review underneath it')
     native.ensure(after['payload'] == before['payload'], 'Interruption changed fixed review payload')
     native.ensure(after['outbox'] == 0, 'Interruption accepted the pending review')
     native.ensure(after['visible_route'] == 'DAY-05', 'Interruption lost the source page')
@@ -68,14 +72,14 @@ def top_overlay(page, name):
     page.keyboard.press('t')
     page.wait_for_function('overlay === "top"')
     settled(page)
-    reading_state(page, name + ':covered')
+    covered = reading_state(page, name + ':covered')
     reading.screenshot(page, name + '-covered')
     page.keyboard.press('Escape')
     page.wait_for_function('overlay === ""')
     settled(page)
     after = reading_state(page, name + ':after')
     reading.screenshot(page, name + '-after')
-    assert_review_unchanged(page, before, after)
+    assert_review_unchanged(page, before, after, covered)
 
 
 def lock_resume(page, name):
@@ -88,7 +92,7 @@ def lock_resume(page, name):
     page.locator('.hw[data-action="power"]').click()
     page.wait_for_function('locked && sleeping')
     settled(page)
-    reading_state(page, name + ':asleep')
+    covered = reading_state(page, name + ':asleep')
     page.locator('.hw[data-action="power"]').click()
     page.wait_for_function('locked && !sleeping')
     page.keyboard.press('Enter')
@@ -99,7 +103,7 @@ def lock_resume(page, name):
     settled(page)
     after = reading_state(page, name + ':after')
     reading.screenshot(page, name + '-after')
-    assert_review_unchanged(page, before, after)
+    assert_review_unchanged(page, before, after, covered)
 
 
 def photo_overlay(page, name):

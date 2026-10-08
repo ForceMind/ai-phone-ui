@@ -5,15 +5,24 @@ const samples=['SYS-01','SYS-02','SYS-03','IMG-02','CLD-03','DAY-05','SET-01'];
 const root=document.documentElement;
 const enabled=new URLSearchParams(location.search).get('design')==='v4';
 let theme='light',opaque=false,viewport='baseline',routeId=Suite.current().id;
+const systemRoutes=['SYS-01','SYS-02','SYS-03','SYS-04','SYS-05','SYS-06'];
+let taskRouteId=systemRoutes.includes(routeId)?'':routeId,systemRouteId='SYS-01';
 const panel=document.createElement('section');panel.className='design-preview-tools';panel.setAttribute('aria-label','V4 样板外观检查');
 panel.innerHTML='<label>设计版本 <select id="designVersion"><option value="baseline">现有 V3</option><option value="v4">V4 样板</option></select></label><label>外观 <select id="designTheme"><option value="light">浅色</option><option value="dark">深色</option></select></label><label>画板 <select id="designViewport"><option value="baseline">360×672</option><option value="portrait">393×852</option></select></label><label><input type="checkbox" id="designOpaque"> 减少透明度</label><span id="designScope" role="status"></span>';
 document.querySelector('.web-head').after(panel);
 const version=panel.querySelector('#designVersion');version.value=enabled?'v4':'baseline';
+function surface(element,id,active){if(!element)return;element.dataset.designSurface='true';element.dataset.designSample=active&&samples.includes(id)?'true':'false';element.dataset.designRoute=id;element.dataset.designTheme=theme;element.dataset.designOpaque=opaque?'true':'false';}
 function apply(){
  const active=version.value==='v4',id=routeId,previousViewport=root.dataset.designViewport;
+ if(!systemRoutes.includes(id))taskRouteId=id;
+ if(['SYS-01','SYS-02','SYS-03'].includes(id))systemRouteId=id;
  root.dataset.design=active?'v4':'baseline';root.dataset.designTheme=theme;
  root.dataset.designSample=active&&samples.includes(id)?'true':'false';
  root.dataset.designOpaque=opaque?'true':'false';root.dataset.designRoute=id;root.dataset.designViewport=active?viewport:'baseline';
+ // The foreground may change without replacing the mounted task. Keep its
+ // typography and geometry on the content route; never cache reading offsets.
+ for(const [element,source] of [['task',taskRouteId],['system',systemRouteId],['topMenu','SYS-04'],['launcher','SYS-03'],['lock','SYS-05'],['sleep','SYS-06'],['toast',id],['gestureToast',id]])surface(document.getElementById(element),source,active);
+ surface(document.querySelector('#screen > .wallpaper'),systemRouteId,active);
  if(previousViewport!==root.dataset.designViewport&&typeof fit==='function')fit();
  if(typeof renderPhotoSelection==='function')renderPhotoSelection();
  panel.querySelector('#designViewport').disabled=!active;panel.querySelector('#designTheme').disabled=!active;panel.querySelector('#designOpaque').disabled=!active;

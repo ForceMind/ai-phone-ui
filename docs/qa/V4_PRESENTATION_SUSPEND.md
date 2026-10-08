@@ -53,3 +53,17 @@ avoids adding another copy of reading/session state or changing accept/cancel
 semantics. Both the underlying task and non-sample system layer should retain
 their appropriate presentation; simply treating SYS-04/05/06 as migrated V4
 pages would broaden the declared sample scope and is not the proposed fix.
+
+## Confirmed native RED and bounded candidate
+
+The source hypothesis was confirmed by [PR18](https://github.com/ForceMind/ai-phone-ui/pull/18) test-only head `a439cb7c4ff83ce310e16de81c70696dc1b1af2a`, [run37738666668](https://github.com/ForceMind/ai-phone-ui/actions/runs/37738666668), Chromium143.0.7499.4. All existing suites passed; the new suite passed7/11. Both overlay-dismissal and lock/resume lost reading position: V4 360,1710→856; V4 393,904→676. V3 remained unchanged. All three photo-geometry scenarios passed. Fixed payload and zero preview executions remained intact.
+
+Artifact11532559516 SHA256 `b96856120d66b427bec984b4c857a7673655c48eecf1975a69c088511099f27d` was downloaded and rehashed; source-head matched and all three dist files matched d856ea2. Native before/covered/after traces show the mounted body shrinking to V3 typography while covered, then regaining V4 height without its old reading offset. The actual after screenshot shows paragraph10 instead of the previously visible final local-only disclaimer.
+
+The new production candidate separates foreground metadata from per-surface styles:
+- Root still reports the visible route/sample for review controls and compatibility. It does not qualify for content-style selectors.
+- Task, system home, top menu, launcher, lock, sleep, and feedback surfaces have independent `data-design-surface`, sample, route, theme, and opacity attributes. Task route changes only on a content-route event, including the existing pre-render preparation. Opening a system layer does not restyle the mounted task.
+- Content selectors require `[data-design-surface][data-design-sample=true]`; rules targeting an overlay or feedback surface itself do not add a descendant space. The seven-page sample list is unchanged. Future approved sample-list extensions use the same separation.
+- There is no additional reading offset, session, or persistence cache. Core gesture, confirmation, candidate, and storage implementation files are untouched.
+
+Four unit cases cover independent task/foreground scope, non-sample task isolation, synchronous target preparation, and theme/material/V3 rollback. Native assertions additionally require covered/asleep typography, scrollHeight, and scrollTop to stay unchanged, preventing a post-dismissal offset patch from hiding reflow. Local build/static26/unit123/Python compilation pass. Candidate exact-head native CI and final pixels remain pending; the old RED and reports above are retained.
