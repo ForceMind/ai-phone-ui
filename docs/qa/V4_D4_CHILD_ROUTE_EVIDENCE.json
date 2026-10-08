@@ -1,0 +1,666 @@
+{
+  "review": "https://github.com/ForceMind/ai-phone-ui/pull/21#discussion_r4219363745",
+  "baseline_main": "f4a5ad0c912a5cfa023b5d488b71728b3713e4d8",
+  "test_only_run": 37787714815,
+  "artifact": 11554264698,
+  "zip_sha256": "72e4dee7eddb99a395203187e148e805cfae283eb2cfd938d115c67d8b521a0e",
+  "runtime_html_sha256": "e95d63e58be4107a00ef3f5f0eac5c93a154324905134781ceaa1eb2778928e2",
+  "result": "specific same-cloud root-reset claim not reproduced; catalog CLD04 has a different task owner",
+  "native": {
+    "source_head": "31fb6f9ee5fd16d6a79134448da492a1a013ecc7",
+    "browser": "143.0.7499.4",
+    "checks": [
+      {
+        "name": "light-glass",
+        "status": "pass",
+        "details": {
+          "before": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": null
+          },
+          "catalog_child": {
+            "route": "CLD-04",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              },
+              {
+                "kind": "suite",
+                "route": "CLD-04"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "catalog_dismissed": {
+            "route": "CLD-03",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "cover_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "catalog_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_child": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [
+              {
+                "kind": "result",
+                "route": null
+              }
+            ],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_returned": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          }
+        }
+      },
+      {
+        "name": "light-opaque",
+        "status": "pass",
+        "details": {
+          "before": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": null
+          },
+          "catalog_child": {
+            "route": "CLD-04",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              },
+              {
+                "kind": "suite",
+                "route": "CLD-04"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "catalog_dismissed": {
+            "route": "CLD-03",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "cover_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "catalog_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_child": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [
+              {
+                "kind": "result",
+                "route": null
+              }
+            ],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_returned": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          }
+        }
+      },
+      {
+        "name": "light-contrast",
+        "status": "pass",
+        "details": {
+          "before": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": null
+          },
+          "catalog_child": {
+            "route": "CLD-04",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              },
+              {
+                "kind": "suite",
+                "route": "CLD-04"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "catalog_dismissed": {
+            "route": "CLD-03",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "cover_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "catalog_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_child": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [
+              {
+                "kind": "result",
+                "route": null
+              }
+            ],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_returned": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          }
+        }
+      },
+      {
+        "name": "dark-glass",
+        "status": "pass",
+        "details": {
+          "before": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": null
+          },
+          "catalog_child": {
+            "route": "CLD-04",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              },
+              {
+                "kind": "suite",
+                "route": "CLD-04"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "catalog_dismissed": {
+            "route": "CLD-03",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "cover_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "catalog_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_child": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [
+              {
+                "kind": "result",
+                "route": null
+              }
+            ],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_returned": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          }
+        }
+      },
+      {
+        "name": "dark-opaque",
+        "status": "pass",
+        "details": {
+          "before": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": null
+          },
+          "catalog_child": {
+            "route": "CLD-04",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              },
+              {
+                "kind": "suite",
+                "route": "CLD-04"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "catalog_dismissed": {
+            "route": "CLD-03",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "cover_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "catalog_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_child": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [
+              {
+                "kind": "result",
+                "route": null
+              }
+            ],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_returned": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          }
+        }
+      },
+      {
+        "name": "dark-contrast",
+        "status": "pass",
+        "details": {
+          "before": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": null
+          },
+          "catalog_child": {
+            "route": "CLD-04",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              },
+              {
+                "kind": "suite",
+                "route": "CLD-04"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "catalog_dismissed": {
+            "route": "CLD-03",
+            "task": "ui-CLD-02",
+            "stack": [
+              {
+                "kind": "suite",
+                "route": "CLD-03"
+              }
+            ],
+            "jobNodes": 0,
+            "offset": null,
+            "font": null,
+            "savedCloudOffset": 471
+          },
+          "cover_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "catalog_resumed": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_child": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [
+              {
+                "kind": "result",
+                "route": null
+              }
+            ],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          },
+          "native_returned": {
+            "route": "CLD-03",
+            "task": "cloud",
+            "stack": [],
+            "jobNodes": 1,
+            "offset": 471,
+            "font": "144px",
+            "savedCloudOffset": 471
+          }
+        }
+      },
+      {
+        "name": "no-page-errors",
+        "status": "pass",
+        "details": []
+      },
+      {
+        "name": "no-outbound",
+        "status": "pass",
+        "details": []
+      }
+    ],
+    "passed": 8,
+    "failed": 0,
+    "not_tested": [
+      "physical devices",
+      "OS font scaling",
+      "screen readers",
+      "unrelated routes"
+    ]
+  },
+  "separate_result_contrast_observation": {
+    "source_head": "31fb6f9ee5fd16d6a79134448da492a1a013ecc7",
+    "runtime_same_as": "f4a5ad0c912a5cfa023b5d488b71728b3713e4d8",
+    "selector": "#stackRoot > .stack-page[data-kind=\"result\"] > .stack-scroll",
+    "method": "Read existing native screenshots; use fully painted pixels matching source #c9e0df plus actual uniform background; exclude anti-aliased edge colors. Not a new computedStyle capture or all-state audit.",
+    "source_font": "14 CSS px from base.css; new native result child was not part of persisted cloud-root-only 200% styles",
+    "samples": [
+      {
+        "mode": "light-glass",
+        "image": "light-glass-native-result-child.png",
+        "image_sha256": "870429692b9d204a7d209a96bf8bb1ba684c7b1e8a7f6cc3011f7f3f9192b409",
+        "crop": [
+          35,
+          185,
+          370,
+          218
+        ],
+        "rendered_solid_foreground": [
+          201,
+          224,
+          223
+        ],
+        "foreground_pixel_count": 8,
+        "rendered_uniform_background": [
+          255,
+          255,
+          255
+        ],
+        "ratio": 1.3805520821569766,
+        "required": 4.5
+      },
+      {
+        "mode": "light-contrast",
+        "image": "light-contrast-native-result-child.png",
+        "image_sha256": "7880767d03a38f771f07fc1c57e4e8ef48efd8538eb43a6c69338a5b5aa26926",
+        "crop": [
+          35,
+          185,
+          370,
+          218
+        ],
+        "rendered_solid_foreground": [
+          201,
+          224,
+          223
+        ],
+        "foreground_pixel_count": 8,
+        "rendered_uniform_background": [
+          255,
+          255,
+          255
+        ],
+        "ratio": 1.3805520821569766,
+        "required": 4.5
+      },
+      {
+        "mode": "dark-glass",
+        "image": "dark-glass-native-result-child.png",
+        "image_sha256": "16c4d655811ee07845a7e76f9949b044f41db5ae234404415165c06b2f767c03",
+        "crop": [
+          35,
+          185,
+          370,
+          218
+        ],
+        "rendered_solid_foreground": [
+          201,
+          224,
+          223
+        ],
+        "foreground_pixel_count": 8,
+        "rendered_uniform_background": [
+          32,
+          35,
+          39
+        ],
+        "ratio": 11.427409389821817,
+        "required": 4.5
+      },
+      {
+        "mode": "dark-contrast",
+        "image": "dark-contrast-native-result-child.png",
+        "image_sha256": "dbd615a2ddf4b3d124bb072ffa98486ac79d1babafac18fe9a22bd6560885153",
+        "crop": [
+          35,
+          185,
+          370,
+          218
+        ],
+        "rendered_solid_foreground": [
+          201,
+          224,
+          223
+        ],
+        "foreground_pixel_count": 8,
+        "rendered_uniform_background": [
+          255,
+          255,
+          255
+        ],
+        "ratio": 1.3805520821569766,
+        "required": 4.5
+      }
+    ]
+  }
+}

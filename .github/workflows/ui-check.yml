@@ -102,6 +102,9 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: D4 rendered contrast and text-only 200 percent resize
         run: npm run test:a11y 2>&1 | tee test-results/d4-accessibility.log
+      - name: D4 reviewed child-route ownership and reading return
+        if: ${{ !cancelled() }}
+        run: npm run test:same-task 2>&1 | tee test-results/d4-same-task.log
       - name: Upload independent D4 evidence
         if: always()
         uses: actions/upload-artifact@v4
