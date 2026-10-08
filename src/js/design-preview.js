@@ -1,22 +1,30 @@
-/* D1 review controls live outside the phone. Presentation only: no storage/state writes. */
+/* Presentation preferences are isolated from tasks, confirmations and business backups. */
 (function(){
 'use strict';
 const samples=window.UI_CATALOG.map(route=>route.id);
 const root=document.documentElement;
-const enabled=new URLSearchParams(location.search).get('design')==='v4';
-let theme='light',opaque=false,viewport='baseline',routeId=Suite.current().id;
+// Presentation has its own bounded key; it is deliberately outside business backups.
+const preferenceKey='ai-phone-ui-presentation-v1';
+let storedPreferences=null,preferenceWarning=false,lastWarning=false;
+try{const raw=localStorage.getItem(preferenceKey);if(raw&&raw.length<=1024){const value=JSON.parse(raw);if(value&&value.schema===1&&['baseline','v4'].includes(value.design)&&['system','light','dark'].includes(value.theme)&&typeof value.opaque==='boolean'&&['baseline','portrait'].includes(value.viewport))storedPreferences=value;}}catch{}
+const requestedDesign=new URLSearchParams(location.search).get('design');
+const initialDesign=requestedDesign==='v4'?'v4':requestedDesign==='v3'?'baseline':storedPreferences?.design||'baseline';
+let theme=storedPreferences?.theme||'system',opaque=storedPreferences?.opaque||false,viewport=storedPreferences?.viewport||'baseline',routeId=Suite.current().id;
+const scheme=typeof window.matchMedia==='function'?window.matchMedia('(prefers-color-scheme: dark)'):null;
+const resolvedTheme=()=>theme==='system'?(scheme?.matches?'dark':'light'):theme;
+function savePreferences(){try{localStorage.setItem(preferenceKey,JSON.stringify({schema:1,design:version.value,theme,opaque,viewport}));preferenceWarning=false;}catch{preferenceWarning=true;}apply();}
 const systemRoutes=['SYS-01','SYS-02','SYS-03','SYS-04','SYS-05','SYS-06'];
 let taskRouteId=systemRoutes.includes(routeId)?'':routeId,systemRouteId='SYS-01';
 const panel=document.createElement('section');panel.className='design-preview-tools';panel.setAttribute('aria-label','V4 样板外观检查');
-panel.innerHTML='<label>设计版本 <select id="designVersion"><option value="baseline">现有 V3</option><option value="v4">V4 样板</option></select></label><label>外观 <select id="designTheme"><option value="light">浅色</option><option value="dark">深色</option></select></label><label>画板 <select id="designViewport"><option value="baseline">360×672</option><option value="portrait">393×852</option></select></label><label><input type="checkbox" id="designOpaque"> 减少透明度</label><span id="designScope" role="status"></span>';
+panel.innerHTML='<label>设计版本 <select id="designVersion"><option value="baseline">现有 V3</option><option value="v4">V4 样板</option></select></label><label>外观 <select id="designTheme"><option value="system">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label><label>画板 <select id="designViewport"><option value="baseline">360×672</option><option value="portrait">393×852</option></select></label><label><input type="checkbox" id="designOpaque"> 减少透明度</label><span id="designScope" role="status"></span>';
 document.querySelector('.web-head').after(panel);
-const version=panel.querySelector('#designVersion');version.value=enabled?'v4':'baseline';
-function surface(element,id,active){if(!element)return;element.dataset.designSurface='true';element.dataset.designSample=active&&samples.includes(id)?'true':'false';element.dataset.designRoute=id;element.dataset.designTheme=theme;element.dataset.designOpaque=opaque?'true':'false';}
+const version=panel.querySelector('#designVersion');version.value=initialDesign;panel.querySelector('#designTheme').value=theme;panel.querySelector('#designOpaque').checked=opaque;panel.querySelector('#designViewport').value=viewport;
+function surface(element,id,active){if(!element)return;element.dataset.designSurface='true';element.dataset.designSample=active&&samples.includes(id)?'true':'false';element.dataset.designRoute=id;element.dataset.designTheme=resolvedTheme();element.dataset.designOpaque=opaque?'true':'false';}
 function apply(){
  const active=version.value==='v4',id=routeId,previousViewport=root.dataset.designViewport;
  if(!systemRoutes.includes(id))taskRouteId=id;
  if(['SYS-01','SYS-02','SYS-03'].includes(id))systemRouteId=id;
- root.dataset.design=active?'v4':'baseline';root.dataset.designTheme=theme;
+ root.dataset.design=active?'v4':'baseline';root.dataset.designTheme=resolvedTheme();
  root.dataset.designSample=active&&samples.includes(id)?'true':'false';
  root.dataset.designOpaque=opaque?'true':'false';root.dataset.designRoute=id;root.dataset.designViewport=active?viewport:'baseline';
  // The foreground may change without replacing the mounted task. Keep its
@@ -28,21 +36,25 @@ function apply(){
  if(typeof renderPhotoSelection==='function')renderPhotoSelection();
  panel.querySelector('#designViewport').disabled=!active;panel.querySelector('#designTheme').disabled=!active;panel.querySelector('#designOpaque').disabled=!active;
  panel.querySelector('#designScope').textContent=active?(samples.includes(id)?'D3 全量候选 · 86 页逐项验收':'未知界面 · 保留 V3'):'现有 V3 回归基线';
+ panel.setAttribute('data-preference-warning',String(preferenceWarning));
+ if(lastWarning!==preferenceWarning){lastWarning=preferenceWarning;if(typeof fit==='function')fit();}
+ if(preferenceWarning)panel.querySelector('#designScope').textContent+=' · 外观保存不可用，仅当前窗口生效';
 }
 document.addEventListener('click',event=>{
  const preference=event.target.closest?.('[data-design-preference]')?.dataset.designPreference;
  if(!preference||version.value!=='v4')return;
  if(preference==='opaque'){opaque=!opaque;panel.querySelector('#designOpaque').checked=opaque;}
- else if(['light','dark'].includes(preference)){theme=preference;panel.querySelector('#designTheme').value=theme;}
- apply();
+ else if(['system','light','dark'].includes(preference)){theme=preference;panel.querySelector('#designTheme').value=theme;}
+ savePreferences();
 });
-version.addEventListener('change',apply);
-panel.querySelector('#designTheme').addEventListener('change',e=>{theme=e.target.value;apply();});
-panel.querySelector('#designOpaque').addEventListener('change',e=>{opaque=e.target.checked;apply();});
-panel.querySelector('#designViewport').addEventListener('change',e=>{viewport=e.target.value;apply();});
+version.addEventListener('change',savePreferences);
+panel.querySelector('#designTheme').addEventListener('change',e=>{theme=e.target.value;savePreferences();});
+panel.querySelector('#designOpaque').addEventListener('change',e=>{opaque=e.target.checked;savePreferences();});
+panel.querySelector('#designViewport').addEventListener('change',e=>{viewport=e.target.value;savePreferences();});
 window.addEventListener('ui:route',()=>{routeId=Suite.current().id;apply();});
 window.addEventListener('design:route',e=>{routeId=e.detail.id;apply();});
 let visibilityQueued=false;
 window.addEventListener('ui:visibility',()=>{if(visibilityQueued)return;visibilityQueued=true;queueMicrotask(()=>{visibilityQueued=false;routeId=Suite.current().id;apply();});});
+if(scheme?.addEventListener)scheme.addEventListener('change',()=>{if(theme==='system')apply();});
 apply();
 })();

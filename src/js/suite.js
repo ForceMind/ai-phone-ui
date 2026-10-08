@@ -12,7 +12,7 @@ let D=PhoneModel.initial();
 let uiStorageWarned=false,renderingRoute='SYS-01';
 try{const raw=PhoneStorage.getItem(STORE_UI);if(raw)D=PhoneModel.validate(JSON.parse(raw));}catch{uiStorageWarned=true;}
 let activeRoute='SYS-01',viewState='default',restoreSerial=0,lastDeleted=null,selectedDay=new Date().getDate(),monthOffset=0;
-let callMuted=false,callSpeaker=false,playingPreview=false;
+let callMuted=false,callSpeaker=false,playingPreview=false,stateReturnFocus=null;
 const rootForTask=new Map(),liveRouteForTask=new Map();
 const row=(title,sub='',target='',glyph='arrow',extra='')=>`<${target?'button':'div'} class="s-row" ${target?`data-action="ui:go:${target}"`:''}>${glyph?icon(glyph):''}<span class="grow"><b>${esc(title)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span>${extra|| (target?'<span class="chev">›</span>':'')}</${target?'button':'div'}>`;
 const button=(label,action,kind='')=>`<button class="s-button ${kind}" data-action="ui:${action}">${esc(label)}</button>`;
@@ -93,7 +93,7 @@ case 'navigation':return `<div class="s-map"><div class="s-route-line"></div><i 
 case 'reader':return `<div class="s-label">本地示例文章</div><div class="s-document">${esc(fixtures.article)}</div>${button('引用到笔记','quote-article','primary')}${row('继续讨论这篇内容','提供来源与引用范围','AI-01','talk')}`;
 case 'search':return `${field('在本机找什么','search',D.readQuery,'试试：照片 / 云端 / 手势') }<div id="suiteSearchResults">${searchHTML(D.readQuery)}</div>${note('仅搜索界面目录和本机笔记；不是互联网搜索。')}`;
 case 'settings':return `${[['氛围与显示','壁纸、色调与字号','SET-02','picture'],['手势与触觉','N9 / Sailfish 融合交互','SET-03','arrow'],['声音与提示','轻量反馈、安静模式','SET-04','mic'],['AI 与服务连接','未连接真实模型','SET-05','cloud'],['个人账户','本机资料和登录边界','SET-06','talk'],['记忆管理','查看、修改和忘记','SET-07','note'],['隐私与数据','能力授权、操作记录','SET-09','lock'],['存储与备份','导出、验证恢复','SET-10','download'],['无障碍','减少动效和替代操作','SET-11','check'],['关于与诊断','构建、能力与边界','SET-12','history']].map(a=>row(...a)).join('')}`;
-case 'appearance':return `<section class="v4-settings" aria-label="V4 外观"><h3>清晰的内容表面</h3><div class="s-actions"><button class="s-button" data-design-preference="light">浅色</button><button class="s-button" data-design-preference="dark">深色</button></div><button class="s-button" data-design-preference="opaque">减少透明度</button><p>只改变当前展示，原文、草稿与确认保持不变。重新打开仍可从外观检查选择。</p></section><h3>氛围，不只是一张壁纸。</h3><div class="ambiences">${[['sea','海雾'],['dusk','暮色'],['rose','夜航']].map(([id,n])=>`<button class="ambience ${id} ${S.theme===id?'on':''}" data-action="theme-${id}"><span>${n}</span></button>`).join('')}</div><p>壁纸、面板、强调色和机身一起改变。交互规则保持不变。</p>${toggle('较大文字','正文和表单字号适当放大','largeText',D.settings.largeText)}${toggle('加强文字对比','提亮正文，不使用颜色作为唯一信息','contrast',D.settings.contrast)}${button('返回活动封面查看','go:SYS-01')}`;
+case 'appearance':return `<section class="v4-settings" aria-label="V4 外观"><h3>清晰的内容表面</h3><div class="s-actions"><button class="s-button" data-design-preference="light">浅色</button><button class="s-button" data-design-preference="dark">深色</button><button class="s-button" data-design-preference="system">系统</button></div><button class="s-button" data-design-preference="opaque">减少透明度</button><p>外观保存在当前浏览器，原文、草稿与确认保持不变；不随业务备份导出。</p></section><h3>氛围，不只是一张壁纸。</h3><div class="ambiences">${[['sea','海雾'],['dusk','暮色'],['rose','夜航']].map(([id,n])=>`<button class="ambience ${id} ${S.theme===id?'on':''}" data-action="theme-${id}"><span>${n}</span></button>`).join('')}</div><p>壁纸、面板、强调色和机身一起改变。交互规则保持不变。</p>${toggle('较大文字','正文和表单字号适当放大','largeText',D.settings.largeText)}${toggle('加强文字对比','提亮正文，不使用颜色作为唯一信息','contrast',D.settings.contrast)}${button('返回活动封面查看','go:SYS-01')}`;
 case 'gestures':return `${steps([['侧边向内 · 推开 / Peek','开始位置决定是系统手势；不松手可推回。'],['顶边向内 · 全局控制','通知放在事件视图，不和拉绳菜单混用。'],['底边向内 · 发起能力','保留当前任务，临时打开能力层。'],['内容下拉 · 拉绳菜单','初始阈值 68；每项 56；深拉 258 固定。'],['内容右滑 · 返回父页','确认页左滑接受、右滑取消。']])}${button('播放手势教学','demo','primary')}${toggle('显示替代操作','为无法完成手势的用户提供可点按动作','assist',D.settings.assist)}${note('阈值是本项目的初始设计参数，不是原系统的官方硬件参数。')}`;
 case 'sound':return `${toggle('轻提示音','仅由用户操作触发短提示，不自动播放','core-sound',S.sound)}${toggle('安静模式偏好','不影响设备系统音量','quiet',D.settings.quiet)}<label class="s-form">提示强度草稿：<span id="volumeLabel">${D.settings.volume}%</span><input class="s-range" type="range" min="0" max="100" value="${D.settings.volume}" data-range="volume"></label>${button('试听一次本机短提示','test-sound')}${note('滑杆是 UI 偏好，不能修改系统音量；实际提示音使用安全的固定较低音量。')}`;
 case 'models':return `<div class="s-env-status"><span class="s-status-dot"></span>没有连接模型</div><h3>模型可替换，<br>你的资料与任务不重来。</h3>${row('文字与规划','需要可信的服务端模型代理','','talk')}${row('图片生成','独立能力，不和本机调色混淆','','picture')}${row('语音识别','浏览器可选能力，需用户授权','','mic')}${note('UI 项目不收集 API 密钥，也不会把服务商密钥写入 HTML 或 localStorage。接入遵循 docs/engineering/ADAPTER_CONTRACTS.md。',true)}${button('查看服务接入设计','go:CLD-08','primary')}`;
@@ -118,7 +118,7 @@ function rerender(){const el=$('stackRoot').lastElementChild?.querySelector('.su
 function ensureTask(r){const key='ui-'+r.id;if(!NAMES[key]){NAMES[key]=r.name;S.messages[key]=[];S.drafts[key]='';rootForTask.set(key,r.id);addCover(key,r);}return key;}
 function addCover(key,r){const wrap=document.querySelector('.home-covers');if(document.querySelector(`[data-task="${key}"]`))return;wrap.classList.add('suite-expanded');const el=document.createElement('div');el.className='cover suite-cover';el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',r.name+' 活动封面');el.dataset.task=key;el.innerHTML=`<div class="cover-under" id="under-${key}"></div><div class="cover-face" id="face-${key}"><div class="overline">${esc(r.group)} / ${r.mode==='local'?'LOCAL':'PREVIEW'}</div><strong>${esc(r.name)}</strong><div class="suite-cover-text">${esc(r.purpose)}</div><div class="cover-bottom"><small>横滑封面，直接操作</small>${icon('arrow')}</div></div>`;wrap.appendChild(el);document.querySelector('#homePage .page-sub').textContent=wrap.children.length+' 件事，留在你离开的地方。';}
 function go(id){
-const r=routes.get(id);if(!r)return;viewState='default';$('suiteStateOverlay')?.remove();const previous=current();if(id==='AI-01'&&previous?.id!=='AI-01')D.lastContext=previous?.name||NAMES[currentTask];
+const r=routes.get(id);if(!r)return;viewState='default';$('suiteStateOverlay')?.remove();stateReturnFocus=null;const previous=current();if(id==='AI-01'&&previous?.id!=='AI-01')D.lastContext=previous?.name||NAMES[currentTask];
 if(demoRunning)stopDemo();if(overlay)closeOverlay(true);locked=sleeping=false;$('lock').classList.remove('visible');$('sleep').classList.remove('visible');
 const special={home:()=>{minimize(false);setHome(1,false);},events:()=>{minimize(false);setHome(0,false);},capabilities:()=>{minimize(false);setHome(2,false);},controls:()=>openOverlay('top'),lock:()=>lockPhone(false),sleep:()=>lockPhone(true),photo:()=>{openTask('photo',{noAnimation:true});stack=[];renderStack();},selection:()=>{openTask('photo',{noAnimation:true});stack=[];renderStack();S.photo.selection={x:.5,y:.5,r:.23,protect:false};renderPhoto();},versions:()=>{openTask('photo',{noAnimation:true});stack=[];pushPage({kind:'history'},false);},export:()=>{openTask('photo',{noAnimation:true});stack=[];exportConfirm('photo');},notes:()=>{openTask('notes',{noAnimation:true});stack=[];renderStack();},job:()=>{openTask('cloud',{noAnimation:true});stack=[];renderStack();},focus:()=>{openTask('focus',{noAnimation:true});stack=[];renderStack();}};
 if(special[r.type])special[r.type]();
@@ -128,7 +128,30 @@ else {const chain=[r];let parent=r.parent;const seen=new Set([r.id]);while(paren
 }
 activeRoute=id;applyPrefs();syncAccess();emit();persist();
 }
-function showState(state){if(!['default','empty','loading','error','offline'].includes(state))return;viewState=state;$('suiteStateOverlay')?.remove();if(state!=='default'){const e=document.createElement('div');e.className='suite-state-overlay';e.id='suiteStateOverlay';e.innerHTML=stateBody(state);(appOpen?$('task'):$('screen')).appendChild(e);}emit();}
+function showState(state){
+ if(!['default','empty','loading','error','offline'].includes(state))return;
+ const old=$('suiteStateOverlay');if(!old&&state!=='default')stateReturnFocus=document.activeElement;
+ viewState=state;old?.remove();
+ if(state!=='default'){
+  finishGesture(null,true);activePointers.clear();
+  const e=document.createElement('div');e.className='suite-state-overlay';e.id='suiteStateOverlay';e.setAttribute('role','dialog');e.setAttribute('aria-modal','true');e.setAttribute('aria-label','界面状态检查');e.innerHTML=stateBody(state);
+  for(const name of ['pointerdown','pointermove','pointerup','pointercancel'])e.addEventListener(name,event=>event.stopPropagation());
+  $('screen').appendChild(e);syncAccess();e.querySelector('button')?.focus({preventScroll:true});
+ }else{
+  const target=stateReturnFocus;stateReturnFocus=null;syncAccess();
+  if(target?.isConnected&&!target.closest('[inert]'))target.focus({preventScroll:true});
+ }
+ emit();
+}
+// State inspection owns input while mounted; it never delegates to a hidden review.
+document.addEventListener('keydown',event=>{
+ const layer=$('suiteStateOverlay');if(!layer)return;
+ event.stopImmediatePropagation();
+ if(event.key==='Escape'){event.preventDefault();showState('default');return;}
+ if(event.key==='Tab'){event.preventDefault();layer.querySelector('button')?.focus({preventScroll:true});}
+ else if(event.key==='Enter'&&!layer.contains(document.activeElement)){event.preventDefault();layer.querySelector('button')?.focus({preventScroll:true});}
+},true);
+
 const original={captureSession,renderJob,renderRoot,renderStack,menuItems,action,openTask,backPage,acceptDialog,coverAction,coverPreview,capHTML,chooseMode,pulleyPreview,resetPulley,pinPulley,finishGesture};
 renderJob=function(){original.renderJob();document.querySelectorAll('[data-suite-job="percent"]').forEach(e=>e.textContent=Math.round(S.job.progress));document.querySelectorAll('[data-suite-job="meter"]').forEach(e=>e.style.width=S.job.progress+'%');document.querySelectorAll('[data-suite-job="status"]').forEach(e=>e.textContent=({idle:'等待开始',running:'正在处理原文快照',paused:'已暂停，进度保留',done:'整理已完成'})[S.job.status]);};
 // Leaving, switching, or locking a task abandons in-flight backup validation.

@@ -71,3 +71,17 @@ run37719887233完整通过26静态/101单元/127DOM/19存储/41键盘/8候选/8�
 ## D2 native first candidate, preserved failures
 
 PR17 head999f59c/run37738614077 passed all old/D1/viewport checks; new core suite7/10. IMG-08 full-width range inherited browser margin and overflowed its reading region. Candidate CSS removes only native range margin; original overflow assertion retained, with failure screenshot added. Note-flow test assumed a confirmation on ui:export-document, but source shows this existing action downloads directly; harness now checks actual downloaded bytes and unchanged source without changing production semantics. Photo fixed-version confirmation/cancellation and execution once/cancel assertions remain. ZIP11532643941 sha256 dcca0916f95ab846c809c56ee5972f6127127f876661b906a8cffaadc83a5813 preserved.
+
+## 首轮完整候选与补充门槛
+
+ffd9bf2/run37740717375全绿，artifact11532874640 SHA256 3716cb62d11bf4bae0ba92b62fd18cbc9481779af80cba72eff8b54597882389，source-head及dist三文件匹配。393浅深86路由矩阵174/174（包括零异常/零出网），本机三闭环10/10，呈现中断11/11。首轮状态层只查挂载、退出使用路由API；不能据此宣称真实恢复/取消已通过。后续增强改用真实状态主按钮、Esc/Enter/H，并验证遮挡、固定确认与原内容。
+
+实际浅色图发现DAY-10说明继承V3淡色、DAY-12路线覆盖层对比不足；使用语义次要色及固定媒体前景修正，不改计时或路线语义。独立review指出产品contrast未关闭blur，补CSS与native断言。独立呈现偏好补刷新/拒写/恢复隔离/V3回退/系统主题/无效记录，需新head专项结果。
+
+## 独立复核追加（本地候选，native待验证）
+
+ffd9bf2的393浅深正常状态172张已经分组实看。SYS-04两主题“所有设置”与菜单说明重叠，浅色说明继承旧淡青；候选使用紧凑正常流和语义文字色、媒体白字，并增加360/393 footer几何及截图断言。
+
+独立源审发现设计态顶层没有隔离底层确认。真实confirmationKey函数的本地测试先得到Tab handled=true（预期false）的RED，再以独立状态层阻断得到GREEN；此前chooseMode源码VM也仍能落入confirm。不能把这当已运行的native误接受报告。修复复用syncAccess统一inert，取消进行中手势，层内pointer/键盘隔离；关闭只恢复仍连接且非inert的DOM焦点，不缓存业务或阅读位置。native新增层上左滑、Tab、Enter、Escape保持原payload/阅读位置且不接受，回原确认后允许明确一次接受，尚待本head CI。
+
+拒写反馈不再只藏在窄屏隐藏span：warning时强制可见；native增加390宽可见、与手机区域不重叠及真实截图。129单元与26静态通过，Python及浏览器内JS片段语法通过；真实native新增项未跑。

@@ -165,3 +165,34 @@
 [data-design=v4] .v4-settings{display:block}
 [data-design=v4] .v4-settings [aria-pressed=true]{background:var(--v4-accent);color:var(--v4-control-text)}
 [data-design=v4] [data-design-surface][data-design-route=SET-02] .ambiences{display:none}
+
+/* The product contrast preference has the same opaque fallback as OS contrast. */
+.high-contrast [data-design-surface][data-design-sample=true] .pulley,
+.high-contrast [data-design-surface][data-design-sample=true].overlay{backdrop-filter:none!important;background:var(--v4-surface)}
+
+/* Design-state inspection must stay visible above lock/sleep and allow its real exit. */
+.suite-state-overlay{z-index:72}
+/* Pixel review: focus instructions and the map overlay need their own contrast. */
+[data-design-surface][data-design-sample=true] .focus-body p{color:var(--v4-secondary);font-size:14px;line-height:1.6}
+[data-design-surface][data-design-sample=true] .focus-circle{border-color:var(--v4-line);box-shadow:none}
+[data-design-surface][data-design-sample=true] .focus-timer{font-weight:600}
+[data-design-surface][data-design-sample=true] .s-map .s-route-line{border-color:#70d9ce}
+
+/* Save failures stay visible in the compact inspection lane as well. */
+.design-preview-tools[data-preference-warning=true] #designScope{display:block;max-width:100%;flex-basis:100%;white-space:normal;color:#8a231d;font-size:12px}
+/* System controls keep their footer and final navigation in normal readable flow. */
+[data-design-surface][data-design-sample=true].top-menu{overflow:auto;overscroll-behavior:contain;padding-bottom:24px}
+[data-design-surface][data-design-sample=true].top-menu :is(.sub,.menu-footer){color:var(--v4-secondary);font-size:14px;line-height:1.6}
+[data-design-surface][data-design-sample=true].top-menu .ambience span{color:#fff;text-shadow:0 1px 3px #000}
+[data-design-surface][data-design-sample=true].top-menu .menu-footer{position:static;margin:20px 0 12px}
+[data-design-surface][data-design-sample=true].top-menu [data-action="ui:go:SET-01"]{position:static!important;width:100%!important;margin-top:12px}
+[data-design-surface][data-design-sample=true].top-menu{padding:24px 26px}
+[data-design-surface][data-design-sample=true].top-menu h2{font-size:30px;line-height:1.2;margin:0 0 8px}
+[data-design-surface][data-design-sample=true].top-menu .sub{margin:0 0 12px}
+[data-design-surface][data-design-sample=true].top-menu .ambiences{margin:12px 0}
+[data-design-surface][data-design-sample=true].top-menu .ambience{height:76px;border-radius:12px}
+[data-design-surface][data-design-sample=true].top-menu .settings-row{min-height:44px;padding:10px 0;font-size:15px}
+[data-design-surface][data-design-sample=true].top-menu .menu-footer{font-size:13px;line-height:1.5;margin:12px 0 0}
+[data-design-surface][data-design-sample=true].top-menu [data-action="ui:go:SET-01"]{margin-top:8px}
+
+@media(max-width:730px){:root:has(.design-preview-tools[data-preference-warning=true]) .workspace{height:calc(100dvh - 200px)}}

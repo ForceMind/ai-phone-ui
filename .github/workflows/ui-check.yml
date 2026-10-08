@@ -63,6 +63,9 @@ jobs:
       - name: Presentation interruption reading and photo geometry
         if: ${{ !cancelled() }}
         run: npm run test:presentation 2>&1 | tee test-results/presentation-suspend.log
+      - name: Isolated presentation preference persistence
+        if: ${{ !cancelled() }}
+        run: npm run test:prefs 2>&1 | tee test-results/presentation-preferences.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4
