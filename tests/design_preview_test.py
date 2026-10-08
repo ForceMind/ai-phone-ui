@@ -136,7 +136,7 @@ def main():
         traceback.print_exc();RESULTS.append({'name':'harness','status':'fail','error':str(exc)})
     for name,items in [('no-page-errors',native.ERRORS),('no-outbound',native.OUTBOUND)]:
         RESULTS.append({'name':name,'status':'fail' if items else 'pass','details':items})
-    report={'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=native.ROOT,text=True).strip(),'browser':version,'frame_sample':FRAME_SAMPLE,'geometry_observation':GEOMETRY_OBSERVATION,'checks':RESULTS,'passed':sum(r['status']=='pass' for r in RESULTS),'failed':sum(r['status']=='fail' for r in RESULTS),'not_tested':['physical devices','screen readers','mobile keyboard','OS font scaling','60fps qualification']}
+    report={'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=native.ROOT,text=True).strip(),'browser':version,'frame_sample':FRAME_SAMPLE,'geometry_observation':GEOMETRY_OBSERVATION,'checks':RESULTS,'reading_trace':reading.TRACE,'passed':sum(r['status']=='pass' for r in RESULTS),'failed':sum(r['status']=='fail' for r in RESULTS),'not_tested':['physical devices','screen readers','mobile keyboard','OS font scaling','60fps qualification']}
     native.OUT.mkdir(exist_ok=True);(native.OUT/'v4-design-results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
     print(json.dumps(report,ensure_ascii=False,indent=2));return bool(report['failed'])
 if __name__=='__main__':raise SystemExit(main())

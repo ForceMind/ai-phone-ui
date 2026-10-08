@@ -153,6 +153,7 @@ def resume_accept(page):
     page.keyboard.press('h')
     page.locator('[data-task="' + task + '"]').click()
     page.wait_for_function('stack.at(-1)?.suiteMode === "message"')
+    native.ensure(page.evaluate('Suite.current().id') == 'DAY-05', 'Resumed confirmation lost its source page route')
     after = observe(page, 'resume:after')
     native.ensure(abs(after['scrollTop'] - before['scrollTop']) <= 1, 'Resuming review lost reading position')
     native.ensure(after['focus'] == 'back', 'Resuming review did not focus cancel')
