@@ -5,9 +5,9 @@ const test=require('node:test'),assert=require('node:assert/strict'),vm=require(
 const source=fs.readFileSync(path.join(__dirname,'../src/js/core.js'),'utf8');
 const code=source.slice(source.indexOf('// Focus belongs to a particular review'),source.indexOf('function saveNow()'));
 function fixture(){
-  let focusCount=0,backs=0,hidden=false,inert=false,help=false;
+  let focusCount=0,backs=0,hidden=false,inert=false,help=false,stateLayer=false;
   const ctx={appOpen:true,overlay:'',locked:false,sleeping:false,currentTask:'photo',stack:[{kind:'confirm'}],
-    document:{activeElement:null},$:()=>({classList:{contains:()=>help}}),backPage(){backs++;}};
+    document:{activeElement:null},$:id=>id==='suiteStateOverlay'?(stateLayer?{}:null):({classList:{contains:()=>help}}),backPage(){backs++;}};
   const button=action=>({dataset:{action},focus(){if(!hidden){ctx.document.activeElement=this;focusCount++;}}});
   const back=button('back'),accept=button('accept');
   const dialog={closest:()=>inert,contains:el=>el===dialog||el===back||el===accept,
@@ -15,7 +15,7 @@ function fixture(){
   ctx.topPage=()=>dialog;
   vm.createContext(ctx);vm.runInContext(code,ctx);
   return {ctx,back,accept,dialog,sync:()=>ctx.syncConfirmationFocus(),count:()=>focusCount,backs:()=>backs,
-    hidden:value=>hidden=value,inert:value=>inert=value,help:value=>help=value,
+    hidden:value=>hidden=value,inert:value=>inert=value,help:value=>help=value,stateLayer:value=>stateLayer=value,
     key(key,extra={}){let prevented=false;const handled=ctx.confirmationKey({key,...extra,preventDefault(){prevented=true;}});return {handled,prevented};}};
 }
 test('confirmation focus: enter safely, preserve Accept during repeated sync',()=>{
@@ -59,3 +59,5 @@ test('confirmation focus: dialog-root focus is treated as outside the two-button
 test('confirmation focus: dismissing a nested review preserves safe older-review focus',()=>{
  const f=fixture();f.sync();f.ctx.restoreConfirmationFocus({kind:'confirm'});assert.equal(f.ctx.document.activeElement,f.back);
 });
+
+test('design-state inspection releases underlying confirmation keyboard ownership',()=>{const f=fixture();f.sync();f.stateLayer(true);f.sync();assert.deepEqual(f.key('Tab'),{handled:false,prevented:false});assert.deepEqual(f.key('Escape'),{handled:false,prevented:false});assert.equal(f.backs(),0);f.stateLayer(false);f.sync();assert.equal(f.ctx.document.activeElement,f.back);});

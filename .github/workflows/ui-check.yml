@@ -51,6 +51,21 @@ jobs:
         run: npm run test:candidates 2>&1 | tee test-results/candidate-ownership.log
       - name: Browser HTTP-origin long confirmation reading
         run: npm run test:reading 2>&1 | tee test-results/confirmation-reading.log
+      - name: V4 opt-in samples and presentation invariance
+        run: npm run test:design 2>&1 | tee test-results/v4-design.log
+      - name: V4 portrait geometry and unchanged logical gestures
+        run: npm run test:viewport 2>&1 | tee test-results/viewport.log
+      - name: V4 core flow and migrated surface regression
+        run: npm run test:core 2>&1 | tee test-results/core-flows.log
+      - name: V4 full route and state migration matrix
+        if: ${{ !cancelled() }}
+        run: npm run test:migration 2>&1 | tee test-results/full-migration.log
+      - name: Presentation interruption reading and photo geometry
+        if: ${{ !cancelled() }}
+        run: npm run test:presentation 2>&1 | tee test-results/presentation-suspend.log
+      - name: Isolated presentation preference persistence
+        if: ${{ !cancelled() }}
+        run: npm run test:prefs 2>&1 | tee test-results/presentation-preferences.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4
