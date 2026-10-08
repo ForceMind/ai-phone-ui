@@ -105,6 +105,9 @@ jobs:
       - name: D4 reviewed child-route ownership and reading return
         if: ${{ !cancelled() }}
         run: npm run test:same-task 2>&1 | tee test-results/d4-same-task.log
+      - name: Native result-body rendered contrast
+        if: ${{ !cancelled() }}
+        run: npm run test:result-contrast 2>&1 | tee test-results/native-result-contrast.log
       - name: Upload independent D4 evidence
         if: always()
         uses: actions/upload-artifact@v4

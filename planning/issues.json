@@ -125,7 +125,8 @@
       "readingEvidence": "docs/qa/UI014_READING_EVIDENCE.json",
       "note": " V4中断复现PR18/a439cb7确认4条阅读位置RED，独立表面呈现修复候选待自身完整CI及实图；不关闭设备/无障碍边界。",
       "d4BrowserEvidence": "PR21 runtime ec5c716/run37778706779：96实际背景样本、50浏览器检查通过，200%长文/设置/任务读位接续验证；只关闭该代表样本子集，完整设备/OS字号/读屏仍开放。",
-      "d4ChildReview": "PR22 test-only: actual catalog child owner differs; native cloud remains471→471. Not a product fix. See docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md; separate native result solid-pixel contrast measured: light/highcontrast1.380552:1, dark11.427409:1; no product repair in this test-only PR."
+      "d4ChildReview": "PR22 test-only: actual catalog child owner differs; native cloud remains471→471. Not a product fix. See docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md; separate native result solid-pixel contrast measured: light/highcontrast1.380552:1, dark11.427409:1; no product repair in this test-only PR.",
+      "nativeResultContrast": "PR23: native RED confirms light/highcontrast 1.380552:1 for empty/completed body; V4 native result body uses semantic text color. Final head/main CI and pixel verification required; device/OS/reader gates stay open."
     },
     {
       "id": "UI-015",
