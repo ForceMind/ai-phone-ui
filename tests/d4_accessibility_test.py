@@ -103,6 +103,13 @@ def resize(page,name,route):
         return {'fonts_checked':len(fonts),'reading':end}
     selector='.suite-scroll' if route=='SET-01' else '.job-detail'
     box=page.locator(selector).filter(visible=True).last
+    if route=='CLD-03':
+        native.ensure(box.evaluate('e=>e.scrollHeight>e.clientHeight'),'200% job detail did not provide a reading scroll region')
+        region=box.bounding_box();x=region['x']+region['width']/2
+        page.mouse.move(x,region['y']+region['height']*.8);page.mouse.down()
+        page.mouse.move(x,region['y']+region['height']*.2,steps=12);page.mouse.up();settle(page)
+        native.ensure(box.evaluate('e=>e.scrollTop')>0,'Real pointer reading gesture did not scroll enlarged job detail')
+        native.ensure(page.evaluate('Suite.current().id')=='CLD-03','Reading gesture navigated away from the task')
     targets=box.locator('b,small,.job-phases span,.job-foot,.job-desc')
     native.ensure(targets.count()>0,'No resize targets')
     seen=set();expected=set();measurements=[]

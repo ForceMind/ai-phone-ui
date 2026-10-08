@@ -77,3 +77,25 @@ Keep this failure; rerun/diagnose rather than infer a production regression.
 
 The next test-only commit separates D4 into a parallel job and fixes text-run,
 clip, opacity-group, unrounded-ratio and real-wheel measurement weaknesses.
+
+## Conservative test-only RED (69cb11f9)
+
+Run 37775681970, independent D4 artifact 11550176376, SHA256
+`dd4560ab8a1174f8e89f3bc28a5a99783039623eb769961a6426a65d31b4d062`.
+Exact source-head and ZIP digest verified; actual screenshots inspected.
+32/44 checks pass: all 24 contrast cases (96 semantic samples, minimum
+6.373409163249365:1), six SET-01 real-wheel 200% cases, errors/outbound checks.
+12 actual resize failures: six DAY-05 body/footer overlaps, six CLD-03
+header/detail overlaps with unreachable footer text. No color defect established.
+The separate unchanged core suite passed 10/10 on this commit. The first
+filechooser timeout remains recorded; production was not changed to mask it.
+
+## Candidate repair
+
+Use normal flex space allocation for existing V4 confirmation regions and task
+header/detail/footer. Existing scroll regions/actions/payloads remain. A visible,
+actually overflowing V4 job detail can use the existing pointer scroll mode;
+nonoverflow and V3 keep their original gesture selection. Three unit regressions
+and a native pointer check cover that boundary. No SET-01 or color changes.
+Candidate build/26 static/132 unit checks pass locally; exact candidate native
+jobs and screenshots must be checked before merge.

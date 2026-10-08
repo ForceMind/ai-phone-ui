@@ -196,3 +196,14 @@
 [data-design-surface][data-design-sample=true].top-menu [data-action="ui:go:SET-01"]{margin-top:8px}
 
 @media(max-width:730px){:root:has(.design-preview-tools[data-preference-warning=true]) .workspace{height:calc(100dvh - 200px)}}
+
+/* D4: fixed-size controls and reading regions must reflow at 200% text size.
+   Keep the proven scroll containers and actions; only their available space flows. */
+[data-design-surface][data-design-sample=true] .stack-page[data-kind=confirm]{display:flex;flex-direction:column;padding:24px 22px 32px}
+[data-design-surface][data-design-sample=true] .stack-page[data-kind=confirm] .dialog-head{position:static;flex:0 0 auto;gap:12px}
+[data-design-surface][data-design-sample=true] .stack-page[data-kind=confirm] .dialog-inner{position:relative;inset:auto;flex:1 1 auto;min-height:0;margin:49px 3px 16px}
+[data-design-surface][data-design-sample=true] .stack-page[data-kind=confirm] .dialog-hint{position:static;flex:0 0 auto;padding:0 4px;gap:8px;flex-wrap:wrap}
+[data-design-surface][data-design-sample=true] .surface-content:has(>.job-detail){display:flex;flex-direction:column;padding:38px 25px 19px}
+[data-design-surface][data-design-sample=true] .surface-content:has(>.job-detail)>.app-header{position:static;flex:0 0 auto}
+[data-design-surface][data-design-sample=true] .job-detail{position:relative;inset:auto;flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;margin:30px 0 16px;overflow-wrap:anywhere}
+[data-design-surface][data-design-sample=true] .surface-content:has(>.job-detail)>.task-hint{position:static;flex:0 0 auto}
