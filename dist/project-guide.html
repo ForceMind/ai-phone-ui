@@ -1344,7 +1344,11 @@ npm run docs</code></pre>
 <p>修复使用实际容器clientWidth/clientHeight统一计算contain图片和选区环；点击通过实际bounding rect归一化。样板切换只重新投影已有ring，不重绘图片、不修改选区/版本/草稿。新增4项单元（基线424、V4480、letterbox、切换ring）及原生真实点击/切换/圆环几何验证；尚需新head CI。原手势阈值、原图与选区数据结构不变。</p>
 <h3>第五候选 e535bd6 原生结果</h3>
 <p>run37719463909：所有旧回归通过，新增design 7/8；照片几何项首个“请求中心=精确0.5±0.001”断言失败，尚未进入ring切换检查。失败artifact11524834438，ZIP摘要4f663cf06a8ad44588e10acdf4360fee5763dadfa0d579d3d84483260e7014c6已下载核对。不可将此轮写成通过。</p>
-<p>后续测试记录浏览器实际click坐标，以独立计算的square contain几何核对归一化选区，同时限定实际click距请求中心≤1设备CSS像素，避免把浏览器整数click舍入与产品选区错误混同。不是放弃原中心/letterbox/ring要求；实际点击到选区的误差仍严格≤0.00001，ring及两次设计切换断言保留。尚须新CI确认真实失败原因。</p></article><article id="doc-31"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>后续测试记录浏览器实际click坐标，以独立计算的square contain几何核对归一化选区，同时限定实际click距请求中心≤1设备CSS像素，避免把浏览器整数click舍入与产品选区错误混同。不是放弃原中心/letterbox/ring要求；实际点击到选区的误差仍严格≤0.00001，ring及两次设计切换断言保留。尚须新CI确认真实失败原因。</p>
+<h3>第六候选 9b89877 实际点击证据</h3>
+<p>run37719887233完整通过26静态/101单元/127DOM/19存储/41键盘/8候选/8阅读/8设计。artifact11524894908摘要e2b860696470380821deb9687df38119988349489eda08397d89f665619884ba；ZIP/source-head/三份dist字节已核对。</p>
+<p>实际click为(720,507)，独立期望图像点(0.499991686,0.497876648)，生产选区为(0.499991686,0.497876648)，归一化误差&lt;4e-10。首轮精确中心断言确为浏览器click坐标舍入不合理；真实选区、ring切换及letterbox均通过。5秒CI前台RAF301帧，p95约16.8ms，&gt;50ms为0；不是设备性能证书。</p>
+<p>像素复核又发现旧媒体选区浅边与旧toast底色在浅色样板对比不足。下一最小样式修正为双色选区边及明确反色反馈，增加实际computed style断言；业务状态不动。交付前仍核对这一新head，不能沿用本轮绿灯。</p></article><article id="doc-31"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
 <p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
 <p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
 <p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>
