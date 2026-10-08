@@ -20,6 +20,7 @@ def snapshots(page,theme):
         surface=page.locator('.suite-scroll').filter(visible=True)
         if surface.count():
             box=surface.last.evaluate('e=>({w:e.clientWidth,sw:e.scrollWidth})')
+            if box['sw']>box['w']+1:page.locator('#phone').screenshot(path=str(native.OUT/(theme+'-'+route+'-overflow.png')),animations='disabled')
             native.ensure(box['sw']<=box['w']+1,route+' has horizontal content overflow')
         page.locator('#phone').screenshot(path=str(native.OUT/(theme+'-'+route+'.png')),animations='disabled')
         before=page.evaluate('JSON.stringify({notes:S.notes,photo:S.photo,drafts:S.drafts})')
@@ -44,12 +45,11 @@ def note_flow(page):
     reading.go(page,'DOC-04')
     expected=page.evaluate('S.job.result')
     native.ensure(bool(expected),'No local result produced')
-    page.locator('[data-action="ui:export-document"]').filter(visible=True).last.click()
-    page.wait_for_function('stack.at(-1)?.kind==="confirm"')
-    page.keyboard.press('Escape')
-    native.ensure(page.evaluate('S.notes')==original,'Cancel changed source')
-    page.locator('[data-action="ui:export-document"]').filter(visible=True).last.click()
-    with page.expect_download() as download: keyboard.dialog(page,'accept').click()
+    # This existing route downloads directly; do not invent an extra confirmation.
+    # Confirm/cancel coverage remains in the photo and execution cases below.
+    with page.expect_download() as download:
+        page.locator('[data-action="ui:export-document"]').filter(visible=True).last.click()
+    native.ensure(page.evaluate('S.notes')==original,'Export changed source')
     native.ensure(Path(download.value.path()).read_text()==expected,'Downloaded result differs from fixed text')
     page.locator('#phone').screenshot(path=str(native.OUT/'notes-result.png'),animations='disabled')
 def main():

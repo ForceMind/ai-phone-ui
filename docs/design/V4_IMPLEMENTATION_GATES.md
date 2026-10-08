@@ -45,3 +45,7 @@ CI 桌面 Chromium 记录浏览器/视口/source SHA；先量测而非承诺 60f
 PR13 main d164cdf 的 CI 已通过 25/92/127/19/41/8/8；此为历史基线，不是本批绿灯。
 PR14 main eaf0874 只加 Pages 工作流；首次 run37646443486 Configure Pages 404，上传/部署跳过。Pages设置/登录仍独立待解决，不阻断D0/D1开发，不把未知网址当交付。
 实机 Android/iOS、VoiceOver/TalkBack、软键盘、系统字体、真实内存/磁盘压力依然未测，D4不可提前关闭。
+
+## Mounted task / foreground presentation boundary
+
+PR18's confirmed interruption RED requires task presentation to remain tied to its content route through system menus, lock, and sleep. The candidate scopes content styles to `[data-design-surface][data-design-sample=true]`; the root's visible-route flag is diagnostic only. Approved D2/D3 style extensions must retain this surface qualifier, including self-target selectors for overlay/toast surfaces, and must not change the sample list merely to mask interruption failures. Reading offsets remain owned by the original DOM/session implementation, with no presentation cache. See the preserved RED and candidate details in `../qa/V4_PRESENTATION_SUSPEND.md`.

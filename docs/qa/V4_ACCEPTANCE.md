@@ -67,3 +67,7 @@ run37719887233完整通过26静态/101单元/127DOM/19存储/41键盘/8候选/8�
 ### 可见层与呈现同步
 
 完整手势入口审计还补充H回任务、T系统层、A能力层、Esc关闭后的样板归属同步。原Workbench只覆盖显式路由和部分指针结束；键盘返回可能保留上一个非样板页样式。syncAccess只发可见状态通知，呈现层用一次microtask读取最终Suite.current()，不写业务状态/历史；恢复前prepareView仍负责避免阅读位置被提前裁剪。新增合并通知单元与键盘层级原生回归，保留输入优先级和所有旧断言。
+
+## D2 native first candidate, preserved failures
+
+PR17 head999f59c/run37738614077 passed all old/D1/viewport checks; new core suite7/10. IMG-08 full-width range inherited browser margin and overflowed its reading region. Candidate CSS removes only native range margin; original overflow assertion retained, with failure screenshot added. Note-flow test assumed a confirmation on ui:export-document, but source shows this existing action downloads directly; harness now checks actual downloaded bytes and unchanged source without changing production semantics. Photo fixed-version confirmation/cancellation and execution once/cancel assertions remain. ZIP11532643941 sha256 dcca0916f95ab846c809c56ee5972f6127127f876661b906a8cffaadc83a5813 preserved.

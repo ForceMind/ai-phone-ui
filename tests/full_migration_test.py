@@ -14,6 +14,13 @@ def verify_route(page,route,theme,capture_state):
     if visible.count():
         geometry=visible.last.evaluate('e=>{const r=e.getBoundingClientRect(),s=document.getElementById("screen").getBoundingClientRect(),h=e.parentElement.querySelector(".suite-header")?.getBoundingClientRect();return {overflow:e.scrollWidth>e.clientWidth+1,height:e.clientHeight,within:r.bottom<=s.bottom+1,overlap:h&&h.bottom>r.top+1}}')
         native.ensure(not geometry['overflow'] and geometry['height']>90 and geometry['within'] and not geometry['overlap'],route['id']+' bad reading region '+str(geometry))
+    if route['id'] in ['SET-02','SET-11']:
+        before_prefs=page.evaluate('JSON.stringify({core:S,suite:Suite.state()})')
+        button=page.locator('[data-design-preference="opaque"]').filter(visible=True).last
+        initial=page.locator('#designOpaque').is_checked();button.click()
+        native.ensure(page.locator('#designOpaque').is_checked()!=initial,'Product opacity preference did not apply')
+        button.click()
+        native.ensure(page.evaluate('JSON.stringify({core:S,suite:Suite.state()})')==before_prefs,'Presentation preference changed business data')
     page.locator('#phone').screenshot(path=str(native.OUT/(theme+'-'+route['id']+'.png')),animations='disabled')
     before=page.evaluate('JSON.stringify({notes:S.notes,photo:S.photo,drafts:S.drafts,stack:stack.map(x=>({kind:x.kind,payload:x.payload,route:x.routeId}))})')
     # Every route retains all four explicit design-state previews and a non-mutating dismissal.
@@ -42,7 +49,8 @@ def main():
                     for route in CATALOG:
                         group=route['id'].split('-')[0]
                         try:verify_route(page,route,theme,group not in groups);RESULTS.append({'name':theme+'-'+route['id'],'status':'pass','group':group})
-                        except Exception as e:traceback.print_exc();RESULTS.append({'name':theme+'-'+route['id'],'status':'fail','error':str(e),'group':group})
+                        except Exception as e:
+                            traceback.print_exc();page.locator('#phone').screenshot(path=str(native.OUT/(theme+'-'+route['id']+'-FAIL.png')),animations='disabled');RESULTS.append({'name':theme+'-'+route['id'],'status':'fail','error':str(e),'group':group})
                         groups.add(group)
             browser.close()
     except Exception as e:traceback.print_exc();RESULTS.append({'name':'harness','status':'fail','error':str(e)})

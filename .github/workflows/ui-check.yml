@@ -58,7 +58,11 @@ jobs:
       - name: V4 core flow and migrated surface regression
         run: npm run test:core 2>&1 | tee test-results/core-flows.log
       - name: V4 full route and state migration matrix
+        if: ${{ !cancelled() }}
         run: npm run test:migration 2>&1 | tee test-results/full-migration.log
+      - name: Presentation interruption reading and photo geometry
+        if: ${{ !cancelled() }}
+        run: npm run test:presentation 2>&1 | tee test-results/presentation-suspend.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4
