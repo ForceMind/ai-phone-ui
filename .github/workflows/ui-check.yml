@@ -57,6 +57,8 @@ jobs:
         run: npm run test:viewport 2>&1 | tee test-results/viewport.log
       - name: V4 core flow and migrated surface regression
         run: npm run test:core 2>&1 | tee test-results/core-flows.log
+      - name: V4 full route and state migration matrix
+        run: npm run test:migration 2>&1 | tee test-results/full-migration.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4

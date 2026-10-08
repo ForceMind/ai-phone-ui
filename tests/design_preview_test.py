@@ -115,11 +115,11 @@ def photo_drag_region(page):
 
 def presentation_visibility(page):
     reading.go(page,'ONB-01')
-    page.wait_for_function('document.documentElement.dataset.designSample==="false"')
+    page.wait_for_function('document.documentElement.dataset.designSample==="true"')
     page.keyboard.press('h')
     page.wait_for_function('!appOpen && document.documentElement.dataset.designSample==="true" && document.documentElement.dataset.designRoute==="SYS-01"')
     page.keyboard.press('t')
-    page.wait_for_function('overlay==="top" && document.documentElement.dataset.designSample==="false"')
+    page.wait_for_function('overlay==="top" && document.documentElement.dataset.designSample==="true"')
     page.keyboard.press('Escape')
     page.wait_for_function('overlay==="" && document.documentElement.dataset.designRoute==="SYS-01"')
     page.keyboard.press('a')

@@ -22,7 +22,13 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "SYS",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SYS-02",
@@ -47,7 +53,13 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "SYS",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SYS-03",
@@ -72,7 +84,13 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "SYS",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SYS-04",
@@ -96,7 +114,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SYS",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SYS-05",
@@ -120,7 +144,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SYS",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SYS-06",
@@ -144,7 +174,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SYS",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ONB-01",
@@ -168,7 +204,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ONB",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ONB-02",
@@ -192,7 +234,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ONB",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ONB-03",
@@ -216,7 +264,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ONB",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ONB-04",
@@ -240,7 +294,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ONB",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ONB-05",
@@ -264,7 +324,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ONB",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "AI-01",
@@ -317,7 +383,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "AI",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "AI-03",
@@ -341,7 +413,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "AI",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "AI-04",
@@ -512,7 +590,13 @@
       "按钮具有具体反馈或目的页面",
       "本机导入确认：取消恢复原任务与入口焦点；再次打开仍须明确接受",
       "导入候选随当前确认及任务会话绑定；取消较新文件后接续旧确认不串用候选；同一候选仅消费一次"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "IMG",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "IMG-02",
@@ -537,7 +621,13 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "IMG",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "IMG-03",
@@ -648,7 +738,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "IMG",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "IMG-07",
@@ -672,7 +768,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "IMG",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "IMG-08",
@@ -902,7 +1004,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DOC",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DOC-06",
@@ -926,7 +1034,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DOC",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-01",
@@ -950,7 +1064,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-02",
@@ -1004,7 +1124,13 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-04",
@@ -1057,7 +1183,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-06",
@@ -1139,7 +1271,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-09",
@@ -1163,7 +1301,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-10",
@@ -1187,7 +1331,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-11",
@@ -1211,7 +1361,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-12",
@@ -1235,7 +1391,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-13",
@@ -1259,7 +1421,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-14",
@@ -1283,7 +1451,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-15",
@@ -1307,7 +1481,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-16",
@@ -1331,7 +1511,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "CLD",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "CLD-17",
@@ -1389,7 +1575,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-02",
@@ -1413,7 +1605,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-03",
@@ -1437,7 +1635,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-04",
@@ -1461,7 +1665,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-05",
@@ -1489,7 +1699,13 @@
       "阅读及取消不执行，跨任务保留确认阅读位置与固定内容",
       "确认按钮明确标为本机预览，接受不代表发送或导出",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-06",
@@ -1513,7 +1729,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-07",
@@ -1537,7 +1759,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-08",
@@ -1561,7 +1789,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-09",
@@ -1585,7 +1819,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-10",
@@ -1609,7 +1849,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-11",
@@ -1633,7 +1879,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-12",
@@ -1657,7 +1909,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-13",
@@ -1681,7 +1939,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "DAY-14",
@@ -1705,7 +1969,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "DAY",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-01",
@@ -1730,7 +2000,13 @@
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面",
       "V4 D1样板：浅深/增强对比/减少透明度可审阅，原状态与手势保持；完整视觉待确认"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D1",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-02",
@@ -1754,7 +2030,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-03",
@@ -1778,7 +2060,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-04",
@@ -1802,7 +2090,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-05",
@@ -1826,7 +2120,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-06",
@@ -1850,7 +2150,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-07",
@@ -1874,7 +2180,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-08",
@@ -1898,7 +2210,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-09",
@@ -1922,7 +2240,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "SET-10",
@@ -2009,7 +2333,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "SET",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-01",
@@ -2033,7 +2363,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-02",
@@ -2057,7 +2393,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-03",
@@ -2081,7 +2423,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-04",
@@ -2105,7 +2453,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-05",
@@ -2129,7 +2483,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-06",
@@ -2153,7 +2513,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-07",
@@ -2177,7 +2543,13 @@
       "返回/最小化不混淆",
       "不伪造远程执行结果",
       "按钮具有具体反馈或目的页面"
-    ]
+    ],
+    "v4Migration": {
+      "phase": "D3",
+      "status": "candidate",
+      "group": "ERR",
+      "evidence": "tests/full_migration_test.py"
+    }
   },
   {
     "id": "ERR-08",

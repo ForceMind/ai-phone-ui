@@ -97,4 +97,62 @@
 [data-design-sample=true] .s-range{min-height:44px}
 [data-design-sample=true] .suite-state-overlay{background:var(--v4-surface);color:var(--v4-text);border:1px solid var(--v4-line);border-radius:20px}
 [data-design-sample=true] .dialog-preview{background:var(--v4-bg);border-radius:16px}
-.large-text [data-design-sample=true] .s-document{font-size:20px}
+[data-design-sample=true] .large-text .s-document{font-size:20px}
+
+/* D3 system/onboarding: neutral control planes and a distinct dark sleep state. */
+[data-design-sample=true] .lock{background:var(--v4-bg);color:var(--v4-text)}
+[data-design-sample=true] .lock-time{font-weight:600;letter-spacing:-3px}
+[data-design-sample=true] :is(.lock-date,.lock-message,.lock-hint,.settings-row small){color:var(--v4-secondary);font-size:14px}
+[data-design-sample=true] .lock-message{border-color:var(--v4-line)}
+[data-design-sample=true] .sleep{background:#08090b;color:#f2f4f7}
+[data-design-sample=true] .sleep span{color:#b8c1cd;font-size:14px}
+[data-design-sample=true] :is(.settings-row,.control-row){min-height:48px;color:var(--v4-text);border-color:var(--v4-line)}
+[data-design-sample=true] .s-hero .orb-small{display:none}
+[data-design-sample=true] .s-flow-tag{color:var(--v4-secondary);font-size:13px;letter-spacing:0}
+[data-design-sample=true] .s-hero{padding:24px 0;text-align:left}
+/* D3 AI/media: input, status and source remain separated from controls. */
+[data-design-sample=true] .s-conversation-log{border-bottom:1px solid var(--v4-line);padding-bottom:16px}
+[data-design-sample=true] .s-wave{background:var(--v4-bg);border-radius:20px}
+[data-design-sample=true] .s-title-large{font-weight:600;font-size:30px}
+[data-design-sample=true] .s-camera{margin:0 0 20px;border-radius:20px}
+[data-design-sample=true] .s-camera .tag{color:#fff;background:#182020cc;padding:6px 10px;border-radius:8px;font-size:13px}
+[data-design-sample=true] .s-shutter{background:var(--v4-surface);border-color:var(--v4-line);box-shadow:inset 0 0 0 3px var(--v4-accent)}
+/* D3 cloud/files: concise records, honest disconnected states and readable metadata. */
+[data-design-sample=true] .s-metric{font-weight:600;font-size:52px;letter-spacing:-1px}
+[data-design-sample=true] .s-stat b{font-weight:600}
+[data-design-sample=true] :is(.s-memory,.s-env-status){border-color:var(--v4-line)}
+[data-design-sample=true] .s-memory{background:var(--v4-bg);border-radius:16px}
+[data-design-sample=true] .s-memory p{color:var(--v4-text);font-size:17px}
+[data-design-sample=true] .s-backup-input{color:var(--v4-text);font-size:14px;min-height:44px}
+/* D3 everyday tools: per-control treatment, rather than another full-page card. */
+[data-design-sample=true] .s-calendar{gap:2px}
+[data-design-sample=true] .s-calendar button{height:44px;min-width:0;font-size:16px;border-radius:12px}
+[data-design-sample=true] .s-calendar button.active{background:var(--v4-accent);color:var(--v4-control-text)}
+[data-design-sample=true] :is(.s-calendar span,.s-day-banner small,.s-keypad small){color:var(--v4-secondary);font-size:13px}
+[data-design-sample=true] .s-day-banner{font-weight:600}
+[data-design-sample=true] .s-day-banner button{min-height:44px;min-width:44px}
+[data-design-sample=true] .s-avatar{background:var(--v4-bg);color:var(--v4-accent);border-color:var(--v4-line);font-weight:500}
+[data-design-sample=true] .s-hero-avatar{margin:12px 0 24px}
+[data-design-sample=true] .s-keypad button{background:var(--v4-bg);border-radius:18px;border:1px solid var(--v4-line);font-size:30px;font-weight:500;height:66px}
+[data-design-sample=true] .s-keypad small{font-size:12px;letter-spacing:2px}
+[data-design-sample=true] .s-call-actions button{border-color:var(--v4-line);border-radius:16px;font-size:14px}
+[data-design-sample=true] .s-call-actions button.on{background:var(--v4-accent);color:var(--v4-control-text)}
+[data-design-sample=true] .s-album{border-radius:22px;border-color:var(--v4-line);color:#fff}
+[data-design-sample=true] .s-music-controls button{background:var(--v4-bg);border-radius:50%;font-size:22px}
+[data-design-sample=true] .s-map{border-radius:20px;border-color:var(--v4-line)}
+[data-design-sample=true] .s-map .map-label{color:#fff;background:#182020cc;padding:5px;border-radius:6px;font-size:12px}
+/* D3 settings/error: readable warnings, persistent focus, explicit local preferences. */
+[data-design-sample=true] .s-text-link{min-height:44px;font-size:15px}
+[data-design-sample=true] .s-warning-symbol{color:var(--v4-accent);font-weight:500}
+[data-design-sample=true] .s-notice.warn{border-color:var(--v4-accent);background:var(--v4-bg);color:var(--v4-secondary)}
+[data-design-sample=true] .s-skeleton{background:var(--v4-line);animation:none;border-radius:6px}
+[data-design-sample=true] .s-spinner{border-color:var(--v4-line);border-top-color:var(--v4-accent)}
+[data-design-sample=true] .high-contrast .screen{--v4-text:#000;--v4-secondary:#202126;--v4-bg:#fff;--v4-surface:#fff;--v4-line:#000;--v4-glass:#fff;--v4-accent:#004641;--v4-control-text:#fff}
+[data-design-sample=true] .large-text :is(.suite-scroll p,.s-document,.s-row b,.s-form input,.s-form textarea,.s-message,.s-check span,.notes-editor){font-size:20px}
+[data-design-sample=true] :is(button,input,textarea,select):focus-visible{outline:2px solid var(--v4-accent);outline-offset:2px}
+/* Native suite pages size the reading region after their actual header, including wraps. */
+[data-design-sample=true] :is(.task-surface,.stack-page):has(> .suite-scroll){display:flex;flex-direction:column;padding:32px 24px 30px;overflow:hidden}
+[data-design-sample=true] :is(.task-surface,.stack-page):has(> .suite-scroll)>.suite-header{position:static;flex:none}
+[data-design-sample=true] :is(.task-surface,.stack-page):has(> .suite-scroll)>.suite-scroll{position:relative;inset:auto;margin-top:20px;flex:1;min-height:0;width:100%;padding-bottom:24px}
+[data-design-sample=true] .suite-header h2{font-size:30px;line-height:1.3;margin:9px 0 0;overflow-wrap:anywhere}
+[data-design-sample=true] .suite-header .metadata{margin-top:8px;font-size:14px;line-height:1.5}
