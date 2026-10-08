@@ -37,7 +37,7 @@ SAMPLES={
  'DAY-05':['.dialog-inner h2','.dialog-inner p','.dialog-head .accept','.dialog-head [data-action="back"]'],
  'SET-01':['.suite-header h2','.s-row b','.s-row small'],
  'CLD-03':['.app-header h2','.job-desc','.job-phases span','.job-foot'],
- 'SYS-04':['#topMenu h2','#topMenu .sub','#topMenu .settings-row','#topMenu .settings-row small','#topMenu .menu-footer']}
+ 'SYS-04':['#topMenu h2','#topMenu .sub','#topMenu .settings-row > span','#topMenu .settings-row small','#topMenu .menu-footer']}
 
 def open_route(page,route):
     if route=='DAY-05':reading.open_review(page)

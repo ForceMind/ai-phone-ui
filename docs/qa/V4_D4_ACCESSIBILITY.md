@@ -57,3 +57,23 @@ service integration and Pages deployment are outside this bounded pass.
 
 These browser probes support the original project criteria; they do not certify
 all WCAG success criteria or substitute for the explicitly open device gates.
+
+## Preserved first native pass (test-only dd557fac)
+
+Run 37774131301 / artifact 11549816758 (SHA256
+341686be2276d86327d2a93f77ce586f79509ab992466e0a894454949ecff7a4)
+completed with 32/44 initial D4 checks passing. Six long-confirmation 200% cases
+showed the body bottom at 858.827 versus hint top 850.346 in rendered coordinates:
+real ~8.48px overlap, reproducible across all six presentation combinations.
+Six reported contrast failures sampled beyond the paragraph's actual scroll clip;
+these are harness-invalid evidence, not confirmed color defects. SET/CLD initial
+resize passes used scrollIntoView and did not prove user-wheel reachability; they
+are superseded by the conservative test-only pass, not accepted as product passes.
+
+The old core suite was 9/10: backup-cancel-resume timed out waiting for filechooser
+at keyboard_focus_test.py:65. No runtime bytes changed from baseline. All other
+old native suites completed successfully, including 178 full-migration checks.
+Keep this failure; rerun/diagnose rather than infer a production regression.
+
+The next test-only commit separates D4 into a parallel job and fixes text-run,
+clip, opacity-group, unrounded-ratio and real-wheel measurement weaknesses.
