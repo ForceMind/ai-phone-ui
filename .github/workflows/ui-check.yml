@@ -66,6 +66,9 @@ jobs:
       - name: Isolated presentation preference persistence
         if: ${{ !cancelled() }}
         run: npm run test:prefs 2>&1 | tee test-results/presentation-preferences.log
+      - name: D4 actual contrast and 200 percent text resize
+        if: ${{ !cancelled() }}
+        run: npm run test:a11y 2>&1 | tee test-results/d4-accessibility.log
       - name: Upload actual reports and preview, no deployment
         if: always()
         uses: actions/upload-artifact@v4
