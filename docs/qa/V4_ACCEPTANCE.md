@@ -85,3 +85,7 @@ ffd9bf2的393浅深正常状态172张已经分组实看。SYS-04两主题“所�
 独立源审发现设计态顶层没有隔离底层确认。真实confirmationKey函数的本地测试先得到Tab handled=true（预期false）的RED，再以独立状态层阻断得到GREEN；此前chooseMode源码VM也仍能落入confirm。不能把这当已运行的native误接受报告。修复复用syncAccess统一inert，取消进行中手势，层内pointer/键盘隔离；关闭只恢复仍连接且非inert的DOM焦点，不缓存业务或阅读位置。native新增层上左滑、Tab、Enter、Escape保持原payload/阅读位置且不接受，回原确认后允许明确一次接受，尚待本head CI。
 
 拒写反馈不再只藏在窄屏隐藏span：warning时强制可见；native增加390宽可见、与手机区域不重叠及真实截图。129单元与26静态通过，Python及浏览器内JS片段语法通过；真实native新增项未跑。
+
+## 交付文件最后检查
+
+补充test:prefs中的standalone-offline-file：直接以file://打开构建出的单HTML，不用set_content或HTTP包装；真实编辑笔记、收起接续并下载文字，记录截图及外部请求。该检查仅证明当前桌面Chromium的离线打开/本机交互/下载，不替代所有浏览器file-origin持久化或实机验收。运行时代码不因该补充改变，仍需最终head与main分别取真实结果。

@@ -59,6 +59,24 @@ def system_theme(page):
 def invalid(page):
     page.evaluate('(k)=>localStorage.setItem(k,JSON.stringify({schema:1,design:"v4",theme:"url(javascript:1)",opaque:true,viewport:"9999"}))',KEY)
     native.reload_page(page);native.ensure(page.locator('#designVersion').input_value()=='baseline','Invalid preference activated');native.assert_original(page)
+def offline_file(browser):
+    # The delivered file itself, not set_content or an HTTP wrapper.
+    context=browser.new_context(viewport={'width':1440,'height':1000})
+    page=context.new_page();page.set_default_timeout(5000)
+    page.on('pageerror',lambda error:native.ERRORS.append(str(error)))
+    context.route('**/*',lambda route:route.continue_() if route.request.url.startswith('file:') else (native.OUTBOUND.append(route.request.url),route.abort())[-1])
+    try:
+        page.goto((native.ROOT/'dist/index.html').as_uri(),wait_until='load')
+        page.wait_for_function('ready && window.Suite && Suite.catalog.length===86')
+        page.locator('#designVersion').select_option('v4');page.locator('#designViewport').select_option('portrait')
+        reading.go(page,'DOC-02');page.locator('#noteEditor').fill('Offline file smoke: retained original text.');page.locator('#noteEditor').blur()
+        page.locator('#screen').focus();page.keyboard.press('h');page.locator('[data-task="notes"]').click()
+        native.ensure(page.locator('#noteEditor').input_value()=='Offline file smoke: retained original text.','File-origin task resume lost text')
+        reading.go(page,'DOC-04')
+        with page.expect_download() as result:page.locator('[data-action="ui:export-document"]').filter(visible=True).last.click()
+        native.ensure(Path(result.value.path()).read_text()=='Offline file smoke: retained original text.','File-origin download changed the current text')
+        reading.go(page,'SYS-01');page.locator('#phone').screenshot(path=str(native.OUT/'offline-file-home.png'),animations='disabled')
+    finally:context.close()
 def main():
     native.OUT=native.OUT/'presentation-preferences';native.OUT.mkdir(parents=True,exist_ok=True);version=None
     try:
@@ -71,6 +89,8 @@ def main():
                     with native.case(browser,origin) as page:fn(page)
                     RESULTS.append({'name':name,'status':'pass'})
                 except Exception as e:traceback.print_exc();RESULTS.append({'name':name,'status':'fail','error':str(e)})
+            try:offline_file(browser);RESULTS.append({'name':'standalone-offline-file','status':'pass'})
+            except Exception as e:traceback.print_exc();RESULTS.append({'name':'standalone-offline-file','status':'fail','error':str(e)})
             browser.close()
     except Exception as e:traceback.print_exc();RESULTS.append({'name':'harness','status':'fail','error':str(e)})
     for name,items in [('no-page-errors',native.ERRORS),('no-outbound',native.OUTBOUND)]:RESULTS.append({'name':name,'status':'fail' if items else 'pass','details':items})
