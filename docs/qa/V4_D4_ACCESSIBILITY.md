@@ -130,3 +130,9 @@ regressions. Candidate d6fff59's complete old job and 44 D4 checks had passed.
 After the session fix, all 134 local units pass; the old backup-image fixture only
 adds a null `querySelector` DOM interface and retains every assertion. Exact new
 candidate native results remain required.
+
+## Subsequent child-route review
+
+The specific same-cloud CLD-04 reset claim was not reproduced by native probes;
+actual owner and return-path evidence is in `V4_D4_CHILD_ROUTE_REVIEW.md`. Original
+D4 scope and passing cross-task evidence remain unchanged. This is test-only.

@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWIPE / AI · 项目计划与设计文档</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8f6;color:#253330;font-family:system-ui,"Microsoft YaHei",sans-serif;line-height:1.85;font-size:15px}header{padding:32px 34px;border-bottom:1px solid #d6dfdb;background:#fff;position:relative}header h1{font-size:26px;margin:0 0 8px;font-weight:500}header p{margin:0;color:#687b75;font-size:13px}aside{position:fixed;top:162px;bottom:0;left:0;width:265px;padding:22px;overflow:auto;background:#eef3ef;border-right:1px solid #dae3dd}aside a{display:block;padding:8px 4px;text-decoration:none;font-size:12px;color:#48665b;border-bottom:1px solid #dce5dd}main{max-width:1120px;margin-left:265px;padding:0 42px 60px}article{padding:38px 0;border-bottom:1px solid #c8d4cc;scroll-margin-top:18px}.filename{font:11px monospace;color:#80968a;letter-spacing:.3px;margin-bottom:15px}h2{font-size:28px;line-height:1.5;font-weight:500;color:#214c3b;margin:8px 0 25px}h3{font-size:21px;font-weight:500;margin-top:30px}h4{font-size:17px;font-weight:600;margin-top:24px}p{margin:9px 0}a{color:#237a68;text-underline-offset:3px}pre{background:#eaf0ea;border:1px solid #dbe4dc;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}code{font-family:ui-monospace,monospace;font-size:.9em;background:#e6eee8;padding:2px 4px;border-radius:3px}pre code{padding:0;background:none}.table-scroll{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:11px 12px;text-align:left;vertical-align:top;border:1px solid #d4dfd6;min-width:80px}th{background:#eaf2ea;font-weight:600}blockquote{border-left:3px solid #bb9272;background:#faf4ea;margin:18px 0;padding:14px 18px;font-size:14px}.list-item{padding-left:14px;color:#3b5148}button{background:#e0ebe0;color:#285a47;border:1px solid #aec6b5;padding:7px 12px;cursor:pointer}#menu{display:none}@media(max-width:880px){header{padding:24px}aside{display:none;position:relative;top:auto;width:100%;max-height:50vh}aside.show{display:block}main{margin-left:0;padding:0 22px 40px}#menu{display:block;margin-top:16px}h2{font-size:23px}body{font-size:14px}}@media print{aside,#menu{display:none}main{margin:0;max-width:none}article{break-before:page}header{border:0}}</style></head><body><header><h1>SWIPE / AI · 项目计划与设计文档</h1><p>v0.1.0 · 86页UI工作台 · 基于认可的V3 · 公开源码快照与原始历史包；模型与云端服务未连接</p><button id="menu" onclick="document.querySelector('aside').classList.toggle('show')">文档目录</button></header><aside><a href="#doc-0">SWIPE / AI — AI Phone UI</a><a href="#doc-1">项目协作规则</a><a href="#doc-2">D4 浏览器代表样本已验证 — 2026-10-08</a><a href="#doc-3">文档导航</a><a href="#doc-4">无障碍与替代操作</a><a href="#doc-5">文案规则</a><a href="#doc-6">当前视觉方向：V4 D1样板</a><a href="#doc-7">信息架构</a><a href="#doc-8">手势与状态契约 v1</a><a href="#doc-9">响应式与设备适配</a><a href="#doc-10">完整界面清单 — 0.1.0</a><a href="#doc-11">状态与恢复矩阵</a><a href="#doc-12">全流程交互设计</a><a href="#doc-13">V4 D2 共享组件</a><a href="#doc-14">V4 D1 参数与完成状态</a><a href="#doc-15">当前执行更新 — 2026-10-08</a><a href="#doc-16">AI Phone UI · V4 完整重设计方案</a><a href="#doc-17">V4 86页候选迁移矩阵</a><a href="#doc-18">D1 独立比例适配候选</a><a href="#doc-19">未来能力适配契约（未实现）</a><a href="#doc-20">架构与维护边界</a><a href="#doc-21">发布与交付</a><a href="#doc-22">远端状态与历史边界</a><a href="#doc-23">UI-011：恢复一致性</a><a href="#doc-24">测试计划</a><a href="#doc-25">项目宪章</a><a href="#doc-26">D4 浏览器代表样本已验证 — 2026-10-08</a><a href="#doc-27">决策记录</a><a href="#doc-28">D4 浏览器代表样本已验证 — 2026-10-08</a><a href="#doc-29">D4 浏览器代表样本已验证 — 2026-10-08</a><a href="#doc-30">2026-10-07 本地提交恢复记录（历史）</a><a href="#doc-31">执行计划</a><a href="#doc-32">v0.1.0 验证记录</a><a href="#doc-33">V4 候选证据</a><a href="#doc-34">Verified representative browser subset</a><a href="#doc-35">D1 presentation interruption checks</a><a href="#doc-36">官方参考与采用方式</a></aside><main><article id="doc-0"><div class="filename">README.md</div><h2>SWIPE / AI — AI Phone UI</h2>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWIPE / AI · 项目计划与设计文档</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8f6;color:#253330;font-family:system-ui,"Microsoft YaHei",sans-serif;line-height:1.85;font-size:15px}header{padding:32px 34px;border-bottom:1px solid #d6dfdb;background:#fff;position:relative}header h1{font-size:26px;margin:0 0 8px;font-weight:500}header p{margin:0;color:#687b75;font-size:13px}aside{position:fixed;top:162px;bottom:0;left:0;width:265px;padding:22px;overflow:auto;background:#eef3ef;border-right:1px solid #dae3dd}aside a{display:block;padding:8px 4px;text-decoration:none;font-size:12px;color:#48665b;border-bottom:1px solid #dce5dd}main{max-width:1120px;margin-left:265px;padding:0 42px 60px}article{padding:38px 0;border-bottom:1px solid #c8d4cc;scroll-margin-top:18px}.filename{font:11px monospace;color:#80968a;letter-spacing:.3px;margin-bottom:15px}h2{font-size:28px;line-height:1.5;font-weight:500;color:#214c3b;margin:8px 0 25px}h3{font-size:21px;font-weight:500;margin-top:30px}h4{font-size:17px;font-weight:600;margin-top:24px}p{margin:9px 0}a{color:#237a68;text-underline-offset:3px}pre{background:#eaf0ea;border:1px solid #dbe4dc;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}code{font-family:ui-monospace,monospace;font-size:.9em;background:#e6eee8;padding:2px 4px;border-radius:3px}pre code{padding:0;background:none}.table-scroll{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:11px 12px;text-align:left;vertical-align:top;border:1px solid #d4dfd6;min-width:80px}th{background:#eaf2ea;font-weight:600}blockquote{border-left:3px solid #bb9272;background:#faf4ea;margin:18px 0;padding:14px 18px;font-size:14px}.list-item{padding-left:14px;color:#3b5148}button{background:#e0ebe0;color:#285a47;border:1px solid #aec6b5;padding:7px 12px;cursor:pointer}#menu{display:none}@media(max-width:880px){header{padding:24px}aside{display:none;position:relative;top:auto;width:100%;max-height:50vh}aside.show{display:block}main{margin-left:0;padding:0 22px 40px}#menu{display:block;margin-top:16px}h2{font-size:23px}body{font-size:14px}}@media print{aside,#menu{display:none}main{margin:0;max-width:none}article{break-before:page}header{border:0}}</style></head><body><header><h1>SWIPE / AI · 项目计划与设计文档</h1><p>v0.1.0 · 86页UI工作台 · 基于认可的V3 · 公开源码快照与原始历史包；模型与云端服务未连接</p><button id="menu" onclick="document.querySelector('aside').classList.toggle('show')">文档目录</button></header><aside><a href="#doc-0">SWIPE / AI — AI Phone UI</a><a href="#doc-1">项目协作规则</a><a href="#doc-2">D4 子页评论有界核验 — 2026-10-08</a><a href="#doc-3">文档导航</a><a href="#doc-4">无障碍与替代操作</a><a href="#doc-5">文案规则</a><a href="#doc-6">当前视觉方向：V4 D1样板</a><a href="#doc-7">信息架构</a><a href="#doc-8">手势与状态契约 v1</a><a href="#doc-9">响应式与设备适配</a><a href="#doc-10">完整界面清单 — 0.1.0</a><a href="#doc-11">状态与恢复矩阵</a><a href="#doc-12">全流程交互设计</a><a href="#doc-13">V4 D2 共享组件</a><a href="#doc-14">V4 D1 参数与完成状态</a><a href="#doc-15">当前执行更新 — 2026-10-08</a><a href="#doc-16">AI Phone UI · V4 完整重设计方案</a><a href="#doc-17">V4 86页候选迁移矩阵</a><a href="#doc-18">D1 独立比例适配候选</a><a href="#doc-19">未来能力适配契约（未实现）</a><a href="#doc-20">架构与维护边界</a><a href="#doc-21">发布与交付</a><a href="#doc-22">远端状态与历史边界</a><a href="#doc-23">UI-011：恢复一致性</a><a href="#doc-24">测试计划</a><a href="#doc-25">项目宪章</a><a href="#doc-26">D4 子页评论有界核验 — 2026-10-08</a><a href="#doc-27">决策记录</a><a href="#doc-28">D4 子页评论有界核验 — 2026-10-08</a><a href="#doc-29">D4 子页评论有界核验 — 2026-10-08</a><a href="#doc-30">2026-10-07 本地提交恢复记录（历史）</a><a href="#doc-31">执行计划</a><a href="#doc-32">v0.1.0 验证记录</a><a href="#doc-33">V4 候选证据</a><a href="#doc-34">Verified representative browser subset</a><a href="#doc-35">D4 child-route review: task ownership and reading return</a><a href="#doc-36">D1 presentation interruption checks</a><a href="#doc-37">官方参考与采用方式</a></aside><main><article id="doc-0"><div class="filename">README.md</div><h2>SWIPE / AI — AI Phone UI</h2>
 <p>!<span>SWIPE / AI</span></p>
 <p><a href="https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml/badge.svg?branch=main" target="_blank" rel="noopener noreferrer">![UI quality</a>](https://github.com/ForceMind/ai-phone-ui/actions/workflows/ui-check.yml)</p>
 <p><a href="https://img.shields.io/github/license/ForceMind/ai-phone-ui" target="_blank" rel="noopener noreferrer">![Repository license</a>](LICENSE)</p>
@@ -40,7 +40,7 @@ npm run docs</code></pre>
 <p>公开仓库已存在，不再执行历史建仓脚本。基于实际远端 HEAD 进行普通提交或既定 PR；不 force push、不重新创建原始标签。旧历史按 <span>恢复说明</span> 克隆到新目录。</p>
 <p>完整入口：<a href="#doc-3">文档索引</a> · <a href="#doc-31">路线图</a> · <span>交接</span></p>
 <h3>设计来源与授权</h3>
-<p>本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。<a href="#doc-36">来源与映射</a>。根目录 <span>LICENSE</span> 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。</p></article><article id="doc-1"><div class="filename">AGENTS.md</div><h2>项目协作规则</h2>
+<p>本项目采用多个时期的交互概念，不是单一历史系统复刻。没有使用 Nokia/Jolla 的商标作为本项目名称，也没有复制其专有资源或字体。<a href="#doc-37">来源与映射</a>。根目录 <span>LICENSE</span> 按字节保留仓库所有者已有 AGPL 文件。原始待定许可通知另行归档，原始 bundle 不变；不声称历史版本原本采用 AGPL，也不作第三方权利保证。</p></article><article id="doc-1"><div class="filename">AGENTS.md</div><h2>项目协作规则</h2>
 <h3>必须先恢复事实</h3>
 <p class="list-item">1. <code>git status --short</code>、<code>git branch --show-current</code>、<code>git log -5 --oneline</code>；保护未提交内容。</p>
 <p class="list-item">2. 有远端且已授权时才 fetch；核对实际 HEAD、PR、exact-head CI。不能把旧报告当最新成功。</p>
@@ -64,7 +64,10 @@ npm run docs</code></pre>
 <p class="list-item">- 任何服务操作用独立 adapter 接口；真实凭据留服务端。模拟器不能复用真实成功语义。</p>
 <p class="list-item">- 每个新页面需编号、父级、空/错/取消方案、至少一个交互断言和可检索入口。</p>
 <p class="list-item">- 手势阈值按 360×672 逻辑坐标；不要混用页面缩放后的物理像素。</p>
-<p class="list-item">- 不删除已经存在的 tests 来“修复”失败；不能把断言换成只看页面存在。</p></article><article id="doc-2"><div class="filename">CHANGELOG.md</div><h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
+<p class="list-item">- 不删除已经存在的 tests 来“修复”失败；不能把断言换成只看页面存在。</p></article><article id="doc-2"><div class="filename">CHANGELOG.md</div><h2>D4 子页评论有界核验 — 2026-10-08</h2>
+<p>PR21的“CLD04同cloud重建后读位归零”评论未在实际Chromium复现。Test-only 31fb6f9/run37787714815两个job通过，原D4 50/50、新核验8/8：目录CLD04和Back实际属于ui-CLD-02包装页；原cloud session保留471，回原cloud或真正同cloud结果子页返回都471→471。详见docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md及逐阶段证据；不称修复产品缺陷，不否定原跨任务验收。</p>
+<p>仅保留测试与核验说明，运行时HTML/src不变，不重发同字节HTML。最终head/main仍各自核CI。子页截图的独立实心像素量测为浅色/高对比1.3806:1、深色11.4274:1，是另行处理的正文对比问题，当前路由检查不证明子页文字全面达标；不夹带新设计或扩大本卡范围。原设备/OS字号/读屏/Pages边界仍开放。</p>
+<h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
 <p>PR21运行时代码 <code>ec5c716</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37778706779" target="_blank" rel="noopener noreferrer">UI quality run 37778706779</a> 两个job通过：26静态、134单元、完整既有native回归与独立D4 50/50。96个实际背景文字样本最低6.3734:1；393×852下浅深×玻璃/减少透明度/高对比，长确认、设置、任务详情真实200%字号可滚读，六组跨任务读位471→471。保存了原始RED、保守测量修正、具体方法、artifact摘要与独立审阅，见 <code>docs/qa/V4_D4_ACCESSIBILITY.md</code>。</p>
 <p>修复仅为确认/任务详情空间分配、实际溢出任务沿用scroll手势、原session的jobScroll接续以及数字字体框正leading。配色、固定payload、接受/取消、业务持久化、离线边界不变。单HTML297285B。收口文档提交不改变已验证运行时；交付仍须核对最终head/main各自CI、artifact和图像，不能用候选绿灯冒充主线结果。</p>
 <p>后续只保留原计划尚未验证的实际Android/iOS、软键盘、OS字号、读屏、设备性能/存储压力，以及D5 Pages/真实外部服务门槛。本批不关闭完整D4/M2，不声称86页全部无障碍达标，不继续追加桌面逐字修整。PR与主线的实际合并/交付状态以GitHub及最终验收报告为准。</p>
@@ -162,7 +165,7 @@ npm run docs</code></pre>
 <h3>设计</h3>
 <p><a href="#doc-7">信息架构</a> · <a href="#doc-10">界面目录</a> · <a href="#doc-8">交互契约</a> · <a href="#doc-6">设计系统</a> · <a href="#doc-12">用户流程</a> · <a href="#doc-11">状态矩阵</a> · <a href="#doc-4">无障碍</a> · <a href="#doc-9">响应式</a> · <a href="#doc-5">文案</a></p>
 <h3>工程与验收</h3>
-<p><a href="#doc-20">架构</a> · <a href="#doc-19">适配器</a> · <a href="#doc-24">测试</a> · <a href="#doc-21">发布</a> · <a href="#doc-22">远端边界</a> · <a href="#doc-32">QA 报告</a> · <a href="#doc-36">来源</a></p>
+<p><a href="#doc-20">架构</a> · <a href="#doc-19">适配器</a> · <a href="#doc-24">测试</a> · <a href="#doc-21">发布</a> · <a href="#doc-22">远端边界</a> · <a href="#doc-32">QA 报告</a> · <a href="#doc-37">来源</a></p>
 <p>开始开发必须优先核对实际 Git 工作区和当前 HEAD，文档本身不是远端同步证明。</p>
 <h3>来源与接续</h3>
 <p><a href="#doc-22">远端状态</a> · 原始历史恢复 · 交接</p>
@@ -1217,7 +1220,10 @@ npm run docs</code></pre>
 <h3>优先级</h3>
 <p>P0 交互语义稳定和用户数据不丢失；P1 操作可学、可逆和无障碍替代；P2 界面密度与美术一致；P3 对接真实能力。远程集成不能反向迫使 UI 变成模拟点击 App 的遥控器。</p>
 <h3>验收负责人</h3>
-<p>产品最终选择与公开发布由仓库所有者确认。AI 可以在已批准范围内实现、测试和补文档；不能擅自改变品牌、创建收费服务或公开私人资料。</p></article><article id="doc-26"><div class="filename">docs/project/CURRENT_STATE.md</div><h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
+<p>产品最终选择与公开发布由仓库所有者确认。AI 可以在已批准范围内实现、测试和补文档；不能擅自改变品牌、创建收费服务或公开私人资料。</p></article><article id="doc-26"><div class="filename">docs/project/CURRENT_STATE.md</div><h2>D4 子页评论有界核验 — 2026-10-08</h2>
+<p>PR21的“CLD04同cloud重建后读位归零”评论未在实际Chromium复现。Test-only 31fb6f9/run37787714815两个job通过，原D4 50/50、新核验8/8：目录CLD04和Back实际属于ui-CLD-02包装页；原cloud session保留471，回原cloud或真正同cloud结果子页返回都471→471。详见docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md及逐阶段证据；不称修复产品缺陷，不否定原跨任务验收。</p>
+<p>仅保留测试与核验说明，运行时HTML/src不变，不重发同字节HTML。最终head/main仍各自核CI。子页截图的独立实心像素量测为浅色/高对比1.3806:1、深色11.4274:1，是另行处理的正文对比问题，当前路由检查不证明子页文字全面达标；不夹带新设计或扩大本卡范围。原设备/OS字号/读屏/Pages边界仍开放。</p>
+<h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
 <p>PR21运行时代码 <code>ec5c716</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37778706779" target="_blank" rel="noopener noreferrer">UI quality run 37778706779</a> 两个job通过：26静态、134单元、完整既有native回归与独立D4 50/50。96个实际背景文字样本最低6.3734:1；393×852下浅深×玻璃/减少透明度/高对比，长确认、设置、任务详情真实200%字号可滚读，六组跨任务读位471→471。保存了原始RED、保守测量修正、具体方法、artifact摘要与独立审阅，见 <code>docs/qa/V4_D4_ACCESSIBILITY.md</code>。</p>
 <p>修复仅为确认/任务详情空间分配、实际溢出任务沿用scroll手势、原session的jobScroll接续以及数字字体框正leading。配色、固定payload、接受/取消、业务持久化、离线边界不变。单HTML297285B。收口文档提交不改变已验证运行时；交付仍须核对最终head/main各自CI、artifact和图像，不能用候选绿灯冒充主线结果。</p>
 <p>后续只保留原计划尚未验证的实际Android/iOS、软键盘、OS字号、读屏、设备性能/存储压力，以及D5 Pages/真实外部服务门槛。本批不关闭完整D4/M2，不声称86页全部无障碍达标，不继续追加桌面逐字修整。PR与主线的实际合并/交付状态以GitHub及最终验收报告为准。</p>
@@ -1292,7 +1298,10 @@ npm run docs</code></pre>
 <h3>ADR-007 / 增量保留旧引擎</h3>
 <p>不抹掉已经认可的V3行为，先用回归测试保护再拆模块。suite函数包装、原生alias与catalog映射属于下一阶段需要统一的技术债。</p>
 <h3>ADR-008 / 诚实测试边界</h3>
-<p>受限浏览器环境采用DOM注入+显式内存存储fixture和CDP触摸；不能称作真机或file-origin实测。CI文件只是配置，实际远端结果另行读取。</p></article><article id="doc-28"><div class="filename">docs/project/DEVELOPMENT_HANDOFF.md</div><h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
+<p>受限浏览器环境采用DOM注入+显式内存存储fixture和CDP触摸；不能称作真机或file-origin实测。CI文件只是配置，实际远端结果另行读取。</p></article><article id="doc-28"><div class="filename">docs/project/DEVELOPMENT_HANDOFF.md</div><h2>D4 子页评论有界核验 — 2026-10-08</h2>
+<p>PR21的“CLD04同cloud重建后读位归零”评论未在实际Chromium复现。Test-only 31fb6f9/run37787714815两个job通过，原D4 50/50、新核验8/8：目录CLD04和Back实际属于ui-CLD-02包装页；原cloud session保留471，回原cloud或真正同cloud结果子页返回都471→471。详见docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md及逐阶段证据；不称修复产品缺陷，不否定原跨任务验收。</p>
+<p>仅保留测试与核验说明，运行时HTML/src不变，不重发同字节HTML。最终head/main仍各自核CI。子页截图的独立实心像素量测为浅色/高对比1.3806:1、深色11.4274:1，是另行处理的正文对比问题，当前路由检查不证明子页文字全面达标；不夹带新设计或扩大本卡范围。原设备/OS字号/读屏/Pages边界仍开放。</p>
+<h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
 <p>PR21运行时代码 <code>ec5c716</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37778706779" target="_blank" rel="noopener noreferrer">UI quality run 37778706779</a> 两个job通过：26静态、134单元、完整既有native回归与独立D4 50/50。96个实际背景文字样本最低6.3734:1；393×852下浅深×玻璃/减少透明度/高对比，长确认、设置、任务详情真实200%字号可滚读，六组跨任务读位471→471。保存了原始RED、保守测量修正、具体方法、artifact摘要与独立审阅，见 <code>docs/qa/V4_D4_ACCESSIBILITY.md</code>。</p>
 <p>修复仅为确认/任务详情空间分配、实际溢出任务沿用scroll手势、原session的jobScroll接续以及数字字体框正leading。配色、固定payload、接受/取消、业务持久化、离线边界不变。单HTML297285B。收口文档提交不改变已验证运行时；交付仍须核对最终head/main各自CI、artifact和图像，不能用候选绿灯冒充主线结果。</p>
 <p>后续只保留原计划尚未验证的实际Android/iOS、软键盘、OS字号、读屏、设备性能/存储压力，以及D5 Pages/真实外部服务门槛。本批不关闭完整D4/M2，不声称86页全部无障碍达标，不继续追加桌面逐字修整。PR与主线的实际合并/交付状态以GitHub及最终验收报告为准。</p>
@@ -1349,7 +1358,10 @@ npm run docs</code></pre>
 <p>PR #12 已正常合并为 main <code>a287cf068fccd8cc2b0b25b2bab8548b2bb7ec50</code>。最终 head <code>6323a2dd</code> 的 run 37641154241 与 main push run 37642165642 各自通过 25/92/127/19/41/8/8；两份 artifact 的摘要、source-head 和三份构建字节独立核对，main 七张阅读图与最终 head 像素相同。完整记录见 UI014_READING_EVIDENCE.json；以下此前的“待最终/main”属于保留的历史阶段。</p>
 <p>当前独立有界卡只纠正 DAY-05 消息确认的动作名称：原按钮「确认导出」与真实行为不符，改为「确认本机预览」。该误导名称已在上一张卡的 main 实际截图中确认；不改变确认标题、固定接收方/正文、取消保留草稿、一次接受、候选归属或 local-preview-only 记录。没有发送消息、导出文件或新增服务副作用。</p>
 <p>现有 HTTP-origin 阅读测试只加一条精确按钮名称断言，复用普通/大字/不换行文本、键盘取消、手势取消、接续与一次接受路径；不增加重复测试矩阵。全部旧断言保留。本卡还需自身 exact-head CI/artifact/截图、独立审阅、正常合并及 exact-main 复核。</p>
-<p>完成后只交回 M2 剩余设备/读屏边界，不启动新的逐字修整。PR #12 合并后正文更新未确认成功并已停止；不重试、不另写评论。</p></article><article id="doc-29"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
+<p>完成后只交回 M2 剩余设备/读屏边界，不启动新的逐字修整。PR #12 合并后正文更新未确认成功并已停止；不重试、不另写评论。</p></article><article id="doc-29"><div class="filename">docs/project/NEXT_ACTION.md</div><h2>D4 子页评论有界核验 — 2026-10-08</h2>
+<p>PR21的“CLD04同cloud重建后读位归零”评论未在实际Chromium复现。Test-only 31fb6f9/run37787714815两个job通过，原D4 50/50、新核验8/8：目录CLD04和Back实际属于ui-CLD-02包装页；原cloud session保留471，回原cloud或真正同cloud结果子页返回都471→471。详见docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md及逐阶段证据；不称修复产品缺陷，不否定原跨任务验收。</p>
+<p>仅保留测试与核验说明，运行时HTML/src不变，不重发同字节HTML。最终head/main仍各自核CI。子页截图的独立实心像素量测为浅色/高对比1.3806:1、深色11.4274:1，是另行处理的正文对比问题，当前路由检查不证明子页文字全面达标；不夹带新设计或扩大本卡范围。原设备/OS字号/读屏/Pages边界仍开放。</p>
+<h2>D4 浏览器代表样本已验证 — 2026-10-08</h2>
 <p>PR21运行时代码 <code>ec5c716</code> 的 <a href="https://github.com/ForceMind/ai-phone-ui/actions/runs/37778706779" target="_blank" rel="noopener noreferrer">UI quality run 37778706779</a> 两个job通过：26静态、134单元、完整既有native回归与独立D4 50/50。96个实际背景文字样本最低6.3734:1；393×852下浅深×玻璃/减少透明度/高对比，长确认、设置、任务详情真实200%字号可滚读，六组跨任务读位471→471。保存了原始RED、保守测量修正、具体方法、artifact摘要与独立审阅，见 <code>docs/qa/V4_D4_ACCESSIBILITY.md</code>。</p>
 <p>修复仅为确认/任务详情空间分配、实际溢出任务沿用scroll手势、原session的jobScroll接续以及数字字体框正leading。配色、固定payload、接受/取消、业务持久化、离线边界不变。单HTML297285B。收口文档提交不改变已验证运行时；交付仍须核对最终head/main各自CI、artifact和图像，不能用候选绿灯冒充主线结果。</p>
 <p>后续只保留原计划尚未验证的实际Android/iOS、软键盘、OS字号、读屏、设备性能/存储压力，以及D5 Pages/真实外部服务门槛。本批不关闭完整D4/M2，不声称86页全部无障碍达标，不继续追加桌面逐字修整。PR与主线的实际合并/交付状态以GitHub及最终验收报告为准。</p>
@@ -1614,7 +1626,59 @@ npm run docs</code></pre>
 <p>regressions. Candidate d6fff59&#x27;s complete old job and 44 D4 checks had passed.</p>
 <p>After the session fix, all 134 local units pass; the old backup-image fixture only</p>
 <p>adds a null <code>querySelector</code> DOM interface and retains every assertion. Exact new</p>
-<p>candidate native results remain required.</p></article><article id="doc-35"><div class="filename">docs/qa/V4_PRESENTATION_SUSPEND.md</div><h2>D1 presentation interruption checks</h2>
+<p>candidate native results remain required.</p>
+<h3>Subsequent child-route review</h3>
+<p>The specific same-cloud CLD-04 reset claim was not reproduced by native probes;</p>
+<p>actual owner and return-path evidence is in <code>V4_D4_CHILD_ROUTE_REVIEW.md</code>. Original</p>
+<p>D4 scope and passing cross-task evidence remain unchanged. This is test-only.</p></article><article id="doc-35"><div class="filename">docs/qa/V4_D4_CHILD_ROUTE_REVIEW.md</div><h2>D4 child-route review: task ownership and reading return</h2>
+<h3>Result</h3>
+<p>The specific <a href="https://github.com/ForceMind/ai-phone-ui/pull/21#discussion_r4219363745" target="_blank" rel="noopener noreferrer">PR21 review</a></p>
+<p>was <strong>not reproduced</strong> on main f4a5ad0. Test-only 31fb6f9 changes no application</p>
+<p>runtime. Run 37787714815 passes both jobs, including original D4 50/50 and the</p>
+<p>new 8/8 probe (six presentation combinations plus page-error/outbound checks).</p>
+<p>This is investigation/regression evidence, not a product fix or a new design.</p>
+<h3>What actually happens</h3>
+<p>In every light/dark × glass/opaque/highcontrast case, the native cloud CLD-03</p>
+<p>reader starts genuinely scrolled to 471 at 200% text size (percentage 144px).</p>
+<p class="list-item">1. Catalog CLD-04 follows CLD-04 → CLD-03 → CLD-02. CLD-02 is type <code>jobs</code>,</p>
+<p>   not <code>job</code>, so <code>Suite.go</code> creates/uses <code>ui-CLD-02</code>, not the native <code>cloud</code> task.</p>
+<p>   Its stack is the suite CLD-03 wrapper plus suite CLD-04; it has no <code>.job-detail</code>.</p>
+<p class="list-item">2. Escape returns to the suite CLD-03 wrapper, still owned by <code>ui-CLD-02</code>.</p>
+<p>   The original cloud session retains 471. This is not the native reader at zero.</p>
+<p class="list-item">3. Returning through the original cloud activity cover restores 471 → 471,</p>
+<p>   with the same 144px percentage font. A direct catalog CLD-04 → CLD-03 round</p>
+<p>   trip also restores the original cloud reader to 471.</p>
+<p class="list-item">4. The actual same-cloud child is the native Pulley result page. It uses</p>
+<p>   <code>pushPage</code>/<code>renderStack</code>, leaves the job root mounted, and Escape returns</p>
+<p>   at 471 → 471 without changing notes, photo, job execution state or outbox.</p>
+<p>The catalog wrapper&#x27;s own <code>.suite-scroll</code> reading position is not proven here.</p>
+<p>Neither its route ID alone nor this probe&#x27;s pass is evidence that it is the same</p>
+<p>native reader. The earlier cross-task 471 → 471 proof remains valid.</p>
+<h3>Evidence and method</h3>
+<p class="list-item">- Real Chromium 143.0.7499.4 over HTTP, synthetic data, no external requests.</p>
+<p class="list-item">- Existing D4 actual computed-font 200% rules persist through native cloud DOM</p>
+<p>  remount; no DPR/native zoom claim and no injected scrollTop.</p>
+<p class="list-item">- Actual catalog controls, keyboard Back/Home, activity cover and Pulley actions.</p>
+<p class="list-item">- Source-head and all three artifact dist files verified; runtime/src bytes match</p>
+<p>  f4a5ad0. ZIP artifact 11554264698 has SHA256</p>
+<p>  <code>72e4dee7eddb99a395203187e148e805cfae283eb2cfd938d115c67d8b521a0e</code>.</p>
+<p class="list-item">- Per-stage route, task, stack, root-node presence, font and offset are preserved</p>
+<p>  in <code>V4_D4_CHILD_ROUTE_EVIDENCE.json</code>. Actual stage screenshots were independently</p>
+<p>  reviewed. Final documentation head and merge main still require their own CI.</p>
+<h3>Limits and separate observation</h3>
+<p>This is not child-page typography or all-page accessibility certification.</p>
+<p>The native result child screenshot contains visibly pale body text in light and</p>
+<p>high-contrast modes. A separate read-only check of the existing native PNGs finds</p>
+<p>8 fully painted pixels per sample matching source foreground #c9e0df. Against the</p>
+<p>actual uniform #fff background, the ratio is 1.3805520821569766:1 in light and</p>
+<p>highcontrast; dark #202327 gives 11.427409389821817:1. This ordinary 14px body needs</p>
+<p>4.5:1. This is raster solid-foreground/background measurement, not a newly captured</p>
+<p>computedStyle audit; anti-aliased edge colors were excluded. Exact crops, image</p>
+<p>hashes and values are in the evidence JSON. Keep the finding separate: routing</p>
+<p>8/8 does not mean result-child contrast passes. A narrowly scoped semantic-color</p>
+<p>repair can be assessed separately; no product repair is made in this PR.</p>
+<p>Physical devices, OS fonts, screen readers and unrelated routes remain untested.</p>
+<p>No application HTML replacement is needed when its bytes have not changed.</p></article><article id="doc-36"><div class="filename">docs/qa/V4_PRESENTATION_SUSPEND.md</div><h2>D1 presentation interruption checks</h2>
 <p>Test-only follow-up from <code>d856ea2f2da777a92f9a7b6d3ea5303475cf2bb1</code>, 2026-10-08.</p>
 <h3>Question under test</h3>
 <p><code>design-preview.js</code> resolves the visible route after <code>ui:visibility</code> and applies</p>
@@ -1666,7 +1730,7 @@ npm run docs</code></pre>
 <p class="list-item">- Task, system home, top menu, launcher, lock, sleep, and feedback surfaces have independent <code>data-design-surface</code>, sample, route, theme, and opacity attributes. Task route changes only on a content-route event, including the existing pre-render preparation. Opening a system layer does not restyle the mounted task.</p>
 <p class="list-item">- Content selectors require <code>[data-design-surface][data-design-sample=true]</code>; rules targeting an overlay or feedback surface itself do not add a descendant space. The seven-page sample list is unchanged. Future approved sample-list extensions use the same separation.</p>
 <p class="list-item">- There is no additional reading offset, session, or persistence cache. Core gesture, confirmation, candidate, and storage implementation files are untouched.</p>
-<p>Four unit cases cover independent task/foreground scope, non-sample task isolation, synchronous target preparation, and theme/material/V3 rollback. Native assertions additionally require covered/asleep typography, scrollHeight, and scrollTop to stay unchanged, preventing a post-dismissal offset patch from hiding reflow. Local build/static26/unit123/Python compilation pass. Candidate exact-head native CI and final pixels remain pending; the old RED and reports above are retained.</p></article><article id="doc-36"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
+<p>Four unit cases cover independent task/foreground scope, non-sample task isolation, synchronous target preparation, and theme/material/V3 rollback. Native assertions additionally require covered/asleep typography, scrollHeight, and scrollTop to stay unchanged, preventing a post-dismissal offset patch from hiding reflow. Local build/static26/unit123/Python compilation pass. Candidate exact-head native CI and final pixels remain pending; the old RED and reports above are retained.</p></article><article id="doc-37"><div class="filename">docs/reference/SOURCES.md</div><h2>官方参考与采用方式</h2>
 <p>这些是设计来源，不是本仓库已有能力证明。文中的阈值与配色属于本项目设计。</p>
 <p class="list-item">1. Nokia N9 announcement / 2011-06-21: https://blogs.windows.com/devices/2011/06/21/introducing-the-nokia-n9-all-it-takes-is-a-swipe/</p>
 <p>   N9使用MeeGo；采用其三主视图与从应用边缘返回Home的系统空间思路。不要写成N9原生搭载Sailfish。</p>
