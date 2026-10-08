@@ -209,3 +209,6 @@
 [data-design-surface][data-design-sample=true] .surface-content:has(>.job-detail)>.task-hint{position:static;flex:0 0 auto}
 /* Keep the percentage text's font box inside the scrollport at enlarged sizes. */
 [data-design-surface][data-design-sample=true] .job-detail .big-percent{line-height:1.3}
+
+/* Native result text is content, not the legacy translucent-shell foreground. */
+[data-design-surface][data-design-sample=true] .stack-page[data-kind=result]>.stack-scroll{color:var(--v4-text)}
