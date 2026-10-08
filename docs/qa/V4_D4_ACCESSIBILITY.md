@@ -13,18 +13,29 @@ whole-product accessibility certification. No runtime changes in this first pass
 - Contrast: capture real compositor background after suppressing only target text
   glyph fill and text shadow; preserve backgrounds, pseudo-elements, borders,
   backdrop blur, ancestors, layout and scroll. Verify target geometry and scroll
-  unchanged. Sample actual rendered pixels inside text rectangles (2px spacing),
-  combine computed text alpha/ancestor opacity, calculate sRGB WCAG luminance.
+  unchanged. Sample actual rendered pixels at every pixel inside visible direct-text rectangles,
+  composite computed glyph alpha over that background, calculate sRGB WCAG luminance.
+  Separate nested text runs use their own computed colors. Account for the phone
+  frame transform when deciding whether text is large. Compare unrounded ratios.
   4.5:1 normal, 3:1 only at >=24px or >=18.667px with weight >=700.
   Rectangle sampling is conservative; anti-aliased glyph edge colors are not used.
-  Filters/blend modes on the text ancestor chain explicitly fail as unverified.
+  Group opacity, filters/blend modes, nonstandard glyph fill/stroke/text background
+  explicitly fail as unverified. Actual overflow clip intersections are used;
+  8px-grid hit testing guards occlusion, with saved foreground/background images
+  for independent review. This is bounded measured evidence, not exhaustive
+  occlusion detection for arbitrary dynamic pages.
   Representative semantic selectors only; this is not all-text/all-state coverage.
 - Resize: snapshot every screen element's computed font-size and line-height,
   explicitly double all font sizes once (no inherited compounding), double pixel
   line-heights and retain `normal`; assert computed 2×. Device pixel ratio, zoom,
   widths and heights are not changed. Exercise end-of-message scroll/cancel,
-  settings rows and task phases/footer reachability. Save start/end screenshots.
-- Browser artifact includes per-sample ratios, geometry, screenshots and source SHA.
+  settings rows and idle-task phases/footer reachability through actual wheel input.
+  Accumulate visible text lines across scroll positions, check clipping ancestors
+  including the element, three-point line hit testing, header/body overlap and
+  unchanged whole core/suite/fixed-payload immediately after resizing. Never use
+  scrollIntoView to manufacture reachability through overflow:hidden ancestors.
+  Save start/end screenshots. Frame coordinate scale is verified against PNG size.
+- Independent parallel D4 CI artifact includes per-sample ratios, geometry, screenshots and source SHA.
 
 ## First-pass status
 
@@ -38,3 +49,11 @@ previously unmeasured gates and from harness problems before any product change.
 Physical Android/iOS, OS font scaling, native browser zoom, screen readers,
 OS contrast/transparency media preferences, all 86-page certification, actual
 service integration and Pages deployment are outside this bounded pass.
+
+## Reference criteria
+
+- [W3C SC 1.4.3 contrast explanation](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
+- [W3C SC 1.4.4 resize-text explanation](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html)
+
+These browser probes support the original project criteria; they do not certify
+all WCAG success criteria or substitute for the explicitly open device gates.
